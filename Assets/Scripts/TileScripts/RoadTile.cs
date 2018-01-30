@@ -16,6 +16,19 @@ public class RoadTile : Tile {
 		}	
 	}
 
+    private Sprite intersection {
+        get {
+            return roadSprites[6];
+        }
+    }
+
+    private Sprite closedLeft { get { return roadSprites[4]; } }
+    private Sprite closedRight { get { return roadSprites[5]; } }
+    private Sprite closedUp { get { return roadSprites[10]; } }
+    private Sprite closedDown { get { return roadSprites[9]; } }
+    private Sprite horizontal { get { return GetRandomHorizontalSprite(); } }
+    private Sprite vertical { get { return GetRandomVerticalSprite(); } }
+
 	public override void RefreshTile(Vector3Int position, ITilemap tilemap) {
 		for (int y = -1; y <= 1; y++) {
 			for (int x = -1; x <= 1; x++) {
@@ -38,50 +51,24 @@ public class RoadTile : Tile {
 				if (x == 0 && y == 0)
 					continue;
 				
-				if (HasRoadTile(tilemap, new Vector3Int(position.x + x, position.y + y, position.z))) {
-					composition += 'R';
-				} else {
-					composition += 'E';
-				}
-				// composition += HasRoadTile(
-				// 	tilemap, new Vector3Int(position.x + x, position.y + y, position.z)
-				// 	) ? 'R' : 'E';
+				//if (HasRoadTile(tilemap, new Vector3Int(position.x + x, position.y + y, position.z))) {
+				//	composition += 'R';
+				//} else {
+				//	composition += 'E';
+				//}
+				 composition += HasRoadTile(
+				 	tilemap, new Vector3Int(position.x + x, position.y + y, position.z)
+				 	) ? 'R' : 'E';
 
 			}
 		}
 
-		// Debug.Log(composition);
-
-		Sprite intersection = roadSprites[6];
-		Sprite closedLeft = roadSprites[4];
-		Sprite closedRight = roadSprites[5];
-		Sprite closedUp = roadSprites[10];
-		Sprite closedDown = roadSprites[9];
-		// Sprite horizontal = roadSprites[0];
-		// Sprite vertical = roadSprites[7];
-		Sprite horizontal = roadSprites[Random.Range(0, 3)];
-		Sprite vertical = roadSprites[Random.Range(7, 8)];
+        // Debug.Log(composition);
 
 		bool right = composition[6] == 'R';
 		bool left = composition[1] == 'R';
 		bool down = composition[3] == 'R';
 		bool up = composition[4] == 'R';
-
-		// string debugString = "----\n|";
-		// debugString += composition[2];
-		// debugString += composition[4];
-		// debugString += composition[7];
-		// debugString += "|\n|";
-		// debugString += composition[1];
-		// debugString += '#';
-		// debugString += composition[6];
-		// debugString += "|\n|";
-		// debugString += composition[0];
-		// debugString += composition[3];
-		// debugString += composition[5];
-		// debugString += "|\n----\n";
-        // System.Console.WriteLine(debugString);
-
 
         if (right && left && !up && !down) {
 			tileData.sprite = horizontal;
@@ -97,7 +84,6 @@ public class RoadTile : Tile {
 			tileData.sprite = closedUp;
 		} else if ((up || down) && (right || left)) {
 			tileData.sprite = intersection;
-		// } else if ()
 		} else {
 			tileData.sprite = intersection;
 		}
@@ -107,6 +93,27 @@ public class RoadTile : Tile {
 	private bool HasRoadTile(ITilemap tilemap, Vector3Int position) {
 		return tilemap.GetTile(position) == this;
 	}
+
+    private Sprite GetRandomHorizontalSprite()
+    {
+        int random = Random.Range(0, 100);
+        if (random <= 5)
+            return roadSprites[3];
+        else if (random > 5 && random <= 10)
+            return roadSprites[2];
+        else if (random > 10 && random <= 15)
+            return roadSprites[1];
+        else
+            return roadSprites[0];
+    }
+
+    private Sprite GetRandomVerticalSprite()
+    {
+        int random = Random.Range(0, 100);
+        if (random < 30)
+            return roadSprites[8];
+        return roadSprites[7];
+    }
 
 #if UNITY_EDITOR
 	[MenuItem("Assets/Create/Tiles/RoadTile")]

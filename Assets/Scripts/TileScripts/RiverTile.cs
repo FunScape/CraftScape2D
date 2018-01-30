@@ -36,11 +36,6 @@ public class RiverTile : Tile {
 				if (x == 0 && y == 0)
 					continue;
 				
-				// if (HasRiverTile(tilemap, new Vector3Int(position.x + x, position.y + y, position.z))) {
-				// 	composition += 'R';
-				// } else {
-				// 	composition += 'E';
-				// }
 				composition += HasRiverTile(
 					tilemap, new Vector3Int(position.x + x, position.y + y, position.z)
 					) ? 'R' : 'E';
@@ -68,49 +63,57 @@ public class RiverTile : Tile {
 		// bool bottomRight = composition[5] == 'R';
 		// bool topRight = composition[7] == 'R';
 
-		Sprite sprite;
+		Sprite l_sprite;
 		if (right && left && !up && !down) 
 		{
-			sprite = horizontalSprite;
+            l_sprite = horizontalSprite;
 		}
 		else if (right && !left && !up && !down)
 		{
-			sprite = intersectionSprite;
+            l_sprite = intersectionSprite;
 		}
 		else if (left && !right && !up && !down)
 		{
-			sprite = intersectionSprite;
+            l_sprite = intersectionSprite;
 		}
 		else if (left && right && up && down)
 		{
-			sprite = intersectionSprite;
+            l_sprite = intersectionSprite;
 		}
 		else if (up && down && !left && !right)
 		{
-			sprite = verticalSprite;
+            l_sprite = verticalSprite;
 		}
 		else if (left && up && !right && !down)
 		{
-			sprite = leftUpSprite;
+            l_sprite = leftUpSprite;
 		}
 		else if (right && up && !left && !down)
 		{
-			sprite = rightUpSprite;
+            l_sprite = rightUpSprite;
 		}
 		else if (right && down && !left && !up)
 		{	
-			sprite = rightDownSprite;
+            l_sprite = rightDownSprite;
 		}
 		else if (left && down && !right && !up)
 		{
-			sprite = leftDownSprite;
+            l_sprite = leftDownSprite;
 		}
+        //else if (left && right && up && !down)
+        //{
+        //    l_sprite = horizontalSprite;
+        //}
+        //else if (left && right && down && !up)
+        //{
+        //    l_sprite = horizontalSprite;
+        //}
 		else
 		{
-			sprite = intersectionSprite;
+            l_sprite = intersectionSprite;
 		}
 
-		tileData.sprite = sprite;
+        tileData.sprite = l_sprite;
 		
 	}
 
