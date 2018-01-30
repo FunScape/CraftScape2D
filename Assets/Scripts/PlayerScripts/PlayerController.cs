@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+	public const float walkSpeed = 3f;
 	[SerializeField]
-	private float walkSpeed = 5f;
+	private float walkSpeedModifier = 1.0f;
 
 	private Animator anim;
 
@@ -50,7 +51,23 @@ public class PlayerController : MonoBehaviour {
 			anim.SetTrigger("Idle");
 		}
 
+		posX *= walkSpeedModifier;
+		posY *= walkSpeedModifier;
+
 		transform.position += new Vector3(posX, posY, 0f);
 
 	}
+
+	public void OnTriggerEnter2D(Collider2D target) {
+		if (target.gameObject.tag == "RoadMapTile") {
+			walkSpeedModifier = 1.5f;
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D target) {
+		if (target.gameObject.tag == "RoadMapTile") {
+			walkSpeedModifier = 1.0f;
+		}
+	}
+
 }
