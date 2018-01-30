@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 61bda409e13a345bcb9e55db18b42f74
-timeCreated: 1517105409
+timeCreated: 1517283595
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -36,42 +36,42 @@ TextureImporter:
     21300058: road_1_vert
     21300060: tileset_30
     21300062: tileset_31
-    21300064: tileset_32
+    21300064: river_vert_2
     21300066: road_close_D_vert
-    21300068: tileset_34
-    21300070: tileset_35
+    21300068: river_Right_Down
+    21300070: river_Left_Up
     21300072: tileset_36
     21300074: tileset_38
     21300076: tileset_39
-    21300078: tileset_40
-    21300080: tileset_41
-    21300082: tileset_42
-    21300084: tileset_43
-    21300086: tileset_44
+    21300078: waterfall_top
+    21300080: river_Right_Up
+    21300082: river_hor
+    21300084: river_intersection
+    21300086: river_Left_Down
     21300088: tileset_45
     21300090: tileset_46
-    21300092: tileset_47
+    21300092: waterfall_1
     21300094: grass_4
-    21300096: tileset_50
-    21300098: tileset_52
+    21300096: river_vert_1
+    21300098: waterfall_2
     21300100: tileset_53
     21300102: tileset_54
     21300104: tileset_55
     21300106: tileset_56
     21300108: tileset_57
     21300110: tileset_58
-    21300112: tileset_59
-    21300114: tileset_60
-    21300116: tileset_61
+    21300112: lake_corner_TL
+    21300114: waterfall_bottom
+    21300116: lake_corner_TR
     21300118: tileset_62
     21300120: tileset_63
     21300122: tileset_64
     21300124: tileset_65
     21300126: tileset_66
     21300128: tileset_67
-    21300130: tileset_68
-    21300132: tileset_69
-    21300134: tileset_70
+    21300130: lake_corner_BL
+    21300132: lake_center_1
+    21300134: lake_corner_BR
     21300136: tileset_71
     21300138: tileset_72
     21300140: tileset_73
@@ -744,7 +744,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_32
+      name: river_vert_2
       rect:
         serializedVersion: 2
         x: 176
@@ -780,7 +780,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_34
+      name: river_Right_Down
       rect:
         serializedVersion: 2
         x: 240
@@ -798,7 +798,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_35
+      name: river_Left_Up
       rect:
         serializedVersion: 2
         x: 256
@@ -870,7 +870,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_40
+      name: waterfall_top
       rect:
         serializedVersion: 2
         x: 176
@@ -888,7 +888,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_41
+      name: river_Right_Up
       rect:
         serializedVersion: 2
         x: 240
@@ -906,7 +906,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_42
+      name: river_hor
       rect:
         serializedVersion: 2
         x: 256
@@ -924,7 +924,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_43
+      name: river_intersection
       rect:
         serializedVersion: 2
         x: 272
@@ -942,7 +942,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_44
+      name: river_Left_Down
       rect:
         serializedVersion: 2
         x: 288
@@ -996,7 +996,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_47
+      name: waterfall_1
       rect:
         serializedVersion: 2
         x: 176
@@ -1032,7 +1032,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_50
+      name: river_vert_1
       rect:
         serializedVersion: 2
         x: 272
@@ -1050,7 +1050,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_52
+      name: waterfall_2
       rect:
         serializedVersion: 2
         x: 176
@@ -1176,7 +1176,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_59
+      name: lake_corner_TL
       rect:
         serializedVersion: 2
         x: 160
@@ -1194,7 +1194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_60
+      name: waterfall_bottom
       rect:
         serializedVersion: 2
         x: 176
@@ -1212,7 +1212,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_61
+      name: lake_corner_TR
       rect:
         serializedVersion: 2
         x: 192
@@ -1338,7 +1338,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_68
+      name: lake_corner_BL
       rect:
         serializedVersion: 2
         x: 160
@@ -1356,7 +1356,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_69
+      name: lake_center_1
       rect:
         serializedVersion: 2
         x: 176
@@ -1374,7 +1374,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_70
+      name: lake_corner_BR
       rect:
         serializedVersion: 2
         x: 192

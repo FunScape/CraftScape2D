@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4980288442046932}
   - component: {fileID: 2569400267916724940}
-  m_Layer: 31
+  m_Layer: 0
   m_Name: GrassPalette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4594314013127298}
   - component: {fileID: 8195094280864143374}
   - component: {fileID: 3664157343685431266}
-  m_Layer: 31
+  m_Layer: 0
   m_Name: Layer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1322,13 +1322,13 @@ Tilemap:
     e33: 1
   m_TileRefreshArray:
   - serializedVersion: 1
-    m_DirtyIndex: 1
+    m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
-    m_DirtyIndex: 1
+    m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
@@ -1494,6 +1494,6 @@ Tilemap:
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
-    m_DirtyIndex: 7
+    m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 18

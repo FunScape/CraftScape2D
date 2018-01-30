@@ -57,10 +57,10 @@ public class RoadTile : Tile {
 		Sprite closedRight = roadSprites[5];
 		Sprite closedUp = roadSprites[10];
 		Sprite closedDown = roadSprites[9];
-		Sprite horizontal = roadSprites[0];
-		Sprite vertical = roadSprites[7];
-		// Sprite horizontal = roadSprites[Random.Range(0, 3)];
-		// Sprite vertical = roadSprites[Random.Range(7, 8)];
+		// Sprite horizontal = roadSprites[0];
+		// Sprite vertical = roadSprites[7];
+		Sprite horizontal = roadSprites[Random.Range(0, 3)];
+		Sprite vertical = roadSprites[Random.Range(7, 8)];
 
 		bool right = composition[6] == 'R';
 		bool left = composition[1] == 'R';
