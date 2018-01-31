@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public const float walkSpeed = 3f;
-	[SerializeField]
-	private float walkSpeedModifier = 1.0f;
+    [SerializeField]
+	public float walkSpeed = 3f;
 
-	private Animator anim;
+	[SerializeField]
+	float walkSpeedModifier = 1.0f;
+
+	Animator anim;
+
+    string[] mapTileTags = { "RoadMapTile", "RiverMapTile" };
 
 	// Use this for initialization
 	void Start () {
@@ -59,15 +63,31 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void OnTriggerEnter2D(Collider2D target) {
-		if (target.gameObject.tag == "RoadMapTile") {
+		if (target.gameObject.tag == "RoadMapTile") 
+        {
+            //print("Entering roadmap tile");
 			walkSpeedModifier = 1.5f;
 		}
+
+        if (target.gameObject.tag == "RiverMapTile") 
+        {
+            //print("Entering rivermap tile");
+            walkSpeedModifier = 0.5f;
+        }
 	}
 
 	public void OnTriggerExit2D(Collider2D target) {
-		if (target.gameObject.tag == "RoadMapTile") {
-			walkSpeedModifier = 1.0f;
+        if (target.gameObject.tag == "RoadMapTile") 
+        {
+            //print("Leaving roadmap tile");
+			walkSpeedModifier = 1f;
 		}
+
+        if (target.gameObject.tag == "RiverMapTile")
+        {
+			//print("Leaving rivermap tile");
+            walkSpeedModifier = 1f;
+        }
 	}
 
 }
