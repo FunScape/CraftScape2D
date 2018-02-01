@@ -6,6 +6,8 @@ TagManager:
   tags:
   - RoadMapTile
   - RiverMapTile
+  - MagicPumpkinPatch
+  - FlameThrower
   layers:
   - Default
   - TransparentFX
