@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
+  walkSpeedModifier: 1
 --- !u!124 &124901515588426804
 Behaviour:
   m_ObjectHideFlags: 1

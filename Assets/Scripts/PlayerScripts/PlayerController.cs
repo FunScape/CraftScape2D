@@ -65,13 +65,13 @@ public class PlayerController : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D target) {
 		if (target.gameObject.tag == "RoadMapTile") 
         {
-            //print("Entering roadmap tile");
+            print("Entering roadmap tile");
 			walkSpeedModifier = 1.5f;
 		}
 
         if (target.gameObject.tag == "RiverMapTile") 
         {
-            //print("Entering rivermap tile");
+            print("Entering rivermap tile");
             walkSpeedModifier = 0.5f;
         }
 	}
@@ -79,13 +79,13 @@ public class PlayerController : MonoBehaviour {
 	public void OnTriggerExit2D(Collider2D target) {
         if (target.gameObject.tag == "RoadMapTile") 
         {
-            //print("Leaving roadmap tile");
+            print("Leaving roadmap tile");
 			walkSpeedModifier = 1f;
 		}
 
         if (target.gameObject.tag == "RiverMapTile")
         {
-			//print("Leaving rivermap tile");
+			print("Leaving rivermap tile");
             walkSpeedModifier = 1f;
         }
 	}
