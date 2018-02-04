@@ -125,44 +125,44 @@ public class HeroMovement : MonoBehaviour
 
     private void Move()
     {
-        //bool moveRight = Input.GetKey(KeyCode.D);
-        //bool moveLeft = Input.GetKey(KeyCode.A);
-        //bool moveUp = Input.GetKey(KeyCode.W);
-        //bool moveDown = Input.GetKey(KeyCode.S);
+        bool moveRight = Input.GetKey(KeyCode.D);
+        bool moveLeft = Input.GetKey(KeyCode.A);
+        bool moveUp = Input.GetKey(KeyCode.W);
+        bool moveDown = Input.GetKey(KeyCode.S);
 
-        float posX = Input.GetAxis("Horizontal");
-        float posY = Input.GetAxis("Vertical");
+        // float posX = Input.GetAxis("Horizontal");
+        // float posY = Input.GetAxis("Vertical");
 
-        //float posX = 0f;
-        //float posY = 0f;
+        float posX = 0f;
+        float posY = 0f;
 
-        //if (moveRight)
-        //{
-        //    posX = walkSpeed * Time.deltaTime;
-        //}
-        //else if (moveLeft)
-        //{
-        //    posX = -walkSpeed * Time.deltaTime;
-        //}
+        if (moveRight)
+        {
+           posX = walkSpeed * Time.deltaTime;
+        }
+        else if (moveLeft)
+        {
+           posX = -walkSpeed * Time.deltaTime;
+        }
 
-        //if (moveUp)
-        //{
-        //    posY = walkSpeed * Time.deltaTime;
-        //}
-        //else if (moveDown)
-        //{
-        //    posY = -walkSpeed * Time.deltaTime;
-        //}
+        if (moveUp)
+        {
+           posY = walkSpeed * Time.deltaTime;
+        }
+        else if (moveDown)
+        {
+           posY = -walkSpeed * Time.deltaTime;
+        }
 
         Vector2 position = new Vector2(posX, posY);
-        if (position.magnitude > 1.0f ) 
-        {
-            position = position.normalized;
-        }
+        // if (position.magnitude > 1.0f ) 
+        // {
+        //     position = position.normalized;
+        // }
         position = new Vector2(position.x + transform.position.x, position.y + transform.position.y);
-        position *= walkSpeed;
-        position *= Time.deltaTime;
-
+        // position *= walkSpeed;
+        // position *= Time.deltaTime;
+        
         body.MovePosition(position);
     }
 
