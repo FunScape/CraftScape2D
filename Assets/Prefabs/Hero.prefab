@@ -91,8 +91,13 @@ GameObject:
   - component: {fileID: 61422309094609832}
   - component: {fileID: 114554159449164970}
   - component: {fileID: 114653872035409144}
+  - component: {fileID: 114480971924785368}
   - component: {fileID: 114005289684835590}
   - component: {fileID: 114935440699502752}
+  - component: {fileID: 95058589699833842}
+  - component: {fileID: 114181144756159318}
+  - component: {fileID: 114351416947883382}
+  - component: {fileID: 114652310600041700}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -193,7 +198,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852322725998526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8663282, y: -2.5726767, z: 0}
+  m_LocalPosition: {x: -13.422949, y: -3.7243304, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4567872837750174}
@@ -245,6 +250,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6214694, y: 0.92280245}
   m_EdgeRadius: 0
+--- !u!95 &95058589699833842
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9119d4e81c4435045b85eadb16091181, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114005289684835590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,7 +298,42 @@ MonoBehaviour:
     i14: 237
     i15: 83
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114181144756159318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8d5f1b76e55e74583701334ed76c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipX: 0
+--- !u!114 &114351416947883382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133896602f6538c4ab6fd195c12f66f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114480971924785368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdaaee62f0afe264c862866dd8d733b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flameThrower: {fileID: 198621945938722332}
 --- !u!114 &114554159449164970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,6 +348,25 @@ MonoBehaviour:
   walkSpeed: 5
   flameThrower: {fileID: 198621945938722332}
   flameThrowerRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114652310600041700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95058589699833842}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114653872035409144
 MonoBehaviour:
   m_ObjectHideFlags: 1
