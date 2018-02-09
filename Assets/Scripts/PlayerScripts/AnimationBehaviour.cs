@@ -28,13 +28,12 @@ public class AnimationBehaviour : MonoBehaviour {
 			anim.SetTrigger("WalkDown");
 		} else if (moveRight) {
 			anim.SetTrigger("WalkSide");
-			
-			GetComponent<SpriteRenderer>().flipX = true;
-			transform.localScale.Set(-1f, 1f, transform.localScale.z);
+			// GetComponent<SpriteRenderer>().flipX = true;
+			GetComponent<NetworkAnimationBehaviour>().CmdFlip(true);
 		} else if (moveLeft) {
 			anim.SetTrigger("WalkSide");
-			GetComponent<SpriteRenderer>().flipX = false;
-			// GetComponent<NetworkAnimationBehaviour>().flipX = false;
+			// GetComponent<SpriteRenderer>().flipX = false;
+			GetComponent<NetworkAnimationBehaviour>().CmdFlip(false);
 		} else {
 			anim.SetTrigger("Idle");
 		}

@@ -5,26 +5,27 @@ using UnityEngine;
 
 public class NetworkAnimationBehaviour : NetworkBehaviour {
 
-	[SyncVar (hook = "OnFlipX")]
-	public bool flipX = false;
+	[SyncVar (hook = "OnFlip")]
+	public bool s_flipX = false;
+	public bool m_flipX = false;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
 
-	void OnFlipX(bool flip)
-	{
-		if (!isServer)
-			return;
-			
-		RpcFlipX(flip);
+	void OnFlip(bool flip) {
+		// GetComponent<SpriteRenderer>().flipX = flip;
+		if (s_flipX != flip) 
+		{
+			s_flipX = flip;
+			GetComponent<SpriteRenderer>().flipX = s_flipX;
+		}
 	}
 
-	[ClientRpc]
-	void RpcFlipX(bool flip)
-	{
-		this.gameObject.GetComponent<SpriteRenderer>().flipX = flip;
+	[Command]
+	public void CmdFlip(bool flip) {
+		OnFlip(flip);
 	}
 	
 
