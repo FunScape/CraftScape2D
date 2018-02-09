@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133896602f6538c4ab6fd195c12f66f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blueToggle: {fileID: 0}
 --- !u!114 &114480971924785368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,7 +347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
-  flameThrower: {fileID: 198621945938722332}
   flameThrowerRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114652310600041700
 MonoBehaviour:
@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e484a9850a97b0d4197130dd926a7c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlue: 0
 --- !u!114 &114935440699502752
 MonoBehaviour:
   m_ObjectHideFlags: 1

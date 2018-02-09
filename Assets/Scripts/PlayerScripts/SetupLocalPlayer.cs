@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class SetupLocalPlayer : NetworkBehaviour {
 
-	[SyncVar]
+    [SyncVar (hook="OnChangeMakeBlue")]
 	public bool isBlue = false;
+    bool m_isBlue = false;
+
+    GameObject localPlayer;
 
 	void Start () {
 		if (isLocalPlayer)
@@ -14,7 +17,6 @@ public class SetupLocalPlayer : NetworkBehaviour {
 			GetComponent<HeroMovement>().enabled = true;
 			GetComponent<AnimationBehaviour>().enabled = true;
 			CameraFollow.player = this.gameObject.transform;
-			GetComponent<SpriteRenderer>().color = Color.blue;
 		}
 		else
 		{
@@ -23,27 +25,34 @@ public class SetupLocalPlayer : NetworkBehaviour {
 		}
 	}
 
-	public void MakeBlue(bool state)
-	{
-		Debug.Log("This got called 1: " + isLocalPlayer.ToString());
-		if (!isLocalPlayer) return;
-		CmdMakeBlue(state);
+    void OnChangeMakeBlue(bool state) {
+        Color color = state ? Color.blue : Color.white;
+        Debug.Log("Making blue... " + color.ToString());
+        GetComponent<SpriteRenderer>().color = color;
+    }
+
+    void MakeBlue(bool state) {
+        this.isBlue = state;
 	}
 
-	[Command]
-	void CmdMakeBlue(bool state)
-	{
-		Debug.Log("This got called 2.");
-		isBlue = state;
-		
-		RpcMakeBlue(state);
-	}
+    private void OnGUI()
+    {
+        if (isLocalPlayer)
+        {
+            bool state = GUI.Toggle(new Rect(25, 15, 35, 25), m_isBlue, "Set");
+            if (state != m_isBlue)
+            {
+                m_isBlue = state;            
+				CmdMakeBlue(m_isBlue);
+            }
+        }
+    }
 
-	[ClientRpc]
-	void RpcMakeBlue(bool state)
-	{
-		Debug.Log("Turning Blue");
-		GetComponent<SpriteRenderer>().color = Color.blue;
+    [Command]
+	void CmdMakeBlue(bool toggle) {
+        isBlue = toggle;
+        Color color = isBlue ? Color.blue : Color.white;
+        GetComponent<SpriteRenderer>().color = color;
 	}
 
 }

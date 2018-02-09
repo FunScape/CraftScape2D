@@ -40,11 +40,5 @@ public class AnimationBehaviour : MonoBehaviour {
 		}
 	}
 
-	public void MakeBlue(bool state)
-	{
-		// Debug.Log("Clicked blue toggle");
-		GetComponent<SetupLocalPlayer>().MakeBlue(state);
-	}
-
 
 }
