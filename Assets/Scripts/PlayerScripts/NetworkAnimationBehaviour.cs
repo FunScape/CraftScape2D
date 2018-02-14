@@ -20,6 +20,7 @@ public class NetworkAnimationBehaviour : NetworkBehaviour {
         }
 	}
 	
+    // this function does something
     void OnFlipX(bool flip)
     {
         if (flip != flipX)
