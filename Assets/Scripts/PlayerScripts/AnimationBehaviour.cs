@@ -7,34 +7,34 @@ public class AnimationBehaviour : MonoBehaviour {
 
 	Animator anim;
 
-	public Toggle blueToggle;
-
-	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
-		// blueToggle.onValueChanged.AddListener(MakeBlue);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		bool moveRight = Input.GetKey(KeyCode.D);
 		bool moveLeft = Input.GetKey(KeyCode.A);
 		bool moveUp = Input.GetKey(KeyCode.W);
 		bool moveDown = Input.GetKey(KeyCode.S);
 
-		if (moveUp && !moveRight && !moveLeft) {
+		if (moveUp && !moveRight && !moveLeft) 
+        {
 			anim.SetTrigger("WalkUp");
-		} else if (moveDown && !moveRight && !moveLeft) {
+		} 
+        else if (moveDown && !moveRight && !moveLeft) 
+        {
 			anim.SetTrigger("WalkDown");
-		} else if (moveRight) {
+		} 
+        else if (moveRight) {
 			anim.SetTrigger("WalkSide");
-			// GetComponent<SpriteRenderer>().flipX = true;
-			GetComponent<NetworkAnimationBehaviour>().CmdFlip(true);
-		} else if (moveLeft) {
+            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(true);
+		} 
+        else if (moveLeft) 
+        {
 			anim.SetTrigger("WalkSide");
-			// GetComponent<SpriteRenderer>().flipX = false;
-			GetComponent<NetworkAnimationBehaviour>().CmdFlip(false);
-		} else {
+            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(false);
+		} else 
+        {
 			anim.SetTrigger("Idle");
 		}
 	}

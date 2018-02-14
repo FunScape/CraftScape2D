@@ -1,32 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Networking;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class NetworkAnimationBehaviour : NetworkBehaviour {
 
-	[SyncVar (hook = "OnFlip")]
-	public bool s_flipX = false;
-	public bool m_flipX = false;
+    [SyncVar(hook = "OnFlipX")]
+    bool flipX = false;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-
-	void OnFlip(bool flip) {
-		// GetComponent<SpriteRenderer>().flipX = flip;
-		if (s_flipX != flip) 
-		{
-			s_flipX = flip;
-			GetComponent<SpriteRenderer>().flipX = s_flipX;
-		}
-	}
-
-	[Command]
-	public void CmdFlip(bool flip) {
-		OnFlip(flip);
+        if (isLocalPlayer)
+        {
+            GetComponent<AnimationBehaviour>().enabled = true;
+        }
+        else
+        {
+            GetComponent<AnimationBehaviour>().enabled = false;
+        }
 	}
 	
+    void OnFlipX(bool flip)
+    {
+        if (flip != flipX)
+        {
+            flipX = flip;
+			GetComponent<SpriteRenderer>().flipX = flipX;
+        }
+    }
+
+    [Command]
+    public void CmdOnFlipX(bool flip)
+    {
+        OnFlipX(flip);
+    }
 
 }
