@@ -8,6 +8,10 @@ TagManager:
   - RiverMapTile
   - MagicPumpkinPatch
   - FlameThrower
+  - Inventory
+  - InventoryPanel
+  - SlotBackgroundImage
+  - SlotItemImage
   layers:
   - Default
   - TransparentFX

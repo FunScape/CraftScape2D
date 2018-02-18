@@ -2,36 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class GameItem {
 
-	private Sprite m_sprite;
-	public Sprite sprite { get { return m_sprite; } }
+	private Sprite _sprite;
+	public Sprite Sprite { get { return _sprite; } }
 
-	private string m_id;
-	public string id { get { return m_id; } }
+	private int _id;
+	public int Id { get { return _id; } }
 
-	private int m_maxStackSize;
-	public int maxStackSize { get { return m_maxStackSize; } }
+	private int _maxStackSize;
+	public int MaxStackSize { get { return _maxStackSize; } }
 
-	private string _itemName;
-	public string itemName { get { return _itemName; } }
+	private string _title;
+	public string Title { get { return _title; } }
 
 	private string _description;
-	public string description { get { return _description; } }
+	public string Description { get { return _description; } }
 
-	public static Item CreateItem(string id, Sprite sprite, string itemName, int maxStackSize=1, string description="")
+	private float _value;
+    public float Value { get{return _value;} }
+
+	private float _power;
+	public float Power { get {return _power;} }
+
+	private float _defense;
+	public float Defense { get { return _defense; } }
+
+	private float _vitality;
+	public float Vitality {get{return _vitality;}}
+
+	private float _healAmount = 0f;
+	public float HealAmount {get{return _healAmount;}}
+
+	private List<string> _types = new List<string>();
+	public List<string> Types {get{return _types;}}
+
+	public GameItem(int id, Sprite sprite, string title, string description, 
+	float value, int maxStackSize, float power, float defense, float vitality,
+	float healAmount, List<string> types)
 	{
-		Item item = new Item();
-		item.m_id = id;
-		item.m_sprite = sprite;
-		item._itemName = itemName;
-		item._description = description;
-		item.m_maxStackSize = maxStackSize;
-
-		return item;
+		_id = id;
+		_sprite = sprite;
+		_title = title;
+		_description = description;
+		_maxStackSize = maxStackSize;
+        _value = value;
+		_power = power;
+		_defense = defense;
+		_vitality = vitality;
+		_healAmount = healAmount;
+		_types = types;
 	}
-
-	// Make constructor private
-	private Item() {}
 
 }
