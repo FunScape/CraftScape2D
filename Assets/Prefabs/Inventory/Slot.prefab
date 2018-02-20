@@ -38,9 +38,12 @@ GameObject:
   - component: {fileID: 224756199364472054}
   - component: {fileID: 222459368042398120}
   - component: {fileID: 114615319154821918}
+  - component: {fileID: 114487191193948506}
+  - component: {fileID: 114573906057978776}
+  - component: {fileID: 225687994584838876}
   m_Layer: 5
-  m_Name: ItemImage
-  m_TagString: SlotItemImage
+  m_Name: SlotItem
+  m_TagString: SlotItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +75,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71d9ae38e652674eac6902f576510ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114487191193948506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289503334412984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114518256575579946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +121,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114573906057978776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289503334412984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b27cc459ce6914aa71dd85b1b5da72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114615319154821918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,3 +227,14 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00012207031, y: -2.0772705}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225687994584838876
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289503334412984}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

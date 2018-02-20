@@ -11,7 +11,8 @@ TagManager:
   - Inventory
   - InventoryPanel
   - SlotBackgroundImage
-  - SlotItemImage
+  - SpawnPoint
+  - SlotItem
   layers:
   - Default
   - TransparentFX
@@ -54,6 +55,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 90579765
+    locked: 0
+  - name: PickupItem
+    uniqueID: 1229648773
     locked: 0
   - name: Player
     uniqueID: 281494893

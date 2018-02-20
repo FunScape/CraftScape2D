@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LitJson;
+using System.IO;
 
 public class Inventory : MonoBehaviour {
+	private const string inventoryFileName = "/PlayerInventory.json";
+	private string inventoryFilePath { get { return Application.streamingAssetsPath + inventoryFileName; } }
 
 	public GameObject inventorySlotPrefab;
 
@@ -24,12 +28,8 @@ public class Inventory : MonoBehaviour {
 		inventoryPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
 		slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;
 
-		CreateSlots();		
-
-		// AddItemById(1);
-		// AddItemById(2);
-		// AddItemById(3);
-
+		CreateSlots();
+		LoadInventory();
 	}
 
 	public void AddItem(GameItem item)
@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour {
 				break;
 			}
 		}
+		Save();
 	}
 
 	public void AddItemById(int id)
@@ -59,16 +60,33 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	void OnDisable()
+	public void Save()
 	{
-
+		database.WriteToJsonFile(this);
 	}
 
-	void OnEnable()
+	public List<GameItem> GetGameItems()
 	{
-		inventoryPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
-		slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;		
+		List<GameItem> items = new List<GameItem>();
+		for (int i = 0; i < slots.Length; i++) 
+		{ 
+			GameItem item = slots[i].GetComponent<Slot>().Item; 
+			if (item != null)
+			{
+				items.Add(item);
+			}
+		}
+		return items;
 	}
-	
+
+	public void LoadInventory()
+	{
+		List<GameItem> items = database.LoadFromFile(inventoryFilePath);
+		for (var i = 0; i < items.Count; i++)
+		{
+			slots[i].GetComponent<Slot>().SetItem(items[i]);
+		}
+		Debug.Log("Loaded inventory: " + items.Count.ToString());
+	}
 
 }

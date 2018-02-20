@@ -54,4 +54,7 @@ public class GameItem {
 		_types = types;
 	}
 
+    
 }
+
+

@@ -1,44 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour {
 
 	public Inventory inventoryPrefab;
 	Inventory inventory;
 
-	Vector3 inventoryOffscreenPosition = new Vector3(1000f, 1000f, 0f);
-	Vector3 inventoryOnScreenPosition = new Vector3(-20f, -20f, 0f);
+	bool displayInventory = false;
 
-	private bool _displayInventory = false;
-	public bool displayInventory {  
-		get { return _displayInventory; } 
-		set { _displayInventory = value; inventory.inventoryPanel.transform.position = _displayInventory ? inventoryOnScreenPosition : inventoryOffscreenPosition; } 
-	}
-
-	// Use this for initialization
 	void Start () {
 		inventory = GameObject.Instantiate(inventoryPrefab);
-		inventoryOnScreenPosition = inventory.inventoryPanel.transform.position;
-		displayInventory = false;
 	}
 	
 	bool isPressingB = false;
-
-	// Update is called once per frame
+	
 	void Update () {
-		bool pressedB = Input.GetKey(KeyCode.B);
+		bool inventoryKey = Input.GetKey(KeyCode.B);
+		OpenInventory(inventoryKey);
+	}
 
-		if (pressedB && !isPressingB)
-		{
+	void OpenInventory(bool shouldOpen)
+	{
+		if (shouldOpen && !isPressingB) {
 			isPressingB = true;
 			displayInventory = !displayInventory;
-		}
-		else if (!pressedB && isPressingB)
-		{
+
+			float height = Camera.main.pixelHeight;
+			float width = Camera.main.pixelWidth;
+
+			if (displayInventory)
+			{
+				// Moves inventory panel to top right corner of screen - CB 2/19
+				inventory.inventoryPanel.transform.position = new Vector3(width, height, 0f); 
+			}
+			else
+			{
+				// move inventory panel offscreen - CB 2/19
+				inventory.inventoryPanel.transform.position = new Vector3(width + 1000f, height, 0); 
+			}
+
+			foreach (GameObject slot in inventory.slots)
+			{
+				slot.GetComponent<Slot>().SetEnabledIfItemExists();
+			}
+
+		} else if (!shouldOpen && isPressingB) {
 			isPressingB = false;
 		}
-
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
