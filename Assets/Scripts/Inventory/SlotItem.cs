@@ -16,17 +16,14 @@ public class SlotItem : MonoBehaviour, IDropHandler {
 	public void OnDrop(PointerEventData eventData)
     {
 		
-		SlotItem droppedSlot = eventData.pointerDrag.GetComponent<SlotItem>();
+		// Slot droppedSlot = eventData.pointerDrag.gameObject.GetComponent<Slot>();
+		// Debug.Log(droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item.Title);
+		// GameItem droppedItem = droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item;
+		// droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item = this.item != null ? this.item : null;
+		// // droppedSlot.transform.Find("SlotItem").gameObject.GetComponent<SlotItem>().item = this.item;
+		// Debug.Log("@OnDrop()");
+		// GetComponentInParent<Slot>().SetItem(droppedItem);
 
-		Debug.Log("Dropped Slot Position: " + droppedSlot.transform.position.x + "x" + droppedSlot.transform.position.y);
-
-		// if (destinationSlot)
-
-		GameItem temp = droppedSlot.item;
-		droppedSlot.item = this.item;
-		this.item = temp;
-		
-		GetComponentInParent<Slot>().SetItem(this.item);
     }
 
 }

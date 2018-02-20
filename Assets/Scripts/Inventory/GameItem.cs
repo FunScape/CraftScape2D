@@ -6,6 +6,7 @@ public class GameItem {
 
 	private Sprite _sprite;
 	public Sprite Sprite { get { return _sprite; } }
+	public string spriteName;
 
 	private int _id;
 	public int Id { get { return _id; } }
@@ -43,6 +44,7 @@ public class GameItem {
 	{
 		_id = id;
 		_sprite = sprite;
+		spriteName = sprite.name;
 		_title = title;
 		_description = description;
 		_maxStackSize = maxStackSize;

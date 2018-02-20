@@ -86,7 +86,6 @@ public class Inventory : MonoBehaviour {
 		{
 			slots[i].GetComponent<Slot>().SetItem(items[i]);
 		}
-		Debug.Log("Loaded inventory: " + items.Count.ToString());
 	}
 
 }
