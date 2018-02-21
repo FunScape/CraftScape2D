@@ -6,24 +6,48 @@ using UnityEngine.UI;
 
 public class SlotItem : MonoBehaviour, IDropHandler {
 
-	public GameItem item = null;
+	GameItem _item = null;
+	public GameItem item {
+		get { return _item; }
+		set { _item = value; UpdateStackLabelText(); }
+	}
+
+	public GameObject stackCountLabelPrefab;
+
+	GameObject stackCountLabel;
+
+	Slot parentSlot;
 
 	// Use this for initialization
 	void Start () {
-		
+		parentSlot = transform.parent.gameObject.GetComponent<Slot>();
+		stackCountLabel = Text.Instantiate(stackCountLabelPrefab);
+		stackCountLabel.transform.SetParent(this.transform);
+		UpdateStackLabelText();
 	}
 
 	public void OnDrop(PointerEventData eventData)
-    {
-		
-		// Slot droppedSlot = eventData.pointerDrag.gameObject.GetComponent<Slot>();
-		// Debug.Log(droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item.Title);
-		// GameItem droppedItem = droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item;
-		// droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item = this.item != null ? this.item : null;
-		// // droppedSlot.transform.Find("SlotItem").gameObject.GetComponent<SlotItem>().item = this.item;
-		// Debug.Log("@OnDrop()");
-		// GetComponentInParent<Slot>().SetItem(droppedItem);
+    {		
+		Slot droppedSlot = eventData.pointerDrag.gameObject.GetComponent<Slot>();
 
+		GameItem droppedItem = droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item;
+		// Debug.Log("Dropped '" + droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item.Title.ToUpper() + "': @SlotItem.OnDrop()");
+
+		droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item = this.item;
+
+		this.item = droppedItem;
+		parentSlot.SetItem(this.item);
     }
+
+	public void UpdateStackLabelText()
+	{
+		if (stackCountLabel != null)
+		{
+			if (_item != null && _item.maxStackSize > 1)
+				stackCountLabel.GetComponent<Text>().text = item.stackSize.ToString();
+			else
+				stackCountLabel.GetComponent<Text>().text = "";
+		}
+	}
 
 }

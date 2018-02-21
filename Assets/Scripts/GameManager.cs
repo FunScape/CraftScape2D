@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
 	void OnGUI()
 	{
-		DrawMousePositionGUI();
+		// DrawMousePositionGUI();
 	}
 
 	void DrawMousePositionGUI()

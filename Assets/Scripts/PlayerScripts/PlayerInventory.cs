@@ -6,12 +6,19 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour {
 
 	public Inventory inventoryPrefab;
+
+	public string inventoryFileName { get { return "/PlayerInventory.json"; } }
+	public string inventoryFilePath { get { return Application.streamingAssetsPath + inventoryFileName; } }
+
 	Inventory inventory;
 
 	bool displayInventory = false;
 
 	void Start () {
 		inventory = GameObject.Instantiate(inventoryPrefab);
+		inventory.transform.SetParent(this.transform);
+		inventory.SetOwner(this.gameObject);
+		inventory.SetFilePath(this.inventoryFilePath);
 	}
 	
 	bool isPressingB = false;
@@ -43,7 +50,7 @@ public class PlayerInventory : MonoBehaviour {
 
 			foreach (GameObject slot in inventory.slots)
 			{
-				slot.GetComponent<Slot>().SetEnabledIfItemExists();
+				slot.GetComponent<Slot>().UpdateItemImage();
 			}
 
 		} else if (!shouldOpen && isPressingB) {

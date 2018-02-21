@@ -7,6 +7,8 @@ using System.Text;
 
 public class ItemDatabase : MonoBehaviour {
 
+    public static ItemDatabase instance;
+
     public const string itemSpritesPath = "Sprites/RPG_inventory_icons/";
 
     private List<GameItem> database = new List<GameItem>();
@@ -15,6 +17,13 @@ public class ItemDatabase : MonoBehaviour {
 
 	void Start () {
         
+        // Implement singleton pattern
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(gameObject);
+        }
+
         itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/ItemDatabase.json"));
         ConstructItemDatabase();
 
@@ -24,7 +33,7 @@ public class ItemDatabase : MonoBehaviour {
     {
         foreach (GameItem item in database)
         {
-            if (item.Id == id)
+            if (item.id == id)
                 return item;
         }
         return null;
@@ -38,31 +47,93 @@ public class ItemDatabase : MonoBehaviour {
         }
     }
 
-    public void WriteToJsonFile(Inventory inventory)
+    public void WriteToFile(Inventory inventory)
     {
         List<GameItem> items = inventory.GetGameItems();
+        WriteToFile(inventory.inventoryFilePath, items.ToArray());
+    }
 
-        StringBuilder sb = new StringBuilder();
-        JsonWriter writer = new JsonWriter(sb);
-        writer.PrettyPrint = true;
+    public void WriteToFile(string filePath, GameItem[] items)
+    {
+        string data = SerializeGameItems(items, true);
+        File.WriteAllText(filePath, data);
+    }
 
-        writer.WriteArrayStart();
-        foreach (GameItem item in items)
+    public void WriteToFile(string filePath, JsonData json)
+    {
+        File.WriteAllText(filePath, json.ToJson());
+    }
+
+    public GameItem ReadOneFromFile(string filePath, string uuid)
+    {
+        JsonData itemJson = ReadOneFromFileRaw(filePath, uuid);
+
+        if (itemJson != null)
+            return DeserializeGameItem(itemJson);
+        else
+            return null;
+    }
+
+    public JsonData ReadOneFromFileRaw(string filePath, string uuid)
+    {
+        JsonData json = JsonMapper.ToObject(File.ReadAllText(filePath));
+
+        foreach (JsonData data in json)
         {
-            SerializeGameItem(item, writer);
+            JsonData metadataJson = data["metadata"];
+
+            try {
+                string uuidJson = metadataJson["uuid"].ToString();
+                if (uuidJson == uuid)
+                    { return data; }
+            } catch (KeyNotFoundException) {
+                continue;
+            }
         }
-        writer.WriteArrayEnd();
 
-        // Debug.LogFormat("DATA TO JSON: {0}", sb.ToString());
+        return null;
+    }
 
-        File.WriteAllText(Application.streamingAssetsPath + "/PlayerInventory.json", sb.ToString());
+    public void WriteOneToFile(string filePath, GameItem item)
+    {
+        JsonData itemJson = JsonMapper.ToObject(SerializeGameItem(item));
+        WriteOneToFileRaw(filePath, itemJson);
+    }
+
+    public void WriteOneToFileRaw(string filePath, JsonData item)
+    {
+        JsonData json = ReadFromFileRaw(filePath);
+
+        bool didFindMatchingItem = false;
+
+        for (int i = 0; i < json.Count; i++)
+        {
+            JsonData metadataJson = json[i]["metadata"];
+            try {
+                string uuidJson = metadataJson["uuid"].ToString();
+                if (uuidJson == item["metadata"]["uuid"].ToString()) {
+                    didFindMatchingItem = true;
+                    item[i] = item;
+                    break;
+                }
+            } catch (KeyNotFoundException) {
+                continue;
+            }
+        }
+
+        if (!didFindMatchingItem)
+        {
+            json.Add(item);
+        }
+
+        WriteToFile(filePath, json);
 
     }
 
-    public List<GameItem> LoadFromFile(string filePath)
+    public List<GameItem> ReadFromFile(string filePath)
     {
         List<GameItem> items = new List<GameItem>();
-        JsonData data = JsonMapper.ToObject(File.ReadAllText(filePath));
+        JsonData data = ReadFromFileRaw(filePath);
         foreach (JsonData itemData in data)
         {
             items.Add(DeserializeGameItem(itemData));
@@ -70,38 +141,35 @@ public class ItemDatabase : MonoBehaviour {
         return items;
     }
 
-    void SerializeGameItem(GameItem item, JsonWriter writer)
+    public JsonData ReadFromFileRaw(string filePath)
     {
-        writer.WriteObjectStart();
-        writer.WritePropertyName("id");
-        writer.Write(item.Id);
-        writer.WritePropertyName("spriteName");
-        writer.Write(item.Sprite.name);
-        writer.WritePropertyName("title");
-        writer.Write(item.Title);
-        writer.WritePropertyName("description");
-        writer.Write(item.Description);
-        writer.WritePropertyName("maxStackSize");
-        writer.Write(item.MaxStackSize);
-        writer.WritePropertyName("value");
-        writer.Write(item.Value);
-        writer.WritePropertyName("stats"); // Write "stats"
-        writer.WriteObjectStart();
-        writer.WritePropertyName("power");
-        writer.Write(item.Power);
-        writer.WritePropertyName("defense");
-        writer.Write(item.Defense);
-        writer.WritePropertyName("vitality");
-        writer.Write(item.Vitality);
-        writer.WritePropertyName("healAmount");
-        writer.Write(item.HealAmount);
-        writer.WriteObjectEnd(); // end "stats"
-        writer.WritePropertyName("types"); // write "types"
+        JsonData json = JsonMapper.ToObject(File.ReadAllText(filePath));
+        return json;
+    }
+
+    string SerializeGameItems(GameItem[] gameItems, bool prettyPrint=true)
+    {
+        StringBuilder sb = new StringBuilder();
+        JsonWriter writer = new JsonWriter(sb);
+        writer.PrettyPrint = prettyPrint;
+
         writer.WriteArrayStart();
-        foreach (string type in item.Types.ToArray())
-            writer.Write(type);
-        writer.WriteArrayEnd(); // end types
-        writer.WriteObjectEnd(); // end main object
+        foreach(GameItem gameItem in gameItems)
+        {
+            SerializeGameItem(gameItem, writer);
+        }
+        writer.WriteArrayEnd();
+
+        return sb.ToString();
+    }
+
+    string SerializeGameItem(GameItem gameItem, bool prettyPrint=true)
+    {
+        StringBuilder sb = new StringBuilder();
+        JsonWriter writer = new JsonWriter(sb);
+        writer.PrettyPrint = prettyPrint;
+        SerializeGameItem(gameItem, writer);
+        return sb.ToString();
     }
 
     GameItem DeserializeGameItem(JsonData data)
@@ -113,7 +181,8 @@ public class ItemDatabase : MonoBehaviour {
         string title = data["title"].ToString();
         string description = data["description"].ToString();
         double value = (double)data["value"];
-        int stackSize = (int)data["maxStackSize"];
+        int maxStackSize = (int)data["maxStackSize"];
+        int stackSize = (int)data["stackSize"];
         JsonData stats = data["stats"];
         double power = (double)stats["power"];
         double defense = (double)stats["defense"];
@@ -125,9 +194,72 @@ public class ItemDatabase : MonoBehaviour {
         {
             types.Add(typesJson[j].ToString());
         }
-        return new GameItem(id, sprite, title, description, 
-            (float)value, stackSize, (float) power, (float)defense,
-            (float)vitality, (float)healAmount, types);
+
+        JsonData metadata = data["metadata"];
+
+        int inventoryPosition;
+        try {
+            inventoryPosition = (int)metadata["inventoryPosition"];
+        } catch (KeyNotFoundException) {
+            inventoryPosition = -1;
+        }
+
+        string uuid;
+        try {
+            uuid = (string)metadata["uuid"];
+        } catch (KeyNotFoundException) {
+            uuid = System.Guid.NewGuid().ToString();
+        }
+
+        return new GameItem(id, uuid, sprite, title, description, 
+            (float)value, maxStackSize, stackSize, (float) power, (float)defense,
+            (float)vitality, (float)healAmount, types, inventoryPosition);
+    }
+
+    
+    void SerializeGameItem(GameItem item, JsonWriter writer)
+    {
+        writer.WriteObjectStart();
+        writer.WritePropertyName("id");
+        writer.Write(item.id);
+        writer.WritePropertyName("spriteName");
+        writer.Write(item.sprite.name);
+        writer.WritePropertyName("title");
+        writer.Write(item.title);
+        writer.WritePropertyName("description");
+        writer.Write(item.description);
+        writer.WritePropertyName("maxStackSize");
+        writer.Write(item.maxStackSize);
+        writer.WritePropertyName("stackSize");
+        writer.Write(item.stackSize);
+        writer.WritePropertyName("value");
+        writer.Write(item.value);
+        writer.WritePropertyName("stats"); // Write "stats"
+        writer.WriteObjectStart();
+        writer.WritePropertyName("power");
+        writer.Write(item.power);
+        writer.WritePropertyName("defense");
+        writer.Write(item.defense);
+        writer.WritePropertyName("vitality");
+        writer.Write(item.vitality);
+        writer.WritePropertyName("healAmount");
+        writer.Write(item.healAmount);
+        writer.WriteObjectEnd(); // end "stats"
+        writer.WritePropertyName("types"); // write "types"
+        writer.WriteArrayStart();
+        foreach (string type in item.types.ToArray())
+            writer.Write(type);
+        writer.WriteArrayEnd(); // end types
+
+        writer.WritePropertyName("metadata"); // metadata start
+        writer.WriteObjectStart();
+        writer.WritePropertyName("inventoryPosition");
+        writer.Write(item.inventoryPosition);
+        writer.WritePropertyName("uuid");
+        writer.Write(item.uuid);
+        writer.WriteObjectEnd(); // metadata end
+
+        writer.WriteObjectEnd(); // end main object
     }
 
 }

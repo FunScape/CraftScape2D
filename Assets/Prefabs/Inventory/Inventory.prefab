@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8fb1cedcb671949859aad9a9e2412b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySlotPrefab: {fileID: 1892156006031546, guid: c078db079e2bb85438e26370d0253339,
+  inventorySlotPrefab: {fileID: 1010740896196022, guid: c078db079e2bb85438e26370d0253339,
     type: 2}
   inventoryPanel: {fileID: 1847830549393512, guid: 608bed9942ccafe499f9c5d565096380,
     type: 2}

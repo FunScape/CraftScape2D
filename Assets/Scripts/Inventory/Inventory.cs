@@ -6,13 +6,23 @@ using LitJson;
 using System.IO;
 
 public class Inventory : MonoBehaviour {
-	private const string inventoryFileName = "/PlayerInventory.json";
-	private string inventoryFilePath { get { return Application.streamingAssetsPath + inventoryFileName; } }
+
+	private GameObject _owner; // _owner: The game object that owns the inventory. Set this value using 'SetInventoryOwner(...)'.
+	
+	public GameObject inventoryOwner { get { return _owner; } } // inventoryOwner: Public getter for '_owner';
+
+	private string _inventoryFilePath;
+
+	public string inventoryFilePath { get { return _inventoryFilePath; } }
 
 	public GameObject inventorySlotPrefab;
 
 	public GameObject inventoryPanel;
+
+	InventoryTrash inventoryTrash;
+
 	GameObject slotPanel;
+
 	ItemDatabase database;
 
 	public GameObject[] slots;
@@ -21,27 +31,80 @@ public class Inventory : MonoBehaviour {
 
 	void Start()
 	{
-		database = GetComponent<ItemDatabase>();
+		database = ItemDatabase.instance;
 
 		slots = new GameObject[slotCount];
 
 		inventoryPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
 		slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;
+		inventoryTrash = inventoryPanel.transform.Find("InventoryTrash").gameObject.GetComponent<InventoryTrash>();
+		inventoryTrash.parentInventory = this;
 
 		CreateSlots();
 		LoadInventory();
 	}
 
+	public void SetOwner(GameObject owner) {
+		this._owner = owner;
+	}
+
+	public void SetFilePath(string path)
+	{
+		this._inventoryFilePath = path;
+	}
+
 	public void AddItem(GameItem item)
 	{
-		foreach (GameObject slot in slots)
+		if (item.maxStackSize > 1)
 		{
-			if (slot.GetComponent<Slot>().Item == null) {
-				slot.GetComponent<Slot>().SetItem(item);
-				break;
+			int firstEmptySlotIndex = -1;
+			bool didIncrementItemStack = false;
+			for (var i = 0; i < slots.Length; i++)
+			{
+				GameItem currentItem = slots[i].GetComponent<Slot>().Item;
+				if (currentItem == null) 
+				{
+					if (firstEmptySlotIndex == -1) { firstEmptySlotIndex = i; }
+				} 
+				else if (currentItem.id == item.id && currentItem.stackSize < currentItem.maxStackSize) 
+				{
+					currentItem.stackSize++;
+					didIncrementItemStack = true;
+					slots[i].GetComponent<Slot>().UpdateItemStackLabel();
+					break;
+				}
+			}
+			if (firstEmptySlotIndex != -1 && !didIncrementItemStack)
+			{
+				slots[firstEmptySlotIndex].GetComponent<Slot>().SetItem(item);
 			}
 		}
-		Save();
+		else
+		{
+			for (int i = 0; i < slots.Length; i++)
+			{
+				GameObject slot = slots[i];
+				if (slot.GetComponent<Slot>().Item == null) {
+					slot.GetComponent<Slot>().SetItem(item);
+					break;
+				}
+			}
+		}
+
+		UpdateItemInventoryPositions();
+
+		SaveInventory();
+	}
+
+	public void UpdateItemInventoryPositions()
+	{
+		// Update item.inventoryPosition
+		for (int i = 0; i < slots.Length; i++)
+		{
+			Slot slot = slots[i].GetComponent<Slot>();
+			if (slot.Item != null)
+				{ slot.Item.inventoryPosition = i; }
+		}
 	}
 
 	public void AddItemById(int id)
@@ -50,19 +113,74 @@ public class Inventory : MonoBehaviour {
 		AddItem(item);
 	}
 
+	public void RemoveItem(int slotIndex)
+	{
+		GameItem item;
+		try
+		{
+			item = slots[slotIndex].GetComponent<Slot>().Item;
+		}
+		catch (System.IndexOutOfRangeException)
+		{
+			Debug.LogWarning("Tried removing item at index out of range.");
+			return;
+		}
+
+		if (item.stackSize > 1)
+			{ item.stackSize -= 1; }
+		else
+			{ slots[slotIndex].GetComponent<Slot>().SetItem(null); }
+
+		slots[slotIndex].GetComponent<Slot>().UpdateItemStackLabel();
+
+		SaveInventory();
+	}
+
+	public void RemoveItems(int slotIndex)
+	{
+		GameItem item;
+		try {
+			item = slots[slotIndex].GetComponent<Slot>().Item;
+		} catch (System.IndexOutOfRangeException) {
+			Debug.LogWarning("Tried removing items at index out of range.");
+			return;
+		}
+
+		slots[slotIndex].GetComponent<Slot>().SetItem(null);
+		slots[slotIndex].GetComponent<Slot>().UpdateItemStackLabel();
+
+		SaveInventory();
+	}
+
 	private void CreateSlots()
 	{
-		for (int i = 0; i < slots.Length; i++)
+		// Check for previously created Slots.
+		Slot[] previousSlots = slotPanel.GetComponentsInChildren<Slot>();
+		// If previousSlots.Length == 0, then create new slots
+		if (previousSlots.Length == 0)
 		{
-			GameObject slot = Instantiate(inventorySlotPrefab);
-			slots[i] = slot;
-			slot.transform.SetParent(slotPanel.transform);
+			for (int i = 0; i < slots.Length; i++)
+			{
+				GameObject slot = Instantiate(inventorySlotPrefab);
+				slot.GetComponent<Slot>().slotIndex = i;
+				slot.transform.SetParent(slotPanel.transform);
+				slots[i] = slot;
+			}
+		}
+		// If previousSlots.Length > 0, then have 'this.slots' elements reference the previously created Slot's gameObjects.
+		else
+		{
+			for (int i = 0; i < slots.Length; i++)
+			{
+				slots[i] = previousSlots[i].gameObject;
+				slots[i].GetComponent<Slot>().slotIndex = i;
+			}
 		}
 	}
 
-	public void Save()
+	public void SaveInventory()
 	{
-		database.WriteToJsonFile(this);
+		database.WriteToFile(this);
 	}
 
 	public List<GameItem> GetGameItems()
@@ -81,10 +199,10 @@ public class Inventory : MonoBehaviour {
 
 	public void LoadInventory()
 	{
-		List<GameItem> items = database.LoadFromFile(inventoryFilePath);
+		List<GameItem> items = database.ReadFromFile(inventoryFilePath);
 		for (var i = 0; i < items.Count; i++)
 		{
-			slots[i].GetComponent<Slot>().SetItem(items[i]);
+			slots[items[i].inventoryPosition].GetComponent<Slot>().SetItem(items[i]);
 		}
 	}
 

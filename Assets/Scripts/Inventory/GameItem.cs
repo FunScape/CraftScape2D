@@ -4,56 +4,46 @@ using UnityEngine;
 
 public class GameItem {
 
-	private Sprite _sprite;
-	public Sprite Sprite { get { return _sprite; } }
-	public string spriteName;
+	public int id { get; set; }
+	public string uuid { get; set; }
+	public Sprite sprite { get; set; }
+	public string spriteName { get; set; }
+	public int maxStackSize { get; set; }
+	public int stackSize { get; set; }
+	public string title { get; set; }
+	public string description { get; set; }
+    public float value { get; set; }
+	public float power { get; set; }
+	public float defense { get; set; }
+	public float vitality { get; set; }
+	public float healAmount { get; set; }
+	public List<string> types { get; set; }
+	public int inventoryPosition { get; set; }
 
-	private int _id;
-	public int Id { get { return _id; } }
-
-	private int _maxStackSize;
-	public int MaxStackSize { get { return _maxStackSize; } }
-
-	private string _title;
-	public string Title { get { return _title; } }
-
-	private string _description;
-	public string Description { get { return _description; } }
-
-	private float _value;
-    public float Value { get{return _value;} }
-
-	private float _power;
-	public float Power { get {return _power;} }
-
-	private float _defense;
-	public float Defense { get { return _defense; } }
-
-	private float _vitality;
-	public float Vitality {get{return _vitality;}}
-
-	private float _healAmount = 0f;
-	public float HealAmount {get{return _healAmount;}}
-
-	private List<string> _types = new List<string>();
-	public List<string> Types {get{return _types;}}
-
-	public GameItem(int id, Sprite sprite, string title, string description, 
-	float value, int maxStackSize, float power, float defense, float vitality,
-	float healAmount, List<string> types)
+	public GameItem(int id, string uuid, Sprite sprite, string title, string description, 
+	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
+	float healAmount, List<string> types, int inventoryPosition=-1)
 	{
-		_id = id;
-		_sprite = sprite;
-		spriteName = sprite.name;
-		_title = title;
-		_description = description;
-		_maxStackSize = maxStackSize;
-        _value = value;
-		_power = power;
-		_defense = defense;
-		_vitality = vitality;
-		_healAmount = healAmount;
-		_types = types;
+		this.id = id;
+		this.uuid = uuid;
+		this.sprite = sprite;
+		this.spriteName = sprite.name;
+		this.title = title;
+		this.description = description;
+		this.maxStackSize = maxStackSize;
+		this.stackSize = stackSize;
+        this.value = value;
+		this.power = power;
+		this.defense = defense;
+		this.vitality = vitality;
+		this.healAmount = healAmount;
+		this.types = types;
+		this.inventoryPosition = inventoryPosition;
+	}
+
+	public void Save(Inventory inventory)
+	{
+		
 	}
 
     

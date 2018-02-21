@@ -5,6 +5,7 @@
 		"title": "apple",
 		"description": "This is an apple.",
 		"maxStackSize": 10,
+		"stackSize": 1,
 		"value": 10.5,
 		"stats": {
 			"power": 0.0,
@@ -16,7 +17,8 @@
 			"consumable",
 			"food",
 			"health"
-		]
+		],
+		"metadata": {}
 	},
 	{
 		"id": 2,
@@ -24,6 +26,7 @@
 		"title": "bag",
 		"description": "This is a bag.",
 		"maxStackSize": 1,
+		"stackSize": 1,
 		"value": 1.1,
 		"stats": {
 			"power": 0.0,
@@ -33,7 +36,8 @@
 		},
 		"types": [
 			"inventory"
-		]
+		],
+		"metadata": {}
 	},
 	{
 		"id": 3,
@@ -41,6 +45,7 @@
 		"title": "axe",
 		"description": "This is an axe.",
 		"maxStackSize": 1,
+		"stackSize": 1,
 		"value": 20.0,
 		"stats": {
 			"power": 10.0,
@@ -52,6 +57,7 @@
 			"equipable",
 			"weapon",
 			"2-handed"
-		]
+		],
+		"metadata": {}
 	}
 ]
