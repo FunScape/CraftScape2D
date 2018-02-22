@@ -3,141 +3,71 @@
     {
         "id" : 2,
         "spriteName" : "bag",
-        "title"      : "bag",
-        "description" : "This is a bag.",
         "maxStackSize" : 1,
         "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
         "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
         "stats"        : {
             "power" : 0.0,
             "defense" : 0.0,
             "vitality" : 0.0,
             "healAmount" : 0.0
         },
-        "types"        : [
-            "inventory"
-        ],
         "metadata"     : {
             "inventoryPosition" : 0,
-            "uuid"              : "190c16f0-c744-43bd-a1d1-c8583feed2d5"
+            "uuid"              : "2c11e301-87bf-4753-af79-6427c0718bd0"
         }
     },
     {
         "id" : 3,
         "spriteName" : "axe",
-        "title"      : "axe",
-        "description" : "This is an axe.",
         "maxStackSize" : 1,
         "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
         "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
         "stats"        : {
             "power" : 10.0,
             "defense" : 5.0,
             "vitality" : 5.0,
             "healAmount" : 0.0
         },
+        "metadata"     : {
+            "inventoryPosition" : 1,
+            "uuid"              : "4c62142a-f23d-4948-b811-0c33828ed89e"
+        }
+    },
+    {
+        "id" : 1,
+        "spriteName" : "apple",
+        "maxStackSize" : 10,
+        "stackSize"    : 7,
+        "title"        : "apple",
+        "description"  : "This is an apple.",
+        "value"        : 10.5,
         "types"        : [
-            "equipable",
-            "weapon",
-            "2-handed"
+            "consumable",
+            "food",
+            "health"
         ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 10.0
+        },
         "metadata"     : {
             "inventoryPosition" : 5,
-            "uuid"              : "844fd677-b874-41e3-a2e2-e1414631ca2e"
-        }
-    },
-    {
-        "id" : 3,
-        "spriteName" : "axe",
-        "title"      : "axe",
-        "description" : "This is an axe.",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "value"        : 20.0,
-        "stats"        : {
-            "power" : 10.0,
-            "defense" : 5.0,
-            "vitality" : 5.0,
-            "healAmount" : 0.0
-        },
-        "types"        : [
-            "equipable",
-            "weapon",
-            "2-handed"
-        ],
-        "metadata"     : {
-            "inventoryPosition" : 6,
-            "uuid"              : "844fd677-b874-41e3-a2e2-e1414631ca2e"
-        }
-    },
-    {
-        "id" : 2,
-        "spriteName" : "bag",
-        "title"      : "bag",
-        "description" : "This is a bag.",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "value"        : 1.10000002384186,
-        "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 0.0
-        },
-        "types"        : [
-            "inventory"
-        ],
-        "metadata"     : {
-            "inventoryPosition" : 9,
-            "uuid"              : "190c16f0-c744-43bd-a1d1-c8583feed2d5"
-        }
-    },
-    {
-        "id" : 1,
-        "spriteName" : "apple",
-        "title"      : "apple",
-        "description" : "This is an apple.",
-        "maxStackSize" : 10,
-        "stackSize"    : 10,
-        "value"        : 10.5,
-        "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 10.0
-        },
-        "types"        : [
-            "consumable",
-            "food",
-            "health"
-        ],
-        "metadata"     : {
-            "inventoryPosition" : 10,
-            "uuid"              : "e6c0926a-4d51-4c65-9e1d-d567f283d475"
-        }
-    },
-    {
-        "id" : 1,
-        "spriteName" : "apple",
-        "title"      : "apple",
-        "description" : "This is an apple.",
-        "maxStackSize" : 10,
-        "stackSize"    : 5,
-        "value"        : 10.5,
-        "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 10.0
-        },
-        "types"        : [
-            "consumable",
-            "food",
-            "health"
-        ],
-        "metadata"     : {
-            "inventoryPosition" : 13,
-            "uuid"              : "7a401967-30b7-4853-bd19-251d7845ef1e"
+            "uuid"              : "01c0e249-95f4-4a25-aa8e-fd917767b256"
         }
     }
 ]

@@ -224,50 +224,70 @@ public class ItemDatabase : MonoBehaviour {
             (float)vitality, (float)healAmount, types, inventoryPosition);
     }
 
-    
-    void SerializeGameItem(GameItem item, JsonWriter writer)
+    void SerializeGameItem(GameItem gameItem, JsonWriter writer)
     {
-        writer.WriteObjectStart();
-        writer.WritePropertyName("id");
-        writer.Write(item.id);
-        writer.WritePropertyName("spriteName");
-        writer.Write(item.sprite.name);
-        writer.WritePropertyName("title");
-        writer.Write(item.title);
-        writer.WritePropertyName("description");
-        writer.Write(item.description);
-        writer.WritePropertyName("maxStackSize");
-        writer.Write(item.maxStackSize);
-        writer.WritePropertyName("stackSize");
-        writer.Write(item.stackSize);
-        writer.WritePropertyName("value");
-        writer.Write(item.value);
-        writer.WritePropertyName("stats"); // Write "stats"
-        writer.WriteObjectStart();
-        writer.WritePropertyName("power");
-        writer.Write(item.power);
-        writer.WritePropertyName("defense");
-        writer.Write(item.defense);
-        writer.WritePropertyName("vitality");
-        writer.Write(item.vitality);
-        writer.WritePropertyName("healAmount");
-        writer.Write(item.healAmount);
-        writer.WriteObjectEnd(); // end "stats"
-        writer.WritePropertyName("types"); // write "types"
-        writer.WriteArrayStart();
-        foreach (string type in item.types.ToArray())
-            writer.Write(type);
-        writer.WriteArrayEnd(); // end types
-
-        writer.WritePropertyName("metadata"); // metadata start
-        writer.WriteObjectStart();
-        writer.WritePropertyName("inventoryPosition");
-        writer.Write(item.inventoryPosition);
-        writer.WritePropertyName("uuid");
-        writer.Write(item.uuid);
-        writer.WriteObjectEnd(); // metadata end
-
-        writer.WriteObjectEnd(); // end main object
+        SerializableGameItem serializable = new SerializableGameItem(gameItem);
+        JsonMapper.ToJson(serializable, writer);
     }
+
+    string SerializableGameItem(GameItem item, bool prettyPrint=true)
+    {
+        StringBuilder builder = new StringBuilder();
+        JsonWriter writer = new JsonWriter(builder);
+        writer.PrettyPrint = prettyPrint;
+
+        SerializableGameItem serialized = new SerializableGameItem(item);
+
+        JsonMapper.ToJson(serialized, writer);
+
+        return builder.ToString();
+    }
+
+    // void SerializeGameItem(GameItem item, JsonWriter writer)
+    // {
+    //     writer.WriteObjectStart();
+    //     writer.WritePropertyName("id");
+    //     writer.Write(item.id);
+    //     writer.WritePropertyName("spriteName");
+    //     writer.Write(item.sprite.name);
+    //     writer.WritePropertyName("title");
+    //     writer.Write(item.title);
+    //     writer.WritePropertyName("description");
+    //     writer.Write(item.description);
+    //     writer.WritePropertyName("maxStackSize");
+    //     writer.Write(item.maxStackSize);
+    //     writer.WritePropertyName("stackSize");
+    //     writer.Write(item.stackSize);
+    //     writer.WritePropertyName("value");
+    //     writer.Write(item.value);
+    //     writer.WritePropertyName("stats"); // Write "stats"
+    //     writer.WriteObjectStart();
+    //     writer.WritePropertyName("power");
+    //     writer.Write(item.power);
+    //     writer.WritePropertyName("defense");
+    //     writer.Write(item.defense);
+    //     writer.WritePropertyName("vitality");
+    //     writer.Write(item.vitality);
+    //     writer.WritePropertyName("healAmount");
+    //     writer.Write(item.healAmount);
+    //     writer.WriteObjectEnd(); // end "stats"
+    //     writer.WritePropertyName("types"); // write "types"
+    //     writer.WriteArrayStart();
+    //     foreach (string type in item.types.ToArray())
+    //         writer.Write(type);
+    //     writer.WriteArrayEnd(); // end types
+
+    //     writer.WritePropertyName("metadata"); // metadata start
+    //     writer.WriteObjectStart();
+    //     writer.WritePropertyName("inventoryPosition");
+    //     writer.Write(item.inventoryPosition);
+    //     writer.WritePropertyName("uuid");
+    //     writer.Write(item.uuid);
+    //     writer.WriteObjectEnd(); // metadata end
+
+    //     writer.WriteObjectEnd(); // end main object
+    // }
+
+    
 
 }
