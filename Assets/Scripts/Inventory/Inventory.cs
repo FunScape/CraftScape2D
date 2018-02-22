@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour {
 			bool didIncrementItemStack = false;
 			for (var i = 0; i < slots.Length; i++)
 			{
-				GameItem currentItem = slots[i].GetComponent<Slot>().Item;
+				GameItem currentItem = slots[i].GetComponent<Slot>().gameItem;
 				if (currentItem == null) 
 				{
 					if (firstEmptySlotIndex == -1) { firstEmptySlotIndex = i; }
@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour {
 			for (int i = 0; i < slots.Length; i++)
 			{
 				GameObject slot = slots[i];
-				if (slot.GetComponent<Slot>().Item == null) {
+				if (slot.GetComponent<Slot>().gameItem == null) {
 					slot.GetComponent<Slot>().SetItem(item);
 					break;
 				}
@@ -103,8 +103,8 @@ public class Inventory : MonoBehaviour {
 		for (int i = 0; i < slots.Length; i++)
 		{
 			Slot slot = slots[i].GetComponent<Slot>();
-			if (slot.Item != null)
-				{ slot.Item.inventoryPosition = i; }
+			if (slot.gameItem != null)
+				{ slot.gameItem.inventoryPosition = i; }
 		}
 	}
 
@@ -119,7 +119,7 @@ public class Inventory : MonoBehaviour {
 		GameItem item;
 		try
 		{
-			item = slots[slotIndex].GetComponent<Slot>().Item;
+			item = slots[slotIndex].GetComponent<Slot>().gameItem;
 		}
 		catch (System.IndexOutOfRangeException)
 		{
@@ -141,7 +141,7 @@ public class Inventory : MonoBehaviour {
 	{
 		GameItem item;
 		try {
-			item = slots[slotIndex].GetComponent<Slot>().Item;
+			item = slots[slotIndex].GetComponent<Slot>().gameItem;
 		} catch (System.IndexOutOfRangeException) {
 			Debug.LogWarning("Tried removing items at index out of range.");
 			return;
@@ -189,7 +189,7 @@ public class Inventory : MonoBehaviour {
 		List<GameItem> items = new List<GameItem>();
 		for (int i = 0; i < slots.Length; i++) 
 		{ 
-			GameItem item = slots[i].GetComponent<Slot>().Item; 
+			GameItem item = slots[i].GetComponent<Slot>().gameItem; 
 			if (item != null)
 			{
 				items.Add(item);

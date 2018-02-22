@@ -30,13 +30,14 @@ public class SlotItem : MonoBehaviour, IDropHandler {
     {		
 		Slot droppedSlot = eventData.pointerDrag.gameObject.GetComponent<Slot>();
 
-		GameItem droppedItem = droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item;
-		// Debug.Log("Dropped '" + droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item.Title.ToUpper() + "': @SlotItem.OnDrop()");
+		if (droppedSlot.draggedSlotItem != null)
+		{
+			GameItem droppedItem = droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item;
+			droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item = this.item;
+			this.item = droppedItem;
+			parentSlot.SetItem(this.item);
+		}
 
-		droppedSlot.draggedSlotItem.GetComponent<SlotItem>().item = this.item;
-
-		this.item = droppedItem;
-		parentSlot.SetItem(this.item);
     }
 
 	public void UpdateStackLabelText()

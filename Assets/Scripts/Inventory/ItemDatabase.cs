@@ -108,30 +108,35 @@ public class ItemDatabase : MonoBehaviour {
         WriteOneToFileRaw(filePath, itemJson);
     }
 
-    public void WriteOneToFileRaw(string filePath, JsonData item)
+    public void WriteOneToFileRaw(string filePath, JsonData itemJson)
     {
         JsonData json = ReadFromFileRaw(filePath);
 
         bool didFindMatchingItem = false;
 
-        for (int i = 0; i < json.Count; i++)
+        int i = 0;
+        foreach (JsonData item in json)
         {
-            JsonData metadataJson = json[i]["metadata"];
-            try {
-                string uuidJson = metadataJson["uuid"].ToString();
-                if (uuidJson == item["metadata"]["uuid"].ToString()) {
+            try
+            {
+                if (item["metadata"]["uuid"].ToString() == itemJson["metadata"]["uuid"].ToString())
+                {
                     didFindMatchingItem = true;
-                    item[i] = item;
+                    json[i] = itemJson;
                     break;
                 }
-            } catch (KeyNotFoundException) {
+            }
+            catch (KeyNotFoundException)
+            {
                 continue;
             }
+
+            i++;
         }
 
         if (!didFindMatchingItem)
         {
-            json.Add(item);
+            json.Add(itemJson);
         }
 
         WriteToFile(filePath, json);

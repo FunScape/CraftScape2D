@@ -43,7 +43,7 @@ public class GameItem : System.Object {
 
 	public GameItem Clone()
 	{
-		return new GameItem(this.id, this.uuid, this.sprite, this.title, this.description, this.value, this.maxStackSize, this.stackSize, this.power,
+		return new GameItem(this.id, System.Guid.NewGuid().ToString(), this.sprite, this.title, this.description, this.value, this.maxStackSize, this.stackSize, this.power,
 		this.defense, this.vitality, this.healAmount, this.types, this.inventoryPosition);
 	}
 

@@ -9,7 +9,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 	static Sprite defaultSprite;
 
 	GameObject backgroundImage;// { get { return transform.Find("Background").gameObject; } }
-	GameObject slotItem;// { get { return transform.Find("SlotItem").gameObject; } }
+	GameObject slotItem;
 
 	public GameObject draggedSlotItem;
 
@@ -23,31 +23,34 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		}
 	}
 
-	private GameItem _item;
-	public GameItem Item { get { return _item; } }
+	public GameItem gameItem { get; set; }
+
+	void Awake() {
+		slotItem = transform.Find("SlotItem").gameObject;
+	}
 
 	void Start()
 	{
+
 		if (defaultSprite == null)
+		{
 			defaultSprite = (Sprite)Resources.Load("Sprites/RPG_inventory_icons/f", typeof(Sprite));
+		}
 
 		backgroundImage = transform.Find("Background").gameObject;
-		slotItem = transform.Find("SlotItem").gameObject;
+		// slotItem = transform.Find("SlotItem").gameObject;
 	}
 
 	public void SetItem(GameItem item)
 	{
-		if (slotItem == null) { slotItem = transform.Find("SlotItem").gameObject; }
+		this.gameItem = item;
 
-		_item = item;
-
-		slotItem.GetComponent<SlotItem>().item = _item;
+		slotItem.GetComponent<SlotItem>().item = this.gameItem;
 		slotItem.GetComponent<SlotItem>().UpdateStackLabelText();
-		// string spriteName = item != null ? item.spriteName.ToUpper() : "NULL";
-		// Debug.Log("Adding '" + spriteName + "': @Slot.SetItem()");
 
-		if (_item != null) {
-			_item.inventoryPosition = this.slotIndex;
+		if (this.gameItem != null) {
+
+			this.gameItem.inventoryPosition = this.slotIndex;
 
 			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -67,9 +70,9 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 				try {
 					GameObject inventory = player.transform.GetChild(0).gameObject;
 					string inventoryFilePath = inventory.GetComponent<Inventory>().inventoryFilePath;
-					ItemDatabase.instance.WriteOneToFile(inventoryFilePath, _item);
+					ItemDatabase.instance.WriteOneToFile(inventoryFilePath, this.gameItem);
 				} catch (System.Exception) {
-
+					throw new System.Exception("Failed to write item to file.");
 				}
 
 			}
@@ -83,10 +86,10 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 	{
 		Image image = slotItem.gameObject.GetComponent<Image>();
 
-		image.sprite = _item == null ? defaultSprite :
-			(Sprite)Resources.Load(ItemDatabase.itemSpritesPath + _item.spriteName, typeof(Sprite));
+		image.sprite = this.gameItem == null ? defaultSprite :
+			(Sprite)Resources.Load(ItemDatabase.itemSpritesPath + this.gameItem.spriteName, typeof(Sprite));
 
-		slotItem.gameObject.GetComponent<Image>().color = _item != null ? Color.white : clearColor;
+		slotItem.gameObject.GetComponent<Image>().color = this.gameItem != null ? Color.white : clearColor;
 	}
 
 	public void UpdateItemStackLabel()
@@ -96,7 +99,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
 	public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_item != null)
+        if (this.gameItem != null)
 		{
 			Slot[] allSlots = this.transform.parent.GetComponentsInChildren<Slot>();
 			foreach (Slot group in allSlots) 
@@ -112,7 +115,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_item != null)
+        if (this.gameItem != null)
 		{
 			draggedSlotItem.transform.position = eventData.position;
 		}
@@ -132,7 +135,6 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 			draggedSlotItem.transform.position = this.transform.position;
 			draggedSlotItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			GameItem updatedItem = draggedSlotItem.GetComponent<SlotItem>().item;
-			// Debug.LogFormat("Item is null? {0}", updatedItem == null ? "YES" : "NO");
 			draggedSlotItem = null;
 
 			SetItem(updatedItem);

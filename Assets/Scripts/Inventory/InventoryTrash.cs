@@ -15,7 +15,7 @@ public class InventoryTrash : MonoBehaviour, IDropHandler {
     public void OnDrop(PointerEventData eventData)
     {
 		GameObject trashedItemObject = eventData.pointerDrag.gameObject;
-        Debug.Log("Trashing item: " + trashedItemObject.GetComponent<Slot>().Item.title);
+        Debug.Log("Trashing item: " + trashedItemObject.GetComponent<Slot>().gameItem.title);
 
 		if (parentInventory != null)
 		{
