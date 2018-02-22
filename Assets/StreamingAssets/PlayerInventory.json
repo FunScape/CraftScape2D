@@ -1,1 +1,143 @@
-[{"id":2,"spriteName":"bag","title":"bag","description":"This is a bag.","maxStackSize":1,"stackSize":1,"value":1.10000002384186,"stats":{"power":0.0,"defense":0.0,"vitality":0.0,"healAmount":0.0},"types":["inventory"],"metadata":{"inventoryPosition":0,"uuid":"df23c435-87da-4edb-bbf1-dc32ef5b75cd"}}]
+
+[
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "title"      : "bag",
+        "description" : "This is a bag.",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "value"        : 1.10000002384186,
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "types"        : [
+            "inventory"
+        ],
+        "metadata"     : {
+            "inventoryPosition" : 0,
+            "uuid"              : "190c16f0-c744-43bd-a1d1-c8583feed2d5"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "title"      : "axe",
+        "description" : "This is an axe.",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "value"        : 20.0,
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "metadata"     : {
+            "inventoryPosition" : 5,
+            "uuid"              : "844fd677-b874-41e3-a2e2-e1414631ca2e"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "title"      : "axe",
+        "description" : "This is an axe.",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "value"        : 20.0,
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "metadata"     : {
+            "inventoryPosition" : 6,
+            "uuid"              : "844fd677-b874-41e3-a2e2-e1414631ca2e"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "title"      : "bag",
+        "description" : "This is a bag.",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "value"        : 1.10000002384186,
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "types"        : [
+            "inventory"
+        ],
+        "metadata"     : {
+            "inventoryPosition" : 9,
+            "uuid"              : "190c16f0-c744-43bd-a1d1-c8583feed2d5"
+        }
+    },
+    {
+        "id" : 1,
+        "spriteName" : "apple",
+        "title"      : "apple",
+        "description" : "This is an apple.",
+        "maxStackSize" : 10,
+        "stackSize"    : 10,
+        "value"        : 10.5,
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 10.0
+        },
+        "types"        : [
+            "consumable",
+            "food",
+            "health"
+        ],
+        "metadata"     : {
+            "inventoryPosition" : 10,
+            "uuid"              : "e6c0926a-4d51-4c65-9e1d-d567f283d475"
+        }
+    },
+    {
+        "id" : 1,
+        "spriteName" : "apple",
+        "title"      : "apple",
+        "description" : "This is an apple.",
+        "maxStackSize" : 10,
+        "stackSize"    : 5,
+        "value"        : 10.5,
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 10.0
+        },
+        "types"        : [
+            "consumable",
+            "food",
+            "health"
+        ],
+        "metadata"     : {
+            "inventoryPosition" : 13,
+            "uuid"              : "7a401967-30b7-4853-bd19-251d7845ef1e"
+        }
+    }
+]

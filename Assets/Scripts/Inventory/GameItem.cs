@@ -41,9 +41,15 @@ public class GameItem {
 		this.inventoryPosition = inventoryPosition;
 	}
 
+	public GameItem Clone()
+	{
+		return new GameItem(this.id, this.uuid, this.sprite, this.title, this.description, this.value, this.maxStackSize, this.stackSize, this.power,
+		this.defense, this.vitality, this.healAmount, this.types, this.inventoryPosition);
+	}
+
 	public void Save(Inventory inventory)
 	{
-		
+		throw new System.NotImplementedException();
 	}
 
     

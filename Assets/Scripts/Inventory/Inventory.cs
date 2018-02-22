@@ -76,6 +76,7 @@ public class Inventory : MonoBehaviour {
 			}
 			if (firstEmptySlotIndex != -1 && !didIncrementItemStack)
 			{
+				// item.stackSize = 1;
 				slots[firstEmptySlotIndex].GetComponent<Slot>().SetItem(item);
 			}
 		}

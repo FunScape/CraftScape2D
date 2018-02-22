@@ -11,7 +11,8 @@ public class ItemDatabase : MonoBehaviour {
 
     public const string itemSpritesPath = "Sprites/RPG_inventory_icons/";
 
-    private List<GameItem> database = new List<GameItem>();
+    private List<GameItem> _database = new List<GameItem>();
+    private List<GameItem> database { get { return _database; } }
 
     private JsonData itemData;
 
@@ -34,7 +35,9 @@ public class ItemDatabase : MonoBehaviour {
         foreach (GameItem item in database)
         {
             if (item.id == id)
-                return item;
+            {
+                return item.Clone();
+            }
         }
         return null;
     }
@@ -61,7 +64,12 @@ public class ItemDatabase : MonoBehaviour {
 
     public void WriteToFile(string filePath, JsonData json)
     {
-        File.WriteAllText(filePath, json.ToJson());
+        StringBuilder builder = new StringBuilder();
+        JsonWriter writer = new JsonWriter(builder);
+        writer.PrettyPrint = true;
+        JsonMapper.ToJson(json, writer);
+        
+        File.WriteAllText(filePath, builder.ToString());
     }
 
     public GameItem ReadOneFromFile(string filePath, string uuid)
