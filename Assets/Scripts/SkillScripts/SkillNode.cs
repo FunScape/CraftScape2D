@@ -18,6 +18,7 @@ public class SkillNode
     //Indicates whether the player has unlocked this skill
     private bool unlocked;
     public bool getUnlocked() { return this.unlocked; }
+    public void setUnlocked(bool unlocked) { this.unlocked = unlocked; }
 
     //A list of references to skillNodes that require this skill node to be unlocked before they can be unlocked
     public List<SkillNode> children;

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SkillTreeUIBinding : MonoBehaviour {
 
-    public bool isBound = false;
+    public SkillBtnManagerBehavior btnManage;
 
     public List<GameObject> UITreeNodes;
 
     // Use this for initialization
     void Start () {
+        btnManage = GameObject.Find("SkillBtnManager").GetComponent<SkillBtnManagerBehavior>();
 		
 	}
 	
@@ -17,7 +18,7 @@ public class SkillTreeUIBinding : MonoBehaviour {
 	void Update () {
 
         //Makes a list of UI elements that can be accessed with the same index as the SkillNodes that they are associated with
-		if(!isBound)
+		if(!btnManage.isBound)
         {
             UITreeNodes = new List<GameObject> { };
             int limit = gameObject.transform.childCount;
@@ -27,7 +28,7 @@ public class SkillTreeUIBinding : MonoBehaviour {
                 UITreeNodes.Add(gameObject.transform.GetChild(i).gameObject);
             }
 
-            isBound = true;
+            btnManage.isBound = true;
         }
 	}
 }
