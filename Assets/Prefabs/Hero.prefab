@@ -27,10 +27,11 @@ GameObject:
   - component: {fileID: 114087622891891894}
   - component: {fileID: 114005289684835590}
   - component: {fileID: 114935440699502752}
-  - component: {fileID: 114721904608156370}
   - component: {fileID: 114001145364688924}
   - component: {fileID: 95058589699833842}
   - component: {fileID: 114652310600041700}
+  - component: {fileID: 114721904608156370}
+  - component: {fileID: 114461961759694930}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -181,6 +182,25 @@ MonoBehaviour:
   walkSpeed: 5
   inventory: {fileID: 114327478289967570, guid: 9922122b61f6019489beca9657e8c7d9,
     type: 2}
+--- !u!114 &114461961759694930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8fb1cedcb671949859aad9a9e2412b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlotPrefab: {fileID: 1010740896196022, guid: c078db079e2bb85438e26370d0253339,
+    type: 2}
+  inventoryCanvasPrefab: {fileID: 1645728670843336, guid: 05144a095b9244430ad19a613ebe00db,
+    type: 2}
+  ItemDatabasePrefab: {fileID: 1347597955937208, guid: b931c03e14dfe4687a000d40acd36a8e,
+    type: 2}
+  itemDatabase: {fileID: 0}
+  slots: []
 --- !u!114 &114652310600041700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPrefab: {fileID: 114327478289967570, guid: 9922122b61f6019489beca9657e8c7d9,
     type: 2}
+  inventoryFileName: /PlayerInventory.json
 --- !u!114 &114935440699502752
 MonoBehaviour:
   m_ObjectHideFlags: 1

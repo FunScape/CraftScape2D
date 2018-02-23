@@ -11,10 +11,10 @@ public class ItemDatabase : MonoBehaviour {
 
     public const string itemSpritesPath = "Sprites/RPG_inventory_icons/";
 
-    private List<GameItem> _database = new List<GameItem>();
-    private List<GameItem> database { get { return _database; } }
+    private static List<GameItem> _database = new List<GameItem>();
+    private static List<GameItem> database { get { return _database; } }
 
-    private JsonData itemData;
+    private static JsonData itemData;
 
 	void Start () {
         
@@ -25,11 +25,14 @@ public class ItemDatabase : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/ItemDatabase.json"));
+        itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/StaticInventory/ItemDatabase.json"));
         ConstructItemDatabase();
 
     }
 
+    // Finds a game item in the database
+    // @param id {int} - the id of the game item in the database.
+    // @returns - a copy of the game item found in the the database, or null if an item is not found.
     public GameItem GetItemById(int id)
     {
         foreach (GameItem item in database)
@@ -58,8 +61,11 @@ public class ItemDatabase : MonoBehaviour {
 
     public void WriteToFile(string filePath, GameItem[] items)
     {
-        string data = SerializeGameItems(items, true);
-        File.WriteAllText(filePath, data);
+        if (!File.Exists(filePath))
+        {
+            File.WriteAllText(filePath, "");
+        }
+        File.WriteAllText(filePath, SerializeGameItems(items, true));
     }
 
     public void WriteToFile(string filePath, JsonData json)
@@ -74,6 +80,7 @@ public class ItemDatabase : MonoBehaviour {
 
     public GameItem ReadOneFromFile(string filePath, string uuid)
     {
+
         JsonData itemJson = ReadOneFromFileRaw(filePath, uuid);
 
         if (itemJson != null)
@@ -84,6 +91,12 @@ public class ItemDatabase : MonoBehaviour {
 
     public JsonData ReadOneFromFileRaw(string filePath, string uuid)
     {
+
+        if (!File.Exists(filePath))
+        {
+            File.WriteAllText(filePath, "[]");
+        }
+
         JsonData json = JsonMapper.ToObject(File.ReadAllText(filePath));
 
         foreach (JsonData data in json)
@@ -156,8 +169,13 @@ public class ItemDatabase : MonoBehaviour {
 
     public JsonData ReadFromFileRaw(string filePath)
     {
-        JsonData json = JsonMapper.ToObject(File.ReadAllText(filePath));
-        return json;
+
+        if (!File.Exists(filePath))
+        {
+            File.WriteAllText(filePath, "[]");
+        }
+
+        return JsonMapper.ToObject(File.ReadAllText(filePath));
     }
 
     string SerializeGameItems(GameItem[] gameItems, bool prettyPrint=true)

@@ -38,7 +38,6 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		}
 
 		backgroundImage = transform.Find("Background").gameObject;
-		// slotItem = transform.Find("SlotItem").gameObject;
 	}
 
 	public void SetItem(GameItem item)
@@ -54,27 +53,15 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
 			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-			GameObject player = null;
-
-			foreach (GameObject p in players)
+			foreach (GameObject player in players)
 			{
-				if (p.GetComponent<SetupLocalPlayer>().isLocalPlayer)
+				if (player.GetComponent<SetupLocalPlayer>().isLocalPlayer)
 				{
-					player = p;
+					Inventory inventory = player.GetComponent<Inventory>();
+					string inventoryFilePath = inventory.GetComponent<Inventory>().inventoryFilePath;
+					// player.itemDatabase. .WriteOneToFile(inventoryFilePath, this.gameItem);
 					break;
 				}
-			}
-
-			if (player != null)
-			{
-				try {
-					GameObject inventory = player.transform.GetChild(0).gameObject;
-					string inventoryFilePath = inventory.GetComponent<Inventory>().inventoryFilePath;
-					ItemDatabase.instance.WriteOneToFile(inventoryFilePath, this.gameItem);
-				} catch (System.Exception) {
-					throw new System.Exception("Failed to write item to file.");
-				}
-
 			}
 
 		}

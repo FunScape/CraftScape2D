@@ -17,24 +17,38 @@ public class Inventory : MonoBehaviour {
 
 	public GameObject inventorySlotPrefab;
 
-	public GameObject inventoryPanel;
+	public GameObject inventoryCanvasPrefab;
+
+	public GameObject ItemDatabasePrefab;
+
+	public GameObject itemDatabase;
+
+	GameObject inventoryCanvas;
+
+	GameObject inventoryPanel;
 
 	InventoryTrash inventoryTrash;
 
 	GameObject slotPanel;
 
-	ItemDatabase database;
-
 	public GameObject[] slots;
 
-	public int slotCount = 20;
+	public int slotCount { get { return 16; }}
+
+	void Awake()
+	{
+		slots = new GameObject[slotCount];
+
+		inventoryCanvas = GameObject.Instantiate(inventoryCanvasPrefab);
+		inventoryCanvas.transform.SetParent(this.transform);
+
+		itemDatabase = GameObject.Instantiate(ItemDatabasePrefab);
+		itemDatabase.transform.SetParent(this.transform);
+
+	}
 
 	void Start()
 	{
-		database = ItemDatabase.instance;
-
-		slots = new GameObject[slotCount];
-
 		inventoryPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
 		slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;
 		inventoryTrash = inventoryPanel.transform.Find("InventoryTrash").gameObject.GetComponent<InventoryTrash>();
@@ -51,6 +65,19 @@ public class Inventory : MonoBehaviour {
 	public void SetFilePath(string path)
 	{
 		this._inventoryFilePath = path;
+	}
+
+	public void ShowInventory(bool show)
+	{
+		float height = Camera.main.pixelHeight;
+		float width = Camera.main.pixelWidth;
+		
+		if (!show)
+		{
+			width += 1000f;
+		}
+
+		inventoryPanel.transform.position = new Vector3(width, height, 0f); 
 	}
 
 	public void AddItem(GameItem item)
@@ -76,7 +103,6 @@ public class Inventory : MonoBehaviour {
 			}
 			if (firstEmptySlotIndex != -1 && !didIncrementItemStack)
 			{
-				// item.stackSize = 1;
 				slots[firstEmptySlotIndex].GetComponent<Slot>().SetItem(item);
 			}
 		}
@@ -110,7 +136,7 @@ public class Inventory : MonoBehaviour {
 
 	public void AddItemById(int id)
 	{
-		GameItem item = database.GetItemById(id);
+		GameItem item = itemDatabase.GetComponent<ItemDatabase>().GetItemById(id);
 		AddItem(item);
 	}
 
@@ -181,7 +207,7 @@ public class Inventory : MonoBehaviour {
 
 	public void SaveInventory()
 	{
-		database.WriteToFile(this);
+		itemDatabase.GetComponent<ItemDatabase>().WriteToFile(this);
 	}
 
 	public List<GameItem> GetGameItems()
@@ -200,11 +226,12 @@ public class Inventory : MonoBehaviour {
 
 	public void LoadInventory()
 	{
-		List<GameItem> items = database.ReadFromFile(inventoryFilePath);
+		List<GameItem> items = itemDatabase.GetComponent<ItemDatabase>().ReadFromFile(inventoryFilePath);
 		for (var i = 0; i < items.Count; i++)
 		{
 			slots[items[i].inventoryPosition].GetComponent<Slot>().SetItem(items[i]);
 		}
+
 	}
 
 }

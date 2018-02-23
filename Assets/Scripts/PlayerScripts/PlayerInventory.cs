@@ -7,16 +7,15 @@ public class PlayerInventory : MonoBehaviour {
 
 	public Inventory inventoryPrefab;
 
-	public string inventoryFileName { get { return "/PlayerInventory.json"; } }
-	public string inventoryFilePath { get { return Application.streamingAssetsPath + inventoryFileName; } }
+	public string inventoryFileName = "/PlayerInventory.json";
+	public string inventoryFilePath { get { return Application.streamingAssetsPath + "/PlayerInventory" + inventoryFileName; } }
 
 	Inventory inventory;
 
 	bool displayInventory = false;
 
 	void Start () {
-		inventory = GameObject.Instantiate(inventoryPrefab);
-		inventory.transform.SetParent(this.transform);
+		inventory = GetComponent<Inventory>();
 		inventory.SetOwner(this.gameObject);
 		inventory.SetFilePath(this.inventoryFilePath);
 	}
@@ -34,18 +33,15 @@ public class PlayerInventory : MonoBehaviour {
 			isPressingB = true;
 			displayInventory = !displayInventory;
 
-			float height = Camera.main.pixelHeight;
-			float width = Camera.main.pixelWidth;
-
 			if (displayInventory)
 			{
 				// Moves inventory panel to top right corner of screen - CB 2/19
-				inventory.inventoryPanel.transform.position = new Vector3(width, height, 0f); 
+				inventory.ShowInventory(true);
 			}
 			else
 			{
 				// move inventory panel offscreen - CB 2/19
-				inventory.inventoryPanel.transform.position = new Vector3(width + 1000f, height, 0); 
+				inventory.ShowInventory(false);
 			}
 
 			foreach (GameObject slot in inventory.slots)
@@ -74,5 +70,13 @@ public class PlayerInventory : MonoBehaviour {
 		}
 
 	}
+
+	public void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect(10, 150, 230, 317-265));
+		GUILayout.TextField(this.inventoryFileName);
+		GUILayout.EndArea();
+	}
+	
 
 }
