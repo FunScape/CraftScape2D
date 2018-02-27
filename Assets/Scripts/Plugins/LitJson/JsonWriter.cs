@@ -365,8 +365,7 @@ namespace LitJson
             context.ExpectingValue = false;
         }
 
-        [CLSCompliant(false)]
-#pragma warning disable CS3021 // Type or member does not need a CLSCompliant attribute because the assembly does not have a CLSCompliant attribute
+        // [CLSCompliant(false)]
         public void Write (ulong number)
         {
             DoValidation (Condition.Value);

@@ -5,233 +5,154 @@ using UnityEngine.UI;
 using LitJson;
 using System.IO;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : ScriptableObject {
 
-	private GameObject _owner; // _owner: The game object that owns the inventory. Set this value using 'SetInventoryOwner(...)'.
-	
-	public GameObject inventoryOwner { get { return _owner; } } // inventoryOwner: Public getter for '_owner';
+	protected string inventoryFileName { get; set; }
 
-	private string _inventoryFilePath;
+	protected string inventoryFileDirectory { get { return Application.streamingAssetsPath + "/SaveData/inventories/"; }}
 
-	public string inventoryFilePath { get { return _inventoryFilePath; } }
+	protected Database database;
 
-	public GameObject inventorySlotPrefab;
+	public const int DEFAULT_INVENTORY_SIZE = 16;
 
-	public GameObject inventoryCanvasPrefab;
+	InventoryItem[] items;
 
-	public GameObject ItemDatabasePrefab;
+	public int size { get { return this.items.Length; } }
 
-	public GameObject itemDatabase;
-
-	GameObject inventoryCanvas;
-
-	GameObject inventoryPanel;
-
-	InventoryTrash inventoryTrash;
-
-	GameObject slotPanel;
-
-	public GameObject[] slots;
-
-	public int slotCount { get { return 16; }}
-
-	void Awake()
+	public static Inventory CreateInstance(int size=DEFAULT_INVENTORY_SIZE)
 	{
-		slots = new GameObject[slotCount];
-
-		inventoryCanvas = GameObject.Instantiate(inventoryCanvasPrefab);
-		inventoryCanvas.transform.SetParent(this.transform);
-
-		itemDatabase = GameObject.Instantiate(ItemDatabasePrefab);
-		itemDatabase.transform.SetParent(this.transform);
-
+		Inventory inventory = ScriptableObject.CreateInstance("Inventory") as Inventory;
+		inventory.Init(size);
+		return inventory;
 	}
 
-	void Start()
+	public void Init(int size)
 	{
-		inventoryPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
-		slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;
-		inventoryTrash = inventoryPanel.transform.Find("InventoryTrash").gameObject.GetComponent<InventoryTrash>();
-		inventoryTrash.parentInventory = this;
-
-		CreateSlots();
-		LoadInventory();
+		if (size == 0)
+			throw new System.Exception("Inventory size must be greater than 0.");
+		this.items = new InventoryItem[size];
+		this.database = new Database();
 	}
 
-	public void SetOwner(GameObject owner) {
-		this._owner = owner;
+	public void SetInventoryFileName(string name) {
+		this.inventoryFileName = name;
 	}
 
-	public void SetFilePath(string path)
+	public string GetInventoryFilePath() {
+		return inventoryFileDirectory + this.inventoryFileName;
+	}
+
+	public InventoryItem GetItem(int index)
 	{
-		this._inventoryFilePath = path;
+		return this.items[index];
+	}
+
+	public void SetItem(int index, InventoryItem item)
+	{
+		this.items[index] = item;
+	}
+
+	public void SwapItems(int index1, int index2)
+	{
+		InventoryItem temp = this.items[index1];
+		this.items[index1] = this.items[index2];
+		this.items[index2] = temp;
 	}
 
 	public void ShowInventory(bool show)
 	{
-		float height = Camera.main.pixelHeight;
-		float width = Camera.main.pixelWidth;
-		
-		if (!show)
-		{
-			width += 1000f;
-		}
 
-		inventoryPanel.transform.position = new Vector3(width, height, 0f); 
 	}
 
-	public void AddItem(GameItem item)
+	public void AddItem(InventoryItem item)
 	{
-		if (item.maxStackSize > 1)
+		bool didFindMatchingItem = false;
+
+		for (int i = 0; i < items.Length; i++)
 		{
-			int firstEmptySlotIndex = -1;
-			bool didIncrementItemStack = false;
-			for (var i = 0; i < slots.Length; i++)
+			InventoryItem currentItem = items[i];
+
+			if (currentItem == null)
+				continue;
+
+			if (currentItem.id == item.id && currentItem.stackSize < currentItem.maxStackSize)
 			{
-				GameItem currentItem = slots[i].GetComponent<Slot>().gameItem;
-				if (currentItem == null) 
-				{
-					if (firstEmptySlotIndex == -1) { firstEmptySlotIndex = i; }
-				} 
-				else if (currentItem.id == item.id && currentItem.stackSize < currentItem.maxStackSize) 
-				{
-					currentItem.stackSize++;
-					didIncrementItemStack = true;
-					slots[i].GetComponent<Slot>().UpdateItemStackLabel();
-					break;
-				}
-			}
-			if (firstEmptySlotIndex != -1 && !didIncrementItemStack)
-			{
-				slots[firstEmptySlotIndex].GetComponent<Slot>().SetItem(item);
-			}
-		}
-		else
-		{
-			for (int i = 0; i < slots.Length; i++)
-			{
-				GameObject slot = slots[i];
-				if (slot.GetComponent<Slot>().gameItem == null) {
-					slot.GetComponent<Slot>().SetItem(item);
-					break;
-				}
+				currentItem.stackSize++;
+				didFindMatchingItem = true;
+				break;
 			}
 		}
 
-		UpdateItemInventoryPositions();
+		if (!didFindMatchingItem)
+		{
+			for (int i = 0; i < items.Length; i++)
+			{
+				if (items[i] == null)
+				{
+					items[i] = item.Clone();
+					items[i].inventoryPosition = i;
+					break;
+				}
+			}
+		}
 
 		SaveInventory();
+	}
+
+	public void AddItem(int id)
+	{
+		AddItem(database.GetItem(id));
+	}
+
+	public void AddItem(string name)
+	{
+		InventoryItem item = database.GetItem(name);
+		if (item != null)
+		{
+			Debug.LogFormat("Picked up item: {0}", name);
+			AddItem(item);
+		}
 	}
 
 	public void UpdateItemInventoryPositions()
 	{
-		// Update item.inventoryPosition
-		for (int i = 0; i < slots.Length; i++)
-		{
-			Slot slot = slots[i].GetComponent<Slot>();
-			if (slot.gameItem != null)
-				{ slot.gameItem.inventoryPosition = i; }
-		}
-	}
 
-	public void AddItemById(int id)
-	{
-		GameItem item = itemDatabase.GetComponent<ItemDatabase>().GetItemById(id);
-		AddItem(item);
 	}
 
 	public void RemoveItem(int slotIndex)
 	{
-		GameItem item;
-		try
-		{
-			item = slots[slotIndex].GetComponent<Slot>().gameItem;
-		}
-		catch (System.IndexOutOfRangeException)
-		{
-			Debug.LogWarning("Tried removing item at index out of range.");
-			return;
-		}
 
-		if (item.stackSize > 1)
-			{ item.stackSize -= 1; }
-		else
-			{ slots[slotIndex].GetComponent<Slot>().SetItem(null); }
-
-		slots[slotIndex].GetComponent<Slot>().UpdateItemStackLabel();
-
-		SaveInventory();
 	}
 
 	public void RemoveItems(int slotIndex)
 	{
-		GameItem item;
-		try {
-			item = slots[slotIndex].GetComponent<Slot>().gameItem;
-		} catch (System.IndexOutOfRangeException) {
-			Debug.LogWarning("Tried removing items at index out of range.");
-			return;
-		}
 
-		slots[slotIndex].GetComponent<Slot>().SetItem(null);
-		slots[slotIndex].GetComponent<Slot>().UpdateItemStackLabel();
-
-		SaveInventory();
-	}
-
-	private void CreateSlots()
-	{
-		// Check for previously created Slots.
-		Slot[] previousSlots = slotPanel.GetComponentsInChildren<Slot>();
-		// If previousSlots.Length == 0, then create new slots
-		if (previousSlots.Length == 0)
-		{
-			for (int i = 0; i < slots.Length; i++)
-			{
-				GameObject slot = Instantiate(inventorySlotPrefab);
-				slot.GetComponent<Slot>().slotIndex = i;
-				slot.transform.SetParent(slotPanel.transform);
-				slots[i] = slot;
-			}
-		}
-		// If previousSlots.Length > 0, then have 'this.slots' elements reference the previously created Slot's gameObjects.
-		else
-		{
-			for (int i = 0; i < slots.Length; i++)
-			{
-				slots[i] = previousSlots[i].gameObject;
-				slots[i].GetComponent<Slot>().slotIndex = i;
-			}
-		}
 	}
 
 	public void SaveInventory()
 	{
-		itemDatabase.GetComponent<ItemDatabase>().WriteToFile(this);
+		// Update inventory positions
+		for (int i = 0; i < this.items.Length; i++)
+		{
+			if (items[i] != null)
+				items[i].inventoryPosition = i;
+		}
+		string path = GetInventoryFilePath();
+		this.database.WriteToFile(path, this.items);
 	}
 
-	public List<GameItem> GetGameItems()
+	public List<InventoryItem> GetGameItems()
 	{
-		List<GameItem> items = new List<GameItem>();
-		for (int i = 0; i < slots.Length; i++) 
-		{ 
-			GameItem item = slots[i].GetComponent<Slot>().gameItem; 
-			if (item != null)
-			{
-				items.Add(item);
-			}
-		}
-		return items;
+		return null;
 	}
 
 	public void LoadInventory()
 	{
-		List<GameItem> items = itemDatabase.GetComponent<ItemDatabase>().ReadFromFile(inventoryFilePath);
-		for (var i = 0; i < items.Count; i++)
+		List<InventoryItem> savedItems = database.ReadFromFile(GetInventoryFilePath());
+		for (int i = 0; i < savedItems.Count; i++)
 		{
-			slots[items[i].inventoryPosition].GetComponent<Slot>().SetItem(items[i]);
+			this.items[savedItems[i].inventoryPosition] = savedItems[i];
 		}
-
 	}
 
 }

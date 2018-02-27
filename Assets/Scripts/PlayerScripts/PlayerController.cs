@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D body;
 
-    public Inventory inventory;
-
     // Use this for initialization
     void Start()
     {
