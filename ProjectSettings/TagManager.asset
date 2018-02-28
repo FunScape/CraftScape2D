@@ -12,8 +12,8 @@ TagManager:
   - InventoryPanel
   - SlotBackgroundImage
   - SpawnPoint
-  - InventoryCanvas
   - InventorySlotItem
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

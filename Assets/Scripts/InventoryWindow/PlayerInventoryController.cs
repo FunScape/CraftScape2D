@@ -25,13 +25,11 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	Color clearColor { get { Color color = Color.white; color.a = 0f; return color; } }
 
-	float maxSpriteSizeOnDrag = 0.6f;
-
 	// Use this for initialization
 	void Start () {
 		inventory = Inventory.CreateInstance();
-		GameObject inventoryCanvas = GameObject.FindWithTag("InventoryCanvas");
-		inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, inventoryCanvas.transform);
+		GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
+		inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
 		inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalPlayer>().netId.ToString()));
 		inventory.LoadInventory();
 

@@ -182,6 +182,8 @@ MonoBehaviour:
     type: 2}
   inventorySlotPrefab: {fileID: 1010740896196022, guid: c078db079e2bb85438e26370d0253339,
     type: 2}
+  inventoryStackLabelPrefab: {fileID: 1980931201881440, guid: 2d1085ca39cc20a43910887376193f3e,
+    type: 2}
   inventory: {fileID: 0}
 --- !u!114 &114304450112468042
 MonoBehaviour:

@@ -1,25 +1,27 @@
 
 [
     {
-        "id" : 2,
-        "spriteName" : "bag",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "bag",
-        "description"  : "This is a bag.",
-        "value"        : 1.10000002384186,
+        "id" : 1,
+        "spriteName" : "apple",
+        "maxStackSize" : 10,
+        "stackSize"    : 3,
+        "title"        : "apple",
+        "description"  : "This is an apple.",
+        "value"        : 10.5,
         "types"        : [
-            "inventory"
+            "consumable",
+            "food",
+            "health"
         ],
         "stats"        : {
             "power" : 0.0,
             "defense" : 0.0,
             "vitality" : 0.0,
-            "healAmount" : 0.0
+            "healAmount" : 10.0
         },
         "metadata"     : {
-            "inventoryPosition" : 0,
-            "uuid"              : "72ea3c31-4bf9-4597-8c6f-32da0f681d08"
+            "inventoryPosition" : 4,
+            "uuid"              : "f6f02ed6-d205-4785-a023-b780abd2a516"
         }
     },
     {
@@ -42,32 +44,30 @@
             "healAmount" : 0.0
         },
         "metadata"     : {
-            "inventoryPosition" : 12,
+            "inventoryPosition" : 5,
             "uuid"              : "fd64e4a2-b507-450a-9761-291610350896"
         }
     },
     {
-        "id" : 1,
-        "spriteName" : "apple",
-        "maxStackSize" : 10,
-        "stackSize"    : 3,
-        "title"        : "apple",
-        "description"  : "This is an apple.",
-        "value"        : 10.5,
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
         "types"        : [
-            "consumable",
-            "food",
-            "health"
+            "inventory"
         ],
         "stats"        : {
             "power" : 0.0,
             "defense" : 0.0,
             "vitality" : 0.0,
-            "healAmount" : 10.0
+            "healAmount" : 0.0
         },
         "metadata"     : {
             "inventoryPosition" : 13,
-            "uuid"              : "f6f02ed6-d205-4785-a023-b780abd2a516"
+            "uuid"              : "72ea3c31-4bf9-4597-8c6f-32da0f681d08"
         }
     }
 ]
