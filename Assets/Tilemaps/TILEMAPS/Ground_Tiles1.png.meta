@@ -1,54 +1,43 @@
 fileFormatVersion: 2
-guid: 4c15f6ed195e2994db41bfb4d902bd26
-timeCreated: 1519668545
+guid: b5eed02e70f44214aa2d60a760746a8c
+timeCreated: 1519772404
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Clothing1_sideways_Spritesheet_0
-    21300002: Clothing1_sideways_Spritesheet_1
-    21300004: Clothing1_sideways_Spritesheet_2
-    21300006: Clothing1_sideways_Spritesheet_3
-    21300008: Clothing1_sideways_Spritesheet_4
-    21300010: Clothing1_sideways_Spritesheet_5
-    21300012: Clothing1_sideways_Spritesheet_6
-    21300014: Clothing1_sideways_Spritesheet_7
-    21300016: Clothing1_sideways_Spritesheet_8
-    21300018: Clothing1_sideways_Spritesheet_9
-    21300020: Clothing1_sideways_Spritesheet_10
-    21300022: Clothing1_sideways_Spritesheet_11
-    21300024: Clothing1_sideways_Spritesheet_12
-    21300026: Clothing1_sideways_Spritesheet_13
-    21300028: Clothing1_sideways_Spritesheet_14
-    21300030: Clothing1_sideways_Spritesheet_15
-    21300032: Clothing1_sideways_Spritesheet_16
-    21300034: Clothing1_sideways_Spritesheet_17
-    21300036: Clothing1_sideways_Spritesheet_18
-    21300038: Clothing1_sideways_Spritesheet_19
-    21300040: Clothing1_sideways_Spritesheet_20
-    21300042: Clothing1_sideways_Spritesheet_21
-    21300044: Clothing1_sideways_Spritesheet_22
-    21300046: Clothing1_sideways_Spritesheet_23
-    21300048: Clothing1_sideways_Spritesheet_24
-    21300050: Clothing1_sideways_Spritesheet_25
-    21300052: Clothing1_sideways_Spritesheet_26
-    21300054: Clothing1_sideways_Spritesheet_27
-    21300056: Clothing1_sideways_Spritesheet_28
-    21300058: Clothing1_sideways_Spritesheet_29
-    21300060: Clothing1_sideways_Spritesheet_30
-    21300062: Clothing1_sideways_Spritesheet_31
-    21300064: Clothing1_sideways_Spritesheet_32
-    21300066: Clothing1_sideways_Spritesheet_33
-    21300068: Clothing1_sideways_Spritesheet_34
-    21300070: Clothing1_sideways_Spritesheet_35
-    21300072: Clothing1_sideways_Spritesheet_36
-    21300074: Clothing1_sideways_Spritesheet_37
-    21300076: Clothing1_sideways_Spritesheet_38
-    21300078: Clothing1_sideways_Spritesheet_39
-    21300080: Clothing1_sideways_Spritesheet_40
-    21300082: Clothing1_sideways_Spritesheet_41
-    21300084: Clothing1_sideways_Spritesheet_42
-    21300086: Clothing1_sideways_Spritesheet_43
-    21300088: Clothing1_sideways_Spritesheet_44
+    21300000: Ground_Tiles1_0
+    21300002: Ground_Tiles1_1
+    21300004: Ground_Tiles1_2
+    21300006: Ground_Tiles1_3
+    21300008: Ground_Tiles1_4
+    21300010: Ground_Tiles1_5
+    21300012: Ground_Tiles1_6
+    21300014: Ground_Tiles1_7
+    21300016: Ground_Tiles1_8
+    21300018: Ground_Tiles1_9
+    21300020: Ground_Tiles1_10
+    21300022: Ground_Tiles1_11
+    21300024: Ground_Tiles1_12
+    21300026: Ground_Tiles1_13
+    21300028: Ground_Tiles1_14
+    21300030: Ground_Tiles1_15
+    21300032: Ground_Tiles1_16
+    21300034: Ground_Tiles1_17
+    21300036: Ground_Tiles1_18
+    21300038: Ground_Tiles1_19
+    21300040: Ground_Tiles1_20
+    21300042: Ground_Tiles1_21
+    21300044: Ground_Tiles1_22
+    21300046: Ground_Tiles1_23
+    21300048: Ground_Tiles1_24
+    21300050: Ground_Tiles1_25
+    21300052: Ground_Tiles1_26
+    21300054: Ground_Tiles1_27
+    21300056: Ground_Tiles1_28
+    21300058: Ground_Tiles1_29
+    21300060: Ground_Tiles1_30
+    21300062: Ground_Tiles1_31
+    21300064: Ground_Tiles1_32
+    21300066: Ground_Tiles1_33
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -145,180 +134,82 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_0
+      name: Ground_Tiles1_0
       rect:
         serializedVersion: 2
-        x: 685
-        y: 603
-        width: 33
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_1
-      rect:
-        serializedVersion: 2
-        x: 728
-        y: 608
-        width: 38
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_2
-      rect:
-        serializedVersion: 2
-        x: 774
-        y: 612
-        width: 39
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 828
-        y: 619
-        width: 41
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 512
-        width: 33
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 523
-        width: 45
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 126
-        y: 520
-        width: 43
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_7
-      rect:
-        serializedVersion: 2
-        x: 177
-        y: 513
-        width: 40
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 229
-        y: 508
-        width: 35
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_9
-      rect:
-        serializedVersion: 2
-        x: 353
-        y: 407
-        width: 63
-        height: 169
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_10
-      rect:
-        serializedVersion: 2
-        x: 681
-        y: 513
-        width: 33
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_11
-      rect:
-        serializedVersion: 2
-        x: 740
-        y: 524
-        width: 50
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_12
-      rect:
-        serializedVersion: 2
-        x: 820
+        x: 29
         y: 514
-        width: 39
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 514
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 514
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 359
+        width: 120
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_4
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 455
+        width: 120
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_5
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 431
+        width: 47
         height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -327,13 +218,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_13
+      name: Ground_Tiles1_6
       rect:
         serializedVersion: 2
-        x: 4
-        y: 414
-        width: 34
-        height: 54
+        x: 96
+        y: 431
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,13 +232,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_14
+      name: Ground_Tiles1_7
       rect:
         serializedVersion: 2
-        x: 59
-        y: 408
-        width: 36
-        height: 52
+        x: 33
+        y: 417
+        width: 4
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,13 +246,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_15
+      name: Ground_Tiles1_8
       rect:
         serializedVersion: 2
-        x: 107
-        y: 413
-        width: 41
-        height: 46
+        x: 38
+        y: 417
+        width: 15
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -369,279 +260,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_16
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 420
-        width: 44
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_17
-      rect:
-        serializedVersion: 2
-        x: 218
-        y: 423
-        width: 46
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_18
-      rect:
-        serializedVersion: 2
-        x: 690
-        y: 428
-        width: 45
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_19
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 421
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_20
-      rect:
-        serializedVersion: 2
-        x: 801
-        y: 418
-        width: 41
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_21
-      rect:
-        serializedVersion: 2
-        x: 853
-        y: 413
-        width: 35
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_22
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 301
-        width: 38
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_23
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 292
-        width: 39
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_24
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 293
-        width: 50
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_25
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 291
-        width: 59
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_26
-      rect:
-        serializedVersion: 2
-        x: 455
-        y: 297
-        width: 45
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_27
-      rect:
-        serializedVersion: 2
-        x: 547
-        y: 299
-        width: 61
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_28
-      rect:
-        serializedVersion: 2
-        x: 716
-        y: 328
-        width: 40
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_29
-      rect:
-        serializedVersion: 2
-        x: 777
-        y: 344
-        width: 51
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_30
-      rect:
-        serializedVersion: 2
-        x: 849
-        y: 329
-        width: 33
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_31
-      rect:
-        serializedVersion: 2
-        x: 215
-        y: 199
-        width: 39
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_32
-      rect:
-        serializedVersion: 2
-        x: 331
-        y: 199
-        width: 41
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_33
-      rect:
-        serializedVersion: 2
-        x: 449
-        y: 208
-        width: 45
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_34
-      rect:
-        serializedVersion: 2
-        x: 550
-        y: 208
-        width: 54
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_35
+      name: Ground_Tiles1_9
       rect:
         serializedVersion: 2
         x: 54
-        y: 103
-        width: 61
-        height: 61
+        y: 417
+        width: 10
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -649,13 +274,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_36
+      name: Ground_Tiles1_10
       rect:
         serializedVersion: 2
-        x: 162
-        y: 101
-        width: 45
-        height: 64
+        x: 288
+        y: 359
+        width: 120
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -663,13 +288,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_37
+      name: Ground_Tiles1_11
       rect:
         serializedVersion: 2
-        x: 242
-        y: 95
-        width: 59
-        height: 70
+        x: 25
+        y: 334
+        width: 71
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -677,13 +302,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_38
+      name: Ground_Tiles1_12
       rect:
         serializedVersion: 2
-        x: 354
-        y: 97
-        width: 49
-        height: 66
+        x: 45
+        y: 322
+        width: 7
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -691,13 +316,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_39
+      name: Ground_Tiles1_13
       rect:
         serializedVersion: 2
-        x: 453
-        y: 96
-        width: 39
-        height: 66
+        x: 62
+        y: 322
+        width: 10
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -705,13 +330,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_40
+      name: Ground_Tiles1_14
       rect:
         serializedVersion: 2
-        x: 565
-        y: 105
-        width: 39
-        height: 66
+        x: 144
+        y: 263
+        width: 120
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -719,13 +344,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_41
+      name: Ground_Tiles1_15
       rect:
         serializedVersion: 2
-        x: 49
-        y: 10
-        width: 54
-        height: 65
+        x: 288
+        y: 263
+        width: 120
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -733,13 +358,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_42
+      name: Ground_Tiles1_16
       rect:
         serializedVersion: 2
-        x: 158
-        y: 10
-        width: 46
-        height: 65
+        x: 24
+        y: 263
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -747,12 +372,194 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_43
+      name: Ground_Tiles1_17
       rect:
         serializedVersion: 2
-        x: 281
-        y: 2
+        x: 89
+        y: 256
         width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_18
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 167
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 167
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_20
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 167
+        width: 120
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 154
+        width: 448
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_22
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 154
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_23
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 23
+        width: 72
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_24
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 95
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_25
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 23
+        width: 96
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_26
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 71
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_27
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 23
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_28
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 22
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_29
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 1
+        width: 144
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_30
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 168
+        width: 66
         height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -761,13 +568,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_sideways_Spritesheet_44
+      name: Ground_Tiles1_31
       rect:
         serializedVersion: 2
-        x: 399
-        y: 2
-        width: 39
-        height: 64
+        x: 219
+        y: 168
+        width: 44
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_32
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 456
+        width: 71
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ground_Tiles1_33
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 483
+        width: 42
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

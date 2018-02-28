@@ -1,9 +1,61 @@
 fileFormatVersion: 2
 guid: 82c27a0f81cbe584b8e2c95e2b2a1e33
-timeCreated: 1519415033
+timeCreated: 1519668506
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Clothing1_forward_Spritesheet_0
+    21300002: Clothing1_forward_Spritesheet_1
+    21300004: Clothing1_forward_Spritesheet_2
+    21300006: Clothing1_forward_Spritesheet_3
+    21300008: Clothing1_forward_Spritesheet_4
+    21300010: Clothing1_forward_Spritesheet_5
+    21300012: Clothing1_forward_Spritesheet_6
+    21300014: Clothing1_forward_Spritesheet_7
+    21300016: Clothing1_forward_Spritesheet_8
+    21300018: Clothing1_forward_Spritesheet_9
+    21300020: Clothing1_forward_Spritesheet_10
+    21300022: Clothing1_forward_Spritesheet_11
+    21300024: Clothing1_forward_Spritesheet_12
+    21300026: Clothing1_forward_Spritesheet_13
+    21300028: Clothing1_forward_Spritesheet_14
+    21300030: Clothing1_forward_Spritesheet_15
+    21300032: Clothing1_forward_Spritesheet_16
+    21300034: Clothing1_forward_Spritesheet_17
+    21300036: Clothing1_forward_Spritesheet_18
+    21300038: Clothing1_forward_Spritesheet_19
+    21300040: Clothing1_forward_Spritesheet_20
+    21300042: Clothing1_forward_Spritesheet_21
+    21300044: Clothing1_forward_Spritesheet_22
+    21300046: Clothing1_forward_Spritesheet_23
+    21300048: Clothing1_forward_Spritesheet_24
+    21300050: Clothing1_forward_Spritesheet_25
+    21300052: Clothing1_forward_Spritesheet_26
+    21300054: Clothing1_forward_Spritesheet_27
+    21300056: Clothing1_forward_Spritesheet_28
+    21300058: Clothing1_forward_Spritesheet_29
+    21300060: Clothing1_forward_Spritesheet_30
+    21300062: Clothing1_forward_Spritesheet_31
+    21300064: Clothing1_forward_Spritesheet_32
+    21300066: Clothing1_forward_Spritesheet_33
+    21300068: Clothing1_forward_Spritesheet_34
+    21300070: Clothing1_forward_Spritesheet_35
+    21300072: Clothing1_forward_Spritesheet_36
+    21300074: Clothing1_forward_Spritesheet_37
+    21300076: Clothing1_forward_Spritesheet_38
+    21300078: Clothing1_forward_Spritesheet_39
+    21300080: Clothing1_forward_Spritesheet_40
+    21300082: Clothing1_forward_Spritesheet_41
+    21300084: Clothing1_forward_Spritesheet_42
+    21300086: Clothing1_forward_Spritesheet_43
+    21300088: Clothing1_forward_Spritesheet_44
+    21300090: Clothing1_forward_Spritesheet_45
+    21300092: Clothing1_forward_Spritesheet_46
+    21300094: Clothing1_forward_Spritesheet_47
+    21300096: Clothing1_forward_Spritesheet_48
+    21300098: Clothing1_forward_Spritesheet_49
+    21300100: Clothing1_forward_Spritesheet_50
+    21300102: Clothing1_forward_Spritesheet_51
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -40,7 +92,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -66,9 +118,767 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 388
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 380
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 380
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 379
+        width: 33
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 381
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 385
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 380
+        width: 21
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 378
+        width: 33
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 379
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 379
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 386
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 379
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 398
+        width: 49
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 261
+        width: 101
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 292
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 284
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 284
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 283
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 285
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 286
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 278
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 276
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 277
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 277
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 284
+        width: 44
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 203
+        width: 44
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 196
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 196
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 195
+        width: 33
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 197
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 198
+        width: 51
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 189
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 187
+        width: 34
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 188
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 188
+        width: 39
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 196
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 113
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 105
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 105
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 104
+        width: 33
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 106
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 107
+        width: 51
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 98
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 97
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_44
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 98
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_45
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 97
+        width: 38
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 105
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1
+        width: 51
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 1
+        width: 56
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_49
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 1
+        width: 45
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_50
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 3
+        width: 48
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clothing1_forward_Spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 2
+        width: 46
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

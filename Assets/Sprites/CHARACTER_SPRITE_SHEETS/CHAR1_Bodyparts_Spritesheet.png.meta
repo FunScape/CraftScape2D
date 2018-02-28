@@ -1,9 +1,77 @@
 fileFormatVersion: 2
 guid: 4e0a1f72b5ea6ee44acb5b42e6cfd8e3
-timeCreated: 1519415033
+timeCreated: 1519668388
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: CHAR1_Bodyparts_Spritesheet_0
+    21300002: CHAR1_Bodyparts_Spritesheet_1
+    21300004: CHAR1_Bodyparts_Spritesheet_2
+    21300006: CHAR1_Bodyparts_Spritesheet_3
+    21300008: CHAR1_Bodyparts_Spritesheet_4
+    21300010: CHAR1_Bodyparts_Spritesheet_5
+    21300012: CHAR1_Bodyparts_Spritesheet_6
+    21300014: CHAR1_Bodyparts_Spritesheet_7
+    21300016: CHAR1_Bodyparts_Spritesheet_8
+    21300018: CHAR1_Bodyparts_Spritesheet_9
+    21300020: CHAR1_Bodyparts_Spritesheet_10
+    21300022: CHAR1_Bodyparts_Spritesheet_11
+    21300024: CHAR1_Bodyparts_Spritesheet_12
+    21300026: CHAR1_Bodyparts_Spritesheet_13
+    21300028: CHAR1_Bodyparts_Spritesheet_14
+    21300030: CHAR1_Bodyparts_Spritesheet_15
+    21300032: CHAR1_Bodyparts_Spritesheet_16
+    21300034: CHAR1_Bodyparts_Spritesheet_17
+    21300036: CHAR1_Bodyparts_Spritesheet_18
+    21300038: CHAR1_Bodyparts_Spritesheet_19
+    21300040: CHAR1_Bodyparts_Spritesheet_20
+    21300042: CHAR1_Bodyparts_Spritesheet_21
+    21300044: CHAR1_Bodyparts_Spritesheet_22
+    21300046: CHAR1_Bodyparts_Spritesheet_23
+    21300048: CHAR1_Bodyparts_Spritesheet_24
+    21300050: CHAR1_Bodyparts_Spritesheet_25
+    21300052: CHAR1_Bodyparts_Spritesheet_26
+    21300054: CHAR1_Bodyparts_Spritesheet_27
+    21300056: CHAR1_Bodyparts_Spritesheet_28
+    21300058: CHAR1_Bodyparts_Spritesheet_29
+    21300060: CHAR1_Bodyparts_Spritesheet_30
+    21300062: CHAR1_Bodyparts_Spritesheet_31
+    21300064: CHAR1_Bodyparts_Spritesheet_32
+    21300066: CHAR1_Bodyparts_Spritesheet_33
+    21300068: CHAR1_Bodyparts_Spritesheet_34
+    21300070: CHAR1_Bodyparts_Spritesheet_35
+    21300072: CHAR1_Bodyparts_Spritesheet_36
+    21300074: CHAR1_Bodyparts_Spritesheet_37
+    21300076: CHAR1_Bodyparts_Spritesheet_38
+    21300078: CHAR1_Bodyparts_Spritesheet_39
+    21300080: CHAR1_Bodyparts_Spritesheet_40
+    21300082: CHAR1_Bodyparts_Spritesheet_41
+    21300084: CHAR1_Bodyparts_Spritesheet_42
+    21300086: CHAR1_Bodyparts_Spritesheet_43
+    21300088: CHAR1_Bodyparts_Spritesheet_44
+    21300090: CHAR1_Bodyparts_Spritesheet_45
+    21300092: CHAR1_Bodyparts_Spritesheet_46
+    21300094: CHAR1_Bodyparts_Spritesheet_47
+    21300096: CHAR1_Bodyparts_Spritesheet_48
+    21300098: CHAR1_Bodyparts_Spritesheet_49
+    21300100: CHAR1_Bodyparts_Spritesheet_50
+    21300102: CHAR1_Bodyparts_Spritesheet_51
+    21300104: CHAR1_Bodyparts_Spritesheet_52
+    21300106: CHAR1_Bodyparts_Spritesheet_53
+    21300108: CHAR1_Bodyparts_Spritesheet_54
+    21300110: CHAR1_Bodyparts_Spritesheet_55
+    21300112: CHAR1_Bodyparts_Spritesheet_56
+    21300114: CHAR1_Bodyparts_Spritesheet_57
+    21300116: CHAR1_Bodyparts_Spritesheet_58
+    21300118: CHAR1_Bodyparts_Spritesheet_59
+    21300120: CHAR1_Bodyparts_Spritesheet_60
+    21300122: CHAR1_Bodyparts_Spritesheet_61
+    21300124: CHAR1_Bodyparts_Spritesheet_62
+    21300126: CHAR1_Bodyparts_Spritesheet_63
+    21300128: CHAR1_Bodyparts_Spritesheet_64
+    21300130: CHAR1_Bodyparts_Spritesheet_65
+    21300132: CHAR1_Bodyparts_Spritesheet_66
+    21300134: CHAR1_Bodyparts_Spritesheet_67
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -98,7 +166,959 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 590
+        width: 98
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 680
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 672
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 672
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 671
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 673
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 688
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 686
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 682
+        width: 49
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 716
+        width: 49
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 598
+        width: 21
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 596
+        width: 32
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 597
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 597
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 605
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 585
+        width: 50
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 585
+        width: 55
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 585
+        width: 46
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 588
+        width: 47
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 586
+        width: 44
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 404
+        width: 51
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 507
+        width: 33
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 512
+        width: 37
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 515
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 522
+        width: 42
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 487
+        width: 39
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 479
+        width: 39
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 480
+        width: 50
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 477
+        width: 58
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 483
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 485
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 417
+        width: 34
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 419
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 424
+        width: 51
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 386
+        width: 39
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 386
+        width: 38
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 394
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 394
+        width: 54
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 223
+        width: 51
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 332
+        width: 45
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 325
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 321
+        width: 40
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 316
+        width: 35
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 290
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_44
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 288
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_45
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 282
+        width: 58
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 284
+        width: 50
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 283
+        width: 39
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 292
+        width: 39
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_49
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 240
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_50
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 239
+        width: 51
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 233
+        width: 34
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_52
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 197
+        width: 54
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_53
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 197
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_54
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 188
+        width: 38
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_55
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 188
+        width: 39
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_56
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 32
+        width: 87
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_57
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 121
+        width: 31
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_58
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 128
+        width: 32
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_59
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 136
+        width: 36
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_60
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 144
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_61
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 109
+        width: 52
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_62
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 87
+        width: 50
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_63
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 83
+        width: 49
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_64
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 79
+        width: 47
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_65
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 76
+        width: 45
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_66
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 0
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHAR1_Bodyparts_Spritesheet_67
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 45
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

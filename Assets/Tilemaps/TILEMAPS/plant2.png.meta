@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: 95ee0bfda0eaea444bedccea5921ec90
-timeCreated: 1519668479
+guid: e8742b90593954f4d936283ea4bc4f6d
+timeCreated: 1519773807
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Clothing1_backwards_Spritesheet_0
-    21300002: Clothing1_backwards_Spritesheet_1
-    21300004: Clothing1_backwards_Spritesheet_2
-    21300006: Clothing1_backwards_Spritesheet_3
-    21300008: Clothing1_backwards_Spritesheet_4
-    21300010: Clothing1_backwards_Spritesheet_5
-    21300012: Clothing1_backwards_Spritesheet_6
-    21300014: Clothing1_backwards_Spritesheet_7
-    21300016: Clothing1_backwards_Spritesheet_8
-    21300018: Clothing1_backwards_Spritesheet_9
-    21300020: Clothing1_backwards_Spritesheet_10
-    21300022: Clothing1_backwards_Spritesheet_11
+    21300000: plant2_0
+    21300002: plant2_1
+    21300004: plant2_2
+    21300006: plant2_3
+    21300008: plant2_4
+    21300010: plant2_5
+    21300012: plant2_6
+    21300014: plant2_7
+    21300016: plant2_8
+    21300018: plant2_9
+    21300020: plant2_10
+    21300022: plant2_11
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -112,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_0
+      name: plant2_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 279
-        width: 36
-        height: 48
+        x: 18
+        y: 127
+        width: 53
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,13 +126,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_1
+      name: plant2_1
       rect:
         serializedVersion: 2
-        x: 120
-        y: 261
-        width: 61
-        height: 61
+        x: 95
+        y: 127
+        width: 34
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,13 +140,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_2
+      name: plant2_2
       rect:
         serializedVersion: 2
-        x: 427
-        y: 143
-        width: 85
-        height: 164
+        x: 126
+        y: 128
+        width: 22
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,13 +154,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_3
+      name: plant2_3
       rect:
         serializedVersion: 2
-        x: 28
-        y: 187
-        width: 50
-        height: 46
+        x: 164
+        y: 129
+        width: 28
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,12 +168,40 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_4
+      name: plant2_4
       rect:
         serializedVersion: 2
-        x: 36
-        y: 108
-        width: 31
+        x: 190
+        y: 130
+        width: 29
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plant2_5
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 63
+        width: 34
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plant2_6
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 68
+        width: 34
         height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -182,13 +210,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_5
+      name: plant2_7
       rect:
         serializedVersion: 2
-        x: 87
-        y: 114
-        width: 31
-        height: 49
+        x: 103
+        y: 66
+        width: 54
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,69 +224,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_6
+      name: plant2_8
       rect:
         serializedVersion: 2
-        x: 141
-        y: 123
-        width: 37
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_7
-      rect:
-        serializedVersion: 2
-        x: 199
-        y: 131
-        width: 36
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 11
-        width: 51
-        height: 67
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_9
-      rect:
-        serializedVersion: 2
-        x: 141
-        y: 7
-        width: 50
-        height: 69
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_10
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 3
+        x: 171
+        y: 64
         width: 47
-        height: 73
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,13 +238,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_11
+      name: plant2_9
       rect:
         serializedVersion: 2
-        x: 309
-        y: 0
-        width: 46
-        height: 72
+        x: 21
+        y: 19
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plant2_10
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 26
+        width: 36
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plant2_11
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 14
+        width: 59
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

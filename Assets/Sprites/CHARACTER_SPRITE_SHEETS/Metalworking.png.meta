@@ -1,21 +1,23 @@
 fileFormatVersion: 2
-guid: 95ee0bfda0eaea444bedccea5921ec90
-timeCreated: 1519668479
+guid: 252eda50e5670bd4c9d2c3665de9f90b
+timeCreated: 1519668587
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Clothing1_backwards_Spritesheet_0
-    21300002: Clothing1_backwards_Spritesheet_1
-    21300004: Clothing1_backwards_Spritesheet_2
-    21300006: Clothing1_backwards_Spritesheet_3
-    21300008: Clothing1_backwards_Spritesheet_4
-    21300010: Clothing1_backwards_Spritesheet_5
-    21300012: Clothing1_backwards_Spritesheet_6
-    21300014: Clothing1_backwards_Spritesheet_7
-    21300016: Clothing1_backwards_Spritesheet_8
-    21300018: Clothing1_backwards_Spritesheet_9
-    21300020: Clothing1_backwards_Spritesheet_10
-    21300022: Clothing1_backwards_Spritesheet_11
+    21300000: Metalworking_0
+    21300002: Metalworking_1
+    21300004: Metalworking_2
+    21300006: Metalworking_3
+    21300008: Metalworking_4
+    21300010: Metalworking_5
+    21300012: Metalworking_6
+    21300014: Metalworking_7
+    21300016: Metalworking_8
+    21300018: Metalworking_9
+    21300020: Metalworking_10
+    21300022: Metalworking_11
+    21300024: Metalworking_12
+    21300026: Metalworking_13
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -112,13 +114,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_0
+      name: Metalworking_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 279
-        width: 36
-        height: 48
+        x: 2
+        y: 848
+        width: 113
+        height: 135
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,13 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_1
+      name: Metalworking_1
       rect:
         serializedVersion: 2
-        x: 120
-        y: 261
-        width: 61
-        height: 61
+        x: 326
+        y: 687
+        width: 48
+        height: 214
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,13 +142,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_2
+      name: Metalworking_2
       rect:
         serializedVersion: 2
-        x: 427
-        y: 143
-        width: 85
-        height: 164
+        x: 27
+        y: 690
+        width: 114
+        height: 135
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,68 +156,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 187
-        width: 50
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_4
+      name: Metalworking_3
       rect:
         serializedVersion: 2
         x: 36
-        y: 108
-        width: 31
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 114
-        width: 31
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 141
-        y: 123
-        width: 37
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_7
-      rect:
-        serializedVersion: 2
-        x: 199
-        y: 131
-        width: 36
+        y: 612
+        width: 108
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -224,13 +170,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_8
+      name: Metalworking_4
       rect:
         serializedVersion: 2
-        x: 29
+        x: 314
+        y: 498
+        width: 92
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Metalworking_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 363
+        width: 271
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Metalworking_6
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 538
+        width: 66
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Metalworking_7
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 492
+        width: 66
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Metalworking_8
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 385
+        width: 83
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Metalworking_9
+      rect:
+        serializedVersion: 2
+        x: 53
         y: 11
-        width: 51
-        height: 67
+        width: 190
+        height: 298
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,13 +254,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_9
+      name: Metalworking_10
       rect:
         serializedVersion: 2
-        x: 141
-        y: 7
-        width: 50
-        height: 69
+        x: 320
+        y: 22
+        width: 190
+        height: 298
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,13 +268,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_10
+      name: Metalworking_11
       rect:
         serializedVersion: 2
-        x: 233
-        y: 3
-        width: 47
-        height: 73
+        x: 586
+        y: 161
+        width: 125
+        height: 155
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,13 +282,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Clothing1_backwards_Spritesheet_11
+      name: Metalworking_12
       rect:
         serializedVersion: 2
-        x: 309
-        y: 0
-        width: 46
-        height: 72
+        x: 782
+        y: 48
+        width: 218
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Metalworking_13
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 44
+        width: 116
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
