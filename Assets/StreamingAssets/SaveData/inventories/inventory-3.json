@@ -1,0 +1,351 @@
+
+[
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 0,
+            "uuid"              : "e2349ea1-a04a-4043-8fea-b26d0572e68e"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 1,
+            "uuid"              : "11f2baaa-c8f0-4fec-ac5c-cdf872e5d7cc"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 2,
+            "uuid"              : "b164c113-ae5e-470d-83e2-359f21cc5d8b"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 3,
+            "uuid"              : "cd85d4dc-e9ce-4752-ab17-dc599a8e11f1"
+        }
+    },
+    {
+        "id" : 1,
+        "spriteName" : "apple",
+        "maxStackSize" : 10,
+        "stackSize"    : 10,
+        "title"        : "apple",
+        "description"  : "This is an apple.",
+        "value"        : 10.5,
+        "types"        : [
+            "consumable",
+            "food",
+            "health"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 10.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 4,
+            "uuid"              : "92c94447-040d-44c5-9a49-1e2405505437"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 5,
+            "uuid"              : "e84abbb5-052c-4836-827b-b1c1d3850ceb"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 6,
+            "uuid"              : "100224d5-1245-4976-aeca-9678c95a0257"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 7,
+            "uuid"              : "8b83a0dd-abb5-4b8c-90f3-fbec7893cbae"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 8,
+            "uuid"              : "c045acfc-ebb9-4c3c-bc9b-5c3656ea47b6"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 9,
+            "uuid"              : "84931b18-3c0b-4974-b784-267e465368fb"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 10,
+            "uuid"              : "437a57c2-12e6-4d50-81e6-aca5e7d4584a"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 11,
+            "uuid"              : "8e4d7fa0-ec88-442e-96aa-58f32ad71cbd"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 12,
+            "uuid"              : "c5e8331f-55da-4046-a2d6-d4b7ec7100e6"
+        }
+    },
+    {
+        "id" : 1,
+        "spriteName" : "apple",
+        "maxStackSize" : 10,
+        "stackSize"    : 1,
+        "title"        : "apple",
+        "description"  : "This is an apple.",
+        "value"        : 10.5,
+        "types"        : [
+            "consumable",
+            "food",
+            "health"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 10.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 13,
+            "uuid"              : "6374d452-f070-41ee-8eb8-1afa92043230"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 14,
+            "uuid"              : "09b50d39-36ef-4986-9f3c-22b2c581fc16"
+        }
+    }
+]

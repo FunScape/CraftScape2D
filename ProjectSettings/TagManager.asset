@@ -8,6 +8,7 @@ TagManager:
   - RiverMapTile
   - MagicPumpkinPatch
   - FlameThrower
+  - MainMenuCanvas
   layers:
   - Default
   - TransparentFX

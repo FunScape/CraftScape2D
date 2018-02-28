@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 114001145364688924}
   - component: {fileID: 95058589699833842}
   - component: {fileID: 114652310600041700}
+  - component: {fileID: 114640322211672048}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -178,6 +179,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
+--- !u!114 &114640322211672048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383de11994f50d74c81978af5b2ebdae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuPanelPrefab: {fileID: 1218101193575006, guid: f05b65dfdaeb80f47806567911c671f3,
+    type: 2}
 --- !u!114 &114652310600041700
 MonoBehaviour:
   m_ObjectHideFlags: 1
