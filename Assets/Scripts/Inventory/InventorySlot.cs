@@ -42,7 +42,9 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         GameObject player = GameObject.FindWithTag("Player");
 		inventoryController = player.GetComponent<PlayerInventoryController>();
-		inventoryController.OnEndDragInventoryItem(eventData);
+		inventoryController.OnEndDragInventoryItem(this.slotIndex);
+		draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		draggedItem = null;
     }
 	
 	public void OnDropInventoryItem(GameObject dropped)

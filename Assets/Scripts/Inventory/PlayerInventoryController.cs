@@ -11,6 +11,8 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	public GameObject inventorySlotPrefab;
 
+	public GameObject inventoryStackLabelPrefab;
+
 	GameObject inventoryPanel;
 
 	const string inventorySlotsContainerName = "InventorySlotsContainer";
@@ -23,7 +25,7 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	Color clearColor { get { Color color = Color.white; color.a = 0f; return color; } }
 
-	float maxSpriteSizeOnDrag = 1.0f;
+	float maxSpriteSizeOnDrag = 0.6f;
 
 	// Use this for initialization
 	void Start () {
@@ -57,6 +59,15 @@ public class PlayerInventoryController : MonoBehaviour {
 				slotContainer.transform
 			);
 			slot.GetComponent<InventorySlot>().slotIndex = i;
+			GameObject stackCountLabel = Instantiate(
+				inventoryStackLabelPrefab, 
+				Vector3.zero, 
+				Quaternion.identity
+			);
+			Transform slotItemTransform = slot.transform.Find("InventorySlotItem");
+			stackCountLabel.transform.SetParent(slotItemTransform);
+			stackCountLabel.transform.localPosition = new Vector3(-4f, 0f, 0f);
+			stackCountLabel.GetComponent<Text>().text = "";
 		}
 	}
 
@@ -85,17 +96,25 @@ public class PlayerInventoryController : MonoBehaviour {
 		for (int i = 0; i < inventory.size; i++)
 		{
 			GameObject slotItem = slots[i].transform.Find("InventorySlotItem").gameObject;
+			slotItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
 			Image slotItemImage = slotItem.GetComponent<Image>();
-			if (inventory.GetItem(i) != null)
+			InventoryItem item = inventory.GetItem(i);
+			if (item != null)
 			{
-				slotItemImage.sprite = inventory.GetItem(i).sprite;
-				if (slotItemImage.sprite == null)
-					slotItemImage.color = clearColor;
-				slotItemImage.color = Color.white;
+				slotItemImage.sprite = item.sprite;
+
+				slotItemImage.color = slotItemImage.sprite == null ? clearColor : Color.white;
+
+				if (item.maxStackSize > 1)
+					slots[i].GetComponentInChildren<Text>().text = item.stackSize.ToString();
+				else
+					slots[i].GetComponentInChildren<Text>().text = "";
+
 			}
 			else
 			{
 				slotItemImage.color = clearColor;
+				slots[i].GetComponentInChildren<Text>().text = "";
 			}
 
 		}
@@ -127,7 +146,7 @@ public class PlayerInventoryController : MonoBehaviour {
 	}
 
 
-	GameObject ghostInventoryItemImage;
+	GameObject draggedInventoryItem;
 
 	public GameObject OnBeginDragInventoryItem(int slotIndex)
 	{
@@ -139,12 +158,11 @@ public class PlayerInventoryController : MonoBehaviour {
 		
 		if (inventory.GetItem(slotIndex) != null)
 		{
-			ghostInventoryItemImage = new GameObject();
-			ghostInventoryItemImage.transform.SetParent(inventoryPanel.transform);
-			ghostInventoryItemImage.AddComponent<Image>();
-			ghostInventoryItemImage.GetComponent<Image>().sprite = inventory.GetItem(slotIndex).sprite;
-			ghostInventoryItemImage.GetComponent<Image>().raycastTarget = false;
-			ghostInventoryItemImage.GetComponent<RectTransform>().localScale = new Vector3(0.6f, 0.6f, 1f);
+			GameObject draggedSlotItem = inventorySlots[slotIndex].transform.Find("InventorySlotItem").gameObject;
+			draggedInventoryItem = GameObject.Instantiate(draggedSlotItem);
+			draggedInventoryItem.transform.SetParent(inventoryPanel.transform);
+			draggedInventoryItem.GetComponent<Image>().raycastTarget = false;
+			Destroy(draggedInventoryItem.GetComponentInChildren<Text>());
 		}
 
 		GameObject inventorySlot = inventorySlots[slotIndex];
@@ -156,13 +174,13 @@ public class PlayerInventoryController : MonoBehaviour {
 	
 	public void OnDragInventoryItem(PointerEventData eventData)
 	{
-		if (ghostInventoryItemImage != null)
+		if (draggedInventoryItem != null)
 		{
-			ghostInventoryItemImage.transform.position = eventData.position;
+			draggedInventoryItem.transform.position = eventData.position;
 		}
 	}
 
-	public void OnEndDragInventoryItem(PointerEventData eventData)
+	public void OnEndDragInventoryItem(int slotIndex)
 	{
 		List<GameObject> inventorySlots = GetInventorySlots();
 		foreach (GameObject slot in inventorySlots)
@@ -170,11 +188,13 @@ public class PlayerInventoryController : MonoBehaviour {
 			slot.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		}
 
-		if (ghostInventoryItemImage != null)
+		if (draggedInventoryItem != null)
 		{
-			Destroy(ghostInventoryItemImage);
+			Destroy(draggedInventoryItem);
+			draggedInventoryItem = null;
 		}
-
+		
+		UpdateInventoryPanelUI();
 	}
 
 	public void SwapInventorySlots(GameObject from, GameObject to)
@@ -195,7 +215,9 @@ public class PlayerInventoryController : MonoBehaviour {
 		from.transform.Find("InventorySlotItem").gameObject.GetComponent<RectTransform>().localPosition = Vector3.zero;
 		to.transform.Find("InventorySlotItem").gameObject.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
-		UpdateInventoryPanelUI();
+		from.transform.Find("InventorySlotItem").gameObject.GetComponent<Image>().color = Color.white;
+		to.transform.Find("InventorySlotItem").gameObject.GetComponent<Image>().color = Color.white;
+
 		inventory.SaveInventory();
 	}
 
@@ -204,6 +226,7 @@ public class PlayerInventoryController : MonoBehaviour {
 		int itemIndex = inventorySlot.GetComponent<InventorySlot>().slotIndex;
 		inventory.RemoveItem(itemIndex);
 		inventory.SaveInventory();
+		UpdateInventoryPanelUI();
 	}
 
 
