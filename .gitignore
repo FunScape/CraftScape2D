@@ -49,3 +49,5 @@ Corridor/Library/metadata/
 # Miscellaneous #
 # ============= #
 .vscode
+
+Assets/StreamingAssets/SaveData/inventories/*.json
