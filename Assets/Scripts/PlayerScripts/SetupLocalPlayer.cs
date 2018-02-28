@@ -11,7 +11,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
 		if (isLocalPlayer)
 		{
             GetComponent<PlayerController>().enabled = true;
-			GetComponent<AnimationBehaviour>().enabled = true;
+//			GetComponent<AnimationBehaviour>().enabled = true;
 			CameraFollow.player = gameObject.transform;
 		}
 		else
