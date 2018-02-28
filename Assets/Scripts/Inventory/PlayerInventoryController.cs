@@ -40,8 +40,7 @@ public class PlayerInventoryController : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.B))
 		{
-			showInventory = !showInventory;
-			OpenInventory(showInventory);
+			ToggleInventory();
 		}
 
 	}
@@ -61,8 +60,10 @@ public class PlayerInventoryController : MonoBehaviour {
 		}
 	}
 
-	void OpenInventory(bool show)
+	void ToggleInventory()
 	{
+		showInventory = !showInventory;
+
 		if (!didOpenInventoryOnce) {
 			UpdateInventoryPanelUI();
 			didOpenInventoryOnce = true;
@@ -71,7 +72,7 @@ public class PlayerInventoryController : MonoBehaviour {
 		float height = Camera.main.pixelHeight;
 		float width = Camera.main.pixelWidth;
 		
-		if (!show)
+		if (!showInventory)
 			width += 1000f;
 
 		inventoryPanel.transform.position = new Vector3(width, height, 0f); 
@@ -104,8 +105,13 @@ public class PlayerInventoryController : MonoBehaviour {
 	{
 		if (other.gameObject.name != null)
 		{
-			inventory.AddItem(other.gameObject.name);
-			UpdateInventoryPanelUI();
+			InventoryItem item = inventory.FindDatabaseItem(other.gameObject.name);
+			if (item != null)
+			{
+				inventory.AddItem(item);
+				Destroy(other.gameObject);
+				UpdateInventoryPanelUI();
+			}
 		}
 	}
 
@@ -158,6 +164,12 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	public void OnEndDragInventoryItem(PointerEventData eventData)
 	{
+		List<GameObject> inventorySlots = GetInventorySlots();
+		foreach (GameObject slot in inventorySlots)
+		{
+			slot.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		}
+
 		if (ghostInventoryItemImage != null)
 		{
 			Destroy(ghostInventoryItemImage);
@@ -167,8 +179,6 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	public void SwapInventorySlots(GameObject from, GameObject to)
 	{
-
-		
 		foreach (GameObject slot in GetInventorySlots())
 		{
 			slot.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -187,7 +197,14 @@ public class PlayerInventoryController : MonoBehaviour {
 
 		UpdateInventoryPanelUI();
 		inventory.SaveInventory();
-		
 	}
+
+	public void RemoveInventoryItem(GameObject inventorySlot)
+	{
+		int itemIndex = inventorySlot.GetComponent<InventorySlot>().slotIndex;
+		inventory.RemoveItem(itemIndex);
+		inventory.SaveInventory();
+	}
+
 
 }

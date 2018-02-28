@@ -59,9 +59,9 @@ public class Inventory : ScriptableObject {
 		this.items[index2] = temp;
 	}
 
-	public void ShowInventory(bool show)
+	public InventoryItem FindDatabaseItem(string name)
 	{
-
+		return database.GetItem(name);
 	}
 
 	public void AddItem(InventoryItem item)
@@ -114,14 +114,21 @@ public class Inventory : ScriptableObject {
 		}
 	}
 
-	public void UpdateItemInventoryPositions()
+	public void RemoveItem(InventoryItem item)
 	{
-
+		for (int i = 0; i < this.items.Length; i++)
+		{
+			if (this.items[i] != null && this.items[i].id == item.id)
+			{
+				this.items[i] = null;
+				break;
+			}
+		}
 	}
 
 	public void RemoveItem(int slotIndex)
 	{
-
+		this.items[slotIndex] = null;
 	}
 
 	public void RemoveItems(int slotIndex)
