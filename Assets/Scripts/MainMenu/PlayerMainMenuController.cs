@@ -5,35 +5,36 @@ using UnityEngine;
 public class PlayerMainMenuController: MonoBehaviour {
 
 	public GameObject mainMenuPanelPrefab;
-
 	GameObject mainMenuPanel;
-
 	bool showMainMenu = false;
+	PlayerController playerController;
+	AnimationBehaviour playerAnimation;
 
 	// Use this for initialization
 	void Start () {
-		GameObject mainMenuCanvas = GameObject.FindWithTag ("MainMenuCanvas");
-		mainMenuPanel = Instantiate (mainMenuPanelPrefab, Vector3.zero, Quaternion.identity, mainMenuCanvas.transform);
+		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
+		mainMenuPanel = Instantiate (mainMenuPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
+		mainMenuPanel.SetActive (false);
+
+		playerController = GetComponent<PlayerController> ();
+		playerAnimation = GetComponent<AnimationBehaviour> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			showMainMenu = !showMainMenu;
-			openMainMenu(showMainMenu);
+			toggleMainMenu();
 		}
 	}
 
 	//This function opens or closes the main menu, depending on its current open/closed status
-	void openMainMenu(bool show) {
-		float height = Camera.main.pixelHeight / 2;
-		float width = Camera.main.pixelWidth / 2;
+	public void toggleMainMenu() {
+		showMainMenu = !showMainMenu;
 
-		if (!show)
-			width += 1000f;
-
-		mainMenuPanel.transform.position = new Vector3(width, height, 0f);
+		mainMenuPanel.SetActive (showMainMenu);
+		playerController.enabled = !showMainMenu;
+		playerAnimation.enabled = !showMainMenu;
 	}
 }

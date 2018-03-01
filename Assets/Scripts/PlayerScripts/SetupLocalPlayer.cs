@@ -18,6 +18,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
 		{
             GetComponent<PlayerController>().enabled = false;
 			GetComponent<AnimationBehaviour>().enabled = false;
+			GetComponent<PlayerMainMenuController> ().enabled = false;
 		}
 	}
 
