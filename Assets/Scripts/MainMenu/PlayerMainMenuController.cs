@@ -1,28 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMainMenuController: MonoBehaviour {
 
 	public GameObject mainMenuPanelPrefab;
 	GameObject mainMenuPanel;
+
 	bool showMainMenu = false;
 	PlayerController playerController;
 	AnimationBehaviour playerAnimation;
 
-	float displayHeight;
-	float displayWidth;
-	float hideWidth;
+	float cameraHeight;
+	float cameraWidth;
 
 	// Use this for initialization
 	void Start () {
-		displayHeight = Camera.main.pixelHeight / 2;
-		displayWidth = Camera.main.pixelWidth / 2;
-		hideWidth = Camera.main.pixelWidth * 2;
+		cameraHeight = Camera.main.pixelHeight;
+		cameraWidth = Camera.main.pixelWidth;
 
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		mainMenuPanel = Instantiate (mainMenuPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
-		mainMenuPanel.transform.position = new Vector3(hideWidth, displayHeight, 0f);
+		mainMenuPanel.transform.position = new Vector3(cameraWidth * 2, cameraHeight / 2, 0f);
 
 		playerController = GetComponent<PlayerController> ();
 		playerAnimation = GetComponent<AnimationBehaviour> ();
@@ -42,9 +42,9 @@ public class PlayerMainMenuController: MonoBehaviour {
 		showMainMenu = !showMainMenu;
 
 		if (showMainMenu)
-			mainMenuPanel.transform.position = new Vector3(displayWidth, displayHeight, 0f);
+			mainMenuPanel.transform.position = new Vector3(cameraWidth / 2, cameraHeight / 2, 0f);
 		else
-			mainMenuPanel.transform.position = new Vector3(hideWidth, displayHeight, 0f);
+			mainMenuPanel.transform.position = new Vector3(cameraWidth * 2, cameraHeight / 2, 0f);
 
 		//mainMenuPanel.SetActive (showMainMenu);
 		playerController.enabled = !showMainMenu;

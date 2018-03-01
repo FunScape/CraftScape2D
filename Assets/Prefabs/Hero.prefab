@@ -192,6 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuPanelPrefab: {fileID: 1218101193575006, guid: f05b65dfdaeb80f47806567911c671f3,
     type: 2}
+  mainMenuButtonPrefab: {fileID: 1282966341140396, guid: e1e830ba867510d4a9769789bcbb1d2b,
+    type: 2}
 --- !u!114 &114652310600041700
 MonoBehaviour:
   m_ObjectHideFlags: 1
