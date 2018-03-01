@@ -1,9 +1,18 @@
 [
 	{
-		"id": 1,
-		"productId": "1",
-		"ingredientId": "1",
-		"ingredientQuantity": "1",
-		"productQuantity": "1",
+  		"id": 1,
+  		"recipeId": 1,
+  		"productId": 4,
+  		"ingredientId": 1,
+  		"ingredientQuantity": 1,
+  		"productQuantity": 1
+	},
+	{
+  		"id": 2,
+  		"recipeId": 1,
+  		"productId": 4,
+  		"ingredientId": 3,
+  		"ingredientQuantity": 1,
+  		"productQuantity": 1
 	}
 ]

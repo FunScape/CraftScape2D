@@ -59,5 +59,26 @@
 			"2-handed"
 		],
 		"metadata": {}
+	},
+	{
+		"id": 4,
+		"spriteName": "axepple",
+		"title": "axepple",
+		"description": "An axe made of apples. Somehow.",
+		"maxStackSize": 1,
+		"stackSize": 1,
+		"value": 50.3,
+		"stats": {
+			"power": 15.0,
+			"defense": 7.5,
+			"vitality": 10.0,
+			"healAmount": 0.0
+		},
+		"types": [
+			"equippable",
+			"weapon",
+			"2-handed"
+		],
+		"metadata": {}
 	}
 ]

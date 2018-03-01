@@ -64,7 +64,7 @@
 		"id": 4,
 		"spriteName": "axepple",
 		"title": "axepple",
-		"description": "An axe made of apples, somehow.",
+		"description": "An axe made of apples. Somehow.",
 		"maxStackSize": 1,
 		"stackSize": 1,
 		"value": 50.3,

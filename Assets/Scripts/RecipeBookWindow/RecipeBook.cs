@@ -9,6 +9,9 @@ public class RecipeBook {
 	public List<Recipe> recipes;
 
 	public void loadRecipeBook() {
+
+		itemDatabase = new Database ();
+
 		recipes = new List<Recipe> ();
 		//Read list of recipes unlocked from database.
 		//for (each recipe unlocked):
@@ -19,16 +22,25 @@ public class RecipeBook {
 }
 	//A method for printing a recipe book as a string, just for testing.
 	public string toString() {
-		itemDatabase = new Database ();
 
 		string recipeBook = "";
 
 		foreach(Recipe recipe in recipes) {
 			foreach(RecipeRequirement requirement in recipe.ingredients) {
-				recipeBook = string.Concat(recipeBook, requirement.ingredientQuantity.ToString(), " ", itemDatabase.GetItem (requirement.ingredientId).title, "(s),");
+				recipeBook += requirement.ingredientQuantity.ToString() + " " + itemDatabase.GetItem (requirement.ingredientId).title + "(s),";
 			}
 
-			recipeBook = string.Concat (recipeBook, " make(s) ", recipe.productQuantity.ToString (), " ", itemDatabase.GetItem (recipe.productID).title, "(s).", System.Environment.NewLine);
+			//recipeBook += " make(s) " + recipe.productQuantity.ToString () + " " + itemDatabase.GetItem (recipe.productID).title + "(s)." + System.Environment.NewLine;
+			recipeBook += " make(s) ";
+			recipeBook += recipe.productQuantity.ToString ();
+			recipeBook += " ";
+			int prodId = recipe.productID;
+			Debug.Log (prodId);
+			InventoryItem prodItem = itemDatabase.GetItem (prodId);
+			Debug.Log (prodItem.ToString ());
+			recipeBook += prodItem.title;
+			recipeBook += "(s).";
+			recipeBook += System.Environment.NewLine;
 		}
 
 		return recipeBook;

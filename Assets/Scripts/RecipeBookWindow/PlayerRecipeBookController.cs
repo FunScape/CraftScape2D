@@ -18,6 +18,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		cameraHeight = Camera.main.pixelHeight;
 		cameraWidth = Camera.main.pixelWidth;
 
@@ -39,8 +40,10 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 	void LayoutRecipeBook()
 	{
-		Text text = recipeBookPanel.AddComponent<Text> ();
-		text.text = recipeBook.toString();
+		Text recipeText = recipeBookPanel.AddComponent<Text> ();
+		recipeText.text = recipeBook.toString();
+		recipeText.fontSize = 72;
+		recipeText.color = Color.magenta;
 	}
 
 	void ToggleRecipeBook()
