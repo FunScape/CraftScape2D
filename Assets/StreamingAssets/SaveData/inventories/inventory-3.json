@@ -1,10 +1,32 @@
 
 [
     {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 0,
+            "uuid"              : "c76f3b4a-6984-4feb-9824-10da94a83edb"
+        }
+    },
+    {
         "id" : 1,
         "spriteName" : "apple",
         "maxStackSize" : 10,
-        "stackSize"    : 3,
+        "stackSize"    : 4,
         "title"        : "apple",
         "description"  : "This is an apple.",
         "value"        : 10.5,
@@ -20,7 +42,7 @@
             "healAmount" : 10.0
         },
         "metadata"     : {
-            "inventoryPosition" : 4,
+            "inventoryPosition" : 1,
             "uuid"              : "f6f02ed6-d205-4785-a023-b780abd2a516"
         }
     },
@@ -44,7 +66,31 @@
             "healAmount" : 0.0
         },
         "metadata"     : {
-            "inventoryPosition" : 5,
+            "inventoryPosition" : 2,
+            "uuid"              : "79375501-4ce9-4f54-b2d1-deecd7a4a5a4"
+        }
+    },
+    {
+        "id" : 3,
+        "spriteName" : "axe",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axe",
+        "description"  : "This is an axe.",
+        "value"        : 20.0,
+        "types"        : [
+            "equipable",
+            "weapon",
+            "2-handed"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 5.0,
+            "vitality" : 5.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 4,
             "uuid"              : "fd64e4a2-b507-450a-9761-291610350896"
         }
     },
@@ -66,7 +112,7 @@
             "healAmount" : 0.0
         },
         "metadata"     : {
-            "inventoryPosition" : 13,
+            "inventoryPosition" : 5,
             "uuid"              : "72ea3c31-4bf9-4597-8c6f-32da0f681d08"
         }
     }
