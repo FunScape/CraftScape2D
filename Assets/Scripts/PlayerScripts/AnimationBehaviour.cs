@@ -38,27 +38,39 @@ public class AnimationBehaviour : MonoBehaviour {
 
 		if (moveUp && !moveRight && !moveLeft) 
         {
+            leftArmAnimator.SetTrigger("WalkUp");
+            rightArmAnimator.SetTrigger("WalkUp");
+            legAnimator.SetTrigger("LegsWalkUp");
             //anim.SetTrigger("WalkUp");
         } 
         else if (moveDown && !moveRight && !moveLeft) 
         {
             leftArmAnimator.SetTrigger("WalkDown");
             rightArmAnimator.SetTrigger("WalkDown");
+            legAnimator.SetTrigger("LegsWalkDown");
            
 			//anim.SetTrigger("WalkDown");
 		} 
         else if (moveRight) {
+
+            leftArmAnimator.SetTrigger("Dissapear");
+            rightArmAnimator.SetTrigger("WalkSide");
+            legAnimator.SetTrigger("LegsWalkSide");
 			//anim.SetTrigger("WalkSide");
-         //   GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(true);
+            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(true);
 		} 
         else if (moveLeft) 
         {
-			//anim.SetTrigger("WalkSide");
-        //    GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(false);
-		} else 
+            leftArmAnimator.SetTrigger("WalkSide");
+            rightArmAnimator.SetTrigger("Dissapear");
+            legAnimator.SetTrigger("LegsWalkSide");
+            //anim.SetTrigger("WalkSide");
+            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(false);
+        } else 
         {
             leftArmAnimator.SetTrigger("IdleDown");
             rightArmAnimator.SetTrigger("IdleDown");
+            legAnimator.SetTrigger("IdleDown");
 			//anim.SetTrigger("Idle");
 		}
 	}
