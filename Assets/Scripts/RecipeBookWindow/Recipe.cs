@@ -23,8 +23,10 @@ public class Recipe{
 		this.ingredients = new List<RecipeRequirement> ();
 
 		JsonData recipeRequirements = JsonMapper.ToObject (File.ReadAllText (filePath));
-		for (int i = 0; i < recipeRequirements.Count; i++) {
-			ingredients.Add (new RecipeRequirement((int)recipeRequirements [i]["ingredientId"], (int)recipeRequirements [i] ["ingredientQuantity"]));
+		foreach (JsonData requirement in recipeRequirements) {
+			Debug.Log ("Message:");
+			Debug.Log (requirement.ToString ());
+			ingredients.Add (new RecipeRequirement((int)requirement ["ingredientId"], (int)requirement ["ingredientQuantity"]));
 		}
 
 		this.id = (int)recipeRequirements [0] ["recipeId"];

@@ -19,11 +19,13 @@ public class RecipeBook {
 }
 	//A method for printing a recipe book as a string, just for testing.
 	public string toString() {
+		itemDatabase = new Database ();
+
 		string recipeBook = "";
 
 		foreach(Recipe recipe in recipes) {
 			foreach(RecipeRequirement requirement in recipe.ingredients) {
-				recipeBook = string.Concat(recipeBook, requirement.ingredientQuantity.ToString(), " ", itemDatabase.GetIem (requirement.ingredientId).title, "(s),");
+				recipeBook = string.Concat(recipeBook, requirement.ingredientQuantity.ToString(), " ", itemDatabase.GetItem (requirement.ingredientId).title, "(s),");
 			}
 
 			recipeBook = string.Concat (recipeBook, " make(s) ", recipe.productQuantity.ToString (), " ", itemDatabase.GetItem (recipe.productID).title, "(s).", System.Environment.NewLine);
