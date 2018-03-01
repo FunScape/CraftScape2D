@@ -10,11 +10,19 @@ public class PlayerMainMenuController: MonoBehaviour {
 	PlayerController playerController;
 	AnimationBehaviour playerAnimation;
 
+	float displayHeight;
+	float displayWidth;
+	float hideWidth;
+
 	// Use this for initialization
 	void Start () {
+		displayHeight = Camera.main.pixelHeight / 2;
+		displayWidth = Camera.main.pixelWidth / 2;
+		hideWidth = Camera.main.pixelWidth * 2;
+
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		mainMenuPanel = Instantiate (mainMenuPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
-		mainMenuPanel.SetActive (false);
+		mainMenuPanel.transform.position = new Vector3(hideWidth, displayHeight, 0f);
 
 		playerController = GetComponent<PlayerController> ();
 		playerAnimation = GetComponent<AnimationBehaviour> ();
@@ -33,7 +41,12 @@ public class PlayerMainMenuController: MonoBehaviour {
 	public void toggleMainMenu() {
 		showMainMenu = !showMainMenu;
 
-		mainMenuPanel.SetActive (showMainMenu);
+		if (showMainMenu)
+			mainMenuPanel.transform.position = new Vector3(displayWidth, displayHeight, 0f);
+		else
+			mainMenuPanel.transform.position = new Vector3(hideWidth, displayHeight, 0f);
+
+		//mainMenuPanel.SetActive (showMainMenu);
 		playerController.enabled = !showMainMenu;
 		playerAnimation.enabled = !showMainMenu;
 	}

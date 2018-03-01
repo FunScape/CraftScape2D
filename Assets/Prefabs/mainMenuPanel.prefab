@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 222218660932907820}
   - component: {fileID: 114650679394155440}
   - component: {fileID: 114321504701308432}
-  - component: {fileID: 114180166927332514}
   m_Layer: 5
   m_Name: resumeButton
   m_TagString: Untagged
@@ -133,18 +132,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Quit
---- !u!114 &114180166927332514
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438913865520126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383de11994f50d74c81978af5b2ebdae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuPanelPrefab: {fileID: 1218101193575006}
 --- !u!114 &114217929834407960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,18 +249,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114650679394155440}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114180166927332514}
-        m_MethodName: toggleMainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114389098712577150
