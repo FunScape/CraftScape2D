@@ -101,6 +101,7 @@ public class Inventory : ScriptableObject {
 
 	public void AddItem(int id)
 	{
+		Debug.Log ("Adding product...");
 		AddItem(database.GetItem(id));
 	}
 
@@ -126,6 +127,29 @@ public class Inventory : ScriptableObject {
 		}
 	}
 
+	public void RemoveQtyOfItems(int id, int qty) {
+		Debug.Log ("Removing ingredient...");
+		foreach (InventoryItem item in items) {
+			if (item != null) {
+				if (item.id == id) {
+					if (item.stackSize > qty) {
+						item.stackSize -= qty;
+						qty = 0;
+					} else if (item.stackSize == qty) {
+						RemoveItem (item.inventoryPosition);
+						qty = 0;
+					} else if (item.stackSize < qty) {
+						qty -= item.stackSize;
+						RemoveItem (item.inventoryPosition);
+					}
+				}
+
+				if (qty <= 0)
+					return;
+			}
+		}
+	}
+
 	public void RemoveItem(int slotIndex)
 	{
 		this.items[slotIndex] = null;
@@ -134,6 +158,23 @@ public class Inventory : ScriptableObject {
 	public void RemoveItems(int slotIndex)
 	{
 
+	}
+
+	public bool checkQuantity(int checkItemId, int checkQty) {
+
+		int qty = 0;
+
+		foreach (InventoryItem item in items) {
+			if (item != null) {
+				if (item.id == checkItemId)
+					qty += item.stackSize;
+				if (qty >= checkQty)
+					return true;
+				Debug.Log (checkItemId.ToString () + ", " + qty.ToString () + ", " + checkQty.ToString() + ", " + (qty >= checkQty));
+			}
+		}
+
+		return false;
 	}
 
 	public void SaveInventory()

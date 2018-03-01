@@ -30,19 +30,13 @@ public class RecipeBook {
 				recipeBook += requirement.ingredientQuantity.ToString() + " " + itemDatabase.GetItem (requirement.ingredientId).title + "(s),";
 			}
 
-			//recipeBook += " make(s) " + recipe.productQuantity.ToString () + " " + itemDatabase.GetItem (recipe.productID).title + "(s)." + System.Environment.NewLine;
-			recipeBook += " make(s) ";
-			recipeBook += recipe.productQuantity.ToString ();
-			recipeBook += " ";
-			int prodId = recipe.productID;
-			Debug.Log (prodId);
-			InventoryItem prodItem = itemDatabase.GetItem (prodId);
-			Debug.Log (prodItem.ToString ());
-			recipeBook += prodItem.title;
-			recipeBook += "(s).";
-			recipeBook += System.Environment.NewLine;
+			recipeBook += " make(s) " + recipe.productQuantity.ToString () + " " + itemDatabase.GetItem (recipe.productID).title + "(s)." + System.Environment.NewLine;
 		}
 
 		return recipeBook;
+	}
+
+	public string getItemTitle(int itemId) {
+		return itemDatabase.GetItem (itemId).title;
 	}
 }

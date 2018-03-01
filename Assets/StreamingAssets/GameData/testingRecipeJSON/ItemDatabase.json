@@ -62,7 +62,7 @@
 	},
 	{
 		"id": 4,
-		"spriteName": "axepple",
+		"spriteName": "Meat",
 		"title": "axepple",
 		"description": "An axe made of apples. Somehow.",
 		"maxStackSize": 1,

@@ -7,6 +7,8 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 	public GameObject recipeBookPanelPrefab;
 
+	public GameObject recipeButtonPrefab;
+
 	GameObject recipeBookPanel;
 
 	public RecipeBook recipeBook;
@@ -38,16 +40,42 @@ public class PlayerRecipeBookController : MonoBehaviour {
 			ToggleRecipeBook ();
 	}
 
-	void LayoutRecipeBook()
-	{
-		Text recipeText = recipeBookPanel.AddComponent<Text> ();
-		recipeText.text = recipeBook.toString();
-		recipeText.fontSize = 72;
-		recipeText.color = Color.magenta;
+	void LayoutRecipeBook() {
+
+		foreach (Recipe recipe in recipeBook.recipes) {
+			GameObject recipeButtonObject = (GameObject)Instantiate (recipeButtonPrefab, Vector3.zero, Quaternion.identity, recipeBookPanel.transform);
+			Button recipeButton = recipeButtonObject.GetComponent<Button> ();
+			recipeButton.GetComponentInChildren<Text>().text = recipeBook.getItemTitle (recipe.productID);
+			recipeButton.onClick.AddListener (delegate{CraftItem (recipe);});
+		}
 	}
 
-	void ToggleRecipeBook()
-	{
+	void CraftItem (Recipe recipe) {
+		
+		Debug.Log ("Finding inventory...");
+		PlayerInventoryController inventoryController = GameObject.FindGameObjectWithTag ("Player").transform.GetComponentsInChildren<PlayerInventoryController> () [0] as PlayerInventoryController;
+		Inventory inventory = inventoryController.inventory;
+		bool hasRequiredIngredients = true;
+
+		foreach (RecipeRequirement ingredient in recipe.ingredients) {
+			hasRequiredIngredients = hasRequiredIngredients && inventory.checkQuantity (ingredient.ingredientId, ingredient.ingredientQuantity);
+			Debug.Log ("Checking ingredient: " + ingredient.ingredientId.ToString() + " x " + ingredient.ingredientQuantity.ToString() + ": " + hasRequiredIngredients);
+		}
+
+		if (hasRequiredIngredients) {
+			Debug.Log ("Ingredients found...");
+			foreach (RecipeRequirement ingredient in recipe.ingredients) {
+				inventory.RemoveQtyOfItems (ingredient.ingredientId, ingredient.ingredientQuantity);
+			}
+
+			inventory.AddItem (recipe.productID);
+
+			inventoryController.UpdateInventoryPanelUI ();
+		}
+	}
+
+	void ToggleRecipeBook() {
+		
 		showRecipeBook = !showRecipeBook;
 
 		if (showRecipeBook)

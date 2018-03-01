@@ -31,7 +31,7 @@ GameObject:
   - component: {fileID: 95058589699833842}
   - component: {fileID: 114652310600041700}
   - component: {fileID: 114266919754102390}
-  - component: {fileID: 114973592844171650}
+  - component: {fileID: 114140015503344210}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -168,6 +168,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133896602f6538c4ab6fd195c12f66f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114140015503344210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766227fb0c9c311409267528fff85891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeBookPanelPrefab: {fileID: 1187763930066720, guid: 8c6ce3db2226efe4c99f8a63423f5d9f,
+    type: 2}
+  recipeButtonPrefab: {fileID: 1053539072311302, guid: 8343f42dd7730bb4c900ed261f6410ba,
+    type: 2}
 --- !u!114 &114266919754102390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,19 +264,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114973592844171650
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1852322725998526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766227fb0c9c311409267528fff85891, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recipeBookPanelPrefab: {fileID: 1187763930066720, guid: 8c6ce3db2226efe4c99f8a63423f5d9f,
-    type: 2}
 --- !u!212 &212091946123813990
 SpriteRenderer:
   m_ObjectHideFlags: 1

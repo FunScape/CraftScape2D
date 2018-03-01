@@ -1,187 +1,51 @@
 
 [
     {
-        "id" : 2,
-        "spriteName" : "bag",
+        "id" : 4,
+        "spriteName" : "",
         "maxStackSize" : 1,
         "stackSize"    : 1,
-        "title"        : "bag",
-        "description"  : "This is a bag.",
-        "value"        : 1.10000002384186,
+        "title"        : "axepple",
+        "description"  : "An axe made of apples. Somehow.",
+        "value"        : 50.2999992370605,
         "types"        : [
-            "inventory"
+            "equippable",
+            "weapon",
+            "2-handed"
         ],
         "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
+            "power" : 15.0,
+            "defense" : 7.5,
+            "vitality" : 10.0,
             "healAmount" : 0.0
         },
         "metadata"     : {
             "inventoryPosition" : 0,
-            "uuid"              : "c76f3b4a-6984-4feb-9824-10da94a83edb"
+            "uuid"              : "e82163d3-a0b8-4b38-afc7-64dce4b3a424"
         }
     },
     {
-        "id" : 1,
-        "spriteName" : "apple",
-        "maxStackSize" : 10,
-        "stackSize"    : 9,
-        "title"        : "apple",
-        "description"  : "This is an apple.",
-        "value"        : 10.5,
+        "id" : 4,
+        "spriteName" : "",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "axepple",
+        "description"  : "An axe made of apples. Somehow.",
+        "value"        : 50.2999992370605,
         "types"        : [
-            "consumable",
-            "food",
-            "health"
+            "equippable",
+            "weapon",
+            "2-handed"
         ],
         "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 10.0
+            "power" : 15.0,
+            "defense" : 7.5,
+            "vitality" : 10.0,
+            "healAmount" : 0.0
         },
         "metadata"     : {
             "inventoryPosition" : 1,
-            "uuid"              : "f6f02ed6-d205-4785-a023-b780abd2a516"
-        }
-    },
-    {
-        "id" : 3,
-        "spriteName" : "axe",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "axe",
-        "description"  : "This is an axe.",
-        "value"        : 20.0,
-        "types"        : [
-            "equipable",
-            "weapon",
-            "2-handed"
-        ],
-        "stats"        : {
-            "power" : 10.0,
-            "defense" : 5.0,
-            "vitality" : 5.0,
-            "healAmount" : 0.0
-        },
-        "metadata"     : {
-            "inventoryPosition" : 2,
-            "uuid"              : "79375501-4ce9-4f54-b2d1-deecd7a4a5a4"
-        }
-    },
-    {
-        "id" : 2,
-        "spriteName" : "bag",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "bag",
-        "description"  : "This is a bag.",
-        "value"        : 1.10000002384186,
-        "types"        : [
-            "inventory"
-        ],
-        "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 0.0
-        },
-        "metadata"     : {
-            "inventoryPosition" : 3,
-            "uuid"              : "a3d92bba-bc86-4164-bec3-52b5699e8a9e"
-        }
-    },
-    {
-        "id" : 3,
-        "spriteName" : "axe",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "axe",
-        "description"  : "This is an axe.",
-        "value"        : 20.0,
-        "types"        : [
-            "equipable",
-            "weapon",
-            "2-handed"
-        ],
-        "stats"        : {
-            "power" : 10.0,
-            "defense" : 5.0,
-            "vitality" : 5.0,
-            "healAmount" : 0.0
-        },
-        "metadata"     : {
-            "inventoryPosition" : 4,
-            "uuid"              : "fd64e4a2-b507-450a-9761-291610350896"
-        }
-    },
-    {
-        "id" : 2,
-        "spriteName" : "bag",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "bag",
-        "description"  : "This is a bag.",
-        "value"        : 1.10000002384186,
-        "types"        : [
-            "inventory"
-        ],
-        "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 0.0
-        },
-        "metadata"     : {
-            "inventoryPosition" : 5,
-            "uuid"              : "72ea3c31-4bf9-4597-8c6f-32da0f681d08"
-        }
-    },
-    {
-        "id" : 2,
-        "spriteName" : "bag",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "bag",
-        "description"  : "This is a bag.",
-        "value"        : 1.10000002384186,
-        "types"        : [
-            "inventory"
-        ],
-        "stats"        : {
-            "power" : 0.0,
-            "defense" : 0.0,
-            "vitality" : 0.0,
-            "healAmount" : 0.0
-        },
-        "metadata"     : {
-            "inventoryPosition" : 6,
-            "uuid"              : "78b5c3bd-7ba8-4876-b4d7-e2f6d9d0d085"
-        }
-    },
-    {
-        "id" : 3,
-        "spriteName" : "axe",
-        "maxStackSize" : 1,
-        "stackSize"    : 1,
-        "title"        : "axe",
-        "description"  : "This is an axe.",
-        "value"        : 20.0,
-        "types"        : [
-            "equipable",
-            "weapon",
-            "2-handed"
-        ],
-        "stats"        : {
-            "power" : 10.0,
-            "defense" : 5.0,
-            "vitality" : 5.0,
-            "healAmount" : 0.0
-        },
-        "metadata"     : {
-            "inventoryPosition" : 7,
-            "uuid"              : "132215e5-b64f-44a0-8ee5-7f4f11cde31d"
+            "uuid"              : "9fcb4da2-a375-425f-b9cf-06d80aaf0914"
         }
     }
 ]

@@ -87,7 +87,7 @@ public class PlayerInventoryController : MonoBehaviour {
 		inventoryPanel.transform.position = new Vector3(width, height, 0f); 
 	}
 
-	void UpdateInventoryPanelUI()
+	public void UpdateInventoryPanelUI()
 	{
 		List<GameObject> slots = GetInventorySlots();
 
