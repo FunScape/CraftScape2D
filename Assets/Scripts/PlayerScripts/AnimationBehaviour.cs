@@ -4,14 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AnimationBehaviour : MonoBehaviour {
-
-	Animator anim;
+    
+    Animator leftArmAnimator;
+    Animator rightArmAnimator;
+    Animator legAnimator;
 
 	void Start () {
-		anim = GetComponent<Animator>();
-	}
-	
-	void Update () {
+        Animator[] playerAnimators = gameObject.GetComponentsInChildren<Animator>();
+        
+        foreach(Animator item in playerAnimators)
+        {
+            if(item.gameObject.name == "Legs")
+            {
+                legAnimator = item;
+            }
+            else if(item.gameObject.name== "LeftArm")
+            {
+                leftArmAnimator = item;
+            }
+            else if(item.gameObject.name== "RightArm")
+            {
+                rightArmAnimator = item;
+            }
+
+        }
+    }
+
+    void Update () {
 		bool moveRight = Input.GetKey(KeyCode.D);
 		bool moveLeft = Input.GetKey(KeyCode.A);
 		bool moveUp = Input.GetKey(KeyCode.W);
@@ -19,23 +38,28 @@ public class AnimationBehaviour : MonoBehaviour {
 
 		if (moveUp && !moveRight && !moveLeft) 
         {
-			anim.SetTrigger("WalkUp");
-		} 
+            //anim.SetTrigger("WalkUp");
+        } 
         else if (moveDown && !moveRight && !moveLeft) 
         {
-			anim.SetTrigger("WalkDown");
+            leftArmAnimator.SetTrigger("WalkDown");
+            rightArmAnimator.SetTrigger("WalkDown");
+           
+			//anim.SetTrigger("WalkDown");
 		} 
         else if (moveRight) {
-			anim.SetTrigger("WalkSide");
-            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(true);
+			//anim.SetTrigger("WalkSide");
+         //   GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(true);
 		} 
         else if (moveLeft) 
         {
-			anim.SetTrigger("WalkSide");
-            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(false);
+			//anim.SetTrigger("WalkSide");
+        //    GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(false);
 		} else 
         {
-			anim.SetTrigger("Idle");
+            leftArmAnimator.SetTrigger("IdleDown");
+            rightArmAnimator.SetTrigger("IdleDown");
+			//anim.SetTrigger("Idle");
 		}
 	}
 
