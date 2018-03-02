@@ -64,6 +64,11 @@ public class Inventory : ScriptableObject {
 		return database.GetItem(name);
 	}
 
+	public InventoryItem FindDatabaseItem(int id)
+	{
+		return database.GetItem (id);
+	}
+
 	public void AddItem(InventoryItem item)
 	{
 		bool didFindMatchingItem = false;

@@ -121,7 +121,23 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.name != null)
+		if (other.gameObject.name == "chest") {
+			int rand = Random.Range (0, 100);
+			InventoryItem item;
+			if (rand > 50) { 
+				// 50% chance the item will be an apple
+				item = inventory.FindDatabaseItem ("apple");
+			} else if (rand > 90) {
+				// 10% chance the item will be a gold ring
+				item = inventory.FindDatabaseItem("gold ring");
+			} else {
+				item = inventory.FindDatabaseItem (Random.Range (2, 5));
+			}
+
+			inventory.AddItem (item);
+			UpdateInventoryPanelUI();
+		}
+		else if (other.gameObject.name != null)
 		{
 			InventoryItem item = inventory.FindDatabaseItem(other.gameObject.name);
 			if (item != null)

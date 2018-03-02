@@ -12,7 +12,6 @@ public class InventoryTrash : MonoBehaviour, IDropHandler {
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.LogFormat("Trash Drop GameObject name: {0}", eventData.pointerDrag.gameObject.name);
 		if (eventData.pointerDrag.gameObject.tag == "InventorySlot")
         {
             GameObject player = GameObject.FindWithTag("Player");
