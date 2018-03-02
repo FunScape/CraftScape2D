@@ -50,4 +50,4 @@ Corridor/Library/metadata/
 # ============= #
 .vscode
 
-Assets/StreamingAssets/SaveData/inventories/*.json
+SaveData/
