@@ -12,12 +12,14 @@ public class SetupLocalPlayer : NetworkBehaviour {
 		{
             GetComponent<PlayerController>().enabled = true;
 			GetComponent<AnimationBehaviour>().enabled = true;
+
 			CameraFollow.player = gameObject.transform;
 		}
 		else
 		{
             GetComponent<PlayerController>().enabled = false;
 			GetComponent<AnimationBehaviour>().enabled = false;
+			GetComponent<PlayerInventoryController>().enabled = false;
 		}
 	}
 
