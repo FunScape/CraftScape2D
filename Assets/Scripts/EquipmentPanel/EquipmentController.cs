@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipmentManager : MonoBehaviour {
+public class EquipmentController : MonoBehaviour {
 
 	bool showEquipmentPanel = false;
 
@@ -15,7 +15,7 @@ public class EquipmentManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
-		equipmentPanel = GameObject.Instantiate (equipmentPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas);
+		equipmentPanel = GameObject.Instantiate (equipmentPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
 	}
 
 	void Update()
@@ -38,7 +38,7 @@ public class EquipmentManager : MonoBehaviour {
 		float width = Camera.main.pixelWidth;
 
 		if (!showEquipmentPanel)
-			width -= 1000f;
+			width += 1000f;
 
 		equipmentPanel.transform.position = new Vector3(width, height, 0f); 
 	}
