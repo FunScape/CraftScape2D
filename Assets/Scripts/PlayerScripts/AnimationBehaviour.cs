@@ -8,11 +8,38 @@ public class AnimationBehaviour : MonoBehaviour {
     Animator leftArmAnimator;
     Animator rightArmAnimator;
     Animator legAnimator;
+    SpriteRenderer leftArmRenderer;
+    SpriteRenderer rightArmRenderer;
+
+    Color clearColor
+    {
+        get
+        {
+            Color color = Color.white;
+            color.a = 0; // change alpha value to zero
+            return color;
+        }
+    }
+
 
 	void Start () {
         Animator[] playerAnimators = gameObject.GetComponentsInChildren<Animator>();
-        
-        foreach(Animator item in playerAnimators)
+        SpriteRenderer[] playerSprites = gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer item in playerSprites)
+        {
+       
+            if (item.gameObject.name == "LeftArm")
+            {
+                leftArmRenderer = item;
+            }
+            else if (item.gameObject.name == "RightArm")
+            {
+                rightArmRenderer = item;
+            }
+
+        }
+        foreach (Animator item in playerAnimators)
         {
             if(item.gameObject.name == "Legs")
             {
@@ -28,6 +55,7 @@ public class AnimationBehaviour : MonoBehaviour {
             }
 
         }
+
     }
 
     void Update () {
@@ -53,7 +81,11 @@ public class AnimationBehaviour : MonoBehaviour {
 		} 
         else if (moveRight) {
 
-            leftArmAnimator.SetTrigger("Dissapear");
+            GameObject leftArm = leftArmAnimator.gameObject;
+            SpriteRenderer leftSpriteRenderer = leftArm.GetComponent<SpriteRenderer>();
+
+            leftSpriteRenderer.color = clearColor;
+
             rightArmAnimator.SetTrigger("WalkSide");
             legAnimator.SetTrigger("LegsWalkSide");
 			//anim.SetTrigger("WalkSide");
