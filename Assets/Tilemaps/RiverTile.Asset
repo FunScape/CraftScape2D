@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a148b595e91c4541b99c0e8f6ca05ec, type: 3}
   m_Name: RiverTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300084, guid: 61bda409e13a345bcb9e55db18b42f74, type: 3}
+  m_Sprite: {fileID: 21300132, guid: 61bda409e13a345bcb9e55db18b42f74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
