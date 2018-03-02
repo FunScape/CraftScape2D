@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemType
+{
+	Consumable, Food, Health, Weapon, Equipable, MainHand, Inventory
+}
+
 [System.Serializable]
 public class InventoryItem {
 
@@ -20,6 +25,7 @@ public class InventoryItem {
 	public float defense;
 	public float vitality;
 	public float healAmount;
+	// public List<ItemType> types;
 	public List<string> types;
 	public int inventoryPosition;
 
@@ -40,8 +46,27 @@ public class InventoryItem {
 		this.defense = defense;
 		this.vitality = vitality;
 		this.healAmount = healAmount;
-		this.types = types;
 		this.inventoryPosition = inventoryPosition;
+
+		this.types = types;
+		// foreach (string type in types)
+		// {
+		// 	if (type == "equipable")
+		// 		this.types.Add(ItemType.Equipable);
+		// 	else if (type == "weapon")
+		// 		this.types.Add(ItemType.Weapon);
+		// 	else if (type == "mainhand")
+		// 		this.types.Add(ItemType.MainHand);
+		// 	else if (type == "inventory")
+		// 		this.types.Add(ItemType.Inventory);
+		// 	else if (type == "consumable")
+		// 		this.types.Add(ItemType.Consumable);
+		// 	else if (type == "food")
+		// 		this.types.Add(ItemType.Food);
+		// 	else if (type == "health")
+		// 		this.types.Add(ItemType.Health);
+		// }
+
 
 		string json = JsonUtility.ToJson(this);
 		Database database = new Database();

@@ -1,27 +1,49 @@
 
 [
     {
-        "id" : 1,
-        "spriteName" : "apple",
-        "maxStackSize" : 10,
-        "stackSize"    : 3,
-        "title"        : "apple",
-        "description"  : "This is an apple.",
-        "value"        : 10.5,
+        "id" : 5,
+        "spriteName" : "armor",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "leather chest armor",
+        "description"  : "This is leather chest armor.",
+        "value"        : 20.0,
         "types"        : [
-            "consumable",
-            "food",
-            "health"
+            "equipable",
+            "chest",
+            "leather"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 15.0,
+            "vitality" : 15.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 1,
+            "uuid"              : "d131ee9d-4cc0-4514-be54-4edc5404445a"
+        }
+    },
+    {
+        "id" : 2,
+        "spriteName" : "bag",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "bag",
+        "description"  : "This is a bag.",
+        "value"        : 1.10000002384186,
+        "types"        : [
+            "inventory"
         ],
         "stats"        : {
             "power" : 0.0,
             "defense" : 0.0,
             "vitality" : 0.0,
-            "healAmount" : 10.0
+            "healAmount" : 0.0
         },
         "metadata"     : {
-            "inventoryPosition" : 4,
-            "uuid"              : "f6f02ed6-d205-4785-a023-b780abd2a516"
+            "inventoryPosition" : 5,
+            "uuid"              : "72ea3c31-4bf9-4597-8c6f-32da0f681d08"
         }
     },
     {
@@ -44,8 +66,8 @@
             "healAmount" : 0.0
         },
         "metadata"     : {
-            "inventoryPosition" : 5,
-            "uuid"              : "fd64e4a2-b507-450a-9761-291610350896"
+            "inventoryPosition" : 6,
+            "uuid"              : "8bfbf43a-0dfa-4c7f-aabc-80f2d55d297e"
         }
     },
     {
@@ -66,8 +88,55 @@
             "healAmount" : 0.0
         },
         "metadata"     : {
+            "inventoryPosition" : 8,
+            "uuid"              : "855b3be7-fe6f-458d-a207-7088aca49d33"
+        }
+    },
+    {
+        "id" : 4,
+        "spriteName" : "rings",
+        "maxStackSize" : 1,
+        "stackSize"    : 1,
+        "title"        : "gold ring",
+        "description"  : "This is a gold ringe.",
+        "value"        : 50.0,
+        "types"        : [
+            "equipable",
+            "ring"
+        ],
+        "stats"        : {
+            "power" : 10.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 0.0
+        },
+        "metadata"     : {
             "inventoryPosition" : 13,
-            "uuid"              : "72ea3c31-4bf9-4597-8c6f-32da0f681d08"
+            "uuid"              : "d3d24c62-9685-4642-bb9c-f3df2bc70eb0"
+        }
+    },
+    {
+        "id" : 1,
+        "spriteName" : "apple",
+        "maxStackSize" : 10,
+        "stackSize"    : 3,
+        "title"        : "apple",
+        "description"  : "This is an apple.",
+        "value"        : 10.5,
+        "types"        : [
+            "consumable",
+            "food",
+            "health"
+        ],
+        "stats"        : {
+            "power" : 0.0,
+            "defense" : 0.0,
+            "vitality" : 0.0,
+            "healAmount" : 10.0
+        },
+        "metadata"     : {
+            "inventoryPosition" : 14,
+            "uuid"              : "f6f02ed6-d205-4785-a023-b780abd2a516"
         }
     }
 ]

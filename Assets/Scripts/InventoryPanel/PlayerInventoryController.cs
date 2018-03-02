@@ -29,7 +29,8 @@ public class PlayerInventoryController : MonoBehaviour {
 	void Start () {
 		inventory = Inventory.CreateInstance();
 		GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
-		inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
+		GameObject equipmentInventoryContainer = mainCanvas.transform.Find("EquipmentInventoryContainer").gameObject;
+		inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
 		inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalPlayer>().netId.ToString()));
 		inventory.LoadInventory();
 
@@ -87,7 +88,7 @@ public class PlayerInventoryController : MonoBehaviour {
 		inventoryPanel.transform.position = new Vector3(width, height, 0f); 
 	}
 
-	void UpdateInventoryPanelUI()
+	public void UpdateInventoryPanelUI()
 	{
 		List<GameObject> slots = GetInventorySlots();
 
@@ -148,6 +149,15 @@ public class PlayerInventoryController : MonoBehaviour {
 
 	public GameObject OnBeginDragInventoryItem(int slotIndex)
 	{
+		// Set the inventoryPanel's sibling index to the equipmentPanel's 
+		// sibling index, so images belonging to the inventoryPanel
+		// will render on top of the equipment panel game object.
+		GameObject equipmentPanel = GameObject.FindWithTag("EquipmentPanel");
+		if (equipmentPanel.transform.GetSiblingIndex() > inventoryPanel.transform.GetSiblingIndex())
+		{
+			inventoryPanel.transform.SetSiblingIndex(equipmentPanel.transform.GetSiblingIndex());
+		}
+
 		List<GameObject> inventorySlots = GetInventorySlots();
 		foreach (GameObject slot in inventorySlots)
 		{
@@ -217,6 +227,25 @@ public class PlayerInventoryController : MonoBehaviour {
 		to.transform.Find("InventorySlotItem").gameObject.GetComponent<Image>().color = Color.white;
 
 		inventory.SaveInventory();
+	}
+
+	public void OnDropEquipmentItem(GameObject inventorySlotObject, GameObject equipmentSlotObject)
+	{
+		EquipmentController equipmentController = GetComponent<EquipmentController>();
+
+		InventorySlot inventorySlot = inventorySlotObject.GetComponent<InventorySlot>();
+		EquipmentSlot equipmentSlot = equipmentSlotObject.GetComponent<EquipmentSlot>();
+
+		InventoryItem inventoryItem = inventory.GetItem(inventorySlot.slotIndex);
+		if (inventoryItem == null)
+		{
+			inventory.SetItem(inventorySlot.slotIndex, equipmentSlot.UnEquipItem());
+			UpdateInventoryPanelUI();
+		}
+		else
+		{
+			Debug.Log("That inventory slot is occupied!");
+		}
 	}
 
 	public void RemoveInventoryItem(GameObject inventorySlot)

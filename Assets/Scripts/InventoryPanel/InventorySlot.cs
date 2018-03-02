@@ -8,7 +8,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	public int slotIndex;
 
-	public InventoryItem gameItem { get; set; }
+	// public InventoryItem gameItem { get; set; }
 
 	PlayerInventoryController inventoryController;
 
@@ -51,7 +51,15 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	{	
 		GameObject player = GameObject.FindWithTag("Player");
 		inventoryController = player.GetComponent<PlayerInventoryController>();
-		inventoryController.SwapInventorySlots(this.gameObject, dropped);
+
+		if (dropped.tag == "EquipmentSlot")
+		{
+			inventoryController.OnDropEquipmentItem(this.gameObject, dropped);
+		}
+		else if (dropped.tag == "InventorySlot")
+		{
+			inventoryController.SwapInventorySlots(this.gameObject, dropped);
+		}
 	}
 
 }
