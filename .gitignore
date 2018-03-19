@@ -29,6 +29,7 @@ sysinfo.txt
 .consulo/
 /*.tmp
 /*.svd
+**/*.code-workspace
  
 # ============ #
 # OS generated #
@@ -48,3 +49,5 @@ Corridor/Library/metadata/
 # Miscellaneous #
 # ============= #
 .vscode
+
+SaveData/
