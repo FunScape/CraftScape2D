@@ -31,7 +31,8 @@ GameObject:
   - component: {fileID: 95058589699833842}
   - component: {fileID: 114652310600041700}
   - component: {fileID: 114042114085607528}
-  - component: {fileID: 114442405946317572}
+  - component: {fileID: 114266919754102390}
+  - component: {fileID: 114466814300684378}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &114266919754102390
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852322725998526}
@@ -212,7 +213,7 @@ MonoBehaviour:
   walkSpeed: 5
 --- !u!114 &114466814300684378
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852322725998526}
