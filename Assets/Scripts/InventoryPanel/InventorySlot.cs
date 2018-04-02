@@ -10,19 +10,16 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	// public InventoryItem gameItem { get; set; }
 
-	PlayerInventoryController inventoryController;
+    InventoryController inventoryController;
 
 	public GameObject draggedItem;
 
-	void Start()
-	{
-		
-	}
+    GameObject owner;
 
 	public void OnBeginDrag(PointerEventData eventData)
     {
-		GameObject player = GameObject.FindWithTag("Player");
-		inventoryController = player.GetComponent<PlayerInventoryController>();
+		owner = GameObject.FindWithTag("Player");
+        inventoryController = owner.GetComponent<InventoryController>();
 		draggedItem = inventoryController.OnBeginDragInventoryItem(slotIndex);
     }
 
@@ -33,7 +30,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			draggedItem.transform.position = eventData.position;
 
 			GameObject player = GameObject.FindWithTag("Player");
-			inventoryController = player.GetComponent<PlayerInventoryController>();
+            inventoryController = player.GetComponent<InventoryController>();
 			inventoryController.OnDragInventoryItem(eventData);
 		}
     }
@@ -41,7 +38,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         GameObject player = GameObject.FindWithTag("Player");
-		inventoryController = player.GetComponent<PlayerInventoryController>();
+        inventoryController = player.GetComponent<InventoryController>();
 		inventoryController.OnEndDragInventoryItem(this.slotIndex);
 		draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		draggedItem = null;
@@ -50,15 +47,15 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public void OnDropInventoryItem(GameObject dropped)
 	{	
 		GameObject player = GameObject.FindWithTag("Player");
-		inventoryController = player.GetComponent<PlayerInventoryController>();
+        inventoryController = player.GetComponent<InventoryController>();
 
 		if (dropped.tag == "EquipmentSlot")
 		{
-			inventoryController.OnDropEquipmentItem(this.gameObject, dropped);
+			inventoryController.OnDropEquipmentItem(gameObject, dropped);
 		}
 		else if (dropped.tag == "InventorySlot")
 		{
-			inventoryController.SwapInventorySlots(this.gameObject, dropped);
+			inventoryController.SwapInventorySlots(gameObject, dropped);
 		}
 	}
 

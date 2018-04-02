@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkAnimationBehaviour_Hero : NetworkBehaviour {
+public class NetworkHeroAnimationBehaviour : NetworkBehaviour {
 
     [SyncVar(hook = "OnFlipX")]
     bool flipX = false;
@@ -12,11 +12,11 @@ public class NetworkAnimationBehaviour_Hero : NetworkBehaviour {
 	void Start () {
         if (isLocalPlayer)
         {
-            GetComponent<AnimationBehaviour>().enabled = true;
+            GetComponent<HeroAnimationBehaviour>().enabled = true;
         }
         else
         {
-            GetComponent<AnimationBehaviour>().enabled = false;
+            GetComponent<HeroAnimationBehaviour>().enabled = false;
         }
 	}
 	

@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class SetupLocalPlayer : NetworkBehaviour {
 
-    GameObject localPlayer;
+    //GameObject localPlayer;
 
 	void Start () {
 		if (isLocalPlayer)
 		{
             GetComponent<PlayerController>().enabled = true;
-//			GetComponent<AnimationBehaviour>().enabled = true;
+			GetComponent<PlayerAnimationBehaviour>().enabled = true;
 			CameraFollow.player = gameObject.transform;
 		}
 		else
 		{
             GetComponent<PlayerController>().enabled = false;
-			GetComponent<AnimationBehaviour>().enabled = false;
+			GetComponent<PlayerAnimationBehaviour>().enabled = false;
 			GetComponent<PlayerInventoryController>().enabled = false;
 		}
 	}

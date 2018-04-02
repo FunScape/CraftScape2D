@@ -22,17 +22,16 @@ GameObject:
   - component: {fileID: 212091946123813990}
   - component: {fileID: 50717934455236724}
   - component: {fileID: 61422309094609832}
-  - component: {fileID: 114304450112468042}
-  - component: {fileID: 114653872035409144}
-  - component: {fileID: 114087622891891894}
   - component: {fileID: 114005289684835590}
   - component: {fileID: 114935440699502752}
-  - component: {fileID: 114001145364688924}
   - component: {fileID: 95058589699833842}
   - component: {fileID: 114652310600041700}
-  - component: {fileID: 114042114085607528}
-  - component: {fileID: 114266919754102390}
   - component: {fileID: 114466814300684378}
+  - component: {fileID: 114349765581526720}
+  - component: {fileID: 114871840791811610}
+  - component: {fileID: 114669240750345662}
+  - component: {fileID: 114721236348488318}
+  - component: {fileID: 114265433598838922}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -115,17 +114,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114001145364688924
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1852322725998526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 888ee35aa8bb248e781539c4b271b76a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114005289684835590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,7 +146,7 @@ MonoBehaviour:
     i15: 83
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114042114085607528
+--- !u!114 &114265433598838922
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -166,30 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1852322725998526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c5a4e7897b55ef4aaf496d73cea03ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
---- !u!114 &114087622891891894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1852322725998526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133896602f6538c4ab6fd195c12f66f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114266919754102390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1852322725998526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25decb36ea817084aa7e864c8c0442f8, type: 3}
+  m_Script: {fileID: 11500000, guid: be673d81bfe0344caa61aee739f55692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPanelPrefab: {fileID: 1847830549393512, guid: 608bed9942ccafe499f9c5d565096380,
@@ -199,7 +164,7 @@ MonoBehaviour:
   inventoryStackLabelPrefab: {fileID: 1980931201881440, guid: 2d1085ca39cc20a43910887376193f3e,
     type: 2}
   inventory: {fileID: 0}
---- !u!114 &114304450112468042
+--- !u!114 &114349765581526720
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -207,10 +172,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1852322725998526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc791e559e884cabb9d17884c3c381a, type: 3}
+  m_Script: {fileID: 11500000, guid: a335449bf757a440283c902d391dde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
 --- !u!114 &114466814300684378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +207,7 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
---- !u!114 &114653872035409144
+--- !u!114 &114669240750345662
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -251,7 +215,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1852322725998526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e484a9850a97b0d4197130dd926a7c92, type: 3}
+  m_Script: {fileID: 11500000, guid: f76e5e739638c484fa09a49ea0ba6b61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+--- !u!114 &114721236348488318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2939597d16f4e929db2f121d2c2105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114871840791811610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7174337a5ec4a4f8355ea0c5c7558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114935440699502752

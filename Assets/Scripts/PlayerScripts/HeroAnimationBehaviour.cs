@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AnimationBehaviour_Hero : MonoBehaviour {
+public class HeroAnimationBehaviour : MonoBehaviour {
 
 	Animator anim;
 
@@ -19,23 +19,23 @@ public class AnimationBehaviour_Hero : MonoBehaviour {
 
 		if (moveUp && !moveRight && !moveLeft) 
         {
-			anim.SetTrigger("WalkUp");
+			this.anim.SetTrigger("WalkUp");
 		} 
         else if (moveDown && !moveRight && !moveLeft) 
         {
-			anim.SetTrigger("WalkDown");
+			this.anim.SetTrigger("WalkDown");
 		} 
         else if (moveRight) {
-			anim.SetTrigger("WalkSide");
-            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(true);
+			this.anim.SetTrigger("WalkSide");
+            GetComponent<NetworkHeroAnimationBehaviour>().CmdOnFlipX(true);
 		} 
         else if (moveLeft) 
         {
-			anim.SetTrigger("WalkSide");
-            GetComponent<NetworkAnimationBehaviour>().CmdOnFlipX(false);
+			this.anim.SetTrigger("WalkSide");
+            GetComponent<NetworkHeroAnimationBehaviour>().CmdOnFlipX(false);
 		} else 
         {
-			anim.SetTrigger("Idle");
+			this.anim.SetTrigger("Idle");
 		}
 	}
 
