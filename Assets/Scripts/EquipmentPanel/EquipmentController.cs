@@ -18,7 +18,7 @@ public class EquipmentController : MonoBehaviour {
 	void Start () {
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		GameObject equipmentInventoryContainer = mainCanvas.transform.Find("EquipmentInventoryContainer").gameObject;
-		equipmentPanel = GameObject.Instantiate (equipmentPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
+		equipmentPanel = Instantiate (equipmentPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
 		equipmentPanel.GetComponent<RectTransform>().localPosition = new Vector3(Screen.width + 1000f, 0f, 0f);
 	}
 
@@ -65,7 +65,7 @@ public class EquipmentController : MonoBehaviour {
 			equipmentPanel.transform.SetSiblingIndex(inventoryPanel.transform.GetSiblingIndex());
 		}
 
-		draggedItem = GameObject.Instantiate(equipmentSlot);
+		draggedItem = Instantiate(equipmentSlot);
 		draggedItem.transform.SetParent(equipmentPanel.transform);
 		draggedItem.GetComponent<Image>().raycastTarget = false;
 
@@ -92,7 +92,7 @@ public class EquipmentController : MonoBehaviour {
 
 	public void OnDropInventoryItem(GameObject equipmentSlotObject, GameObject droppedObject)
 	{
-		Inventory inventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventoryController>().inventory;
+		Inventory inventory = GameObject.FindWithTag("Player").GetComponent<InventoryController>().inventory;
 		InventorySlot inventorySlot = droppedObject.GetComponent<InventorySlot>();
 		InventoryItem item = inventory.GetItem(inventorySlot.slotIndex);
 		if (CanEquipItemType(item, equipmentSlotObject.name))
@@ -100,7 +100,7 @@ public class EquipmentController : MonoBehaviour {
 			Debug.Log("You equiped item: " + item.title);
 			equipmentSlotObject.GetComponent<EquipmentSlot>().EquipItem(item);
 			inventory.RemoveItem(inventorySlot.slotIndex);
-			GetPlayerInventoryController().UpdateInventoryPanelUI(); 
+			GetInventoryController().UpdateInventoryPanelUI(); 
 		}
 		else
 		{
@@ -129,9 +129,9 @@ public class EquipmentController : MonoBehaviour {
 		return false;
 	}
 
-	PlayerInventoryController GetPlayerInventoryController()
+    InventoryController GetInventoryController()
 	{
-		return GameObject.FindWithTag("Player").GetComponent<PlayerInventoryController>();
+		return GameObject.FindWithTag("Player").GetComponent<InventoryController>();
 	}
 
 }

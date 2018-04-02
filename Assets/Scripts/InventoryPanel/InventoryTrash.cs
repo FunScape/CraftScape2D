@@ -14,8 +14,8 @@ public class InventoryTrash : MonoBehaviour, IDropHandler {
     {
 		if (eventData.pointerDrag.gameObject.tag == "InventorySlot")
         {
-            GameObject player = GameObject.FindWithTag("Player");
-            PlayerInventoryController controller = player.GetComponent<PlayerInventoryController>();
+            GameObject owner = GameObject.FindWithTag("Player");
+            InventoryController controller = owner.GetComponent<InventoryController>();
             controller.RemoveInventoryItem(eventData.pointerDrag.gameObject);
         }
     }
