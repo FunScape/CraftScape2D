@@ -119,7 +119,24 @@ public class Inventory : ScriptableObject {
 		}
 	}
 
-	public void RemoveItem(InventoryItem item)
+    public int checkQuantity(int checkItemId)
+    {
+
+        int qty = 0;
+
+        foreach (InventoryItem item in items)
+        {
+            if (item != null)
+            {
+                if (item.id == checkItemId)
+                    qty += item.stackSize;
+            }
+        }
+
+        return qty;
+    }
+
+    public void RemoveItem(InventoryItem item)
 	{
 		for (int i = 0; i < this.items.Length; i++)
 		{
@@ -136,7 +153,39 @@ public class Inventory : ScriptableObject {
 		this.items[slotIndex] = null;
 	}
 
-	public void RemoveItems(int slotIndex)
+    public void RemoveQtyOfItems(int id, int qty)
+    {
+        Debug.Log("Removing ingredient...");
+        foreach (InventoryItem item in items)
+        {
+            if (item != null)
+            {
+                if (item.id == id)
+                {
+                    if (item.stackSize > qty)
+                    {
+                        item.stackSize -= qty;
+                        qty = 0;
+                    }
+                    else if (item.stackSize == qty)
+                    {
+                        RemoveItem(item.inventoryPosition);
+                        qty = 0;
+                    }
+                    else if (item.stackSize < qty)
+                    {
+                        qty -= item.stackSize;
+                        RemoveItem(item.inventoryPosition);
+                    }
+                }
+
+                if (qty <= 0)
+                    return;
+            }
+        }
+    }
+
+    public void RemoveItems(int slotIndex)
 	{
 
 	}
