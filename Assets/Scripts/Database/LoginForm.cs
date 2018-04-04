@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine;
 using LitJson;
+using UnityEngine.EventSystems;
 
 public class APIRoutes {
     public const string baseUrl = "localhost:8000";
@@ -22,9 +23,35 @@ public class LoginForm : MonoBehaviour {
 
 	void Start() {
 
-        if (rememberToggle.isOn) {
-            LoadCredentials();
-        }
+		if (PlayerPrefs.GetInt("rememberMe") == 1) {
+			rememberToggle.isOn = true;	
+			LoadCredentials();
+		} else {
+			rememberToggle.isOn = false;
+		}
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Tab))
+		{
+			Selectable next = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable> ().FindSelectableOnDown ();
+
+			if (next != null)
+			{
+				InputField field = next.GetComponent<InputField> ();
+				if (field != null)
+				{
+					field.OnPointerClick (new PointerEventData (EventSystem.current));
+				}
+				EventSystem.current.SetSelectedGameObject (next.gameObject, new BaseEventData (EventSystem.current));
+			}
+
+		}
+
+		if (Input.GetKeyDown(KeyCode.KeypadEnter)) {
+			OnClickLogin ();
+		}
 	}
 
     void LoadCredentials() {
@@ -40,6 +67,7 @@ public class LoginForm : MonoBehaviour {
     void SaveCredentials() {
         PlayerPrefs.SetString("username", usernameField.text);
         PlayerPrefs.SetString("password", passwordField.text);
+		PlayerPrefs.SetInt ("rememberMe", 1);
     }
 
     public void OnClickLogin() {
@@ -53,6 +81,7 @@ public class LoginForm : MonoBehaviour {
         } else {
             PlayerPrefs.DeleteKey("username");
             PlayerPrefs.DeleteKey("password");
+			PlayerPrefs.DeleteKey ("rememberMe");
         }
         LoadCredentials();
     }
