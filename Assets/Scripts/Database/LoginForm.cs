@@ -88,9 +88,19 @@ public class LoginForm : MonoBehaviour {
 
     IEnumerator Login(string username, string password) {
 
-        string url = string.Format("{0}?username={1}&password={2}", APIRoutes.token, username, password);
+        // string url = string.Format("{0}?username={1}&password={2}", APIRoutes.token, username, password);
+		string url = "http://localhost:8000/api/authorize/";
+		
+		Dictionary<string, string> data = new Dictionary<string, string>();
+		data.Add("username", username);
+		data.Add("password", password);
+		JsonData jsonData = JsonMapper.ToJson(data);
 
-        UnityWebRequest request = UnityWebRequest.Post(url, new Dictionary<string, string>());
+		UnityWebRequest request = UnityWebRequest.Put(url, jsonData.ToString());
+		request.method = "POST";
+		request.SetRequestHeader ("Content-Type", "application/json");
+
+		request.chunkedTransfer = false;
 
         yield return request.SendWebRequest();
         if (request.isNetworkError || request.isHttpError)
