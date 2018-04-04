@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerRecipeBookController : MonoBehaviour {
 
@@ -19,6 +20,8 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 	public RecipeBook recipeBook;
 
+    public Recipe displayedRecipe;
+
 	bool showRecipeBook = false;
 
 	float cameraHeight;
@@ -28,6 +31,8 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
     protected const string ingredientsContainerName = "IngredientsContainer";
 
+    protected const string craftButtonName = "RecipeButton";
+
 	// Use this for initialization
 	void Start () {
 		
@@ -36,6 +41,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 		recipeBook = new RecipeBook ();
 		recipeBook.loadRecipeBook ();
+        displayedRecipe = recipeBook.recipes[0];
 
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		recipeBookPanel = Instantiate (recipeBookPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
@@ -64,11 +70,20 @@ public class PlayerRecipeBookController : MonoBehaviour {
                 Quaternion.identity,
                 recipesContainer.transform
             );
-            
-            Image recipeSprite = slot.GetComponent<Image>();
-            //recipeSprite.sprite = product.sprite;
+
+            slot.GetComponent<recipeSlot>().recipe = recipe;
+
+            //Need to set click event handler to set the current recipe.
+
+            Image recipeImage = slot.GetComponent<Image>();
+            recipeImage.sprite = recipe.productSprite;
+            recipeImage.color = Color.white;
 
         }
+
+        GameObject craftButton = recipeBookPanel.transform.Find(craftButtonName).gameObject;
+
+        //Need to set click event handler to craft the current recipe.
 	}
 
     void displayRecipe(Recipe recipe) {
