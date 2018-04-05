@@ -88,7 +88,6 @@ public class LoginForm : MonoBehaviour {
 
     IEnumerator Login(string username, string password) {
 
-        // string url = string.Format("{0}?username={1}&password={2}", APIRoutes.token, username, password);
 		string url = "http://localhost:8000/api/authorize/";
 		
 		Dictionary<string, string> data = new Dictionary<string, string>();
@@ -118,6 +117,8 @@ public class LoginForm : MonoBehaviour {
             JsonData response = JsonMapper.ToObject(request.downloadHandler.text);
             networkManager.SetActive(true);
             gameObject.SetActive(false);
+			networkManager.GetComponent<NetworkManager>().StartHost();
+			
 		}
     }
 
