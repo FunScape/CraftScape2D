@@ -18,6 +18,6 @@ public class RecipeSlot : MonoBehaviour, IPointerClickHandler {
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject player = GameObject.FindWithTag("Player");
-        player.GetComponent<PlayerRecipeBookController>().selectRecipe(recipe);
+        player.GetComponent<PlayerRecipeBookController>().SelectRecipe(recipe);
     }
 }

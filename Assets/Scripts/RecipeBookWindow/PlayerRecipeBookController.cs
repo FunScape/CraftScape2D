@@ -12,6 +12,8 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
     public GameObject recipeSlotPrefab;
 
+    public GameObject ingredientSlotPrefab;
+
 	public GameObject recipeBookPanel;
 
     public InventoryController inventoryController;
@@ -35,6 +37,10 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
     protected const string craftButtonName = "CraftButton";
 
+    protected const string ingredientImageName = "IngredientImage";
+
+    protected const string ingredientTextName = "IngredientCount";
+
 	// Use this for initialization
 	void Start () {
 		
@@ -53,7 +59,12 @@ public class PlayerRecipeBookController : MonoBehaviour {
         inventory = inventoryController.inventory;
 
         LayoutRecipeBook ();
-	}
+
+        GameObject craftButtonObj = recipeBookPanel.transform.Find(craftButtonName).gameObject;
+        Button craftButton = craftButtonObj.GetComponent<Button>();
+
+        craftButton.onClick.AddListener(delegate { CraftItem(); });
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -88,44 +99,76 @@ public class PlayerRecipeBookController : MonoBehaviour {
             //slot.GetComponent<RecipeSlot>().SetOnClick(selectRecipe(recipe));
         }
 
-        displayRecipe();
-
-        GameObject craftButton = recipeBookPanel.transform.Find(craftButtonName).gameObject;
+        DisplayRecipe();
 
         //Need to set click event handler to craft the current recipe.
 	}
 
-    public void selectRecipe(Recipe recipe)
+    public void SelectRecipe(Recipe recipe)
     {
         selectedRecipe = recipe;
-        displayRecipe();
+        DisplayRecipe();
     }
 
-    public void displayRecipe() {
+    public void DisplayRecipe() {
 
         Image productImage = recipeBookPanel.transform.Find(productImageName).gameObject.GetComponent<Image>();
         productImage.sprite = selectedRecipe.productSprite;
+        DisplayIngredients();
     }
 
-	public void CraftItem (Recipe recipe) {
+    public void DisplayIngredients() {
+
+        GameObject ingredientsContainer = recipeBookPanel.transform.Find(ingredientsContainerName).gameObject;
+
+        foreach (Transform slotTransform in ingredientsContainer.transform) {
+            Destroy(slotTransform.gameObject);
+        }
+
+        foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
+            GameObject slot = Instantiate(
+                ingredientSlotPrefab,
+                Vector3.zero,
+                Quaternion.identity,
+                ingredientsContainer.transform
+            );
+
+            Image slotImage = slot.transform.Find(ingredientImageName).GetComponent<Image>();
+            slotImage.sprite = ingredient.ingredientSprite;
+
+            Text slotText = slot.transform.Find(ingredientTextName).GetComponent<Text>();
+            int currentCount = inventory.checkQuantity(ingredient.ingredientId);
+            int requiredCount = ingredient.ingredientQuantity;
+            slotText.text = currentCount.ToString() + "/" + requiredCount.ToString();
+
+            if (currentCount >= requiredCount)
+                slotText.color = Color.green;
+            else
+                slotText.color = Color.red;
+        }
+    }
+
+	public void CraftItem () {
 		
 		bool hasRequiredIngredients = true;
 
-		foreach (RecipeRequirement ingredient in recipe.ingredients) {
+		foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
 			hasRequiredIngredients = hasRequiredIngredients && (inventory.checkQuantity (ingredient.ingredientId) >= ingredient.ingredientQuantity);
 			Debug.Log ("Checking ingredient: " + ingredient.ingredientId.ToString() + " x " + ingredient.ingredientQuantity.ToString() + ": " + hasRequiredIngredients);
 		}
 
 		if (hasRequiredIngredients) {
 			Debug.Log ("Ingredients found...");
-			foreach (RecipeRequirement ingredient in recipe.ingredients) {
+			foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
 				inventory.RemoveQtyOfItems (ingredient.ingredientId, ingredient.ingredientQuantity);
 			}
 
-			inventory.AddItem (recipe.productID);
+			inventory.AddItem (selectedRecipe.productID);
 
 			inventoryController.UpdateInventoryPanelUI ();
 		}
+
+        DisplayIngredients();
 	}
 
 	void ToggleRecipeBook() {
