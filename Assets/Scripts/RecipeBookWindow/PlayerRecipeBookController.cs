@@ -154,11 +154,9 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 		foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
 			hasRequiredIngredients = hasRequiredIngredients && (inventory.checkQuantity (ingredient.ingredientId) >= ingredient.ingredientQuantity);
-			Debug.Log ("Checking ingredient: " + ingredient.ingredientId.ToString() + " x " + ingredient.ingredientQuantity.ToString() + ": " + hasRequiredIngredients);
 		}
 
 		if (hasRequiredIngredients) {
-			Debug.Log ("Ingredients found...");
 			foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
 				inventory.RemoveQtyOfItems (ingredient.ingredientId, ingredient.ingredientQuantity);
 			}

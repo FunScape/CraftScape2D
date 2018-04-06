@@ -155,7 +155,6 @@ public class Inventory : ScriptableObject {
 
     public void RemoveQtyOfItems(int id, int qty)
     {
-        Debug.Log("Removing ingredient...");
         foreach (InventoryItem item in items)
         {
             if (item != null)
