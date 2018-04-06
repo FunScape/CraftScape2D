@@ -8,15 +8,34 @@ using System.Linq;
 
 public class Database {
 
+    string defaultSavePath {
+        get { return Application.streamingAssetsPath + "/GameData/ItemDatabase.json"; }
+    }
+
     public const string itemSpritesPath = "Sprites/RPG_inventory_icons/";
 
     private List<InventoryItem> gameItems = new List<InventoryItem>();
 
     private const bool prettyPrintToFile = true;
 
+    public Database(JsonData data)
+    {
+        foreach (JsonData item in data) {
+            gameItems.Add(DeserializeGameItem(item));
+        }
+    }
+
     public Database()
     {
         ConstructDatabase();
+    }
+
+    public void Save(string filePath = null)
+    {
+        if (filePath == null)
+            filePath = defaultSavePath;
+
+        WriteToFile(filePath, gameItems.ToArray());
     }
 
     // Reads in a json file and serializes the json file into a list of GameItems.
@@ -45,7 +64,7 @@ public class Database {
     {
         foreach (InventoryItem item in gameItems)
         {
-            if (item.title == itemName)
+            if (item.name == itemName)
                 return item.Clone();
         }
         return null;

@@ -14,30 +14,37 @@ public class InventoryItem {
 	public string uuid;
 
 	public int id { get; set; }
-	public Sprite sprite;
+	public string name;
 	public string spriteName;
-	public int maxStackSize;
-	public int stackSize;
-	public string title;
+	public Sprite sprite;
 	public string description;
+	public int maxStackSize;
     public float value;
+	public bool equipable;
+	public int rarity;
+	public int minLevel;
+	public int baseDurability;
+	public bool soulBound;
 	public float power;
 	public float defense;
 	public float vitality;
 	public float healAmount;
-	// public List<ItemType> types;
-	public List<string> types;
+	public int inventoryID;
 	public int inventoryPosition;
+	public int stackSize;
+	public int createdByID;
+	public string createdByName;
 
-	public InventoryItem(int id, Sprite sprite, string title, string description, 
+	public InventoryItem(int id, Sprite sprite, string name, string description, 
 	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
-	float healAmount, List<string> types, int inventoryPosition=-1)
+	float healAmount, bool equipable, int rarity, int minLevel, int baseDurability, bool soulBound,
+	int inventoryID, int createdByID, string createdByName, int inventoryPosition=-1)
 	{
 		this.id = id;
 		this.uuid = System.Guid.NewGuid().ToString();
 		this.sprite = sprite;
 		this.spriteName = sprite.name;
-		this.title = title;
+		this.name = name;
 		this.description = description;
 		this.maxStackSize = maxStackSize;
 		this.stackSize = stackSize;
@@ -46,37 +53,21 @@ public class InventoryItem {
 		this.defense = defense;
 		this.vitality = vitality;
 		this.healAmount = healAmount;
+		this.equipable = equipable;
+		this.rarity = rarity;
+		this.minLevel = minLevel;
+		this.baseDurability = baseDurability;
+		this.soulBound = soulBound;
+		this.inventoryID = inventoryID;
 		this.inventoryPosition = inventoryPosition;
-
-		this.types = types;
-		// foreach (string type in types)
-		// {
-		// 	if (type == "equipable")
-		// 		this.types.Add(ItemType.Equipable);
-		// 	else if (type == "weapon")
-		// 		this.types.Add(ItemType.Weapon);
-		// 	else if (type == "mainhand")
-		// 		this.types.Add(ItemType.MainHand);
-		// 	else if (type == "inventory")
-		// 		this.types.Add(ItemType.Inventory);
-		// 	else if (type == "consumable")
-		// 		this.types.Add(ItemType.Consumable);
-		// 	else if (type == "food")
-		// 		this.types.Add(ItemType.Food);
-		// 	else if (type == "health")
-		// 		this.types.Add(ItemType.Health);
-		// }
-
-
-		string json = JsonUtility.ToJson(this);
-		Database database = new Database();
-		database.WriteToFile(Application.dataPath + string.Format("/GameData/{0}.json", this.uuid), json);
-
+		this.createdByID = createdByID;
+		this.createdByName = createdByName;
+		this.inventoryPosition = inventoryPosition;
 	}
 
 	public InventoryItem(int id, string uuid, Sprite sprite, string title, string description, 
 	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
-	float healAmount, List<string> types, int inventoryPosition=-1)
+	float healAmount, int inventoryPosition=-1)
 	{
 		this.id = id;
 		this.uuid = uuid;
@@ -87,7 +78,7 @@ public class InventoryItem {
 		else
 			this.spriteName = sprite.name;
 			
-		this.title = title;
+		this.name = title;
 		this.description = description;
 		this.maxStackSize = maxStackSize;
 		this.stackSize = stackSize;
@@ -96,19 +87,20 @@ public class InventoryItem {
 		this.defense = defense;
 		this.vitality = vitality;
 		this.healAmount = healAmount;
-		this.types = types;
 		this.inventoryPosition = inventoryPosition;
 	}
 
 	public InventoryItem Clone()
 	{
-		return new InventoryItem(this.id, System.Guid.NewGuid().ToString(), this.sprite, this.title, this.description, this.value, this.maxStackSize, this.stackSize, this.power,
-		this.defense, this.vitality, this.healAmount, this.types, this.inventoryPosition);
+		return new InventoryItem(this.id, System.Guid.NewGuid().ToString(), this.sprite, this.name, this.description, this.value, this.maxStackSize, this.stackSize, this.power,
+		this.defense, this.vitality, this.healAmount, this.inventoryPosition);
 	}
 
 	public void Save(Inventory inventory)
 	{
-		throw new System.NotImplementedException();
+		string json = JsonUtility.ToJson(this);
+		Database database = new Database();
+		database.WriteToFile(Application.dataPath + string.Format("/GameData/{0}.json", this.uuid), json);
 	}
 
 
@@ -135,7 +127,7 @@ public class SerializableInventoryItem : System.Object {
 		this.spriteName = item.spriteName;
 		this.maxStackSize = item.maxStackSize;
 		this.stackSize = item.stackSize;
-		this.title = item.title;
+		this.title = item.name;
 		this.description = item.description;
 		this.value = (double)item.value;
 		this.types = item.types.ToArray();

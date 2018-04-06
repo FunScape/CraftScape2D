@@ -6,13 +6,6 @@ using UnityEngine;
 using LitJson;
 using UnityEngine.EventSystems;
 
-public class APIRoutes {
-    public const string baseUrl = "localhost:8000";
-    public const string token = baseUrl + "/api/authorize/";
-    public const string users = baseUrl + "/user/";
-    public const string characters = baseUrl + "/character/";
-    public const string axeImage = "https://opengameart.org/sites/default/files/axe2.png";
-}
 
 public class LoginForm : MonoBehaviour {
 
@@ -88,7 +81,7 @@ public class LoginForm : MonoBehaviour {
 
     IEnumerator Login(string username, string password) {
 
-		string url = "http://localhost:8000/api/authorize/";
+		string url = APIRoute.authorize;
 		
 		Dictionary<string, string> data = new Dictionary<string, string>();
 		data.Add("username", username);
@@ -117,7 +110,7 @@ public class LoginForm : MonoBehaviour {
             JsonData response = JsonMapper.ToObject(request.downloadHandler.text);
             networkManager.SetActive(true);
             gameObject.SetActive(false);
-			networkManager.GetComponent<NetworkManager>().StartHost();
+			networkManager.GetComponent<CSNetworkManager>().StartHost();
 			
 		}
     }

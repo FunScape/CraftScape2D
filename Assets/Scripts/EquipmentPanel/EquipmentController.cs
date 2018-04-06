@@ -97,7 +97,7 @@ public class EquipmentController : MonoBehaviour {
 		InventoryItem item = inventory.GetItem(inventorySlot.slotIndex);
 		if (CanEquipItemType(item, equipmentSlotObject.name))
 		{
-			Debug.Log("You equiped item: " + item.title);
+			Debug.Log("You equiped item: " + item.name);
 			equipmentSlotObject.GetComponent<EquipmentSlot>().EquipItem(item);
 			inventory.RemoveItem(inventorySlot.slotIndex);
 			GetInventoryController().UpdateInventoryPanelUI(); 
