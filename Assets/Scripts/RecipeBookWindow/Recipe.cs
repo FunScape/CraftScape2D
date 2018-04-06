@@ -15,14 +15,35 @@ public class Recipe{
 
     protected Database database;
 
-	public Recipe(int id, int product, int productQuantity, List<RecipeRequirement> ingredients, Sprite productSprite) {
+	public Recipe(int id, int productID, int productQuantity, List<RecipeRequirement> ingredients, Sprite productSprite) {
 		this.id = id;
-		this.productID = product;
+		this.productID = productID;
 		this.productQuantity = productQuantity;
 		this.ingredients = ingredients;
         this.productSprite = productSprite;
 	}
 
+    public Recipe(JsonData recipeJson, JsonData ingredientsJson) {
+
+        database = new Database();
+
+        id = (int)recipeJson["id"];
+        productID = (int)recipeJson["productId"];
+        productQuantity = (int)recipeJson["productQuantity"];
+
+        InventoryItem productItem = database.GetItem(productID);
+        productSprite = productItem.sprite;
+
+        ingredients = new List<RecipeRequirement>();
+
+        foreach (JsonData ingredient in ingredientsJson) {
+
+            InventoryItem ingredientItem = database.GetItem((int)ingredient["ingredientId"]);
+            ingredients.Add(new RecipeRequirement((int)ingredient["ingredientId"], (int)ingredient["ingredientQuantity"], ingredientItem.sprite));
+        }
+    }
+
+    //This one will probably end up being obsolete by the time I'm done creating a constructor that takes JsonData arguments.
 	public Recipe(string recipeJSON, string ingredientsJSON) {
 
         database = new Database();

@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LitJson;
+using System.IO;
 
 public class RecipeBook {
 
-	protected Database itemDatabase;
+    private string recipePath = "/GameData/testingRecipeJSON/RecipeDatabase.json";
+
+    private string ingredientsPath = "/GameData/testingRecipeJSON/ingredients/";
+
+    protected Database itemDatabase;
 
 	public List<Recipe> recipes;
 
@@ -13,13 +19,17 @@ public class RecipeBook {
 		itemDatabase = new Database ();
 
 		recipes = new List<Recipe> ();
-		//Read list of recipes unlocked from database.
-		//for (each recipe unlocked):
-		//read requirements from the database
-		Recipe recipe = new Recipe(Application.streamingAssetsPath + "/GameData/testingRecipeJSON/RecipeDatabase.json", Application.streamingAssetsPath + "/GameData/testingRecipeJSON/IngredientDatabase.json");
-		recipes.Add (recipe);
-		//end for
-}
+
+        JsonData recipesJSON = JsonMapper.ToObject(File.ReadAllText(Application.streamingAssetsPath + recipePath));
+
+        foreach (JsonData recipe in recipesJSON) {
+
+            JsonData ingredientsJson = JsonMapper.ToObject(File.ReadAllText(Application.streamingAssetsPath + ingredientsPath + recipe["id"] + ".json"));
+
+            recipes.Add(new Recipe(recipe, ingredientsJson));
+        }
+    }
+
 	//A method for printing a recipe book as a string, just for testing.
 	public string toString() {
 

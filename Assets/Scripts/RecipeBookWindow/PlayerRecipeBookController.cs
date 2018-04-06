@@ -20,7 +20,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 	public RecipeBook recipeBook;
 
-    public Recipe displayedRecipe;
+    public Recipe selectedRecipe;
 
 	bool showRecipeBook = false;
 
@@ -31,7 +31,9 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
     protected const string ingredientsContainerName = "IngredientsContainer";
 
-    protected const string craftButtonName = "RecipeButton";
+    protected const string productImageName = "RecipeProductImage";
+
+    protected const string craftButtonName = "CraftButton";
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +43,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
 		recipeBook = new RecipeBook ();
 		recipeBook.loadRecipeBook ();
-        displayedRecipe = recipeBook.recipes[0];
+        selectedRecipe = recipeBook.recipes[0];
 
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		recipeBookPanel = Instantiate (recipeBookPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
@@ -71,26 +73,41 @@ public class PlayerRecipeBookController : MonoBehaviour {
                 recipesContainer.transform
             );
 
-            slot.GetComponent<recipeSlot>().recipe = recipe;
+            slot.GetComponent<RecipeSlot>().recipe = recipe;
 
             //Need to set click event handler to set the current recipe.
-
+            /*
             Image recipeImage = slot.GetComponent<Image>();
             recipeImage.sprite = recipe.productSprite;
             recipeImage.color = Color.white;
+            */
+            Image slotImage = slot.GetComponent<Image>();
+            slotImage.sprite = recipe.productSprite;
+            slotImage.color = Color.white;
 
+            //slot.GetComponent<RecipeSlot>().SetOnClick(selectRecipe(recipe));
         }
+
+        displayRecipe();
 
         GameObject craftButton = recipeBookPanel.transform.Find(craftButtonName).gameObject;
 
         //Need to set click event handler to craft the current recipe.
 	}
 
-    void displayRecipe(Recipe recipe) {
-        //
+    public void selectRecipe(Recipe recipe)
+    {
+        selectedRecipe = recipe;
+        displayRecipe();
     }
 
-	void CraftItem (Recipe recipe) {
+    public void displayRecipe() {
+
+        Image productImage = recipeBookPanel.transform.Find(productImageName).gameObject.GetComponent<Image>();
+        productImage.sprite = selectedRecipe.productSprite;
+    }
+
+	public void CraftItem (Recipe recipe) {
 		
 		bool hasRequiredIngredients = true;
 
