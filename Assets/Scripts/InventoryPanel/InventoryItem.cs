@@ -14,6 +14,7 @@ public class InventoryItem {
 	public string uuid;
 
 	public int id { get; set; }
+    public int staticID { get; set; }
 	public string name;
 	public string spriteName;
 	public Sprite sprite;
@@ -24,7 +25,7 @@ public class InventoryItem {
 	public int rarity;
 	public int minLevel;
 	public int baseDurability;
-	public bool soulBound;
+	public bool soulbound;
 	public float power;
 	public float defense;
 	public float vitality;
@@ -34,16 +35,21 @@ public class InventoryItem {
 	public int stackSize;
 	public int createdByID;
 	public string createdByName;
+	public List<string> types;
 
-	public InventoryItem(int id, Sprite sprite, string name, string description, 
-	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
-	float healAmount, bool equipable, int rarity, int minLevel, int baseDurability, bool soulBound,
-	int inventoryID, int createdByID, string createdByName, int inventoryPosition=-1)
+	public InventoryItem(int id, int staticID, Sprite sprite, string name, string description, 
+    	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
+    	float healAmount, bool equipable, int rarity, int minLevel, int baseDurability, bool soulbound,
+	    int inventoryID, int createdByID, string createdByName, List<string> types, int inventoryPosition=-1)
 	{
 		this.id = id;
+        this.staticID = staticID;
 		this.uuid = System.Guid.NewGuid().ToString();
 		this.sprite = sprite;
-		this.spriteName = sprite.name;
+        if (this.sprite != null)
+            this.spriteName = sprite.name;
+        else
+            this.spriteName = name;
 		this.name = name;
 		this.description = description;
 		this.maxStackSize = maxStackSize;
@@ -57,19 +63,42 @@ public class InventoryItem {
 		this.rarity = rarity;
 		this.minLevel = minLevel;
 		this.baseDurability = baseDurability;
-		this.soulBound = soulBound;
+		this.soulbound = soulbound;
 		this.inventoryID = inventoryID;
 		this.inventoryPosition = inventoryPosition;
 		this.createdByID = createdByID;
 		this.createdByName = createdByName;
 		this.inventoryPosition = inventoryPosition;
+		this.types = types;
 	}
 
-	public InventoryItem(int id, string uuid, Sprite sprite, string title, string description, 
-	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
-	float healAmount, int inventoryPosition=-1)
+
+	public InventoryItem(int id, 
+                         int staticID,
+                         string uuid, 
+                         Sprite sprite, 
+                         string name, 
+                         string description, 
+                         float value, 
+                         int maxStackSize, 
+                         int stackSize, 
+                         float power, 
+                         float defense, 
+                         float vitality,
+                         float healAmount, 
+                         bool equipable,
+                         int rarity,
+                         int minLevel,
+                         int baseDurability,
+                         bool soulbound,
+                         int inventoryID,
+                         int createdByID,
+                         string createdByName,
+						 List<string> types,
+                         int inventoryPosition=-1)
 	{
 		this.id = id;
+        this.staticID = staticID;
 		this.uuid = uuid;
 		this.sprite = sprite;
 
@@ -78,7 +107,7 @@ public class InventoryItem {
 		else
 			this.spriteName = sprite.name;
 			
-		this.name = title;
+		this.name = name;
 		this.description = description;
 		this.maxStackSize = maxStackSize;
 		this.stackSize = stackSize;
@@ -87,13 +116,43 @@ public class InventoryItem {
 		this.defense = defense;
 		this.vitality = vitality;
 		this.healAmount = healAmount;
+        this.equipable = equipable;
+        this.rarity = rarity;
+        this.minLevel = minLevel;
+        this.baseDurability = baseDurability;
+        this.soulbound = soulbound;
+        this.inventoryID = inventoryID;
+        this.createdByID = createdByID;
+        this.createdByName = createdByName;
+		this.types = types;
 		this.inventoryPosition = inventoryPosition;
 	}
 
 	public InventoryItem Clone()
 	{
-		return new InventoryItem(this.id, System.Guid.NewGuid().ToString(), this.sprite, this.name, this.description, this.value, this.maxStackSize, this.stackSize, this.power,
-		this.defense, this.vitality, this.healAmount, this.inventoryPosition);
+		return new InventoryItem(this.id, 
+                                 this.staticID,
+                                 System.Guid.NewGuid().ToString(), 
+                                 this.sprite, 
+                                 this.name, 
+                                 this.description, 
+                                 this.value, 
+                                 this.maxStackSize, 
+                                 this.stackSize, 
+                                 this.power,
+                                 this.defense, 
+                                 this.vitality, 
+                                 this.healAmount, 
+								 this.equipable,
+								 this.rarity,
+								 this.minLevel,
+								 this.baseDurability,
+								 this.soulbound,
+								 this.inventoryID,
+								 this.createdByID,
+								 this.createdByName,
+								 this.types,
+                                 this.inventoryPosition);
 	}
 
 	public void Save(Inventory inventory)
@@ -108,40 +167,78 @@ public class InventoryItem {
 
 [System.Serializable]
 public class SerializableInventoryItem : System.Object {
-	public int id { get; set; }
-	public string spriteName { get; set; }
-	public int maxStackSize { get; set; }
-	public int stackSize { get; set; }
-	public string title { get; set; }
-	public string description { get; set; }
-	public double value { get; set; }
-	public string[] types { get; set; }
-
-	public Dictionary<string, object> stats;
-
-	public Dictionary<string, object> metadata;
+	int id;
+    int staticID;
+    int inventoryID;
+    int inventoryPosition;
+    int stackSize;
+    int createdByID;
+    string createdByName;
+	string name;
+	string spriteName;
+	string description;
+	int maxStack;
+	double value;
+	bool equipable;
+	int rarity;
+	int minLevel;
+	int baseDurability;
+	bool soulbound;
+	double power;
+	double defense;
+	double vitality;
+	double healAmount;
+	string[] types;
 
 	public SerializableInventoryItem(InventoryItem item)
 	{
-		this.id = item.id;
-		this.spriteName = item.spriteName;
-		this.maxStackSize = item.maxStackSize;
-		this.stackSize = item.stackSize;
-		this.title = item.name;
-		this.description = item.description;
-		this.value = (double)item.value;
-		this.types = item.types.ToArray();
-
-		this.stats = new Dictionary<string, object>();
-		this.stats.Add("power", (double)item.power);
-		this.stats.Add("defense", (double)item.defense);
-		this.stats.Add("vitality", (double)item.vitality);
-		this.stats.Add("healAmount", (double)item.healAmount);
-
-		this.metadata = new Dictionary<string, object>();
-		this.metadata.Add("inventoryPosition", item.inventoryPosition);
-		this.metadata.Add("uuid", item.uuid);
+		id = item.id;
+        staticID = item.staticID;
+		inventoryID = item.inventoryID;
+		inventoryPosition = item.inventoryPosition;
+		stackSize = item.stackSize;
+		createdByID = item.createdByID;
+		createdByName = item.createdByName;
+		name = item.name;
+		spriteName = item.spriteName;
+		description = item.description;
+		maxStack = item.maxStackSize;
+		value = item.value;
+		equipable = item.equipable;
+		rarity = item.rarity;
+		minLevel = item.minLevel;
+		baseDurability = item.baseDurability;
+		soulbound = item.soulbound;
+		power = item.power;
+		defense = item.defense;
+		vitality = item.vitality;
+		healAmount = item.healAmount;
+		types = item.types.ToArray();
 	}
+
+    public static Dictionary<object, object> SerializableStaticItemDictionary(InventoryItem item)
+    {
+        Dictionary<object, object> serialized = new Dictionary<object, object>();
+        serialized.Add("id", item.id);
+		serialized.Add("name", item.name);
+		serialized.Add("sprite_name", item.spriteName);
+		serialized.Add("description", item.description);
+		serialized.Add("max_stack", item.maxStackSize);
+		serialized.Add("value", item.value);
+		serialized.Add("equipable", item.equipable);
+		serialized.Add("rarity", item.rarity);
+		serialized.Add("min_level", item.minLevel);
+		serialized.Add("base_durability", item.baseDurability);
+		serialized.Add("soulbound", item.soulbound);
+		serialized.Add("power", item.power);
+		serialized.Add("defense", item.defense);
+		serialized.Add("vitality", item.vitality);
+		serialized.Add("heal_amount", item.healAmount);
+		serialized.Add("item_type", item.types.ToArray());
+
+
+        return serialized;
+    }
 
 }
 

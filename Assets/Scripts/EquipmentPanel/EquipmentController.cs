@@ -111,7 +111,7 @@ public class EquipmentController : MonoBehaviour {
 
 	bool CanEquipItemType(InventoryItem item, string equipmentSlotName)
 	{
-		if (item.types.Contains("equipable"))
+		if (item.equipable)
 		{
 			if (equipmentSlotName == "MainHand")
 			{

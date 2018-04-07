@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameItem : MonoBehaviour {
 
-    bool lootable = true;
-
 	// Use this for initialization
 	void Start () {
 		

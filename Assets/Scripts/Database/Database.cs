@@ -21,8 +21,11 @@ public class Database {
     public Database(JsonData data)
     {
         foreach (JsonData item in data) {
-            gameItems.Add(DeserializeGameItem(item));
-        }
+            if (JsonDataContainsKey(item, "static_game_item"))
+                gameItems.Add(DeserializeGameItem(item));
+            else
+                gameItems.Add(DeserializeStaticGameItem(item));
+        } 
     }
 
     public Database()
@@ -30,12 +33,18 @@ public class Database {
         ConstructDatabase();
     }
 
-    public void Save(string filePath = null)
+    public void Save(string filePath=null)
     {
         if (filePath == null)
             filePath = defaultSavePath;
 
         WriteToFile(filePath, gameItems.ToArray());
+    }
+
+    public void SaveStaticGameItems()
+    {
+        string filePath = defaultSavePath;
+        WriteStaticItemsToFile(filePath, gameItems.ToArray());
     }
 
     // Reads in a json file and serializes the json file into a list of GameItems.
@@ -44,7 +53,7 @@ public class Database {
         JsonData itemData = JsonMapper.ToObject(File.ReadAllText(Application.streamingAssetsPath + "/GameData/ItemDatabase.json"));
         for (int i = 0; i < itemData.Count; i++)
         {
-            gameItems.Add(DeserializeGameItem(itemData[i]));
+            gameItems.Add(DeserializeStaticGameItem(itemData[i]));
         }
     }
 
@@ -79,6 +88,36 @@ public class Database {
             File.WriteAllText(filePath, "");
         }
         File.WriteAllText(filePath, SerializeGameItems(items));
+    }
+
+    public void WriteStaticItemsToFile(string filePath, InventoryItem[] items)
+    {
+        items = items.Where(item => item != null).ToArray();
+        Dictionary<object,object>[] serializedItems = new Dictionary<object,object>[items.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            serializedItems[i] = SerializableInventoryItem.SerializableStaticItemDictionary(items[i]);
+        }
+        string data = SerializeGameItems(serializedItems);
+        WriteToFile(filePath, data);
+    }
+
+    string SerializeGameItems(Dictionary<object, object>[] items)
+    {
+        StringBuilder sb = new StringBuilder();
+        JsonWriter writer = new JsonWriter(sb);
+        writer.PrettyPrint = Database.prettyPrintToFile;
+
+        writer.WriteArrayStart();
+        foreach(Dictionary<object, object> item in items)
+        {
+            JsonMapper.ToJson(item, writer);
+            //string jsonString = JsonMapper.ToJson(item);
+            //Debug.Log(jsonString);
+        }
+        writer.WriteArrayEnd();
+
+        return sb.ToString();
     }
 
     public void WriteToFile(string filePath, JsonData jsonData)
@@ -200,7 +239,7 @@ public class Database {
         writer.WriteArrayStart();
         foreach(InventoryItem gameItem in gameItems)
         {
-            SerializableInventoryItem serializable = new SerializableInventoryItem(gameItem);
+            Dictionary<object, object> serializable = SerializableInventoryItem.SerializableStaticItemDictionary(gameItem);
             JsonMapper.ToJson(serializable, writer);
         }
         writer.WriteArrayEnd();
@@ -228,48 +267,102 @@ public class Database {
 
     InventoryItem DeserializeGameItem(JsonData data)
     {
+        Debug.Log("DESERIALIZING DATA");
+		IDictionary dict = data as IDictionary;
+		foreach (string key in dict.Keys){
+		    Debug.Log(key);
+		}
 
-        int id = (int)data["id"];
-        string spritePath = itemSpritesPath + data["spriteName"].ToString();
-        Sprite sprite = (Sprite)Resources.Load(spritePath, typeof(Sprite));
-        string title = data["title"].ToString();
-        string description = data["description"].ToString();
-        double value = (double)data["value"];
-        int maxStackSize = (int)data["maxStackSize"];
-        int stackSize = (int)data["stackSize"];
-        JsonData stats = data["stats"];
-        double power = (double)stats["power"];
-        double defense = (double)stats["defense"];
-        double vitality = (double)stats["vitality"];
-        double healAmount = (double)stats["healAmount"];
-        List<string> types = new List<string>();
-        JsonData typesJson = data["types"];
-        for (var j = 0; j < typesJson.Count; j++)
-        {
-            types.Add(typesJson[j].ToString());
-        }
+        //int id = (int)data["id"];
+        //int staticID = (int)data["static_game_item"]["id"];
+        //string spritePath = itemSpritesPath + data["static_game_item"]["sprite_name"].ToString();
+        //Sprite sprite = (Sprite)Resources.Load(spritePath, typeof(Sprite));
+        //string name = data["static_game_item"]["name"].ToString();
+        //string description = data["static_game_item"]["description"].ToString();
+        //double value = (double)data["static_game_item"]["value"];
+        //int maxStackSize = (int)data["static_game_item"]["max_stack"];
+        //int stackSize = (int)data["stack_size"];
+        //double power = (double)data["static_game_item"]["power"];
+        //double defense = (double)data["static_game_item"]["defense"];
+        //double vitality = (double)data["static_game_item"]["vitality"];
+        //double healAmount = (double)data["static_game_item"]["heal_amount"];
+        //bool equipable = (bool)data["static_game_item"]["equipable"];
+        //int rarity = (int)data["static_game_item"]["rarity"];
+        //int minLevel = (int)data["static_game_item"]["min_level"];
+        //int baseDurability = (int)data["static_game_item"]["base_durability"];
+        //bool soulbound = (bool)data["static_game_item"]["soulbound"];
+        //int inventoryID = (int)data["inventory"];
+        //int createdByID = (int)data["created_by"];
+        //string createdByName = data["created_by_name"].ToString();
+        //int inventoryPosition = (int)data["inventory_position"];
 
-        JsonData metadata = data["metadata"];
+        //List<string> types = new List<string>();
+        //foreach(JsonData type in data["item_type"])
+        //{
+        //    types.Add(type.ToString());
+        //}
 
-        int inventoryPosition;
-        try {
-            inventoryPosition = (int)metadata["inventoryPosition"];
-        } catch (KeyNotFoundException) {
-            inventoryPosition = -1;
-        }
-
-        string uuid;
-        try {
-            uuid = (string)metadata["uuid"];
-        } catch (KeyNotFoundException) {
-            uuid = System.Guid.NewGuid().ToString();
-        }
-
-        return new InventoryItem(id, uuid, sprite, title, description, 
-            (float)value, maxStackSize, stackSize, (float) power, (float)defense,
-            (float)vitality, (float)healAmount, types, inventoryPosition);
+        //return new InventoryItem(id, staticID, sprite, name, description, (float)value, maxStackSize, stackSize, (float)power,
+        //(float)defense, (float)vitality, (float)healAmount, equipable, rarity, minLevel, baseDurability, soulbound,
+        //inventoryID, createdByID, createdByName, types, inventoryPosition);
+        return null;
     }
 
- 
+    InventoryItem DeserializeStaticGameItem(JsonData data)
+    {
+        //IDictionary dict = data as IDictionary;
+        //foreach (string key in dict.Keys)
+        //{
+        //    Debug.Log(key);
+        //}
+
+        int staticID = (int)data["id"];
+        string spritePath = itemSpritesPath + data["sprite_name"].ToString();
+        Sprite sprite = (Sprite)Resources.Load(spritePath, typeof(Sprite));
+        string name = data["name"].ToString();
+        string description = data["description"].ToString();
+        double value = (double)data["value"];
+        int maxStackSize = (int)data["max_stack"];
+        double power = (double)data["power"];
+        double defense = (double)data["defense"];
+        double vitality = (double)data["vitality"];
+        double healAmount = (double)data["heal_amount"];
+        bool equipable = (bool)data["equipable"];
+        int rarity = (int)data["rarity"];
+        int minLevel = (int)data["min_level"];
+        int baseDurability = (int)data["base_durability"];
+        bool soulbound = (bool)data["soulbound"];
+
+        List<string> types = new List<string>();
+        foreach (JsonData type in data["item_type"])
+        {
+            types.Add(type.ToString());
+        }
+
+        return new InventoryItem(-1, staticID, sprite, name, description, (float)value, maxStackSize, 1, (float)power,
+                                 (float)defense, (float)vitality, (float)healAmount, equipable, rarity, minLevel, baseDurability, soulbound,
+                                 1, 1, "", types);
+    }
+
+    public bool JsonDataContainsKey(JsonData data, string key)
+    {
+        bool result = false;
+        if (data == null)
+            return result;
+        if (!data.IsObject)
+        {
+            return result;
+        }
+        IDictionary tdictionary = data as IDictionary;
+        if (tdictionary == null)
+            return result;
+        if (tdictionary.Contains(key))
+        {
+            result = true;
+        }
+        return result;
+    }
+
+
 
 }

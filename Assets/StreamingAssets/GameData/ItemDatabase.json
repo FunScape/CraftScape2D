@@ -1,109 +1,108 @@
+
 [
-	{
-		"id": 1,
-		"spriteName": "apple",
-		"title": "apple",
-		"description": "This is an apple.",
-		"maxStackSize": 10,
-		"stackSize": 1,
-		"value": 10.5,
-		"equipable": false,
-		"stats": {
-			"power": 0.0,
-			"defense": 0.0,
-			"vitality": 0.0,
-			"healAmount": 10.0
-		},
-		"types": [
-			"consumable",
-			"food",
-			"health"
-		],
-		"metadata": {}
-	},
-	{
-		"id": 2,
-		"spriteName": "bag",
-		"title": "bag",
-		"description": "This is a bag.",
-		"maxStackSize": 1,
-		"stackSize": 1,
-		"value": 1.1,
-		"equipable": false,
-		"stats": {
-			"power": 0.0,
-			"defense": 0.0,
-			"vitality": 0.0,
-			"healAmount": 0.0
-		},
-		"types": [
-			"inventory"
-		],
-		"metadata": {}
-	},
-	{
-		"id": 3,
-		"spriteName": "axe",
-		"title": "axe",
-		"description": "This is an axe.",
-		"maxStackSize": 1,
-		"stackSize": 1,
-		"value": 20.0,
-		"equipable": true,
-		"stats": {
-			"power": 10.0,
-			"defense": 5.0,
-			"vitality": 5.0,
-			"healAmount": 0.0
-		},
-		"types": [
-			"equipable",
-			"weapon",
-			"2-handed"
-		],
-		"metadata": {}
-	},
-	{
-		"id": 4,
-		"spriteName": "armor",
-		"title": "leather chest armor",
-		"description": "This is leather chest armor.",
-		"maxStackSize": 1,
-		"stackSize": 1,
-		"value": 20.0,
-		"equipable": true,
-		"stats": {
-			"power": 0.0,
-			"defense": 15.0,
-			"vitality": 15.0,
-			"healAmount": 0.0
-		},
-		"types": [
-			"equipable",
-			"chest",
-			"leather"
-		],
-		"metadata": {}
-	},
-	{
-		"id": 5,
-		"spriteName": "rings",
-		"title": "gold ring",
-		"description": "This is a gold ringe.",
-		"maxStackSize": 1,
-		"stackSize": 1,
-		"value": 50.0,
-		"equipable": true,
-		"stats": {
-			"power": 10.0,
-			"defense": 0.0,
-			"vitality": 0.0,
-			"healAmount": 0.0
-		},
-		"types": [
-			"equipable",
-			"ring"
-		],
-		"metadata": {}
-	}
+    {
+        "id" : -1,
+        "name" : "apple",
+        "sprite_name" : "apple",
+        "description" : "An apple.",
+        "max_stack"   : 10,
+        "value"       : 5.0,
+        "equipable"   : false,
+        "rarity"      : 1,
+        "min_level"   : 1,
+        "base_durability" : 1,
+        "soulbound"       : false,
+        "power"           : 0.0,
+        "defense"         : 0.0,
+        "vitality"        : 0.0,
+        "heal_amount"     : 10.0,
+        "item_type"       : [
+            "food",
+            "consumable",
+            "health"
+        ]
+    },
+    {
+        "id" : -1,
+        "name" : "axe",
+        "sprite_name" : "axe",
+        "description" : "An axe.",
+        "max_stack"   : 1,
+        "value"       : 15.0,
+        "equipable"   : true,
+        "rarity"      : 1,
+        "min_level"   : 1,
+        "base_durability" : 1,
+        "soulbound"       : true,
+        "power"           : 10.0,
+        "defense"         : 5.0,
+        "vitality"        : 5.0,
+        "heal_amount"     : 0.0,
+        "item_type"       : [
+            "weapon",
+            "2-handed"
+        ]
+    },
+    {
+        "id" : -1,
+        "name" : "bag",
+        "sprite_name" : "bag",
+        "description" : "A bag.",
+        "max_stack"   : 1,
+        "value"       : 6.0,
+        "equipable"   : false,
+        "rarity"      : 1,
+        "min_level"   : 1,
+        "base_durability" : 1,
+        "soulbound"       : false,
+        "power"           : 0.0,
+        "defense"         : 0.0,
+        "vitality"        : 0.0,
+        "heal_amount"     : 0.0,
+        "item_type"       : [
+            "inventory"
+        ]
+    },
+    {
+        "id" : -1,
+        "name" : "leather chest armor",
+        "sprite_name" : "armor",
+        "description" : "Leather chest armor.",
+        "max_stack"   : 1,
+        "value"       : 10.0,
+        "equipable"   : true,
+        "rarity"      : 1,
+        "min_level"   : 1,
+        "base_durability" : 1,
+        "soulbound"       : true,
+        "power"           : 0.0,
+        "defense"         : 10.0,
+        "vitality"        : 10.0,
+        "heal_amount"     : 0.0,
+        "item_type"       : [
+            "armor",
+            "chest"
+        ]
+    },
+    {
+        "id" : -1,
+        "name" : "gold ring",
+        "sprite_name" : "gold ring",
+        "description" : "A gold ring.",
+        "max_stack"   : 1,
+        "value"       : 30.0,
+        "equipable"   : true,
+        "rarity"      : 2,
+        "min_level"   : 1,
+        "base_durability" : 1,
+        "soulbound"       : true,
+        "power"           : 5.0,
+        "defense"         : 5.0,
+        "vitality"        : 5.0,
+        "heal_amount"     : 0.0,
+        "item_type"       : [
+            "ring",
+            "gold"
+        ]
+    }
 ]
