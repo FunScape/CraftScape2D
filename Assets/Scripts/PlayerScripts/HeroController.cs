@@ -10,16 +10,43 @@ public class HeroController : MonoBehaviour
 
     Rigidbody2D body;
 
+    User user;
+    Character character;
+    Inventory[] inventories = new Inventory[5];
+
     // Use this for initialization
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        InitializeCharacter();
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+    }
+
+    void InitializeCharacter() {
+        GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
+        APIManager manager = APIManager.GetComponent<APIManager>();
+        StartCoroutine(manager.GetUser((user) => {
+            this.user = user;
+            Debug.Log("Found user!");
+            StartCoroutine(manager.GetCharacter(user.characterUrls[0], (character) => {
+                Debug.Log("Found Character!");
+                this.character = character;
+                StartCoroutine(manager.GetInventory(character.inventoryUrls[0], (inventory) => {
+                    Debug.Log("Found inventory!");
+                    // this.inventories[0] = inventory;
+                    GetComponent<HeroInventoryController>().inventory = inventory;
+                    GetComponent<HeroInventoryController>().SetupInventory();
+                    StartCoroutine(manager.GetStaticGameItems((staticItems) => {
+                        GetComponent<HeroInventoryController>().inventory.database = new Database(this.inventories[0], staticItems);
+                    }));
+                }));
+            }));
+        }));
     }
 
     private void Move()

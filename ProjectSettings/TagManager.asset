@@ -17,6 +17,8 @@ TagManager:
   - EquipmentPanel
   - InventorySlot
   - EquipmentSlot
+  - APIManager
+  - NetworkManager
   layers:
   - Default
   - TransparentFX

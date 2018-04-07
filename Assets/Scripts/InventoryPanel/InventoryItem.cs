@@ -2,166 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
-{
-	Consumable, Food, Health, Weapon, Equipable, MainHand, Inventory
-}
-
 [System.Serializable]
-public class InventoryItem {
+public class InventoryItem : ScriptableObject {
 
 	[System.NonSerialized]
 	public string uuid;
+	public const string SpritesPath = "Sprites/RPG_inventory_icons/";
+	public GameItem gameItem { get; private set; }
+
 
 	public int id { get; set; }
     public int staticID { get; set; }
-	public string name;
-	public string spriteName;
-	public Sprite sprite;
-	public string description;
-	public int maxStackSize;
-    public float value;
-	public bool equipable;
-	public int rarity;
-	public int minLevel;
-	public int baseDurability;
-	public bool soulbound;
-	public float power;
-	public float defense;
-	public float vitality;
-	public float healAmount;
-	public int inventoryID;
-	public int inventoryPosition;
-	public int stackSize;
-	public int createdByID;
-	public string createdByName;
-	public List<string> types;
+	public string Name { get { return gameItem.staticGameItem.Name; } }
+	public string spriteName { get { return gameItem.staticGameItem.SpriteName; } }
+	public Sprite sprite { get { return (Sprite)Resources.Load(SpritesPath + spriteName, typeof(Sprite)); } }
+	public string description { get { return gameItem.staticGameItem.Description; } }
+	public int maxStackSize { get { return gameItem.staticGameItem.MaxStack; } }
+    public float value { get { return gameItem.staticGameItem.Value; } }
+	public bool equipable { get { return gameItem.staticGameItem.Equipable; } }
+	public int rarity { get { return gameItem.staticGameItem.Rarity; } }
+	public int minLevel { get { return gameItem.staticGameItem.MinLevel; } }
+	public int baseDurability { get { return gameItem.staticGameItem.BaseDurability; } }
+	public bool soulbound { get { return gameItem.staticGameItem.Soulbound; } }
+	public float power { get { return (float) gameItem.staticGameItem.Power; } }
+	public float defense { get { return (float) gameItem.staticGameItem.Defense; } }
+	public float vitality { get { return (float) gameItem.staticGameItem.Vitality; } }
+	public float healAmount { get { return (float) gameItem.staticGameItem.HealAmount; } }
+	public int inventoryID { get { return gameItem.InventoryId; } set { gameItem.InventoryId = value; } }
+	public int inventoryPosition { get { return gameItem.Position; } set { gameItem.Position = value; } }
+	public int stackSize { get { return gameItem.StackSize; } set { gameItem.StackSize = value; } }
+	public int createdByID { get { return gameItem.CreatedById; } }
+	public string createdByName { get { return gameItem.CreatedByName; } }
+	public List<string> types { get { return gameItem.staticGameItem.ItemTypes; } }
 
-	public InventoryItem(int id, int staticID, Sprite sprite, string name, string description, 
-    	float value, int maxStackSize, int stackSize, float power, float defense, float vitality,
-    	float healAmount, bool equipable, int rarity, int minLevel, int baseDurability, bool soulbound,
-	    int inventoryID, int createdByID, string createdByName, List<string> types, int inventoryPosition=-1)
+	public static InventoryItem CreateInstance(GameItem item)
 	{
-		this.id = id;
-        this.staticID = staticID;
-		this.uuid = System.Guid.NewGuid().ToString();
-		this.sprite = sprite;
-        if (this.sprite != null)
-            this.spriteName = sprite.name;
-        else
-            this.spriteName = name;
-		this.name = name;
-		this.description = description;
-		this.maxStackSize = maxStackSize;
-		this.stackSize = stackSize;
-        this.value = value;
-		this.power = power;
-		this.defense = defense;
-		this.vitality = vitality;
-		this.healAmount = healAmount;
-		this.equipable = equipable;
-		this.rarity = rarity;
-		this.minLevel = minLevel;
-		this.baseDurability = baseDurability;
-		this.soulbound = soulbound;
-		this.inventoryID = inventoryID;
-		this.inventoryPosition = inventoryPosition;
-		this.createdByID = createdByID;
-		this.createdByName = createdByName;
-		this.inventoryPosition = inventoryPosition;
-		this.types = types;
+		InventoryItem invItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+		invItem.Init(item);
+		return invItem;
 	}
 
-
-	public InventoryItem(int id, 
-                         int staticID,
-                         string uuid, 
-                         Sprite sprite, 
-                         string name, 
-                         string description, 
-                         float value, 
-                         int maxStackSize, 
-                         int stackSize, 
-                         float power, 
-                         float defense, 
-                         float vitality,
-                         float healAmount, 
-                         bool equipable,
-                         int rarity,
-                         int minLevel,
-                         int baseDurability,
-                         bool soulbound,
-                         int inventoryID,
-                         int createdByID,
-                         string createdByName,
-						 List<string> types,
-                         int inventoryPosition=-1)
+	void Init(GameItem item)
 	{
-		this.id = id;
-        this.staticID = staticID;
-		this.uuid = uuid;
-		this.sprite = sprite;
-
-		if (this.sprite == null)
-			this.spriteName = "";
-		else
-			this.spriteName = sprite.name;
-			
-		this.name = name;
-		this.description = description;
-		this.maxStackSize = maxStackSize;
-		this.stackSize = stackSize;
-        this.value = value;
-		this.power = power;
-		this.defense = defense;
-		this.vitality = vitality;
-		this.healAmount = healAmount;
-        this.equipable = equipable;
-        this.rarity = rarity;
-        this.minLevel = minLevel;
-        this.baseDurability = baseDurability;
-        this.soulbound = soulbound;
-        this.inventoryID = inventoryID;
-        this.createdByID = createdByID;
-        this.createdByName = createdByName;
-		this.types = types;
-		this.inventoryPosition = inventoryPosition;
+		gameItem = item;
 	}
 
 	public InventoryItem Clone()
 	{
-		return new InventoryItem(this.id, 
-                                 this.staticID,
-                                 System.Guid.NewGuid().ToString(), 
-                                 this.sprite, 
-                                 this.name, 
-                                 this.description, 
-                                 this.value, 
-                                 this.maxStackSize, 
-                                 this.stackSize, 
-                                 this.power,
-                                 this.defense, 
-                                 this.vitality, 
-                                 this.healAmount, 
-								 this.equipable,
-								 this.rarity,
-								 this.minLevel,
-								 this.baseDurability,
-								 this.soulbound,
-								 this.inventoryID,
-								 this.createdByID,
-								 this.createdByName,
-								 this.types,
-                                 this.inventoryPosition);
+		return InventoryItem.CreateInstance(this.gameItem);
 	}
-
-	public void Save(Inventory inventory)
-	{
-		string json = JsonUtility.ToJson(this);
-		Database database = new Database();
-		database.WriteToFile(Application.dataPath + string.Format("/GameData/{0}.json", this.uuid), json);
-	}
-
 
 }
 
@@ -235,7 +124,6 @@ public class SerializableInventoryItem : System.Object {
 		serialized.Add("vitality", item.vitality);
 		serialized.Add("heal_amount", item.healAmount);
 		serialized.Add("item_type", item.types.ToArray());
-
 
         return serialized;
     }

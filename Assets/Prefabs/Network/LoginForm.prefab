@@ -224,9 +224,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224943413358705126}
-  - component: {fileID: 114695282180443452}
   - component: {fileID: 222100692749046492}
   - component: {fileID: 114922823670496886}
+  - component: {fileID: 114695282180443452}
   m_Layer: 5
   m_Name: LoginForm
   m_TagString: Untagged
@@ -700,6 +700,7 @@ MonoBehaviour:
   passwordField: {fileID: 114970071141435074}
   rememberToggle: {fileID: 114098064737575564}
   networkManager: {fileID: 0}
+  apiManager: {fileID: 0}
 --- !u!114 &114711449966089102
 MonoBehaviour:
   m_ObjectHideFlags: 1

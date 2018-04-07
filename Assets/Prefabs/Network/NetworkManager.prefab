@@ -23,11 +23,11 @@ GameObject:
   - component: {fileID: 114865080770782652}
   m_Layer: 0
   m_Name: NetworkManager
-  m_TagString: Untagged
+  m_TagString: NetworkManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4092960360356004
 Transform:
   m_ObjectHideFlags: 1

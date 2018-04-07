@@ -13,6 +13,7 @@ public class LoginForm : MonoBehaviour {
     public InputField passwordField;
     public Toggle rememberToggle;
     public GameObject networkManager;
+	public GameObject apiManager;
 
 	void Start() {
 
@@ -65,7 +66,17 @@ public class LoginForm : MonoBehaviour {
 
     public void OnClickLogin() {
         
-        StartCoroutine(Login(usernameField.text, passwordField.text));
+		APIManager manager = apiManager.GetComponent<APIManager>();
+        StartCoroutine(manager.Login(usernameField.text, passwordField.text, () => {
+
+			if (rememberToggle.isOn)
+				SaveCredentials();
+
+			// networkManager.SetActive(true);
+			GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+			networkManager.GetComponent<CSNetworkManager>().StartHost();
+		}));
+		
     }
 
     public void OnClickRememberToggle(bool value) {
@@ -79,41 +90,7 @@ public class LoginForm : MonoBehaviour {
         LoadCredentials();
     }
 
-    IEnumerator Login(string username, string password) {
-
-		string url = APIRoute.authorize;
-		
-		Dictionary<string, string> data = new Dictionary<string, string>();
-		data.Add("username", username);
-		data.Add("password", password);
-		JsonData jsonData = JsonMapper.ToJson(data);
-
-		UnityWebRequest request = UnityWebRequest.Put(url, jsonData.ToString());
-		request.method = "POST";
-		request.SetRequestHeader ("Content-Type", "application/json");
-
-		request.chunkedTransfer = false;
-
-        yield return request.SendWebRequest();
-        if (request.isNetworkError || request.isHttpError)
-		{
-            Debug.Log(request.error);
-		}
-		else
-		{
-            if (rememberToggle.isOn)
-            {
-                SaveCredentials();
-            }
-
-			Debug.Log("Authentication successful!");
-            JsonData response = JsonMapper.ToObject(request.downloadHandler.text);
-            networkManager.SetActive(true);
-            gameObject.SetActive(false);
-			networkManager.GetComponent<CSNetworkManager>().StartHost();
-			
-		}
-    }
+    
 
 	public IEnumerator GetTexture(string url, SpriteRenderer renderer) {
 

@@ -5,13 +5,19 @@ using UnityEngine.UI;
 using LitJson;
 using System.IO;
 
+[System.Serializable]
 public class Inventory : ScriptableObject {
+
+	public int Id { get; private set; }
+	public int Position { get; private set; }
+	public int CharacterId { get; private set; }
+	public int Size { get; private set; }
 
 	protected string inventoryFileName { get; set; }
 
 	protected string inventoryFileDirectory { get { return Application.streamingAssetsPath + "/SaveData/inventories/"; }}
 
-	protected Database database;
+	public Database database;
 
 	public const int DEFAULT_INVENTORY_SIZE = 16;
 
@@ -24,6 +30,37 @@ public class Inventory : ScriptableObject {
 		Inventory inventory = ScriptableObject.CreateInstance("Inventory") as Inventory;
 		inventory.Init(size);
 		return inventory;
+	}
+
+	public static Inventory CreateInstance(int id, int position, int characterId, int size, InventoryItem[] items)
+	{
+		Inventory inventory = ScriptableObject.CreateInstance("Inventory") as Inventory;
+		inventory.Init(size, position, characterId, size, items);
+		return inventory;
+	}
+
+	public static Inventory Parse(JsonData data) {
+		int id = (int) data["id"];
+		int position = (int) data["position"];
+		int characterId = (int) data["character"];
+		int size = (int) data["size"];
+		InventoryItem[] items = new InventoryItem[size];
+		for (int i = 0; i < data["game_items"].Count; i++) 
+		{
+			GameItem gameItem = GameItem.Parse(data["game_items"][i]);
+			items[gameItem.Position] = InventoryItem.CreateInstance(gameItem);
+		}
+		return Inventory.CreateInstance(id, position, characterId, size, items);
+	}
+
+	public void Init(int id, int position, int characterId, int size, InventoryItem[] items, List<StaticGameItem> allItems=null)
+	{
+		Init(size);
+		this.Position = position;
+		this.CharacterId = characterId;
+		this.items = items;
+		if (allItems != null)
+			this.database = new Database(this, allItems);
 	}
 
 	public void Init(int size)
@@ -61,7 +98,7 @@ public class Inventory : ScriptableObject {
 
 	public InventoryItem FindDatabaseItem(string name)
 	{
-		return database.GetItem(name);
+		return database.GetStaticItem(name);
 	}
 
 	public InventoryItem FindDatabaseItem(int id)

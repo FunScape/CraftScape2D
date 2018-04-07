@@ -8,8 +8,7 @@ using UnityEngine.EventSystems;
 public class HeroInventoryController : InventoryController
 {
 
-    // Use this for initialization
-    void Start()
+    public void SetupInventory()
     {
         // Instantiate inventory game object
         base.inventory = Inventory.CreateInstance();
