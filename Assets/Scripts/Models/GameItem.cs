@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
+[CreateAssetMenu(fileName="New Game Item", menuName="Inventory/Game Item", order=2)]
 public class GameItem : ScriptableObject {
 
-    public int Id { get; private set; }
-    public string Url { get; private set; }
-    public int Position { get; set; }
-    public int InventoryId { get; set; }
-    public int StackSize { get; set; }
-    public int CreatedById { get; private set; }
-    public Character CreatedBy { get; private set; }
-    public string CreatedByName { get; private set; }
-    public int StaticGameItemId { get; private set; }
-    public StaticGameItem staticGameItem { get; private set; }
+    public int Id;
+    public string Url;
+    public int Position;
+    public int InventoryId;
+    public int StackSize;
+    public int CreatedById;
+    public Character CreatedBy;
+    public string CreatedByName;
+    public int StaticGameItemId;
+    public StaticGameItem staticGameItem;
+
+    public string Name { get { return staticGameItem.Name; } }
+    public int MaxStackSize { get { return staticGameItem.MaxStack; } }
+    public bool Equipable { get { return staticGameItem.Equipable; } }
+    public List<string> Types { get { return staticGameItem.ItemTypes; } }
+    public Sprite sprite { get { return staticGameItem.sprite; } }
 
     public static GameItem CreateInstance()
     {
@@ -55,6 +62,11 @@ public class GameItem : ScriptableObject {
         item.Init(Id, Url, Position, InventoryId, StackSize, CreatedById, CreatedByName, StaticGameItemId);
         item.staticGameItem = StaticGameItem.Parse(data["static_game_item"]);
         return item;
+    }
+
+    public GameItem Clone()
+    {
+        return GameItem.CreateInstance(this.staticGameItem);
     }
 
 }

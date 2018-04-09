@@ -10,9 +10,6 @@ public class HeroInventoryController : InventoryController
 
     public void SetupInventory()
     {
-        // Instantiate inventory game object
-        base.inventory = Inventory.CreateInstance();
-
         // Get reference to main canvas object
         GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
 
@@ -23,10 +20,10 @@ public class HeroInventoryController : InventoryController
         base.inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
 
         // Tell inventory what file to write objects to
-        base.inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalHero>().netId.ToString()));
+        // base.inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalHero>().netId.ToString()));
 
         // Load inventory items from file
-        base.inventory.LoadInventory();
+        // base.inventory.LoadInventory();
 
         // Layout/render inventory on canvas
         base.LayoutInventory();

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
+[CreateAssetMenu(fileName="New Static Game Item", menuName="Inventory/Static Game Item", order=3)]
 public class StaticGameItem : ScriptableObject {
+    public const string SpritesPath = "Sprites/RPG_inventory_icons/";
+
     public int Id { get; private set; }
     public string Name { get; private set; }
     public string SpriteName { get; private set; }
@@ -20,6 +23,7 @@ public class StaticGameItem : ScriptableObject {
     public double Vitality { get; private set; }
     public double HealAmount { get; private set; }
     public List<string> ItemTypes { get; private set; }
+    public Sprite sprite { get { return (Sprite)Resources.Load(SpritesPath + SpriteName, typeof(Sprite)); } }
 
     public static StaticGameItem CreateInstance()
     {

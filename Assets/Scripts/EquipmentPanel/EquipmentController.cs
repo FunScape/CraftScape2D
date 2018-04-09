@@ -94,7 +94,7 @@ public class EquipmentController : MonoBehaviour {
 	{
 		Inventory inventory = GameObject.FindWithTag("Player").GetComponent<InventoryController>().inventory;
 		InventorySlot inventorySlot = droppedObject.GetComponent<InventorySlot>();
-		InventoryItem item = inventory.GetItem(inventorySlot.slotIndex);
+		GameItem item = inventory.GameItems[inventorySlot.slotIndex];
 		if (CanEquipItemType(item, equipmentSlotObject.name))
 		{
 			Debug.Log("You equiped item: " + item.name);
@@ -109,21 +109,21 @@ public class EquipmentController : MonoBehaviour {
 	}
 	
 
-	bool CanEquipItemType(InventoryItem item, string equipmentSlotName)
+	bool CanEquipItemType(GameItem item, string equipmentSlotName)
 	{
-		if (item.equipable)
+		if (item.Equipable)
 		{
 			if (equipmentSlotName == "MainHand")
 			{
-				if (item.types.Contains("weapon")) return true;
+				if (item.Types.Contains("weapon")) return true;
 			}
 			else if (equipmentSlotName == "Chest")
 			{
-				 if (item.types.Contains("chest")) return true;
+				 if (item.Types.Contains("chest")) return true;
 			}
 			else if (equipmentSlotName == "Ring")
 			{
-				if (item.types.Contains("ring")) return true;
+				if (item.Types.Contains("ring")) return true;
 			}
 		}
 		return false;

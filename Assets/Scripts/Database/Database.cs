@@ -15,7 +15,7 @@ public class Database {
     public const string itemSpritesPath = "Sprites/RPG_inventory_icons/";
 
     private List<InventoryItem> GameItems = new List<InventoryItem>();
-    private List<StaticGameItem> StaticGameItems = new List<StaticGameItem>();
+    public List<StaticGameItem> StaticGameItems { get; private set; }
 
     private const bool prettyPrintToFile = true;
 

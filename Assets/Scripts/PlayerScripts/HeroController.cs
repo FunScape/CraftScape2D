@@ -30,22 +30,23 @@ public class HeroController : MonoBehaviour
     void InitializeCharacter() {
         GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
         APIManager manager = APIManager.GetComponent<APIManager>();
+        Debug.Log("Finding user...");
         StartCoroutine(manager.GetUser((user) => {
             this.user = user;
-            Debug.Log("Found user!");
+            Debug.Log("Loading Character...");
             StartCoroutine(manager.GetCharacter(user.characterUrls[0], (character) => {
-                Debug.Log("Found Character!");
                 this.character = character;
+                Debug.Log("Loading inventory...");
                 StartCoroutine(manager.GetInventory(character.inventoryUrls[0], (inventory) => {
-                    Debug.Log("Found inventory!");
-                    // this.inventories[0] = inventory;
                     GetComponent<HeroInventoryController>().inventory = inventory;
                     GetComponent<HeroInventoryController>().SetupInventory();
-                    StartCoroutine(manager.GetStaticGameItems((staticItems) => {
-                        GetComponent<HeroInventoryController>().inventory.database = new Database(this.inventories[0], staticItems);
-                    }));
                 }));
             }));
+        }));
+
+        // Get static game items
+        StartCoroutine(manager.GetStaticGameItems((staticItems) => {
+            GameItemDatabase.instance.gameItems = staticItems;
         }));
     }
 

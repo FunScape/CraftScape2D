@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler, IEndDragHandler {
 
-	InventoryItem equipedItem;
+	GameItem equipedItem;
 
 	Dictionary<string, Sprite> slotEmptySprites;
 
@@ -27,20 +27,20 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDr
 		};
 	}
 
-	public InventoryItem GetEquipedItem()
+	public GameItem GetEquipedItem()
 	{
 		return this.equipedItem;
 	}
 
-	public InventoryItem UnEquipItem()
+	public GameItem UnEquipItem()
 	{
-		InventoryItem item = this.equipedItem;
+		GameItem item = this.equipedItem;
 		this.equipedItem = null;
 		ShowAsEmpty(true);
 		return item;
 	}
 
-	public void EquipItem(InventoryItem item)
+	public void EquipItem(GameItem item)
 	{
 		this.equipedItem = item;
 		GetComponent<Image>().sprite = item.sprite;
