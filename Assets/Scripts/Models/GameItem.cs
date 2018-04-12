@@ -6,16 +6,32 @@ using LitJson;
 [CreateAssetMenu(fileName="New Game Item", menuName="Inventory/Game Item", order=2)]
 public class GameItem : ScriptableObject {
 
-    public int Id;
-    public string Url;
-    public int Position;
-    public int InventoryId;
-    public int StackSize;
-    public int CreatedById;
-    public Character CreatedBy;
-    public string CreatedByName;
-    public int StaticGameItemId;
-    public StaticGameItem staticGameItem;
+	public bool Dirty;
+	public bool Locked;
+
+	private string uuid;
+	public string Uuid { get { return uuid; } }
+
+    private int id;
+	public int Id { get { return id; } set { id = value; Dirty = true;} }
+    private string url;
+	public string Url { get { return url; } set { url = value; Dirty = true;} }
+    private int position;
+	public int Position { get { return position; } set { position = value; Dirty = true;} }
+    private int inventoryId;
+	public int InventoryId { get { return inventoryId; } set { inventoryId = value; Dirty = true;} }
+    private int stackSize;
+	public int StackSize { get { return stackSize; } set { stackSize = value; Dirty = true;} }
+    private int createdById;
+	public int CreatedById { get { return createdById; } set { createdById = value; Dirty = true;} }
+    private Character createdBy;
+	public Character CreatedBy { get { return createdBy; } set { createdBy = value; Dirty = true;} }
+    private string createdByName;
+	public string CreatedByName { get { return createdByName; } set { createdByName = value; Dirty = true;} }
+    private int staticGameItemId;
+	public int StaticGameItemId { get { return staticGameItemId; } set { staticGameItemId = value; Dirty = true;} }
+    private StaticGameItem _staticGameItem;
+	public StaticGameItem staticGameItem { get { return _staticGameItem; } set { _staticGameItem = value; Dirty = true;} }
 
     public string Name { get { return staticGameItem.Name; } }
     public int MaxStackSize { get { return staticGameItem.MaxStack; } }
@@ -38,6 +54,7 @@ public class GameItem : ScriptableObject {
 
     public void Init(int id, string url, int position, int inventoryId, int stackSize, int createdById, string createdByName, int staticGameItemId)
     {
+		uuid = System.Guid.NewGuid ().ToString ();
         Id = id;
         Url = url;
         Position = position;
@@ -64,9 +81,33 @@ public class GameItem : ScriptableObject {
         return item;
     }
 
-    public GameItem Clone()
+	public GameItem Clone(bool exact = false)
     {
-        return GameItem.CreateInstance(this.staticGameItem);
+		GameItem item = GameItem.CreateInstance(this.staticGameItem);
+		if (exact == true) {
+			item.Map (this);
+			item.uuid = uuid;
+		}
+		return item;
     }
+
+    /*
+    @description: Maps properties of the GameItem to the passed in GameItem 'other' excluding the uuid.
+    @param <GameItem> other: The GameItem to map to.
+     */
+	public void Map(GameItem other)
+	{
+		Id = other.Id;
+		Url = other.Url;
+		Position = other.Position;
+		InventoryId = other.InventoryId;
+		StackSize = other.StackSize;
+		CreatedById = other.CreatedById;
+		CreatedBy = other.CreatedBy;
+		CreatedByName = other.CreatedByName;
+		StaticGameItemId = other.StaticGameItemId;
+		staticGameItem = other.staticGameItem;
+		Dirty = false;
+	}
 
 }

@@ -14,6 +14,8 @@ public class Inventory : ScriptableObject {
 	public int Size;
 	public GameItem[] GameItems;
 
+	private List<GameItem> trash = new List<GameItem> ();
+
 	public static Inventory CreateInstance()
 	{
 		return Inventory.CreateInstance(-1, -1, -1, 8);
@@ -108,7 +110,17 @@ public class Inventory : ScriptableObject {
 
 	public GameItem RemoveItem(GameItem item)
 	{
-		return RemoveItem(item.staticGameItem);
+		for (int i = 0; i < GameItems.Length; i++)
+		{
+			if (GameItems[i] != null && GameItems[i].Uuid == item.Uuid)
+			{
+				GameItem temp = GameItems [i].Clone (true);
+				GameItems[i] = null;
+				trash.Add (temp);
+				return temp;
+			}
+		}
+		return null;
 	}
 
 	public GameItem RemoveItem(StaticGameItem item)
@@ -117,8 +129,9 @@ public class Inventory : ScriptableObject {
 		{
 			if (GameItems[i] != null && GameItems[i].staticGameItem.Equals(item))
 			{
-				GameItem temp = GameItems[i];
+				GameItem temp = GameItems [i].Clone (true);
 				GameItems[i] = null;
+				trash.Add (temp);
 				return temp;
 			}
 		}
@@ -127,9 +140,7 @@ public class Inventory : ScriptableObject {
 
 	public GameItem RemoveItem(int index)
 	{
-		GameItem temp = GameItems[index];
-		GameItems[index] = null;
-		return temp;
+		return RemoveItem (GameItems [index]);
 	}
 
 	void UpdateItemPositions()
@@ -147,35 +158,40 @@ public class Inventory : ScriptableObject {
 	{
 		APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
 
-		controller.StartCoroutine (apiManager.UpdateInventory (this, (inv) => {
+//		controller.StartCoroutine (apiManager.UpdateInventory (this, (inv) => {
 
-			for (int i = 0; i < GameItems.Length; i++)
+		for (int i = 0; i < GameItems.Length; i++)
+		{
+			if (GameItems[i] != null && GameItems[i].Dirty == true && GameItems[i].Locked == false)
 			{
-				if (GameItems[i] != null)
+				GameItem item = GameItems[i];
+				item.InventoryId = this.Id;
+				item.Position = i;
+				item.Locked = true;  // Lock the game item to prevent further editing
+
+				if (item.Id == -1)
 				{
-					GameItem item = GameItems[i];
-					item.InventoryId = this.Id;
-					item.Position = i;
-
-					if (item.Id == -1)
-					{
-						item.CreatedById = this.CharacterId;
-						controller.StartCoroutine(apiManager.CreateGameItem(item, (newItem) => {
-							item = newItem;
-						}));
-					}
-					else
-					{
-						controller.StartCoroutine(apiManager.UpdateGameItem(item, (updatedItem) => {
-							item = updatedItem;
-						}));
-					}
-					
+					item.CreatedById = this.CharacterId;
+					controller.StartCoroutine(apiManager.CreateGameItem(item, (newItem) => {
+						item.Locked = false;  // Unlock the game item to allow editing
+						item.Map(newItem);
+					}));
 				}
+				else
+				{
+					controller.StartCoroutine(apiManager.UpdateGameItem(item, (updatedItem) => {
+						item.Locked = false;  // Unlock the game item to allow editing
+						item.Map(updatedItem);
+					}));
+				}
+				
 			}
+		}
 
-		}));
+//		}));
 	}
+
+
 
 	public void Load()
 	{

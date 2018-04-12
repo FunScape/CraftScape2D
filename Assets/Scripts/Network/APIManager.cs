@@ -8,8 +8,8 @@ using System.Text;
 using System.Linq;
 
 public class APIRoute : Object {
-    public const string BASE_API_URL = "https://foostats.com/api";
-	// public const string BASE_API_URL = "localhost:8000/api";
+//    public const string BASE_API_URL = "https://foostats.com/api";
+ 	public const string BASE_API_URL = "localhost:8000/api";
     public const string authorize = BASE_API_URL + "/authorize/";
     public const string user = BASE_API_URL + "/user/";
     public const string character = BASE_API_URL + "/character/";
