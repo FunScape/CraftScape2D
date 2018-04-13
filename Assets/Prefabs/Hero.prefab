@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 114669240750345662}
   - component: {fileID: 114721236348488318}
   - component: {fileID: 114265433598838922}
+  - component: {fileID: 114550007061595596}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -187,6 +188,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentPanelPrefab: {fileID: 1292681917438376, guid: 776db963e1dc2467eb03b3978f702d7d,
+    type: 2}
+--- !u!114 &114550007061595596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e8d1d4d5640c4bb44a80c0109dccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillMenuPanelPrefab: {fileID: 1938356632728700, guid: 59315770e8103fe409979b0b128cba36,
     type: 2}
 --- !u!114 &114652310600041700
 MonoBehaviour:
