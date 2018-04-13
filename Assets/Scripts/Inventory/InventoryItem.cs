@@ -29,7 +29,7 @@ public class InventoryItem : ScriptableObject {
 	public float defense { get { return (float) gameItem.staticGameItem.Defense; } }
 	public float vitality { get { return (float) gameItem.staticGameItem.Vitality; } }
 	public float healAmount { get { return (float) gameItem.staticGameItem.HealAmount; } }
-	public int inventoryID { get { return gameItem.InventoryId; } set { gameItem.InventoryId = value; } }
+	public int? inventoryID { get { return gameItem.InventoryId; } set { gameItem.InventoryId = value; } }
 	public int inventoryPosition { get { return gameItem.Position; } set { gameItem.Position = value; } }
 	public int stackSize { get { return gameItem.StackSize; } set { gameItem.StackSize = value; } }
 	public int createdByID { get { return gameItem.CreatedById; } }
@@ -59,7 +59,7 @@ public class InventoryItem : ScriptableObject {
 public class SerializableInventoryItem : System.Object {
 	int id;
     int staticID;
-    int inventoryID;
+    int? inventoryID;
     int inventoryPosition;
     int stackSize;
     int createdByID;

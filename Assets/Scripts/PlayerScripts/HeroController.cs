@@ -43,22 +43,25 @@ public class HeroController : MonoBehaviour
                     GetComponent<HeroInventoryController>().inventory = inventory;
                     GetComponent<HeroInventoryController>().SetupInventory();
                     GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
-                }));
 
-                Debug.Log("Loading character equipment...");
-                StartCoroutine(manager.GetEquipment(character, (equipment) => {
-                    character.equipment = equipment;
-					GameObject.FindWithTag("EquipmentPanel").GetComponent<EquipmentController>().equipment = equipment;
-                }));
+					Debug.Log("Loading character equipment...");
+					StartCoroutine(manager.GetEquipment(character, (equipment) => {
+						character.equipment = equipment;
+						GameObject player = GameObject.FindWithTag("Player");
+						EquipmentController eController = player.GetComponent<EquipmentController>();
+						eController.equipment = equipment;
 
+						Debug.Log("Loading static items...");
+						StartCoroutine(manager.GetStaticGameItems((staticItems) => {
+							GameItemDatabase.instance.gameItems = staticItems;
+						}));
+					}));
+                }));
             }));
         }));
 
         // Get static game items
-        Debug.Log("Loading static items...");
-        StartCoroutine(manager.GetStaticGameItems((staticItems) => {
-            GameItemDatabase.instance.gameItems = staticItems;
-        }));
+        
     }
 
     private void Move()

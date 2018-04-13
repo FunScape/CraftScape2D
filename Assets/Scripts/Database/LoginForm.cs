@@ -70,14 +70,15 @@ public class LoginForm : MonoBehaviour {
 		APIManager manager = apiManager.GetComponent<APIManager>();
 
 		loginButton.interactable = false;
-		
-        StartCoroutine(manager.Login(usernameField.text, passwordField.text, () => {
+
+		StartCoroutine(manager.Login(usernameField.text, passwordField.text, (success) => {
+			if (success)
+				networkManager.GetComponent<CSNetworkManager>().StartHost();
+
 			if (rememberToggle.isOn)
 				SaveCredentials();
-
-			// networkManager.SetActive(true);
-			// GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
-			networkManager.GetComponent<CSNetworkManager>().StartHost();
+			
+			loginButton.interactable = true;
 		}));
 		
     }

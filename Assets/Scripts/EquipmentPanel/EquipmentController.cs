@@ -24,7 +24,7 @@ public class EquipmentController : MonoBehaviour {
 	EquipmentSlot Neck { get { return GetEquipmentSlot("Neck"); } }
 	EquipmentSlot Head { get { return GetEquipmentSlot("Head"); } }
 	EquipmentSlot Chest { get { return GetEquipmentSlot("Chest"); } }
-	EquipmentSlot Weapon { get { return GetEquipmentSlot("Weapon"); } }
+	EquipmentSlot MainHand { get { return GetEquipmentSlot("MainHand"); } }
 	EquipmentSlot Back { get { return GetEquipmentSlot("Back"); } }
 	EquipmentSlot Hands { get { return GetEquipmentSlot("Hands"); } }
 	EquipmentSlot Feet { get { return GetEquipmentSlot("Feet"); } }
@@ -69,7 +69,7 @@ public class EquipmentController : MonoBehaviour {
 		Neck.EquipItem(equipment.Neck);
 		Head.EquipItem(equipment.Head);
 		Chest.EquipItem(equipment.Chest);
-		Weapon.EquipItem(equipment.Weapon);
+		MainHand.EquipItem(equipment.MainHand);
 		Back.EquipItem(equipment.Back);
 		Hands.EquipItem(equipment.Hands);
 		Feet.EquipItem(equipment.Feet);
@@ -128,8 +128,8 @@ public class EquipmentController : MonoBehaviour {
 			equipment.Head = item;
 		else if (equipmentSlotObject.name == "Chest" && item.Types.Contains("chest"))
 			equipment.Chest = item;
-		else if (equipmentSlotObject.name == "Weapon" && item.Types.Contains("weapon"))
-			equipment.Weapon = item;
+		else if (equipmentSlotObject.name == "MainHand" && (item.Types.Contains("weapon") || item.Types.Contains("mainHand")))
+			equipment.MainHand = item;
 		else if (equipmentSlotObject.name == "Back" && item.Types.Contains("back"))
 			equipment.Back = item;
 		else if (equipmentSlotObject.name == "Hands" && item.Types.Contains("hands"))
@@ -146,6 +146,11 @@ public class EquipmentController : MonoBehaviour {
 		inventory.RemoveItem(inventorySlot.slotIndex);
 		GetInventoryController().UpdateInventoryPanelUI(); 
 		UpdateEquipmentPanelUI();
+
+		if (equipment.Dirty)
+		{
+			equipment.Save();
+		}
 	}
 	
 

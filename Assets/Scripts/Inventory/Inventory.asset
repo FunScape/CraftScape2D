@@ -11,3 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8fb1cedcb671949859aad9a9e2412b, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
+  Id: 0
+  Position: 0
+  CharacterId: 0
+  Size: 0
+  GameItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

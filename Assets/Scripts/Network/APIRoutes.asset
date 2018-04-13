@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: APIRoutes
   m_EditorClassIdentifier: Assembly-CSharp::APIRoutes
-  baseURL: localhost:8000
+  baseURL: http://localhost:8000

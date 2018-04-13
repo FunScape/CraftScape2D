@@ -206,8 +206,10 @@ public class Inventory : ScriptableObject {
 		{
 			if (item.Deleted)
 				continue;
-				
-			controller.StartCoroutine(apiManager.DeleteGameItem(item, () => {
+			
+			item.InventoryId = null;
+			item.Position = -1;
+			controller.StartCoroutine(apiManager.UpdateGameItem(item, (updatedItem) => {
 				Debug.Log("Removed item: " + item.Name);
 				item.Deleted = true;
 			}));

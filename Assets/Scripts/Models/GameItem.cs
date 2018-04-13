@@ -16,7 +16,7 @@ public class GameItem : ScriptableObject {
     private int id;
     private string url;
     private int position;
-    private int inventoryId;
+    private int? inventoryId;
     private int stackSize;
     private int createdById;
     private Character createdBy;
@@ -28,7 +28,7 @@ public class GameItem : ScriptableObject {
 	public int Id { get { return id; } set { id = value; Dirty = true;} }
 	public string Url { get { return url; } set { url = value; Dirty = true;} }
 	public int Position { get { return position; } set { position = value; Dirty = true;} }
-	public int InventoryId { get { return inventoryId; } set { inventoryId = value; Dirty = true;} }
+	public int? InventoryId { get { return inventoryId; } set { inventoryId = value; Dirty = true;} }
 	public int StackSize { get { return stackSize; } set { stackSize = value; Dirty = true;} }
 	public int CreatedById { get { return createdById; } set { createdById = value; Dirty = true;} }
 	public Character CreatedBy { get { return createdBy; } set { createdBy = value; Dirty = true;} }
@@ -73,9 +73,19 @@ public class GameItem : ScriptableObject {
             return null;
             
         int Id = (int) data["id"];
-        string Url = data["url"].ToString();
+		string Url = "";
+		try {
+			Url = data["url"].ToString();
+		} catch (KeyNotFoundException e) {
+			
+		}
         int Position = (int) data["inventory_position"];
-        int InventoryId = (int) data["inventory"];
+		int InventoryId;
+		try {
+			InventoryId = (int) data["inventory"];
+		} catch (System.Exception e) {
+			InventoryId = -1;
+		}
         int StackSize = (int) data["stack_size"];
         int CreatedById = (int) data["created_by"];
         string CreatedByName = data["created_by_name"].ToString();

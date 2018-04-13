@@ -54,7 +54,7 @@ public class APIManager : MonoBehaviour {
 
 	}
 
-	public IEnumerator Login(string username, string password, System.Action callback) {
+	public IEnumerator Login(string username, string password, System.Action<bool> callback) {
 
 		string url = routes.authorize;
 
@@ -66,16 +66,18 @@ public class APIManager : MonoBehaviour {
 
 
 		yield return www.SendWebRequest();
+		try {
+			JsonData response = HandleResponse(www);
 
-		JsonData response = HandleResponse(www);
+			Debug.Log("Authentication successful!");
 
-		Debug.Log("Authentication successful!");
-
-		if (callback != null)
-		{
 			APIManager.token = response["token"].ToString();
 			Debug.Log (string.Format("TOKEN: {0}", APIManager.token));
-			callback();
+			callback(true);
+
+		} catch (System.Exception e) {
+			Debug.Log (e);
+			callback (false);
 		}
 	}
 
@@ -201,7 +203,7 @@ public class APIManager : MonoBehaviour {
 
 	public IEnumerator UpdateEquipment(Equipment equipment, System.Action<Equipment> callback)
 	{
-		UnityWebRequest www = PreparePOSTRequest(routes.equipment + "/" + equipment.Id.ToString() + "/", equipment.ToJson());
+		UnityWebRequest www = PreparePUTRequest(routes.equipment + "/" + equipment.Id.ToString() + "/", equipment.ToJson());
 
 		yield return www.SendWebRequest();
 
@@ -262,16 +264,20 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
+	UnityWebRequest PreparePUTRequest(string url, string json)
 	{
-		JsonData jsonData = JsonMapper.ToJson(formData);
-
-		UnityWebRequest www = UnityWebRequest.Put(url, jsonData.ToString());
+		UnityWebRequest www = UnityWebRequest.Put(url, json);
 		www.SetRequestHeader("Content-Type", "application/json");
 		if (APIManager.token != null)
 			www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
 		www.chunkedTransfer = false;
 		return www;
+	}
+
+	UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
+	{
+		JsonData jsonData = JsonMapper.ToJson(formData);
+		return PreparePUTRequest(url, jsonData.ToString());
 	}
 
 	UnityWebRequest PrepareDELETERequest(string url)
@@ -285,7 +291,7 @@ public class APIManager : MonoBehaviour {
 
 	JsonData HandleResponse(UnityWebRequest www) {
 		if (www.isNetworkError || www.isHttpError)
-			throw new System.Exception(www.downloadHandler.text);
+			throw new System.Exception(www.error);
 
 		// Debug.Log(www.downloadHandler.text);
 
