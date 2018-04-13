@@ -12,6 +12,7 @@ public class LoginForm : MonoBehaviour {
     public InputField usernameField;
     public InputField passwordField;
     public Toggle rememberToggle;
+	public Button loginButton;
     public GameObject networkManager;
 	public GameObject apiManager;
 
@@ -67,13 +68,15 @@ public class LoginForm : MonoBehaviour {
     public void OnClickLogin() {
         
 		APIManager manager = apiManager.GetComponent<APIManager>();
-        StartCoroutine(manager.Login(usernameField.text, passwordField.text, () => {
 
+		loginButton.interactable = false;
+		
+        StartCoroutine(manager.Login(usernameField.text, passwordField.text, () => {
 			if (rememberToggle.isOn)
 				SaveCredentials();
 
 			// networkManager.SetActive(true);
-			GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+			// GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
 			networkManager.GetComponent<CSNetworkManager>().StartHost();
 		}));
 		

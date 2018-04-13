@@ -8,30 +8,32 @@ public class GameItem : ScriptableObject {
 
 	public bool Dirty;
 	public bool Locked;
+    public bool Deleted;
 
 	private string uuid;
 	public string Uuid { get { return uuid; } }
 
     private int id;
-	public int Id { get { return id; } set { id = value; Dirty = true;} }
     private string url;
-	public string Url { get { return url; } set { url = value; Dirty = true;} }
     private int position;
-	public int Position { get { return position; } set { position = value; Dirty = true;} }
     private int inventoryId;
-	public int InventoryId { get { return inventoryId; } set { inventoryId = value; Dirty = true;} }
     private int stackSize;
-	public int StackSize { get { return stackSize; } set { stackSize = value; Dirty = true;} }
     private int createdById;
-	public int CreatedById { get { return createdById; } set { createdById = value; Dirty = true;} }
     private Character createdBy;
-	public Character CreatedBy { get { return createdBy; } set { createdBy = value; Dirty = true;} }
     private string createdByName;
-	public string CreatedByName { get { return createdByName; } set { createdByName = value; Dirty = true;} }
     private int staticGameItemId;
-	public int StaticGameItemId { get { return staticGameItemId; } set { staticGameItemId = value; Dirty = true;} }
     private StaticGameItem _staticGameItem;
+    
 	public StaticGameItem staticGameItem { get { return _staticGameItem; } set { _staticGameItem = value; Dirty = true;} }
+	public int Id { get { return id; } set { id = value; Dirty = true;} }
+	public string Url { get { return url; } set { url = value; Dirty = true;} }
+	public int Position { get { return position; } set { position = value; Dirty = true;} }
+	public int InventoryId { get { return inventoryId; } set { inventoryId = value; Dirty = true;} }
+	public int StackSize { get { return stackSize; } set { stackSize = value; Dirty = true;} }
+	public int CreatedById { get { return createdById; } set { createdById = value; Dirty = true;} }
+	public Character CreatedBy { get { return createdBy; } set { createdBy = value; Dirty = true;} }
+	public string CreatedByName { get { return createdByName; } set { createdByName = value; Dirty = true;} }
+	public int StaticGameItemId { get { return staticGameItemId; } set { staticGameItemId = value; Dirty = true;} }
 
     public string Name { get { return staticGameItem.Name; } }
     public int MaxStackSize { get { return staticGameItem.MaxStack; } }
@@ -67,6 +69,9 @@ public class GameItem : ScriptableObject {
 
     public static GameItem Parse(JsonData data)  
     {
+        if (data == null)
+            return null;
+            
         int Id = (int) data["id"];
         string Url = data["url"].ToString();
         int Position = (int) data["inventory_position"];
@@ -109,5 +114,16 @@ public class GameItem : ScriptableObject {
 		staticGameItem = other.staticGameItem;
 		Dirty = false;
 	}
+
+    public string ToJson()
+    {
+        Dictionary<string, object> data = new Dictionary<string, object>();
+        data.Add("id", Id);
+        data.Add("inventory", InventoryId);
+        data.Add("inventory_position", Position);
+        data.Add("stack_size", StackSize);
+        data.Add("created_by", CreatedBy);
+        return JsonMapper.ToJson(data).ToString();
+    }
 
 }

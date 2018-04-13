@@ -699,6 +699,7 @@ MonoBehaviour:
   usernameField: {fileID: 114711449966089102}
   passwordField: {fileID: 114970071141435074}
   rememberToggle: {fileID: 114098064737575564}
+  loginButton: {fileID: 114100994113425334}
   networkManager: {fileID: 0}
   apiManager: {fileID: 0}
 --- !u!114 &114711449966089102

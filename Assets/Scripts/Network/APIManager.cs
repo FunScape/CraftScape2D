@@ -7,246 +7,292 @@ using System.IO;
 using System.Text;
 using System.Linq;
 
-public class APIRoute : Object {
-//    public const string BASE_API_URL = "https://foostats.com/api";
- 	public const string BASE_API_URL = "localhost:8000/api";
-    public const string authorize = BASE_API_URL + "/authorize/";
-    public const string user = BASE_API_URL + "/user/";
-    public const string character = BASE_API_URL + "/character/";
-    public const string inventory = BASE_API_URL + "/inventory/";
-    public const string staticGameItem = BASE_API_URL + "/static_game_item/";
-    public const string gameItem = BASE_API_URL + "/game_item/";
-    public const string skill = BASE_API_URL + "/skill/";
-    public const string skillDependency = BASE_API_URL + "/skill_dependency/";
-    public const string characterSkill = BASE_API_URL + "/character_skill/";
-    public const string gameItemModifier = BASE_API_URL + "/game_item_modifier/";
-    public const string itemModifier = BASE_API_URL + "/item_modifier/";
-    public const string staticItemModifier = BASE_API_URL + "/static_item_modifier";
-    public const string gameItemType = BASE_API_URL + "/game_item_type/";
-    public const string staticItemTypeModifier = BASE_API_URL + "/static_item_type_modifier";
+[CreateAssetMenu()]
+public class APIRoutes : ScriptableObject {
+	// public string BASE_API_URL = "https://foostats.com/api";
+	public string baseURL = "localhost:8000";
+	public string authorize { get { return baseURL + "/api/authorize/"; } }
+	public string user { get { return baseURL + "/api/user/"; } }
+	public string character { get { return baseURL + "/api/character/"; } }
+	public string inventory { get { return baseURL + "/api/inventory/"; } }
+	public string staticGameItem { get { return baseURL + "/api/static_game_item/"; } }
+	public string gameItem { get { return baseURL + "/api/game_item/"; } }
+	public string skill { get { return baseURL + "/api/skill/"; } }
+	public string skillDependency { get { return baseURL + "/api/skill_dependency/"; } }
+	public string characterSkill { get { return baseURL + "/api/character_skill/"; } }
+	public string gameItemModifier { get { return baseURL + "/api/game_item_modifier/"; } }
+	public string itemModifier { get { return baseURL + "/api/item_modifier/"; } }
+	public string staticItemModifier { get { return baseURL + "/api/static_item_modifier"; } }
+	public string gameItemType { get { return baseURL + "/api/game_item_type/"; } }
+	public string staticItemTypeModifier { get { return baseURL + "/api/static_item_type_modifier"; } }
+	public string equipment { get { return baseURL + "/api/equipment"; } }
 }
 
 
 public class APIManager : MonoBehaviour {
 
-    public static APIManager instance { get; private set; }
+	public static APIManager instance { get; private set; }
 
-    public static string token { get; private set; }
+	public static string token { get; private set; }
 
-    private Database database;
+	public APIRoutes routes;
 
-    private APIManager() {}
+	Database database;
 
-    public void Awake() {
-        if (instance != null && instance != this) {
-            Destroy(gameObject);
-        }
+	private APIManager() {}
 
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+	public void Awake() {
+		if (instance != null && instance != this) {
+			Destroy(gameObject);
+		}
 
-    void Start() {
-        // StartCoroutine(GetStaticGameItems());
-    }
+		instance = this;
+		DontDestroyOnLoad(gameObject);
+	}
 
-    public IEnumerator Login(string username, string password, System.Action callback) {
+	void Start() {
 
-		string url = APIRoute.authorize;
-		
+	}
+
+	public IEnumerator Login(string username, string password, System.Action callback) {
+
+		string url = routes.authorize;
+
 		Dictionary<string, object> data = new Dictionary<string, object>();
 		data.Add("username", username);
 		data.Add("password", password);
-		
-        UnityWebRequest www = PreparePOSTRequest(url, data);
-		
 
-        yield return www.SendWebRequest();
-        
-        JsonData response = HandleResponse(www);
+		UnityWebRequest www = PreparePOSTRequest(url, data);
 
-        Debug.Log("Authentication successful!");
 
-        if (callback != null)
-        {
-            APIManager.token = response["token"].ToString();
-            callback();
-        }
-    }
+		yield return www.SendWebRequest();
 
-    public IEnumerator GetUser(System.Action<User> callback) {
-        UnityWebRequest www = PrepareGETRequest(APIRoute.user);
-        
-        yield return www.SendWebRequest();
+		JsonData response = HandleResponse(www);
 
-        JsonData data = HandleResponse(www);
+		Debug.Log("Authentication successful!");
 
-        JsonData userJson = data[0];
-        
-        callback(User.Parse(userJson));
-    }
+		if (callback != null)
+		{
+			APIManager.token = response["token"].ToString();
+			Debug.Log (string.Format("TOKEN: {0}", APIManager.token));
+			callback();
+		}
+	}
 
-    public IEnumerator GetCharacter(int id, System.Action<Character> callback) {
-        UnityWebRequest www = PrepareGETRequest(APIRoute.character + "/" + id.ToString());
+	public IEnumerator GetUser(System.Action<User> callback) {
+		UnityWebRequest www = PrepareGETRequest(routes.user);
 
-        yield return www.SendWebRequest();
+		yield return www.SendWebRequest();
 
-        JsonData data = HandleResponse(www);
+		JsonData data = HandleResponse(www);
 
-        callback(Character.Parse(data));
-    }
+		JsonData userJson = data[0];
 
-    public IEnumerator GetCharacter(string url, System.Action<Character> callback) {
-        UnityWebRequest www = PrepareGETRequest(url);
+		callback(User.Parse(userJson));
+	}
 
-        yield return www.SendWebRequest();
+	public IEnumerator GetCharacter(int id, System.Action<Character> callback) {
+		UnityWebRequest www = PrepareGETRequest(routes.character + "/" + id.ToString());
 
-        JsonData data = HandleResponse(www);
+		yield return www.SendWebRequest();
 
-        callback(Character.Parse(data));
-    }
+		JsonData data = HandleResponse(www);
 
-    public IEnumerator GetInventory(int id, System.Action<Inventory> callback)
-    {
-        UnityWebRequest www = PrepareGETRequest(APIRoute.inventory + "/" + id.ToString());
+		callback(Character.Parse(data));
+	}
 
-        yield return www.SendWebRequest();
+	public IEnumerator GetCharacter(string url, System.Action<Character> callback) {
+		UnityWebRequest www = PrepareGETRequest(url);
 
-        JsonData data = HandleResponse(www);
+		yield return www.SendWebRequest();
 
-        callback(Inventory.Parse(data));
-    }
+		JsonData data = HandleResponse(www);
 
-    public IEnumerator GetInventory(string url, System.Action<Inventory> callback)
-    {
-        UnityWebRequest www = PrepareGETRequest(url);
+		callback(Character.Parse(data));
+	}
 
-        yield return www.SendWebRequest();
+	public IEnumerator GetInventory(int id, System.Action<Inventory> callback)
+	{
+		UnityWebRequest www = PrepareGETRequest(routes.inventory + "/" + id.ToString());
 
-        JsonData data = HandleResponse(www);
+		yield return www.SendWebRequest();
 
-        callback(Inventory.Parse(data));
-    }
+		JsonData data = HandleResponse(www);
 
-    public IEnumerator UpdateInventory(Inventory inventory, System.Action<Inventory> callback)
-    {
-        Dictionary<string, object> formData = new Dictionary<string, object>();
-        formData.Add("position", inventory.Position);
-        formData.Add("character", inventory.CharacterId);
-        formData.Add("size", inventory.Size);
+		callback(Inventory.Parse(data));
+	}
 
-		UnityWebRequest www = PreparePUTRequest(APIRoute.inventory + inventory.Id.ToString() + "/", formData);
+	public IEnumerator GetInventory(string url, System.Action<Inventory> callback)
+	{
+		UnityWebRequest www = PrepareGETRequest(url);
 
-        yield return www.SendWebRequest();
+		yield return www.SendWebRequest();
 
-        JsonData data = HandleResponse(www);
+		JsonData data = HandleResponse(www);
 
-        callback(Inventory.Parse(data));
-    }
+		callback(Inventory.Parse(data));
+	}
 
-    public IEnumerator UpdateGameItem(GameItem item, System.Action<GameItem> callback)
-    {
-        Dictionary<string, object> formData = new Dictionary<string, object>();
-        formData.Add("inventory", item.InventoryId);
-        formData.Add("inventory_position", item.Position);
-        formData.Add("stack_size", item.StackSize);
-        formData.Add("created_by", item.CreatedById);
-        formData.Add("static_game_item", item.StaticGameItemId);
+	public IEnumerator UpdateInventory(Inventory inventory, System.Action<Inventory> callback)
+	{
+		Dictionary<string, object> formData = new Dictionary<string, object>();
+		formData.Add("position", inventory.Position);
+		formData.Add("character", inventory.CharacterId);
+		formData.Add("size", inventory.Size);
 
-        UnityWebRequest www = PreparePUTRequest(APIRoute.gameItem + item.Id + "/", formData);
+		UnityWebRequest www = PreparePUTRequest(routes.inventory + inventory.Id.ToString() + "/", formData);
 
-        yield return www.SendWebRequest();
+		yield return www.SendWebRequest();
 
-        JsonData data = HandleResponse(www);
+		JsonData data = HandleResponse(www);
 
-        callback(GameItem.Parse(data));
-    }
+		callback(Inventory.Parse(data));
+	}
 
-    public IEnumerator CreateGameItem(GameItem item, System.Action<GameItem> callback)
-    {
-        Dictionary<string, object> formData = new Dictionary<string, object>();
-        formData.Add("inventory", item.InventoryId);
-        formData.Add("inventory_position", item.Position);
-        formData.Add("stack_size", item.StackSize);
-        formData.Add("created_by", item.CreatedById);
-        formData.Add("static_game_item", item.staticGameItem.Id);
+	public IEnumerator UpdateGameItem(GameItem item, System.Action<GameItem> callback)
+	{
+		Dictionary<string, object> formData = new Dictionary<string, object>();
+		formData.Add("inventory", item.InventoryId);
+		formData.Add("inventory_position", item.Position);
+		formData.Add("stack_size", item.StackSize);
+		formData.Add("created_by", item.CreatedById);
+		formData.Add("static_game_item", item.StaticGameItemId);
 
-        UnityWebRequest www = PreparePOSTRequest(APIRoute.gameItem, formData);
+		UnityWebRequest www = PreparePUTRequest(routes.gameItem + item.Id + "/", formData);
 
-        yield return www.SendWebRequest();
+		yield return www.SendWebRequest();
 
-        JsonData data = HandleResponse(www);
+		JsonData data = HandleResponse(www);
 
-        callback(GameItem.Parse(data));
-    }
+		callback(GameItem.Parse(data));
+	}
 
-    // public IEnumerator GetInventoryItems(int inventoryId, System.Action<InventoryItem[]> callback) 
-    // {
+	public IEnumerator CreateGameItem(GameItem item, System.Action<GameItem> callback)
+	{
+		Dictionary<string, object> formData = new Dictionary<string, object>();
+		formData.Add("inventory", item.InventoryId);
+		formData.Add("inventory_position", item.Position);
+		formData.Add("stack_size", item.StackSize);
+		formData.Add("created_by", item.CreatedById);
+		formData.Add("static_game_item", item.staticGameItem.Id);
 
-    // }
+		UnityWebRequest www = PreparePOSTRequest(routes.gameItem, formData);
 
-    // public IEnumerator GetInventoryItem(int itemId, System.Action<InventoryItem> callback)
-    // {
+		yield return www.SendWebRequest();
 
-    // }
+		JsonData data = HandleResponse(www);
 
-    public IEnumerator GetStaticGameItems(System.Action<List<StaticGameItem>> callback) {
-        UnityWebRequest www = PrepareGETRequest(APIRoute.staticGameItem);
-        
-        yield return www.SendWebRequest();
+		callback(GameItem.Parse(data));
+	}
 
-        JsonData data = HandleResponse(www);
+	public IEnumerator GetEquipment(Character character, System.Action<Equipment> callback)
+	{
+		if (character.equipmentUrl == null)
+			throw new System.MissingMemberException("character has no equipment URL");
 
-        List<StaticGameItem> items = new List<StaticGameItem>();
-        foreach (JsonData item in data) {
-            items.Add(StaticGameItem.Parse(item));
-        }
-        callback(items);
-    }
+		UnityWebRequest www = PrepareGETRequest(character.equipmentUrl);
 
-    UnityWebRequest PrepareGETRequest(string url) {
-        UnityWebRequest www = UnityWebRequest.Get(url);
-        www.SetRequestHeader("Content-Type", "application/json");
-        if (APIManager.token != null)
-            www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
-        return www;
-    }
+		yield return www.SendWebRequest();
 
-    UnityWebRequest PreparePOSTRequest(string url, Dictionary<string, object> formData) {
+		JsonData data = HandleResponse(www);
 
-        JsonData jsonData = JsonMapper.ToJson(formData);
+		callback(Equipment.Parse(data));
+	}
 
-        UnityWebRequest www = UnityWebRequest.Put(url, jsonData.ToString());
+	public IEnumerator UpdateEquipment(Equipment equipment, System.Action<Equipment> callback)
+	{
+		UnityWebRequest www = PreparePOSTRequest(routes.equipment + "/" + equipment.Id.ToString() + "/", equipment.ToJson());
+
+		yield return www.SendWebRequest();
+
+		JsonData data = HandleResponse(www);
+
+		callback(Equipment.Parse(data));
+	}
+
+	public IEnumerator DeleteGameItem(GameItem item, System.Action callback)
+	{
+		UnityWebRequest www = PrepareDELETERequest (routes.gameItem + "/" + item.Id.ToString () + "/");
+
+		yield return www.SendWebRequest ();
+
+		if (www.isHttpError || www.isNetworkError) {
+			throw new System.Exception (www.error);
+			//			callback (false);
+		} else {
+			callback ();
+		}
+	}
+
+	public IEnumerator GetStaticGameItems(System.Action<List<StaticGameItem>> callback) {
+		UnityWebRequest www = PrepareGETRequest(routes.staticGameItem);
+
+		yield return www.SendWebRequest();
+
+		JsonData data = HandleResponse(www);
+
+		List<StaticGameItem> items = new List<StaticGameItem>();
+		foreach (JsonData item in data) {
+			items.Add(StaticGameItem.Parse(item));
+		}
+		callback(items);
+	}
+
+	UnityWebRequest PrepareGETRequest(string url) {
+		UnityWebRequest www = UnityWebRequest.Get(url);
+		www.SetRequestHeader("Content-Type", "application/json");
+		if (APIManager.token != null)
+			www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
+		return www;
+	}
+
+	UnityWebRequest PreparePOSTRequest(string url, Dictionary<string, object> formData) {
+		JsonData jsonData = JsonMapper.ToJson(formData);
+		return PreparePOSTRequest(url, jsonData.ToString());
+	}
+
+	UnityWebRequest PreparePOSTRequest(string url, string json) {
+
+		UnityWebRequest www = UnityWebRequest.Put(url, json);
 		www.method = "POST";
 		www.SetRequestHeader ("Content-Type", "application/json");
-        if (APIManager.token != null)
-            www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
+		if (APIManager.token != null)
+			www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
 		www.chunkedTransfer = false;
-        return www;
-    }
+		return www;
+	}
 
-    UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
-    {
-        JsonData jsonData = JsonMapper.ToJson(formData);
+	UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
+	{
+		JsonData jsonData = JsonMapper.ToJson(formData);
 
-        UnityWebRequest www = UnityWebRequest.Put(url, jsonData.ToString());
-        www.SetRequestHeader("Content-Type", "application/json");
-        if (APIManager.token != null)
-            www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
-        www.chunkedTransfer = false;
-        return www;
-    }
+		UnityWebRequest www = UnityWebRequest.Put(url, jsonData.ToString());
+		www.SetRequestHeader("Content-Type", "application/json");
+		if (APIManager.token != null)
+			www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
+		www.chunkedTransfer = false;
+		return www;
+	}
 
-    JsonData HandleResponse(UnityWebRequest www) {
-        if (www.isNetworkError || www.isHttpError)
+	UnityWebRequest PrepareDELETERequest(string url)
+	{
+		UnityWebRequest www = UnityWebRequest.Delete (url);
+		www.SetRequestHeader ("Content-Type", "application/json; charset=utf8");
+		www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
+		www.chunkedTransfer = false;
+		return www;
+	}
+
+	JsonData HandleResponse(UnityWebRequest www) {
+		if (www.isNetworkError || www.isHttpError)
 			throw new System.Exception(www.downloadHandler.text);
 
-        // Debug.Log(www.downloadHandler.text);
-        
-        JsonData data = JsonMapper.ToObject(www.downloadHandler.text);
+		// Debug.Log(www.downloadHandler.text);
 
-        return data;
-    }
+		JsonData data = JsonMapper.ToObject(www.downloadHandler.text);
+
+		return data;
+	}
 
 }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
 using System.IO;
+using System.Linq;
 
 [CreateAssetMenu(fileName="Inventory", menuName="Inventory/Inventory", order=1)]
 public class Inventory : ScriptableObject {
@@ -54,6 +55,10 @@ public class Inventory : ScriptableObject {
 		GameItem temp = GameItems[index1];
 		GameItems[index1] = GameItems[index2];
 		GameItems[index2] = temp;
+		if (GameItems[index1] != null)
+			GameItems [index1].Position = index1;
+		if (GameItems[index2] != null)
+			GameItems [index2].Position = index2;
 	}
 
 	public void AddItem(GameItem item, InventoryController controller)
@@ -117,6 +122,7 @@ public class Inventory : ScriptableObject {
 				GameItem temp = GameItems [i].Clone (true);
 				GameItems[i] = null;
 				trash.Add (temp);
+				Save ();
 				return temp;
 			}
 		}
@@ -132,6 +138,7 @@ public class Inventory : ScriptableObject {
 				GameItem temp = GameItems [i].Clone (true);
 				GameItems[i] = null;
 				trash.Add (temp);
+				Save ();
 				return temp;
 			}
 		}
@@ -154,19 +161,26 @@ public class Inventory : ScriptableObject {
 		}
 	}
 
-	public void Save(InventoryController controller)
+	public void Save(InventoryController controller = null)
 	{
-		APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
+		if (controller == null)
+			controller = GameObject.FindGameObjectWithTag ("Player").GetComponent<InventoryController> ();
 
-//		controller.StartCoroutine (apiManager.UpdateInventory (this, (inv) => {
+		APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
 
 		for (int i = 0; i < GameItems.Length; i++)
 		{
-			if (GameItems[i] != null && GameItems[i].Dirty == true && GameItems[i].Locked == false)
-			{
-				GameItem item = GameItems[i];
-				item.InventoryId = this.Id;
+			GameItem item = GameItems [i];
+
+			if (item == null)
+				continue;
+
+			if (item.Position != i)
 				item.Position = i;
+
+			if (item.Dirty && !item.Locked)
+			{
+				item.InventoryId = this.Id;
 				item.Locked = true;  // Lock the game item to prevent further editing
 
 				if (item.Id == -1)
@@ -188,7 +202,17 @@ public class Inventory : ScriptableObject {
 			}
 		}
 
-//		}));
+		foreach (GameItem item in trash) 
+		{
+			if (item.Deleted)
+				continue;
+				
+			controller.StartCoroutine(apiManager.DeleteGameItem(item, () => {
+				Debug.Log("Removed item: " + item.Name);
+				item.Deleted = true;
+			}));
+		}
+
 	}
 
 

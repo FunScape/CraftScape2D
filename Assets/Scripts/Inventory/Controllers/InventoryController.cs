@@ -244,7 +244,7 @@ public class InventoryController : MonoBehaviour
 
     public void OnDropEquipmentItem(GameObject inventorySlotObject, GameObject equipmentSlotObject)
     {
-        EquipmentController equipmentController = GetComponent<EquipmentController>();
+//        EquipmentController equipmentController = GetComponent<EquipmentController>();
 
         InventorySlot inventorySlot = inventorySlotObject.GetComponent<InventorySlot>();
         EquipmentSlot equipmentSlot = equipmentSlotObject.GetComponent<EquipmentSlot>();
@@ -265,7 +265,6 @@ public class InventoryController : MonoBehaviour
     {
         int itemIndex = inventorySlot.GetComponent<InventorySlot>().slotIndex;
         inventory.RemoveItem(itemIndex);
-        inventory.Save(this);
         UpdateInventoryPanelUI();
     }
 

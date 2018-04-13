@@ -15,8 +15,10 @@ public class Character : ScriptableObject {
     public double WalkSpeed { get; private set; }
     public List<Inventory> Inventories { get; private set; }
     public List<string> inventoryUrls { get; set; }
+    public Equipment equipment;
+    public string equipmentUrl;
 
-    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<string> inventoryUrls)
+    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<string> inventoryUrls, string equipmentUrl)
     {
         this.Id = id;
         this.UserId = userId;
@@ -26,12 +28,14 @@ public class Character : ScriptableObject {
         this.Currency = currency;
         this.WalkSpeed = walkSpeed;
         this.inventoryUrls = inventoryUrls;
+        this.equipmentUrl = equipmentUrl;
     }
 
-    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<Inventory> inventories) 
+    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<Inventory> inventories, Equipment equipment) 
     {
-        Init(id, userId, name, health, maxHealth, currency, walkSpeed, new List<string>());
+        Init(id, userId, name, health, maxHealth, currency, walkSpeed, new List<string>(), equipment.Url);
         Inventories = inventories;
+        this.equipment = equipment;
     }
 
     public static Character Parse(JsonData data)
@@ -43,10 +47,11 @@ public class Character : ScriptableObject {
         int maxHealth = (int) (double) data["max_health"];
         int currency = (int) data["currency"];
         double walkSpeed = (double) data["walk_speed"];
-        List<string> urls = new List<string>();
-        foreach(JsonData url in data["inventories"]) { urls.Add(url.ToString()); }
+        List<string> inventoryUrls = new List<string>();
+        foreach(JsonData url in data["inventories"]) { inventoryUrls.Add(url.ToString()); }
+        string equipmentUrl = data["equipment"].ToString();
         Character character = Character.CreateInstance("Character") as Character;
-        character.Init(id, userId, name, health, maxHealth, currency, walkSpeed, urls);
+        character.Init(id, userId, name, health, maxHealth, currency, walkSpeed, inventoryUrls, equipmentUrl);
         return character;
     }
 
