@@ -66,7 +66,8 @@ public class LoginForm : MonoBehaviour {
     }
 
     public void OnClickLogin() {
-        
+        PlayerPrefs.SetInt("IsLocalPlayer", 0);
+
 		APIManager manager = apiManager.GetComponent<APIManager>();
 
 		loginButton.interactable = false;
@@ -82,6 +83,11 @@ public class LoginForm : MonoBehaviour {
 		}));
 		
     }
+
+	public void OnClickIsLocalPlayer() {
+		PlayerPrefs.SetInt("IsLocalPlayer", 1);
+		networkManager.GetComponent<CSNetworkManager>().StartHost();
+	}
 
     public void OnClickRememberToggle(bool value) {
         if (value) {

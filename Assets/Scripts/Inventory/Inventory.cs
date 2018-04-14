@@ -19,7 +19,7 @@ public class Inventory : ScriptableObject {
 
 	public static Inventory CreateInstance()
 	{
-		return Inventory.CreateInstance(-1, -1, -1, 8);
+		return Inventory.CreateInstance(-1, -1, -1, 16);
 	}
 
 	public static Inventory CreateInstance(int id, int position, int characterId, int size, GameItem[] items = null)
@@ -163,6 +163,9 @@ public class Inventory : ScriptableObject {
 
 	public void Save(InventoryController controller = null)
 	{
+		if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
+            return;
+
 		if (controller == null)
 			controller = GameObject.FindGameObjectWithTag ("Player").GetComponent<InventoryController> ();
 
@@ -175,8 +178,9 @@ public class Inventory : ScriptableObject {
 			if (item == null)
 				continue;
 
-			if (item.Position != i)
+			if (item.Position != i){
 				item.Position = i;
+			}
 
 			if (item.Dirty && !item.Locked)
 			{
@@ -221,6 +225,9 @@ public class Inventory : ScriptableObject {
 
 	public void Load()
 	{
+		if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
+            return;
+
 		APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
 		apiManager.GetInventory(Id, (inventory) => {
 			Id = inventory.Id;

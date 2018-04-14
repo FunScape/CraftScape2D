@@ -68,7 +68,7 @@ public class StaticGameItem : ScriptableObject {
         double vitality = (double) data["vitality"];
         double healAmount = (double) data["heal_amount"];
         List<string> itemTypes = new List<string>();
-        foreach (JsonData type in data["item_type"]) { itemTypes.Add(type.ToString()); }
+        foreach (JsonData type in data["item_types"]) { itemTypes.Add(type.ToString()); }
         StaticGameItem item = StaticGameItem.CreateInstance();
         item.Init(id, name, spriteName, description, maxStack, value, equipable, rarity, minLevel, baseDurability, soulbound, power, defense, vitality, healAmount, itemTypes);
         return item;

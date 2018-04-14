@@ -153,38 +153,43 @@ public class APIManager : MonoBehaviour {
 
 	public IEnumerator UpdateGameItem(GameItem item, System.Action<GameItem> callback)
 	{
-		Dictionary<string, object> formData = new Dictionary<string, object>();
-		formData.Add("inventory", item.InventoryId);
-		formData.Add("inventory_position", item.Position);
-		formData.Add("stack_size", item.StackSize);
-		formData.Add("created_by", item.CreatedById);
-		formData.Add("static_game_item", item.StaticGameItemId);
+		Dictionary<string, object> formData = item.ToDict();
 
 		UnityWebRequest www = PreparePUTRequest(routes.gameItem + item.Id + "/", formData);
 
 		yield return www.SendWebRequest();
 
-		JsonData data = HandleResponse(www);
+		try {
+			JsonData data = HandleResponse(www);
+			callback(GameItem.Parse(data));
+		} catch (System.Exception) {
+			callback (null);
+		}
 
-		callback(GameItem.Parse(data));
 	}
 
+	/* 
+	 * 
+	 * Create Game Item
+	 * 
+	 * */
 	public IEnumerator CreateGameItem(GameItem item, System.Action<GameItem> callback)
 	{
-		Dictionary<string, object> formData = new Dictionary<string, object>();
-		formData.Add("inventory", item.InventoryId);
-		formData.Add("inventory_position", item.Position);
-		formData.Add("stack_size", item.StackSize);
-		formData.Add("created_by", item.CreatedById);
-		formData.Add("static_game_item", item.staticGameItem.Id);
+		Dictionary<string, object> formData = item.ToDict();
+		formData.Add("static_game_item", item.StaticGameItemId);
+		formData.Add ("created_by_id", item.CreatedById);
 
 		UnityWebRequest www = PreparePOSTRequest(routes.gameItem, formData);
 
 		yield return www.SendWebRequest();
 
-		JsonData data = HandleResponse(www);
+		try {
+			JsonData data = HandleResponse(www);
+			callback(GameItem.Parse(data));
+		} catch (System.Exception) {
+			callback (null);
+		}
 
-		callback(GameItem.Parse(data));
 	}
 
 	public IEnumerator GetEquipment(Character character, System.Action<Equipment> callback)
@@ -203,7 +208,30 @@ public class APIManager : MonoBehaviour {
 
 	public IEnumerator UpdateEquipment(Equipment equipment, System.Action<Equipment> callback)
 	{
-		UnityWebRequest www = PreparePUTRequest(routes.equipment + "/" + equipment.Id.ToString() + "/", equipment.ToJson());
+		Dictionary<string, object> formData = new Dictionary<string, object> ();
+		formData.Add("id", equipment.Id);
+		if (equipment.MainHand != null)
+			formData.Add("main_hand", new Dictionary<string, object>() { { "uuid", equipment.MainHand.Uuid } });
+		if (equipment.Ring != null)
+			formData.Add("ring", new Dictionary<string, object>() { { "uuid", equipment.Ring.Uuid } });
+		if (equipment.Neck != null)
+			formData.Add("neck", new Dictionary<string, object>() { { "uuid", equipment.Neck.Uuid } });
+		if (equipment.Head != null)
+			formData.Add("head", new Dictionary<string, object>() { { "uuid", equipment.Head.Uuid } });
+		if (equipment.Shoulders != null)
+			formData.Add("shoulders", new Dictionary<string, object>() { { "uuid", equipment.Shoulders.Uuid } });
+		if (equipment.Chest != null)
+			formData.Add("chest", new Dictionary<string, object>() { { "uuid", equipment.Chest.Uuid } });
+		if (equipment.Back != null)
+			formData.Add("back", new Dictionary<string, object>() { { "uuid", equipment.Back.Uuid } });
+		if (equipment.Hands != null)
+			formData.Add("hands", new Dictionary<string, object>() { { "uuid", equipment.Hands.Uuid } });
+		if (equipment.Feet != null)
+			formData.Add("feet", new Dictionary<string, object>() { { "uuid", equipment.Feet.Uuid } });
+		if (equipment.Legs != null)
+			formData.Add("legs", new Dictionary<string, object>() { { "uuid", equipment.Legs.Uuid } });
+
+		UnityWebRequest www = PreparePUTRequest(routes.equipment + "/" + equipment.Id.ToString() + "/", formData);
 
 		yield return www.SendWebRequest();
 
@@ -220,7 +248,6 @@ public class APIManager : MonoBehaviour {
 
 		if (www.isHttpError || www.isNetworkError) {
 			throw new System.Exception (www.error);
-			//			callback (false);
 		} else {
 			callback ();
 		}
@@ -290,10 +317,14 @@ public class APIManager : MonoBehaviour {
 	}
 
 	JsonData HandleResponse(UnityWebRequest www) {
-		if (www.isNetworkError || www.isHttpError)
-			throw new System.Exception(www.error);
-
-		// Debug.Log(www.downloadHandler.text);
+		if (www.isNetworkError || www.isHttpError) {
+			throw new System.Exception (www.downloadHandler.text);
+//			if (www.downloadHandler != null && www.downloadHandler.text != null)
+//				Debug.LogError (www.downloadHandler.text);
+//			else
+//				Debug.LogError (www.error);
+//			return null;
+		}
 
 		JsonData data = JsonMapper.ToObject(www.downloadHandler.text);
 

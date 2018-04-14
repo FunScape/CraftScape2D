@@ -28,39 +28,68 @@ public class HeroController : MonoBehaviour
     }
 
     void InitializeCharacter() {
-        GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
-        APIManager manager = APIManager.GetComponent<APIManager>();
-        Debug.Log("Loading user...");
-        StartCoroutine(manager.GetUser((user) => {
-            this.user = user;
+		
+		GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
+		APIManager manager = APIManager.GetComponent<APIManager>();
 
-            Debug.Log("Loading character...");
-            StartCoroutine(manager.GetCharacter(user.characterUrls[0], (character) => {
-                this.character = character;
-                
-                Debug.Log("Loading character inventory...");
-                StartCoroutine(manager.GetInventory(character.inventoryUrls[0], (inventory) => {
-                    GetComponent<HeroInventoryController>().inventory = inventory;
-                    GetComponent<HeroInventoryController>().SetupInventory();
-                    GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+        // Init character without database interaction.
+        if (PlayerPrefs.GetInt("IsLocalPlayer") == 1) {
 
-					Debug.Log("Loading character equipment...");
-					StartCoroutine(manager.GetEquipment(character, (equipment) => {
-						character.equipment = equipment;
-						GameObject player = GameObject.FindWithTag("Player");
-						EquipmentController eController = player.GetComponent<EquipmentController>();
-						eController.equipment = equipment;
+			Inventory inventory = Inventory.CreateInstance ();
 
-						Debug.Log("Loading static items...");
-						StartCoroutine(manager.GetStaticGameItems((staticItems) => {
-							GameItemDatabase.instance.gameItems = staticItems;
-						}));
-					}));
+			// Setup inventory with no starting items
+			GetComponent<HeroInventoryController>().inventory = inventory;
+
+            GetComponent<HeroInventoryController>().SetupInventory();
+
+            // Move login form off screen
+            GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+
+			// Still need to get static game items...
+			Debug.Log("Loading static items...");
+			StartCoroutine(manager.GetStaticGameItems((staticItems) => {
+				GameItemDatabase.instance.gameItems = staticItems;
+			}));
+
+        } else {
+			
+            Debug.Log("Loading user...");
+            StartCoroutine(manager.GetUser((user) => {
+                this.user = user;
+
+                Debug.Log("Loading character...");
+                StartCoroutine(manager.GetCharacter(user.characterUrls[0], (character) => {
+                    this.character = character;
+                    
+                    Debug.Log("Loading character inventory...");
+                    StartCoroutine(manager.GetInventory(character.inventoryUrls[0], (inventory) => {
+                        // Add inventory and do initial setup
+                        GetComponent<HeroInventoryController>().inventory = inventory;
+                        GetComponent<HeroInventoryController>().SetupInventory();
+
+                        // Move login form off screen
+                        GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+
+                        Debug.Log("Loading character equipment...");
+                        StartCoroutine(manager.GetEquipment(character, (equipment) => {
+                            character.equipment = equipment;
+                            GameObject player = GameObject.FindWithTag("Player");
+                            EquipmentController eController = player.GetComponent<EquipmentController>();
+                            eController.equipment = equipment;
+
+                            // Get static game items
+                            Debug.Log("Loading static items...");
+                            StartCoroutine(manager.GetStaticGameItems((staticItems) => {
+                                GameItemDatabase.instance.gameItems = staticItems;
+                            }));
+                        }));
+                    }));
                 }));
             }));
-        }));
 
-        // Get static game items
+        }
+
+
         
     }
 

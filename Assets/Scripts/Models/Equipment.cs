@@ -13,6 +13,7 @@ public class Equipment : ScriptableObject {
     public GameItem Ring { get { return ring; } set { ring = value; Dirty = true; } }
     public GameItem Neck { get { return neck; } set { neck = value; Dirty = true; } }
     public GameItem Head { get { return head; } set { head = value; Dirty = true; } }
+    public GameItem Shoulders { get { return shoulders; } set { shoulders = value; Dirty = true; } }
     public GameItem Chest { get { return chest; } set { chest = value; Dirty = true; } }
 	public GameItem MainHand { get { return mainHand; } set { mainHand = value; Dirty = true; } }
     public GameItem Back { get { return back; } set { back = value; Dirty = true; } }
@@ -23,6 +24,7 @@ public class Equipment : ScriptableObject {
     private GameItem ring;
     private GameItem neck;
     private GameItem head;
+    private GameItem shoulders;
     private GameItem chest;
     private GameItem mainHand;
     private GameItem back;
@@ -49,6 +51,7 @@ public class Equipment : ScriptableObject {
         equipment.Ring = GameItem.Parse(data["ring"]);
         equipment.Neck = GameItem.Parse(data["neck"]);
         equipment.Head = GameItem.Parse(data["head"]);
+        equipment.Shoulders = GameItem.Parse(data["shoulders"]);
         equipment.Chest = GameItem.Parse(data["chest"]);
 		equipment.MainHand = GameItem.Parse(data["main_hand"]);
         equipment.Back = GameItem.Parse(data["back"]);
@@ -58,39 +61,45 @@ public class Equipment : ScriptableObject {
         return equipment;
     }
 
-    public string ToJson()
+    public JsonData ToJson()
     {
         Dictionary<string, object> data = new Dictionary<string, object>();
         if (Ring != null)
-            data.Add("ring", Ring.Id);
+            data.Add("ring", Ring.ToDict());
         if (Neck != null)
-            data.Add("neck", Neck.Id);
+            data.Add("neck", Neck.ToDict());
         if (Head != null)
-            data.Add("head", Head.Id);
+            data.Add("head", Head.ToDict());
+        if (Shoulders != null)
+            data.Add("shoulders", Shoulders.ToDict());
         if (Chest != null)
-            data.Add("chest", Chest.Id);
+            data.Add("chest", Chest.ToDict());
         if (MainHand != null)
-		    data.Add("main_hand", MainHand.Id);
+		    data.Add("main_hand", MainHand.ToDict());
         if (Back != null)
-            data.Add("back", Back.Id);
+            data.Add("back", Back.ToDict());
         if (Hands != null)
-            data.Add("hands", Hands.Id);
+            data.Add("hands", Hands.ToDict());
         if (Feet != null)
-            data.Add("feet", Feet.Id);
+            data.Add("feet", Feet.ToDict());
         if (Legs != null)
-            data.Add("legs", Legs.Id);
-        return JsonMapper.ToJson(data).ToString();
+            data.Add("legs", Legs.ToDict());
+        return JsonMapper.ToJson(data);
     }
 
     public void Save()
     {
-        APIManager manager = GameObject.FindWithTag("APIManager").GetComponent<APIManager>();
-        EquipmentController controller = GameObject.FindWithTag("Player").GetComponent<EquipmentController>();
+        if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
+            return;
 
-        controller.StartCoroutine(manager.UpdateEquipment(this, (equipment) => {
+        APIManager manager = GameObject.FindWithTag("APIManager").GetComponent<APIManager>();
+//        EquipmentController controller = GameObject.FindWithTag("Player").GetComponent<EquipmentController>();
+
+        manager.StartCoroutine(manager.UpdateEquipment(this, (equipment) => {
             ring = equipment.ring;
             neck = equipment.neck;
             head = equipment.head;
+            shoulders = equipment.shoulders;
             chest = equipment.chest;
             mainHand = equipment.mainHand;
             back = equipment.back;

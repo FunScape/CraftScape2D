@@ -49,14 +49,14 @@ public class GameItem : ScriptableObject {
     public static GameItem CreateInstance(StaticGameItem staticItem)
     {
         GameItem item = GameItem.CreateInstance();
-        item.Init(-1, null, -1, -1, 1, -1, null, staticItem.Id);
+        item.Init(-1, System.Guid.NewGuid().ToString(), null, -1, -1, 1, -1, null, staticItem.Id);
         item.staticGameItem = staticItem;
         return item;
     }
 
-    public void Init(int id, string url, int position, int inventoryId, int stackSize, int createdById, string createdByName, int staticGameItemId)
+    public void Init(int id, string uuid, string url, int position, int inventoryId, int stackSize, int createdById, string createdByName, int staticGameItemId)
     {
-		uuid = System.Guid.NewGuid ().ToString ();
+		this.uuid = uuid;
         Id = id;
         Url = url;
         Position = position;
@@ -73,17 +73,16 @@ public class GameItem : ScriptableObject {
             return null;
             
         int Id = (int) data["id"];
+        string uuid = data["uuid"].ToString();
 		string Url = "";
 		try {
 			Url = data["url"].ToString();
-		} catch (KeyNotFoundException e) {
-			
-		}
+		} catch (KeyNotFoundException) {}
         int Position = (int) data["inventory_position"];
 		int InventoryId;
 		try {
 			InventoryId = (int) data["inventory"];
-		} catch (System.Exception e) {
+		} catch (System.Exception) {
 			InventoryId = -1;
 		}
         int StackSize = (int) data["stack_size"];
@@ -91,8 +90,9 @@ public class GameItem : ScriptableObject {
         string CreatedByName = data["created_by_name"].ToString();
         int StaticGameItemId = (int) data["static_game_item"]["id"];
         GameItem item = GameItem.CreateInstance();
-        item.Init(Id, Url, Position, InventoryId, StackSize, CreatedById, CreatedByName, StaticGameItemId);
+        item.Init(Id, uuid, Url, Position, InventoryId, StackSize, CreatedById, CreatedByName, StaticGameItemId);
         item.staticGameItem = StaticGameItem.Parse(data["static_game_item"]);
+		item.Dirty = false;
         return item;
     }
 
@@ -107,12 +107,13 @@ public class GameItem : ScriptableObject {
     }
 
     /*
-    @description: Maps properties of the GameItem to the passed in GameItem 'other' excluding the uuid.
-    @param <GameItem> other: The GameItem to map to.
+    Description: Maps properties of the GameItem to the passed in GameItem 'other'.
+    param <GameItem> other: The GameItem to map to.
      */
 	public void Map(GameItem other)
 	{
 		Id = other.Id;
+        uuid = other.uuid;
 		Url = other.Url;
 		Position = other.Position;
 		InventoryId = other.InventoryId;
@@ -125,15 +126,16 @@ public class GameItem : ScriptableObject {
 		Dirty = false;
 	}
 
-    public string ToJson()
+    public Dictionary<string, object> ToDict()
     {
         Dictionary<string, object> data = new Dictionary<string, object>();
         data.Add("id", Id);
+        data.Add("uuid", Uuid);
         data.Add("inventory", InventoryId);
         data.Add("inventory_position", Position);
         data.Add("stack_size", StackSize);
         data.Add("created_by", CreatedBy);
-        return JsonMapper.ToJson(data).ToString();
+        return data;
     }
 
 }
