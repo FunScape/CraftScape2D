@@ -39,6 +39,7 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 		GameObject canvas = GameObject.FindWithTag("MainCanvas");
 		hoverText = GameObject.Instantiate(hoverTextPrefab);
 		hoverText.transform.SetParent(canvas.transform);
+        UpdateText();
     }
 
     void StopHover() {
@@ -54,7 +55,7 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 
 			if (Input.GetMouseButtonDown(1)) {
 				UpdateItem ();
-				hoverText.GetComponentInChildren<Text> ().text = string.Format ("Name: {0}\n      ID: {1}\n UUID: {2}", item.Name, item.Id.ToString(), item.Uuid);
+                UpdateText();
 			}
 
 		} else if (hoverText != null) {
@@ -69,4 +70,13 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 		InventoryController controller = player.GetComponent<InventoryController>();
 		item = controller.inventory.GameItems[parent.slotIndex];
 	}
+
+    void UpdateText()
+    {
+        if (hoverText != null && item != null) {
+            hoverText.transform.Find("Name").GetComponent<Text>().text = item.Name;
+            hoverText.transform.Find("UUID").GetComponent<Text>().text = item.Uuid;
+            hoverText.transform.Find("Id").GetComponent<Text>().text = item.Id.ToString();
+        }
+    }
 }
