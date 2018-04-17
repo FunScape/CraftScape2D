@@ -12,7 +12,7 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
     GameItem item;
 	InventorySlot parent;
 
-    Vector3 offset = new Vector3(-125f, -42f, 0f);
+    Vector3 offset = new Vector3(-120f, -100f, 0f);
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -40,6 +40,7 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 		hoverText = GameObject.Instantiate(hoverTextPrefab);
 		hoverText.transform.SetParent(canvas.transform);
         UpdateText();
+        UpdateItem();
     }
 
     void StopHover() {
@@ -49,14 +50,9 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 
     void Update() {
 
-		if (hoverText != null && Input.GetMouseButton(1)) {
-			
-			hoverText.transform.position = Input.mousePosition + offset;
+		if (hoverText != null && item != null && Input.GetKey(KeyCode.LeftControl)) {
 
-			if (Input.GetMouseButtonDown(1)) {
-				UpdateItem ();
-                UpdateText();
-			}
+			hoverText.transform.position = Input.mousePosition + offset;
 
 		} else if (hoverText != null) {
 			hoverText.transform.position = new Vector3 (1000f, 1000f, 0);
@@ -65,10 +61,12 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 
 	void UpdateItem()
 	{
-		parent = transform.parent.gameObject.GetComponent<InventorySlot> ();
-		GameObject player = GameObject.FindWithTag("Player");
-		InventoryController controller = player.GetComponent<InventoryController>();
-		item = controller.inventory.GameItems[parent.slotIndex];
+		if (GameObject.FindWithTag("Player").GetComponent<SetupLocalHero>().isLocalPlayer) {
+			parent = transform.parent.gameObject.GetComponent<InventorySlot> ();
+			GameObject player = GameObject.FindWithTag("Player");
+			InventoryController controller = player.GetComponent<InventoryController>();
+			item = controller.inventory.GameItems[parent.slotIndex];
+		}
 	}
 
     void UpdateText()

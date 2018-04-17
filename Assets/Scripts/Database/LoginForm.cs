@@ -12,9 +12,10 @@ public class LoginForm : MonoBehaviour {
     public InputField usernameField;
     public InputField passwordField;
     public Toggle rememberToggle;
+	public Toggle isGameHost;
 	public Button loginButton;
-    public GameObject networkManager;
-	public GameObject apiManager;
+	GameObject networkManager { get { return GameObject.FindWithTag ("NetworkManager"); } }
+	GameObject apiManager { get { return GameObject.FindWithTag ("APIManager"); } }
 
 	void Start() {
 
@@ -73,13 +74,18 @@ public class LoginForm : MonoBehaviour {
 		loginButton.interactable = false;
 
 		StartCoroutine(manager.Login(usernameField.text, passwordField.text, (success) => {
-			if (success)
-				networkManager.GetComponent<CSNetworkManager>().StartHost();
+			if (success) {
+				if (isGameHost.isOn)
+					networkManager.GetComponent<CSNetworkManager>().StartHost();
+				else
+					networkManager.GetComponent<CSNetworkManager>().StartClient();
+			} else {
+				loginButton.interactable = true;
+			}
 
 			if (rememberToggle.isOn)
 				SaveCredentials();
 			
-			loginButton.interactable = true;
 		}));
 		
     }
