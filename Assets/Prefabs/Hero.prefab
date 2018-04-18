@@ -202,6 +202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillMenuPanelPrefab: {fileID: 1938356632728700, guid: 59315770e8103fe409979b0b128cba36,
     type: 2}
+  skillMenuPanel: {fileID: 0}
+  skillNodePefab: {fileID: 1726530354651426, guid: 38b4471f5edea0040b39f59a1961a6f6,
+    type: 2}
 --- !u!114 &114652310600041700
 MonoBehaviour:
   m_ObjectHideFlags: 1

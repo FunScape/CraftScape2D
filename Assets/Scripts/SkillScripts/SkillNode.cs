@@ -11,9 +11,12 @@ public class SkillNode
     private int id;
     public int getId() { return this.id; }
 
+    public Recipe recipe;
+
     //Lists what tier each skill is within the skill tree
     private int tier;
     public int getTier() { return this.tier; }
+    public void setTier(int tier) { this.tier = tier; return; }
 
     //Indicates whether the player has unlocked this skill
     private bool unlocked;

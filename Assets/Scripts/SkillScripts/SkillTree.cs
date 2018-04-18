@@ -18,15 +18,17 @@ public class SkillTree
     {
         this.tierSize = tierSize;
         this.skills = generateContent();
+
+        topologicalSort();
     }
 
     //Will eventually read from a database to create a bunch of SkillNodes
     //Right now, creates sample list for testing
     public static List<SkillNode> generateContent()
     {
-        List<SkillNode> content = new List<SkillNode> { };
+        List<SkillNode> content = new List<SkillNode>();
+        
         SkillNode pickaxe = new SkillNode(1, 1, false);
-
         SkillNode candle = new SkillNode(2, 2, false);
         SkillNode dagger = new SkillNode(3, 2, false);
         SkillNode ring = new SkillNode(4, 2, false);
@@ -46,5 +48,38 @@ public class SkillTree
         content.Add(ring);
 
         return content;
+    }
+
+    public void topologicalSort()
+    {
+        List<SkillNode> sortedSkills = new List<SkillNode>();
+
+        Dictionary<int, bool> visitedDict = new Dictionary<int, bool>();
+
+        foreach (SkillNode node in skills)
+        {
+            visitedDict.Add(node.getId(), false);
+        }
+
+        foreach (SkillNode node in skills)
+        {
+            if (!visitedDict[node.getId()])
+                topologicalSortRecurse(ref sortedSkills, ref visitedDict, node);
+        }
+
+        skills = sortedSkills;
+    }
+
+    public void topologicalSortRecurse(ref List<SkillNode> sortedSkills, ref Dictionary<int, bool> visitedDict, SkillNode node)
+    {
+        visitedDict[node.getId()] = true;
+
+        foreach (SkillNode child in node.children)
+        {
+            if (!visitedDict[child.getId()])
+                topologicalSortRecurse(ref sortedSkills, ref visitedDict, child);
+        }
+
+        sortedSkills.Add(node);
     }
 }
