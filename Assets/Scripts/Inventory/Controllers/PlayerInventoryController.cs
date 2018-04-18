@@ -13,8 +13,8 @@ public class PlayerInventoryController : InventoryController {
 		GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
 		GameObject equipmentInventoryContainer = mainCanvas.transform.Find("EquipmentInventoryContainer").gameObject;
 		inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
-		inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalPlayer>().netId.ToString()));
-		inventory.LoadInventory();
+		// inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalPlayer>().netId.ToString()));
+		// inventory.LoadInventory();
 
 		LayoutInventory();
 	}

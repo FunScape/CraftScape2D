@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainScene_COPY.unity
+    guid: fe69f344681764db78b5ac640f219eb7
+  - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: 1680a81702eb3824c8c8b89e20d3ba52
   - enabled: 1
@@ -14,6 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForestScene.unity
     guid: d39cdfb0b15333646bbe5519565fbfb7
-  - enabled: 1
-    path: Assets/Scenes/RiverScene.unity
-    guid: 714c294dee22441019e4901e92ae5100
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000

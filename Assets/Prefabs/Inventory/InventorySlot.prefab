@@ -90,6 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4e004aca3c1a74e9c617c11f7b12ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverTextPrefab: {fileID: 1283241692842330, guid: 598f2732c87038c4296a07cc03ca6e36,
+    type: 2}
 --- !u!114 &114436834497504392
 MonoBehaviour:
   m_ObjectHideFlags: 1

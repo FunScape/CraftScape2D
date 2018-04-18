@@ -18,14 +18,18 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	public void OnBeginDrag(PointerEventData eventData)
     {
-		owner = GameObject.FindWithTag("Player");
-        inventoryController = owner.GetComponent<InventoryController>();
-		draggedItem = inventoryController.OnBeginDragInventoryItem(slotIndex);
+		// Only begin dragging the item with the left mouse button
+		if (eventData.button == PointerEventData.InputButton.Left) {
+			owner = GameObject.FindWithTag("Player");
+			inventoryController = owner.GetComponent<InventoryController>();
+
+			draggedItem = inventoryController.OnBeginDragInventoryItem(slotIndex);
+		}
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-		if (draggedItem != null)
+		if (draggedItem != null && eventData.button == PointerEventData.InputButton.Left)
 		{
 			draggedItem.transform.position = eventData.position;
 
@@ -37,11 +41,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        inventoryController = player.GetComponent<InventoryController>();
-		inventoryController.OnEndDragInventoryItem(this.slotIndex);
-		draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		draggedItem = null;
+		if (draggedItem != null && eventData.button == PointerEventData.InputButton.Left) {
+			GameObject player = GameObject.FindWithTag("Player");
+			inventoryController = player.GetComponent<InventoryController>();
+			inventoryController.OnEndDragInventoryItem(this.slotIndex);
+			draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			draggedItem = null;
+		}
     }
 	
 	public void OnDropInventoryItem(GameObject dropped)

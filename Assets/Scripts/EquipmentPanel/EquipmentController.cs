@@ -14,6 +14,22 @@ public class EquipmentController : MonoBehaviour {
 
 	GameObject equipmentPanel;
 
+	private Equipment _equipment;
+	public Equipment equipment {
+		get { return _equipment; }
+		set { _equipment = value; UpdateEquipmentPanelUI(); }
+	}
+
+	EquipmentSlot Ring { get { return GetEquipmentSlot("Ring"); } }
+	EquipmentSlot Neck { get { return GetEquipmentSlot("Neck"); } }
+	EquipmentSlot Head { get { return GetEquipmentSlot("Head"); } }
+	EquipmentSlot Chest { get { return GetEquipmentSlot("Chest"); } }
+	EquipmentSlot MainHand { get { return GetEquipmentSlot("MainHand"); } }
+	EquipmentSlot Back { get { return GetEquipmentSlot("Back"); } }
+	EquipmentSlot Hands { get { return GetEquipmentSlot("Hands"); } }
+	EquipmentSlot Feet { get { return GetEquipmentSlot("Feet"); } }
+	EquipmentSlot Legs { get { return GetEquipmentSlot("Legs"); } }
+
 	// Use this for initialization
 	void Start () {
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
@@ -49,7 +65,15 @@ public class EquipmentController : MonoBehaviour {
 
 	void UpdateEquipmentPanelUI()
 	{
-
+		Ring.EquipItem(equipment.Ring);
+		Neck.EquipItem(equipment.Neck);
+		Head.EquipItem(equipment.Head);
+		Chest.EquipItem(equipment.Chest);
+		MainHand.EquipItem(equipment.MainHand);
+		Back.EquipItem(equipment.Back);
+		Hands.EquipItem(equipment.Hands);
+		Feet.EquipItem(equipment.Feet);
+		Legs.EquipItem(equipment.Legs);
 	}
 
 	GameObject draggedItem;
@@ -90,40 +114,61 @@ public class EquipmentController : MonoBehaviour {
 		draggedItemObject.GetComponent<EquipmentSlot>().ShowAsEmpty(false);
 	}
 
-	public void OnDropInventoryItem(GameObject equipmentSlotObject, GameObject droppedObject)
+	public void OnDropGameItem(GameObject equipmentSlotObject, GameObject droppedObject)
 	{
 		Inventory inventory = GameObject.FindWithTag("Player").GetComponent<InventoryController>().inventory;
 		InventorySlot inventorySlot = droppedObject.GetComponent<InventorySlot>();
-		InventoryItem item = inventory.GetItem(inventorySlot.slotIndex);
-		if (CanEquipItemType(item, equipmentSlotObject.name))
-		{
-			Debug.Log("You equiped item: " + item.title);
-			equipmentSlotObject.GetComponent<EquipmentSlot>().EquipItem(item);
-			inventory.RemoveItem(inventorySlot.slotIndex);
-			GetInventoryController().UpdateInventoryPanelUI(); 
-		}
-		else
-		{
+		GameItem item = inventory.GameItems[inventorySlot.slotIndex];
+
+		if (equipmentSlotObject.name == "Ring" && item.Types.Contains("ring"))
+			equipment.Ring = item;
+		else if (equipmentSlotObject.name == "Neck" && item.Types.Contains("neck"))
+			equipment.Neck = item;
+		else if (equipmentSlotObject.name == "Head" && item.Types.Contains("head"))
+			equipment.Head = item;
+		else if (equipmentSlotObject.name == "Chest" && item.Types.Contains("chest"))
+			equipment.Chest = item;
+		else if (equipmentSlotObject.name == "MainHand" && (item.Types.Contains("weapon") || item.Types.Contains("mainHand")))
+			equipment.MainHand = item;
+		else if (equipmentSlotObject.name == "Back" && item.Types.Contains("back"))
+			equipment.Back = item;
+		else if (equipmentSlotObject.name == "Hands" && item.Types.Contains("hands"))
+			equipment.Hands = item;
+		else if (equipmentSlotObject.name == "Feet" && item.Types.Contains("feet"))
+			equipment.Feet = item;
+		else if (equipmentSlotObject.name == "Legs" && item.Types.Contains("legs"))
+			equipment.Legs = item;
+		else {
 			Debug.Log("You can't equip that!");
+			return;
+		}
+
+		inventory.RemoveItem(inventorySlot.slotIndex);
+		GetInventoryController().UpdateInventoryPanelUI(); 
+		UpdateEquipmentPanelUI();
+
+		if (equipment.Dirty)
+		{
+			equipment.Save();
 		}
 	}
 	
 
-	bool CanEquipItemType(InventoryItem item, string equipmentSlotName)
+	bool CanEquipItemType(GameItem item, string slotName)
 	{
-		if (item.types.Contains("equipable"))
+		if (item.Equipable)
 		{
-			if (equipmentSlotName == "MainHand")
+			if (slotName == "MainHand")
 			{
-				if (item.types.Contains("weapon")) return true;
+				if (item.Types.Contains("weapon")) return true;
 			}
-			else if (equipmentSlotName == "Chest")
+			else if (slotName == "Chest")
 			{
-				 if (item.types.Contains("chest")) return true;
+				 if (item.Types.Contains("chest")) return true;
 			}
-			else if (equipmentSlotName == "Ring")
+			else if (slotName == "Ring")
 			{
-				if (item.types.Contains("ring")) return true;
+				if (item.Types.Contains("ring")) return true;
 			}
 		}
 		return false;
@@ -132,6 +177,18 @@ public class EquipmentController : MonoBehaviour {
     InventoryController GetInventoryController()
 	{
 		return GameObject.FindWithTag("Player").GetComponent<InventoryController>();
+	}
+
+	EquipmentSlot GetEquipmentSlot(string name)
+	{
+		GameObject equipmentPanel = GameObject.FindWithTag ("EquipmentPanel");
+		EquipmentSlot[] slots = equipmentPanel.GetComponentsInChildren<EquipmentSlot>();
+		foreach (EquipmentSlot slot in slots)
+		{
+			if (slot.gameObject.name == name)
+				return slot;
+		}
+		return null;
 	}
 
 }

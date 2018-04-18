@@ -39,7 +39,7 @@ public class InventoryController : MonoBehaviour
     protected void LayoutInventory()
     {
         GameObject slotContainer = inventoryPanel.transform.Find(inventorySlotsContainerName).gameObject;
-        for (int i = 0; i < this.inventory.size; i++)
+        for (int i = 0; i < this.inventory.Size; i++)
         {
             GameObject slot = Instantiate(
                 inventorySlotPrefab,
@@ -83,20 +83,20 @@ public class InventoryController : MonoBehaviour
     {
         List<GameObject> slots = GetInventorySlots();
 
-        for (int i = 0; i < inventory.size; i++)
+        for (int i = 0; i < inventory.Size; i++)
         {
             GameObject slotItem = slots[i].transform.Find("InventorySlotItem").gameObject;
             slotItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
             Image slotItemImage = slotItem.GetComponent<Image>();
-            InventoryItem item = inventory.GetItem(i);
+            GameItem item = inventory.GameItems[i];
             if (item != null)
             {
                 slotItemImage.sprite = item.sprite;
 
                 slotItemImage.color = slotItemImage.sprite == null ? clearColor : Color.white;
 
-                if (item.maxStackSize > 1)
-                    slots[i].GetComponentInChildren<Text>().text = item.stackSize.ToString();
+                if (item.MaxStackSize > 1)
+                    slots[i].GetComponentInChildren<Text>().text = item.StackSize.ToString();
                 else
                     slots[i].GetComponentInChildren<Text>().text = "";
 
@@ -115,31 +115,31 @@ public class InventoryController : MonoBehaviour
         if (other.gameObject.name == "chest")
         {
             int rand = Random.Range(0, 100);
-            InventoryItem item;
+            StaticGameItem item;
             if (rand > 50)
             {
                 // 50% chance the item will be an apple
-                item = inventory.FindDatabaseItem("apple");
+                item = GameItemDatabase.instance.GetItem("apple");
             }
             else if (rand > 90)
             {
                 // 10% chance the item will be a gold ring
-                item = inventory.FindDatabaseItem("gold ring");
+                item = GameItemDatabase.instance.GetItem("gold ring");
             }
             else
             {
-                item = inventory.FindDatabaseItem(Random.Range(2, 5));
+                item = GameItemDatabase.instance.GetItem(Random.Range(2, 5));
             }
 
-            inventory.AddItem(item);
+            inventory.AddItem(item, this);
             UpdateInventoryPanelUI();
         }
         else if (other.gameObject.name != null)
         {
-            InventoryItem item = inventory.FindDatabaseItem(other.gameObject.name);
+            StaticGameItem item = GameItemDatabase.instance.GetItem(other.gameObject.name);
             if (item != null)
             {
-                inventory.AddItem(item);
+                inventory.AddItem(item, this);
                 Destroy(other.gameObject);
                 UpdateInventoryPanelUI();
             }
@@ -177,7 +177,7 @@ public class InventoryController : MonoBehaviour
             slot.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
-        if (inventory.GetItem(slotIndex) != null)
+        if (GameItemDatabase.instance.GetItem(slotIndex) != null)
         {
             GameObject draggedSlotItem = inventorySlots[slotIndex].transform.Find("InventorySlotItem").gameObject;
             draggedInventoryItem = Instantiate(draggedSlotItem);
@@ -239,20 +239,20 @@ public class InventoryController : MonoBehaviour
         from.transform.Find("InventorySlotItem").gameObject.GetComponent<Image>().color = Color.white;
         to.transform.Find("InventorySlotItem").gameObject.GetComponent<Image>().color = Color.white;
 
-        inventory.SaveInventory();
+        inventory.Save(this);
     }
 
     public void OnDropEquipmentItem(GameObject inventorySlotObject, GameObject equipmentSlotObject)
     {
-        EquipmentController equipmentController = GetComponent<EquipmentController>();
+//        EquipmentController equipmentController = GetComponent<EquipmentController>();
 
         InventorySlot inventorySlot = inventorySlotObject.GetComponent<InventorySlot>();
         EquipmentSlot equipmentSlot = equipmentSlotObject.GetComponent<EquipmentSlot>();
 
-        InventoryItem inventoryItem = inventory.GetItem(inventorySlot.slotIndex);
+        GameItem inventoryItem = inventory.GameItems[inventorySlot.slotIndex];
         if (inventoryItem == null)
         {
-            inventory.SetItem(inventorySlot.slotIndex, equipmentSlot.UnEquipItem());
+            inventory.GameItems[inventorySlot.slotIndex] = equipmentSlot.UnEquipItem();
             UpdateInventoryPanelUI();
         }
         else
@@ -265,7 +265,6 @@ public class InventoryController : MonoBehaviour
     {
         int itemIndex = inventorySlot.GetComponent<InventorySlot>().slotIndex;
         inventory.RemoveItem(itemIndex);
-        inventory.SaveInventory();
         UpdateInventoryPanelUI();
     }
 

@@ -16,8 +16,10 @@ public class SetupLocalHero : NetworkBehaviour {
 		}
 		else
 		{
-            GetComponent<HeroController>().enabled = false;
+//			GetComponent<InventoryController>().enabled = false;
+//			GetComponent<EquipmentController>().enabled = false;
             GetComponent<HeroAnimationBehaviour>().enabled = false;
+			GetComponent<HeroController>().enabled = false;
 		}
 	}
 
