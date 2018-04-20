@@ -164,7 +164,7 @@ MonoBehaviour:
     type: 2}
   recipeSlotPrefab: {fileID: 1797330086665918, guid: a6b1bc97f3212dd44a02750b26c60dd7,
     type: 2}
-  ingredientSlotPrefab: {fileID: 1172668366452820, guid: df54eb19e16c85142ba333fc920abfd9,
+  ingredientSlotPrefab: {fileID: 1032000434965874, guid: 13440c89f5c68244e85553eca6763c6b,
     type: 2}
   recipeBookPanel: {fileID: 0}
   inventoryController: {fileID: 0}
