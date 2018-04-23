@@ -83,6 +83,22 @@ public class HeroController : MonoBehaviour
 								GetComponent<HeroInventoryController>().inventory = inventory;
 								GetComponent<HeroInventoryController>().SetupInventory();
 
+                                //Get character skills
+                                Debug.Log("Loading character skills...");
+                                StartCoroutine(manager.GetCharacterSkills((recipes) => {
+
+                                    //Find PlayerRecipeBookController
+                                    PlayerRecipeBookController recipeBookController = player.GetComponent<PlayerRecipeBookController>();
+
+                                    //Load recipes
+                                    recipeBookController.recipeBook.Load();
+
+                                    //Connect inventory to recipe book controller and layout recipe book.
+                                    recipeBookController.FindInventory();
+
+                                    //Layout recipe book
+                                    recipeBookController.LayoutRecipeBook();
+                                }));
                             }));
                         }));
                     }));

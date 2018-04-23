@@ -248,9 +248,6 @@ public class APIManager : MonoBehaviour {
 	}
 
     public IEnumerator GetCharacterSkills(System.Action<List<Recipe>> callback) {
-        //
-        Debug.Log("Loading character skills...");
-        //
         UnityWebRequest www = PrepareGETRequest(routes.characterSkill);
 
         yield return www.SendWebRequest();
@@ -263,6 +260,31 @@ public class APIManager : MonoBehaviour {
         }
         callback(recipes);
     }
+
+    /*public void GetCharacterSkills(System.Action<List<Recipe>> callback) {
+        //
+        Debug.Log("Loading character skills...");
+        //
+        UnityWebRequest www = PrepareGETRequest(routes.characterSkill);
+
+        www.SendWebRequest();
+
+        while (!www.isDone)
+        {
+
+        }
+
+        JsonData data = HandleResponse(www);
+
+        List<Recipe> recipes = new List<Recipe>();
+        foreach (JsonData characterSkill in data)
+        {
+            recipes.Add(Recipe.Parse(characterSkill["skill"], true));
+        }
+        callback(recipes);
+
+        return;
+    }*/
 
 	UnityWebRequest PrepareGETRequest(string url) {
 		UnityWebRequest www = UnityWebRequest.Get(url);

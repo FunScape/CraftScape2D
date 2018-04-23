@@ -62,12 +62,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		recipeBookPanel = Instantiate (recipeBookPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
         recipeBookPanel.GetComponent<RectTransform>().localPosition = new Vector3(Screen.width + 1000f, 0f, 0f);
-
-        inventoryController = GameObject.FindWithTag("Player").GetComponent<InventoryController>();
-        inventory = inventoryController.inventory;
-
-        LayoutRecipeBook ();
-
+        
         GameObject craftButtonObj = recipeBookPanel.transform.Find(craftButtonName).gameObject;
         Button craftButton = craftButtonObj.GetComponent<Button>();
 
@@ -80,7 +75,14 @@ public class PlayerRecipeBookController : MonoBehaviour {
 			ToggleRecipeBook ();
 	}
 
-	void LayoutRecipeBook() {
+    public void FindInventory() {
+        inventoryController = GameObject.FindWithTag("Player").GetComponent<InventoryController>();
+        inventory = inventoryController.inventory;
+
+        return;
+    }
+
+	public void LayoutRecipeBook() {
 
         GameObject recipesContainer = recipeBookPanel.transform.Find(recipesContainerName).gameObject;
 
@@ -175,7 +177,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 	}
 
 	void ToggleRecipeBook() {
-		
+        
 		showRecipeBook = !showRecipeBook;
 
         if (showRecipeBook)

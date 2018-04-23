@@ -58,4 +58,16 @@ public class RecipeBook {
             this.recipes = recipes;
         }));
     }
+
+    /*public void Load()
+    {
+        if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
+            return;
+
+        APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
+        apiManager.GetCharacterSkills((recipes) =>
+        {
+            this.recipes = recipes;
+        });
+    }*/
 }
