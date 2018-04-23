@@ -6,7 +6,7 @@ using LitJson;
 using System.IO;
 using System.Text;
 using System.Linq;
-
+using System;
 
 public class APIManager : MonoBehaviour {
 
@@ -261,30 +261,43 @@ public class APIManager : MonoBehaviour {
         callback(recipes);
     }
 
-    /*public void GetCharacterSkills(System.Action<List<Recipe>> callback) {
-        //
-        Debug.Log("Loading character skills...");
-        //
-        UnityWebRequest www = PrepareGETRequest(routes.characterSkill);
+    public IEnumerator GetAllSkills(System.Action<List<Recipe>> callback) {
+        UnityWebRequest www = PrepareGETRequest(routes.skill);
 
-        www.SendWebRequest();
-
-        while (!www.isDone)
-        {
-
-        }
+        yield return www.SendWebRequest();
 
         JsonData data = HandleResponse(www);
 
-        List<Recipe> recipes = new List<Recipe>();
-        foreach (JsonData characterSkill in data)
+        List<Recipe> skills = new List<Recipe>();
+        foreach (JsonData skill in data)
         {
-            recipes.Add(Recipe.Parse(characterSkill["skill"], true));
+            skills.Add(Recipe.Parse(skill, false));
         }
-        callback(recipes);
+        callback(skills);
+    }
 
-        return;
-    }*/
+    public IEnumerator GetSkillDependencies(System.Action<List<List<object>>> callback) {
+        UnityWebRequest www = PrepareGETRequest(routes.skillDependency);
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+        
+        //skillDependencies holds three lists: A list of ints, holding parent skill ids, a list of ints, holding child skill ids, and a list of characters, representing unions or intersections.
+        List<List<object>> skillDependencies = new List<List<object>>();
+        skillDependencies.Add(new List<object>());
+        skillDependencies.Add(new List<object>());
+        skillDependencies.Add(new List<object>());
+
+        foreach (JsonData dependency in data)
+        {
+            skillDependencies[0].Add((int)dependency["parent_skill"]);
+            skillDependencies[1].Add((int)dependency["child_skill"]);
+            skillDependencies[2].Add(((string)dependency["dependency_type"])[0]); //Since I can't convert between a single-character string and a char, I access the first character in the string and use that.
+        }
+
+        callback(skillDependencies);
+    }
 
 	UnityWebRequest PrepareGETRequest(string url) {
 		UnityWebRequest www = UnityWebRequest.Get(url);

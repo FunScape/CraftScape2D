@@ -98,6 +98,57 @@ public class HeroController : MonoBehaviour
 
                                     //Layout recipe book
                                     recipeBookController.LayoutRecipeBook();
+
+                                    //Get all skills
+                                    Debug.Log("Loading all skills...");
+                                    StartCoroutine(manager.GetAllSkills((skills) => {
+                                        PlayerSkillController skillController = player.GetComponent<PlayerSkillController>();
+
+                                        foreach (Recipe skill in skills)
+                                        {
+                                            SkillNode node = new SkillNode(skill);
+                                            if (recipeBookController.SearchRecipeBook(skill.id))
+                                                node.recipe.canCraft = true;
+                                            skillController.skillTrees[skill.skillType].skills.Add(node);
+                                        }
+
+                                        //Get skill dependencies
+                                        Debug.Log("Loading skill dependencies...");
+                                        StartCoroutine(manager.GetSkillDependencies((dependencies) =>
+                                        {//dependencies holds three lists: A list of ints, holding parent skill ids, a list of ints, holding child skill ids, and a list of characters, representing unions or intersections.
+                                            for (int i = 0; i < dependencies[0].Count; i++)
+                                            {
+                                                SkillNode parentNode = skillController.FindSkillNodeById((int)dependencies[0][i]);
+                                                SkillNode childNode = skillController.FindSkillNodeById((int)dependencies[1][i]);
+                                                SkillNode dependencyNode;
+                                                char dependencyType = (char)dependencies[2][i];
+                                                int depNodeId = 0; //-1 if the dependency is a union, -2 if the dependency is an intersection
+
+                                                if (dependencyType == 'U')
+                                                    depNodeId = -1;
+                                                if (dependencyType == 'I')
+                                                    depNodeId = -2;
+
+                                                //If the dependency node has already been created, it will be in childNode's dependency list, and it will be the only node of its type there.
+                                                dependencyNode = childNode.FindDependencyById(depNodeId);
+                                                if (dependencyNode == null)
+                                                {
+                                                    dependencyNode = new SkillNode(dependencyType);
+                                                    skillController.skillTrees[childNode.recipe.skillType].skills.Add(dependencyNode);
+                                                    childNode.dependencies.Add(dependencyNode);
+                                                }
+
+                                                parentNode.children.Add(dependencyNode);
+                                            }
+
+                                            foreach (string key in skillController.skillTrees.Keys)
+                                            {
+                                                skillController.skillTrees[key].topologicalSort();
+                                            }
+
+                                            skillController.LayoutSkillMenu();
+                                        }));
+                                    }));
                                 }));
                             }));
                         }));

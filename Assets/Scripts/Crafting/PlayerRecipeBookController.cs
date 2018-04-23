@@ -185,4 +185,14 @@ public class PlayerRecipeBookController : MonoBehaviour {
 		else
 			recipeBookPanel.transform.localPosition = new Vector3 (cameraWidth * 2, 0f, 0f);
 	}
+
+    public bool SearchRecipeBook(int searchRecipeId) {
+        foreach (Recipe recipe in recipeBook.recipes)
+        {
+            if (recipe.id == searchRecipeId)
+                return true;
+        }
+
+        return false;
+    }
 }
