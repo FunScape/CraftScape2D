@@ -8,8 +8,13 @@ using UnityEngine.EventSystems;
 public class HeroInventoryController : InventoryController
 {
 
-    public void SetupInventory()
+    public void SetupInventory(Inventory inventory = null)
     {
+        if (inventory == null)
+            inventory = Inventory.CreateInstance();
+
+        this.inventory = inventory;
+        
         // Get reference to main canvas object
         GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
 
@@ -27,6 +32,21 @@ public class HeroInventoryController : InventoryController
 
         // Layout/render inventory on canvas
         base.LayoutInventory();
+    }
+
+    public void UpdateCharacterDBPosition()
+    {
+        float posX = gameObject.transform.position.x;
+        float posY = gameObject.transform.position.y;
+
+        APIManager manager = GameObject.FindWithTag("APIManager").GetComponent<APIManager>();
+
+        Dictionary<string, float> data = new Dictionary<string, float>();
+        data.Add("position_x", posX);
+        data.Add("position_y", posX);
+
+        // manager.PreparePUTRequest();
+
     }
 
 

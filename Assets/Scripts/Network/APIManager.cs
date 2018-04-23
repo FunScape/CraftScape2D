@@ -247,7 +247,7 @@ public class APIManager : MonoBehaviour {
 		callback(items);
 	}
 
-	UnityWebRequest PrepareGETRequest(string url) {
+	public UnityWebRequest PrepareGETRequest(string url) {
 		UnityWebRequest www = UnityWebRequest.Get(url);
 		www.SetRequestHeader("Content-Type", "application/json");
 		if (APIManager.token != null)
@@ -255,12 +255,12 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePOSTRequest(string url, Dictionary<string, object> formData) {
+	public UnityWebRequest PreparePOSTRequest(string url, Dictionary<string, object> formData) {
 		JsonData jsonData = JsonMapper.ToJson(formData);
 		return PreparePOSTRequest(url, jsonData.ToString());
 	}
 
-	UnityWebRequest PreparePOSTRequest(string url, string json) {
+	public UnityWebRequest PreparePOSTRequest(string url, string json) {
 
 		UnityWebRequest www = UnityWebRequest.Put(url, json);
 		www.method = "POST";
@@ -271,7 +271,7 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePUTRequest(string url, string json)
+	public UnityWebRequest PreparePUTRequest(string url, string json)
 	{
 		UnityWebRequest www = UnityWebRequest.Put(url, json);
 		www.SetRequestHeader("Content-Type", "application/json");
@@ -281,16 +281,16 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
+	public UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
 	{
 		JsonData jsonData = JsonMapper.ToJson(formData);
 		return PreparePUTRequest(url, jsonData.ToString());
 	}
 
-	UnityWebRequest PrepareDELETERequest(string url)
+	public UnityWebRequest PrepareDELETERequest(string url)
 	{
 		UnityWebRequest www = UnityWebRequest.Delete (url);
-		www.SetRequestHeader ("Content-Type", "application/json; charset=utf8");
+		www.SetRequestHeader("Content-Type", "application/json; charset=utf8");
 		www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
 		www.chunkedTransfer = false;
 		return www;
@@ -299,11 +299,6 @@ public class APIManager : MonoBehaviour {
 	JsonData HandleResponse(UnityWebRequest www) {
 		if (www.isNetworkError || www.isHttpError) {
 			throw new System.Exception (www.downloadHandler.text);
-//			if (www.downloadHandler != null && www.downloadHandler.text != null)
-//				Debug.LogError (www.downloadHandler.text);
-//			else
-//				Debug.LogError (www.error);
-//			return null;
 		}
 
 		JsonData data = JsonMapper.ToObject(www.downloadHandler.text);

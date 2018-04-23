@@ -1258,8 +1258,6 @@ MonoBehaviour:
   rememberToggle: {fileID: 114578093950401504}
   isGameHost: {fileID: 114865369899930082}
   loginButton: {fileID: 114780673431625460}
-  networkManager: {fileID: 0}
-  apiManager: {fileID: 0}
 --- !u!114 &114928627059810426
 MonoBehaviour:
   m_ObjectHideFlags: 1
