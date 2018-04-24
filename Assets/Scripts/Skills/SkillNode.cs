@@ -27,9 +27,7 @@ public class SkillNode
     private int tier;
     public int getTier() { return this.tier; }
     public void setTier(int tier) { this.tier = tier; return; }
-
-    //Indicates whether the player has unlocked this skill
-    public bool getUnlocked() { return recipe.canCraft; }
+    
     public void setUnlocked(bool canCraft) { recipe.canCraft = canCraft; }
 
     //A list of references to skillNodes that require this skill node to be unlocked before they can be unlocked
@@ -38,9 +36,9 @@ public class SkillNode
     //A list of references to skillNodes that this skill require before it can be unlocked
     public List<SkillNode> dependencies;
 
-    static string spritePath = "Sprites/";
-    static string unionSpriteName = "union.png";
-    static string intersectionSpriteName = "intersection.png";
+    protected const string spritePath = "Sprites/";
+    protected const string unionSpriteName = "union";
+    protected const string intersectionSpriteName = "intersection";
 
     //Default constructor, for testing only
     public SkillNode()
@@ -125,5 +123,46 @@ public class SkillNode
             return (Sprite)Resources.Load(spritePath + intersectionSpriteName, typeof(Sprite));
         else
             return null;
+    }
+
+    public string getDescription()
+    {
+        if (getId() == -1)
+        {
+            return "Union node. All skills leading to this node must be unlocked to unlock this node.";
+        }
+        else if (getId() == -2)
+        {
+            return "Intersection node. At least one skill leading to this node must be unlocked to unlock this node.";
+        }
+        else
+            return recipe.product.Description;
+    }
+
+    //Indicates whether the player has unlocked this skill
+    public bool getUnlocked()
+    {
+        if (getId() == -1)
+        {
+            foreach (SkillNode depend in dependencies)
+            {
+                if (!depend.recipe.canCraft)
+                    return false;
+            }
+
+            return true;
+        }
+        else if (getId() == -2)
+        {
+            foreach (SkillNode depend in dependencies)
+            {
+                if (depend.recipe.canCraft)
+                    return true;
+            }
+
+            return false;
+        }
+        else
+            return recipe.canCraft;
     }
 }

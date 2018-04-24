@@ -72,10 +72,10 @@ public class SkillTree
     {
         visitedDict[node] = true;
 
-        foreach (SkillNode child in node.children)
+        foreach (SkillNode parent in node.dependencies)
         {
-            if (!visitedDict[child])
-                topologicalSortRecurse(ref sortedSkills, ref visitedDict, child);
+            if (!visitedDict[parent])
+                topologicalSortRecurse(ref sortedSkills, ref visitedDict, parent);
         }
 
         sortedSkills.Add(node);

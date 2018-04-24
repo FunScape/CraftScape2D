@@ -76,9 +76,6 @@ public class HeroController : MonoBehaviour
                             StartCoroutine(manager.GetStaticGameItems((staticItems) => {
 								GameItemDatabase.instance.gameItems = staticItems;
 
-								// Move login form off screen
-								GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
-
 								// Add inventory and do initial setup
 								GetComponent<HeroInventoryController>().inventory = inventory;
 								GetComponent<HeroInventoryController>().SetupInventory();
@@ -128,7 +125,7 @@ public class HeroController : MonoBehaviour
                                                     depNodeId = -1;
                                                 if (dependencyType == 'I')
                                                     depNodeId = -2;
-
+                                                
                                                 //If the dependency node has already been created, it will be in childNode's dependency list, and it will be the only node of its type there.
                                                 dependencyNode = childNode.FindDependencyById(depNodeId);
                                                 if (dependencyNode == null)
@@ -136,9 +133,44 @@ public class HeroController : MonoBehaviour
                                                     dependencyNode = new SkillNode(dependencyType);
                                                     skillController.skillTrees[childNode.recipe.skillType].skills.Add(dependencyNode);
                                                     childNode.dependencies.Add(dependencyNode);
+                                                    dependencyNode.children.Add(childNode);
                                                 }
 
                                                 parentNode.children.Add(dependencyNode);
+                                                dependencyNode.dependencies.Add(parentNode);
+                                            }
+
+                                            //Now that the dependencies are all established, iterate over all the nodes and eliminate unnecessary union and intersection nodes (e.g., union/intersection nodes with only one dependency.
+                                            foreach (string key in skillController.skillTrees.Keys)
+                                            {
+                                                List<SkillNode> skillList = skillController.skillTrees[key].skills;
+                                                List<SkillNode> nodesToBeDeleted = new List<SkillNode>();
+
+                                                foreach (SkillNode node in skillList)
+                                                {
+                                                    if (node.getId() < 0)
+                                                    {
+                                                        if (node.dependencies.Count == 1)
+                                                        {//Make connections between nodes on either side, remove connections to this node, and delete this node.
+                                                            SkillNode depNode = node.dependencies[0];
+                                                            depNode.children.Remove(node);
+                                                            foreach (SkillNode childNode in node.children)
+                                                            {
+                                                                depNode.children.Add(childNode);
+                                                                childNode.dependencies.Add(depNode);
+
+                                                                childNode.dependencies.Remove(node);
+                                                            }
+
+                                                            nodesToBeDeleted.Add(node);
+                                                        }
+                                                    }
+                                                }
+
+                                                foreach (SkillNode node in nodesToBeDeleted)
+                                                {
+                                                    skillList.Remove(node);
+                                                }
                                             }
 
                                             foreach (string key in skillController.skillTrees.Keys)
@@ -147,6 +179,9 @@ public class HeroController : MonoBehaviour
                                             }
 
                                             skillController.LayoutSkillMenu();
+
+                                            // Move login form off screen
+                                            GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
                                         }));
                                     }));
                                 }));
