@@ -93,6 +93,21 @@ public class APIManager : MonoBehaviour {
 		callback(Character.Parse(data));
 	}
 
+    public IEnumerator UpdateCharacterPosition(Character character, float x, float y, System.Action<Character> callback)
+    {
+        Dictionary<string, object> formData = new Dictionary<string, object>();
+        formData.Add("x_pos", x);
+        formData.Add("y_pos", y);
+
+        UnityWebRequest www = PreparePUTRequest(routes.character + "/" + character.Id + "/", formData);
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+
+        callback(Character.Parse(data));
+    }
+
 	public IEnumerator GetInventory(int id, System.Action<Inventory> callback)
 	{
 		UnityWebRequest www = PrepareGETRequest(routes.inventory + "/" + id.ToString());
@@ -112,7 +127,9 @@ public class APIManager : MonoBehaviour {
 
 		JsonData data = HandleResponse(www);
 
-		callback(Inventory.Parse(data));
+		Inventory inventory = Inventory.Parse(data);
+
+		callback(inventory);
 	}
 
 	public IEnumerator UpdateInventory(Inventory inventory, System.Action<Inventory> callback)
@@ -157,7 +174,6 @@ public class APIManager : MonoBehaviour {
 	{
 		Dictionary<string, object> formData = item.ToDict();
 		formData.Add("static_game_item", item.StaticGameItemId);
-		formData.Add ("created_by_id", item.CreatedById);
 
 		UnityWebRequest www = PreparePOSTRequest(routes.gameItem, formData);
 

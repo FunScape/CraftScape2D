@@ -45,6 +45,11 @@ public class EquipmentController : MonoBehaviour {
 		}
 	}
 
+	void OnApplicationQuit()
+	{
+		equipment.Save();		
+	}
+
 	void ToggleEquipment()
 	{
 		showEquipmentPanel = !showEquipmentPanel;
@@ -105,18 +110,20 @@ public class EquipmentController : MonoBehaviour {
 		}
 	}
 
-	public void OnEndDragEquipedItem(GameObject draggedItemObject)
+	public void OnEndDragEquipedItem(GameObject draggedItemObject, string slotName)
 	{
 		if (draggedItem != null)
 		{
 			Destroy(draggedItem);
 		}
 		draggedItemObject.GetComponent<EquipmentSlot>().ShowAsEmpty(false);
+		RemoveItem(slotName);
+		GetInventoryController().inventory.Save();
 	}
 
 	public void OnDropGameItem(GameObject equipmentSlotObject, GameObject droppedObject)
 	{
-		Inventory inventory = GameObject.FindWithTag("Player").GetComponent<InventoryController>().inventory;
+		Inventory inventory = GetInventoryController().inventory;
 		InventorySlot inventorySlot = droppedObject.GetComponent<InventorySlot>();
 		GameItem item = inventory.GameItems[inventorySlot.slotIndex];
 
@@ -152,27 +159,6 @@ public class EquipmentController : MonoBehaviour {
 			equipment.Save();
 		}
 	}
-	
-
-	bool CanEquipItemType(GameItem item, string slotName)
-	{
-		if (item.Equipable)
-		{
-			if (slotName == "MainHand")
-			{
-				if (item.Types.Contains("weapon")) return true;
-			}
-			else if (slotName == "Chest")
-			{
-				 if (item.Types.Contains("chest")) return true;
-			}
-			else if (slotName == "Ring")
-			{
-				if (item.Types.Contains("ring")) return true;
-			}
-		}
-		return false;
-	}
 
     InventoryController GetInventoryController()
 	{
@@ -189,6 +175,29 @@ public class EquipmentController : MonoBehaviour {
 				return slot;
 		}
 		return null;
+	}
+
+	void RemoveItem(string slotName)
+	{
+		if (slotName == "Ring")
+			equipment.Ring = null;
+		else if (slotName == "Neck")
+			equipment.Neck = null;
+		else if (slotName == "Head")
+			equipment.Head = null;
+		else if (slotName == "Chest")
+			equipment.Chest = null;
+		else if (slotName == "MainHand")
+			equipment.MainHand = null;
+		else if (slotName == "Back")
+			equipment.Back = null;
+		else if (slotName == "Hands")
+			equipment.Hands = null;
+		else if (slotName == "Feet")
+			equipment.Feet = null;
+		else if (slotName == "Legs")
+			equipment.Legs = null;
+		equipment.Save();
 	}
 
 }

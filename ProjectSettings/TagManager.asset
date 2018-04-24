@@ -19,6 +19,7 @@ TagManager:
   - EquipmentSlot
   - APIManager
   - NetworkManager
+  - LoginContainer
   layers:
   - Default
   - TransparentFX

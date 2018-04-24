@@ -10,7 +10,8 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDr
 
 	Dictionary<string, Sprite> slotEmptySprites;
 
-    void Start () {
+	void Awake()
+	{
 		// Get sprites used as placeholder images for empty inventory slots.
 		string spritePath = Database.itemSpritesPath;
 		slotEmptySprites = new Dictionary<string, Sprite>() 
@@ -25,6 +26,10 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDr
 			{ "Legs", (Sprite)Resources.Load(spritePath + "pants_grey", typeof(Sprite)) },
 			{ "Feet", (Sprite)Resources.Load(spritePath + "boots_grey", typeof(Sprite)) }
 		};
+	}
+
+    void Start () {
+		
 	}
 
 	public GameItem GetEquipedItem()
@@ -71,7 +76,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        GetEquipmentController().OnEndDragEquipedItem(this.gameObject);
+        GetEquipmentController().OnEndDragEquipedItem(this.gameObject, gameObject.name);
     }
 
     public void OnDrop(PointerEventData eventData)

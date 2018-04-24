@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class HeroController : MonoBehaviour
 
     Rigidbody2D body;
 
-    User user;
-    Character character;
+    public User user;
+    public Character character;
     Inventory[] inventories = new Inventory[5];
+
+    Slider progressBar;
+    Text progressBarText;
+    GameObject loginContainer;
 
     // Use this for initialization
     void Start()
@@ -27,23 +32,25 @@ public class HeroController : MonoBehaviour
         Move();
     }
 
+    private void OnApplicationQuit()
+    {
+        UpdateCharacterPosition();
+    }
+
     void InitializeCharacter() {
 		
 		GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
 		APIManager manager = APIManager.GetComponent<APIManager>();
+        loginContainer = GameObject.FindGameObjectWithTag("LoginContainer");
 
         // Init character without database interaction.
         if (PlayerPrefs.GetInt("IsLocalPlayer") == 1) {
 
-			Inventory inventory = Inventory.CreateInstance ();
-
-			// Setup inventory with no starting items
-			GetComponent<HeroInventoryController>().inventory = inventory;
-
             GetComponent<HeroInventoryController>().SetupInventory();
+            GetComponent<EquipmentController>().equipment = Equipment.CreateInstance();
 
             // Move login form off screen
-            GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+            loginContainer.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
 
 			// Still need to get static game items...
 			Debug.Log("Loading static items...");
@@ -52,37 +59,57 @@ public class HeroController : MonoBehaviour
 			}));
 
         } else {
-			
-            Debug.Log("Loading user...");
+
+            progressBar = GameObject.Find("ProgressBar").GetComponent<Slider>();
+            progressBarText = GameObject.Find("ProgressBarText").GetComponent<Text>();
+
+            int callbackCount = 6;
+
+            progressBar.value = 1.0f / callbackCount;
+            progressBarText.text = "Loading user...";
+
             StartCoroutine(manager.GetUser((user) => {
                 this.user = user;
 
-                Debug.Log("Loading character...");
+                progressBar.value = 2.0f / callbackCount;
+                progressBarText.text = "Loading character...";
+
                 StartCoroutine(manager.GetCharacter(user.characterUrls[0], (character) => {
                     this.character = character;
-                    
-                    Debug.Log("Loading character inventory...");
+
+                    if (character.Position != null)
+                        transform.position = new Vector3(character.Position.x, character.Position.y, 0);
+
+                    progressBar.value = 3f / callbackCount;
+                    progressBarText.text = "Loading inventory...";
+
                     StartCoroutine(manager.GetInventory(character.inventoryUrls[0], (inventory) => {
 
-                        Debug.Log("Loading character equipment...");
+                        // Add inventory and do initial setup
+                        GetComponent<HeroInventoryController>().SetupInventory(inventory);
+
+                        progressBar.value = 4f / callbackCount;
+                        progressBarText.text = "Loading equipment...";
+
                         StartCoroutine(manager.GetEquipment(character, (equipment) => {
                             character.equipment = equipment;
                             GameObject player = GameObject.FindWithTag("Player");
                             EquipmentController eController = player.GetComponent<EquipmentController>();
                             eController.equipment = equipment;
 
+                            progressBar.value = 5f / callbackCount;
+                            progressBarText.text = "Loading static game items...";
+
                             // Get static game items
                             Debug.Log("Loading static items...");
                             StartCoroutine(manager.GetStaticGameItems((staticItems) => {
 								GameItemDatabase.instance.gameItems = staticItems;
 
-								// Move login form off screen
-								GameObject.Find("LoginForm").GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
+                                progressBar.value = 1f;
+                                progressBarText.text = "done!";
 
-								// Add inventory and do initial setup
-								GetComponent<HeroInventoryController>().inventory = inventory;
-								GetComponent<HeroInventoryController>().SetupInventory();
-
+                                // Move login form off screen
+                                loginContainer.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
                             }));
                         }));
                     }));
@@ -93,6 +120,22 @@ public class HeroController : MonoBehaviour
 
 
         
+    }
+
+    // Updates the characters position in the database
+    public void UpdateCharacterPosition()
+    {
+        float posX = gameObject.transform.position.x;
+        float posY = gameObject.transform.position.y;
+
+        Character character = GetComponent<HeroController>().character;
+
+        APIManager manager = GameObject.FindWithTag("APIManager").GetComponent<APIManager>();
+
+        StartCoroutine(manager.UpdateCharacterPosition(character, posX, posY, (c) => {
+            Debug.LogFormat("Updated {0}'s position", character.Name);
+            character.Position = c.Position;
+        }));
     }
 
     private void Move()

@@ -24,30 +24,11 @@ public class HeroInventoryController : InventoryController
         // Instantiate inventory panel
         base.inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
 
-        // Tell inventory what file to write objects to
-        // base.inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalHero>().netId.ToString()));
-
-        // Load inventory items from file
-        // base.inventory.LoadInventory();
-
         // Layout/render inventory on canvas
         base.LayoutInventory();
     }
 
-    public void UpdateCharacterDBPosition()
-    {
-        float posX = gameObject.transform.position.x;
-        float posY = gameObject.transform.position.y;
-
-        APIManager manager = GameObject.FindWithTag("APIManager").GetComponent<APIManager>();
-
-        Dictionary<string, float> data = new Dictionary<string, float>();
-        data.Add("position_x", posX);
-        data.Add("position_y", posX);
-
-        // manager.PreparePUTRequest();
-
-    }
+    
 
 
 }

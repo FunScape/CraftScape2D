@@ -14,6 +14,8 @@ public class LoginForm : MonoBehaviour {
     public Toggle rememberToggle;
 	public Toggle isGameHost;
 	public Button loginButton;
+    public Slider progressBar;
+    public Text progressBarText;
 	GameObject networkManager { get { return GameObject.FindWithTag ("NetworkManager"); } }
 	GameObject apiManager { get { return GameObject.FindWithTag ("APIManager"); } }
 
@@ -73,8 +75,17 @@ public class LoginForm : MonoBehaviour {
 
 		loginButton.interactable = false;
 
+        progressBar.gameObject.SetActive(true);
+        progressBarText.gameObject.SetActive(true);
+
+        progressBar.value = 0;
+        progressBarText.text = "Logging in...";
+
 		StartCoroutine(manager.Login(usernameField.text, passwordField.text, (success) => {
-			if (success) {
+
+            progressBarText.text = "Login successful!";
+
+            if (success) {
 				if (isGameHost.isOn)
 					networkManager.GetComponent<CSNetworkManager>().StartHost();
 				else
