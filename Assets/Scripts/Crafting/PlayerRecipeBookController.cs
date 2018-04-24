@@ -20,7 +20,9 @@ public class PlayerRecipeBookController : MonoBehaviour {
 
     public Inventory inventory;
 
-	public RecipeBook recipeBook;
+    PlayerSkillController skillController;
+
+    public RecipeBook recipeBook;
 
     public Recipe selectedRecipe;
 
@@ -29,16 +31,13 @@ public class PlayerRecipeBookController : MonoBehaviour {
 	float cameraHeight;
 	float cameraWidth;
 
+    protected const string recipesScrollViewName = "RecipesScrollView";
+    protected const string recipesViewPortName = "Viewport";
     protected const string recipesContainerName = "RecipesContainer";
-
     protected const string ingredientsContainerName = "IngredientsContainer";
-
     protected const string productImageName = "RecipeProductImage";
-
     protected const string craftButtonName = "CraftButton";
-
     protected const string ingredientImageName = "IngredientImage";
-
     protected const string ingredientTextName = "IngredientCount";
 
 	// Use this for initialization
@@ -62,7 +61,9 @@ public class PlayerRecipeBookController : MonoBehaviour {
 		GameObject mainCanvas = GameObject.FindWithTag ("MainCanvas");
 		recipeBookPanel = Instantiate (recipeBookPanelPrefab, Vector3.zero, Quaternion.identity, mainCanvas.transform);
         recipeBookPanel.GetComponent<RectTransform>().localPosition = new Vector3(Screen.width + 1000f, 0f, 0f);
-        
+
+        skillController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkillController>();
+
         GameObject craftButtonObj = recipeBookPanel.transform.Find(craftButtonName).gameObject;
         Button craftButton = craftButtonObj.GetComponent<Button>();
 
@@ -83,8 +84,17 @@ public class PlayerRecipeBookController : MonoBehaviour {
     }
 
 	public void LayoutRecipeBook() {
+        
+        GameObject recipesScrollView = recipeBookPanel.transform.Find(recipesScrollViewName).gameObject;
+        GameObject recipesViewPort = recipesScrollView.transform.Find(recipesViewPortName).gameObject;
+        GameObject recipesContainer = recipesViewPort.transform.Find(recipesContainerName).gameObject;
 
-        GameObject recipesContainer = recipeBookPanel.transform.Find(recipesContainerName).gameObject;
+        foreach (Transform recipeSlotTransform in recipesContainer.transform)
+        {
+            Destroy(recipeSlotTransform.gameObject);
+        }
+
+        recipesContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(125f, Mathf.Max(230f, recipeBook.recipes.Count * 50f));
 
 		foreach (Recipe recipe in recipeBook.recipes) {
             GameObject slot = Instantiate(
@@ -157,9 +167,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 		
 		bool hasRequiredIngredients = true;
 
-        HeroInventoryController controller = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroInventoryController>();
-
-		foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
+        foreach (RecipeRequirement ingredient in selectedRecipe.ingredients) {
 			hasRequiredIngredients = hasRequiredIngredients && (inventory.CheckQuantity (ingredient.ingredient.Id) >= ingredient.quantity);
 		}
 
@@ -168,9 +176,12 @@ public class PlayerRecipeBookController : MonoBehaviour {
 				inventory.RemoveQtyOfItems (ingredient.ingredient.Id, ingredient.quantity);
 			}
 
-			inventory.AddItem (selectedRecipe.product.Id, controller);
+			inventory.AddItem (selectedRecipe.product.Id, inventoryController);
 
-			inventoryController.UpdateInventoryPanelUI ();
+            skillController.AddXP(selectedRecipe.expReward);
+            skillController.LayoutXP();
+
+            inventoryController.UpdateInventoryPanelUI ();
 		}
 
         DisplayIngredients();
@@ -194,5 +205,11 @@ public class PlayerRecipeBookController : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public void AddRecipe(Recipe recipe)
+    {
+        recipeBook.recipes.Add(recipe);
+        LayoutRecipeBook();
     }
 }

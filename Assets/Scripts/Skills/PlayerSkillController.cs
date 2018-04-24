@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerSkillController : MonoBehaviour {
 
+    public Character character;
+
     public GameObject skillMenuPanelPrefab;
 
     public GameObject skillMenuPanel;
+
+    public GameObject selectionPanel;
 
     public GameObject skillNodePrefab;
 
@@ -21,6 +25,8 @@ public class PlayerSkillController : MonoBehaviour {
 
     bool showSkillMenu;
 
+    public PlayerRecipeBookController recipeBookController;
+    
     float cameraHeight;
     float cameraWidth;
 
@@ -35,6 +41,8 @@ public class PlayerSkillController : MonoBehaviour {
     protected const string selectionButtonName = "SelectionButton";
     protected const string ingredientImageName = "IngredientImage";
     protected const string ingredientTextName = "IngredientCount";
+    protected const string experienceCostTextName = "ExperienceCostText";
+    protected const string totalExperienceTextName = "TotalExperienceText";
 
     protected const string spritePath = "Sprites/";
     protected const string unlockedSpriteName = "unlocked";
@@ -50,12 +58,16 @@ public class PlayerSkillController : MonoBehaviour {
         GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
         
         skillMenuPanel = Instantiate(skillMenuPanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, mainCanvas.transform);
+        selectionPanel = skillMenuPanel.transform.Find(selectionPanelName).gameObject;
         ToggleSkillMenu();
 
         skillTrees = new Dictionary<string, SkillTree>();
         skillTrees.Add("Blacksmithing", new SkillTree(1));
         selectedTree = skillTrees["Blacksmithing"];
-	}
+
+        recipeBookController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRecipeBookController>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -69,17 +81,27 @@ public class PlayerSkillController : MonoBehaviour {
 
         LayoutTreePanel();
         LayoutSelectedSkill();
+        LayoutXP();
+    }
+
+    public void LayoutXP()
+    {
+        GameObject totalExperience = selectionPanel.transform.Find(totalExperienceTextName).gameObject;
+        Text totalExperienceText = totalExperience.GetComponent<Text>();
+
+        totalExperienceText.text = GetXP().ToString();
     }
 
     public void LayoutSelectedSkill()
     {
-        GameObject selectionPanel = skillMenuPanel.transform.Find(selectionPanelName).gameObject;
         GameObject selectionImage = selectionPanel.transform.Find(selectionImageName).gameObject;
         GameObject selectionText = selectionPanel.transform.Find(selectionTextName).gameObject;
         GameObject selectionButton = selectionPanel.transform.Find(selectionButtonName).gameObject;
+        GameObject experienceCost = selectionPanel.transform.Find(experienceCostTextName).gameObject;
 
         selectionText.GetComponent<Text>().text = selectedSkill.getDescription();
         selectionImage.GetComponent<Image>().sprite = selectedSkill.getSprite();
+        Text experienceCostText = experienceCost.GetComponent<Text>();
 
         ClearIngredients();
 
@@ -89,17 +111,31 @@ public class PlayerSkillController : MonoBehaviour {
         }
 
         if (selectedSkill.getUnlocked())
+        {
             selectionButton.GetComponent<Image>().sprite = (Sprite)Resources.Load(spritePath + unlockedSpriteName, typeof(Sprite));
+            selectionButton.GetComponent<Button>().onClick.RemoveAllListeners();
+
+            experienceCostText.text = "";
+        }
         else
         {
             selectionButton.GetComponent<Image>().sprite = (Sprite)Resources.Load(spritePath + lockedSpriteName, typeof(Sprite));
-            //selectionButton.GetComponent<Button>().onClick = UnlockSkill();
+            selectionButton.GetComponent<Button>().onClick.AddListener(delegate { UnlockSkill(); });
+            
+            experienceCostText.text = selectedSkill.getXPCostString();
+
+            if (selectedSkill.getId() >= 0)
+            {
+                if (GetXP() >= selectedSkill.recipe.expCost)
+                    experienceCostText.color = Color.green;
+                else
+                    experienceCostText.color = Color.red;
+            }
         }
     }
 
     public void ClearIngredients()
     {
-        GameObject selectionPanel = skillMenuPanel.transform.Find(selectionPanelName).gameObject;
         GameObject ingredientsContainer = selectionPanel.transform.Find(ingredientsPanelName).gameObject;
 
         foreach (Transform slotTransform in ingredientsContainer.transform)
@@ -110,7 +146,6 @@ public class PlayerSkillController : MonoBehaviour {
 
     public void LayoutIngredients()
     {
-        GameObject selectionPanel = skillMenuPanel.transform.Find(selectionPanelName).gameObject;
         GameObject ingredientsContainer = selectionPanel.transform.Find(ingredientsPanelName).gameObject;
         Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryController>().inventory;
 
@@ -256,5 +291,37 @@ public class PlayerSkillController : MonoBehaviour {
     {
         selectedSkill = skill;
         LayoutSelectedSkill();
+    }
+
+    public void UnlockSkill()
+    {
+        if (GetXP() < selectedSkill.recipe.expCost)
+            return;
+        else
+        {
+            SpendXP(selectedSkill.recipe.expCost);
+            selectedSkill.recipe.canCraft = true;
+
+            recipeBookController.AddRecipe(selectedSkill.recipe);
+
+            LayoutSelectedSkill();
+        }
+    }
+
+    public void AddXP(int xp)
+    {
+        character.experience += xp;
+        LayoutXP();
+    }
+
+    public void SpendXP(int xp)
+    {
+        character.experience -= xp;
+        LayoutXP();
+    }
+
+    public int GetXP()
+    {
+        return character.experience;
     }
 }

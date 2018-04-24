@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d104c6c1772f2848b5bf20a081da41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeBookPanelPrefab: {fileID: 1187763930066720, guid: 6ac023fc0b3f9be48afd5ec54f048590,
+  recipeBookPanelPrefab: {fileID: 1399914318393860, guid: 9ac7894a73937a24d917e4751d8618b4,
     type: 2}
   recipeButtonPrefab: {fileID: 1053539072311302, guid: 132b2d8f4ace3aa4d94659e0e4c9cd52,
     type: 2}
@@ -242,13 +242,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e8d1d4d5640c4bb44a80c0109dccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   skillMenuPanelPrefab: {fileID: 1162175526828914, guid: 3f3c76e9e9a577b47add89ebe5b4829c,
     type: 2}
   skillMenuPanel: {fileID: 0}
+  selectionPanel: {fileID: 0}
   skillNodePrefab: {fileID: 1726530354651426, guid: 38b4471f5edea0040b39f59a1961a6f6,
     type: 2}
   ingredientSlotPrefab: {fileID: 1032000434965874, guid: 5401e1dfaf67d6444994f7920d234e3e,
     type: 2}
+  recipeBookController: {fileID: 0}
 --- !u!114 &114669240750345662
 MonoBehaviour:
   m_ObjectHideFlags: 1

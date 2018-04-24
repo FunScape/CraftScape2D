@@ -27,6 +27,11 @@ public class HeroController : MonoBehaviour
         Move();
     }
 
+    public Character GetCharacter()
+    {
+        return character;
+    }
+
     void InitializeCharacter() {
 		
 		GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
@@ -100,6 +105,7 @@ public class HeroController : MonoBehaviour
                                     Debug.Log("Loading all skills...");
                                     StartCoroutine(manager.GetAllSkills((skills) => {
                                         PlayerSkillController skillController = player.GetComponent<PlayerSkillController>();
+                                        skillController.character = this.character;
 
                                         foreach (Recipe skill in skills)
                                         {

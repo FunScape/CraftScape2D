@@ -122,7 +122,7 @@ public class Inventory : ScriptableObject {
         {
             if (item != null)
             {
-                if (item.Id == checkItemId)
+                if (item.StaticGameItemId == checkItemId)
                     qty += item.StackSize;
             }
         }
@@ -185,7 +185,7 @@ public class Inventory : ScriptableObject {
         {
             if (item != null)
             {
-                if (item.Id == id)
+                if (item.StaticGameItemId == id)
                 {
                     if (item.StackSize> qty)
                     {

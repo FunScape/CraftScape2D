@@ -139,6 +139,14 @@ public class SkillNode
             return recipe.product.Description;
     }
 
+    public string getXPCostString()
+    {
+        if (getId() < 0)
+            return "";
+        else
+            return recipe.expCost.ToString();
+    }
+
     //Indicates whether the player has unlocked this skill
     public bool getUnlocked()
     {
