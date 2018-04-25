@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 public class HeroEquipmentController : EquipmentController
 {
 
-	void ToggleEquipment()
+	new void ToggleEquipment()
 	{
-		if (GameObject.FindWithTag ("Player").GetComponent<SetupLocalHero> ().isLocalPlayer) {
+		if (GameManager.GetLocalPlayer().GetComponent<SetupLocalHero> ().isLocalPlayer) {
 
 			if (Input.GetKeyDown (KeyCode.B)) 
 			{

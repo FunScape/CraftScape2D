@@ -116,6 +116,9 @@ public class InventoryController : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
+		if (!GameManager.GetLocalPlayer ().GetComponent<SetupLocalHero> ().isLocalPlayer)
+			return;
+		
         if (other.gameObject.name == "chest")
         {
             int rand = Random.Range(0, 100);
