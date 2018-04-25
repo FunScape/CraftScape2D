@@ -145,15 +145,6 @@ public class InventoryController : MonoBehaviour
 
                 } else {
 
-                    if (other.gameObject.name == "iron_ingot")
-                    {
-                        // Debug.Log(GameManager.instance.LocalPlayer().GetComponent<HeroController>().character.Name)
-                        if (GameManager.instance.LocalPlayer().GetComponent<HeroController>().character.Name != "amnesia")
-                        {
-                            return;
-                        }
-                    }
-
                     string name;
                     if (other.gameObject.name == "sticks")
                         name = "stick";
