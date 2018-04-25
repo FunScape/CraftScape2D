@@ -8,16 +8,4 @@ using UnityEngine.EventSystems;
 public class HeroEquipmentController : EquipmentController
 {
 
-	new void ToggleEquipment()
-	{
-		if (GameManager.GetLocalPlayer().GetComponent<SetupLocalHero> ().isLocalPlayer) {
-
-			if (Input.GetKeyDown (KeyCode.B)) 
-			{
-				base.ToggleEquipment();
-			}
-
-		}
-	}
-
 }

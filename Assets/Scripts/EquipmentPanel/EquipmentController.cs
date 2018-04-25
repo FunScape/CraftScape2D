@@ -42,12 +42,9 @@ public class EquipmentController : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.G)) {
 			
-			if (GameManager.GetLocalPlayer().GetComponent<SetupLocalHero>().isLocalPlayer) {
+			if (GameManager.instance.LocalPlayer().GetComponent<SetupLocalHero>().isLocalPlayer) {
 
-				if (Input.GetKeyDown (KeyCode.B)) 
-				{
-					ToggleEquipment();
-				}
+				ToggleEquipment();
 
 			}
 		}
