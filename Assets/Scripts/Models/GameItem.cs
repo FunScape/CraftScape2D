@@ -121,18 +121,21 @@ public class GameItem : ScriptableObject {
      */
 	public void Map(GameItem other)
 	{
-		Id = other.Id;
-        uuid = other.uuid;
-		Url = other.Url;
-		Position = other.Position;
-		InventoryId = other.InventoryId;
-		StackSize = other.StackSize;
-		CreatedById = other.CreatedById;
-		CreatedBy = other.CreatedBy;
-		CreatedByName = other.CreatedByName;
-		StaticGameItemId = other.StaticGameItemId;
-		staticGameItem = other.staticGameItem;
-		Dirty = false;
+        try {
+
+            Id = other.Id;
+            uuid = other.uuid;
+            Url = other.Url;
+            Position = other.Position;
+            InventoryId = other.InventoryId;
+            StackSize = other.StackSize;
+            CreatedById = other.CreatedById;
+            CreatedBy = other.CreatedBy;
+            CreatedByName = other.CreatedByName;
+            StaticGameItemId = other.StaticGameItemId;
+            staticGameItem = other.staticGameItem;
+            Dirty = false;
+        } catch (System.Exception) {}
 	}
 
     public Dictionary<string, object> ToDict()

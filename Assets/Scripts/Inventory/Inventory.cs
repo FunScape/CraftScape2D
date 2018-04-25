@@ -248,14 +248,16 @@ public class Inventory : ScriptableObject {
 					item.CreatedById = this.CharacterId;
 					controller.StartCoroutine(apiManager.CreateGameItem(item, (newItem) => {
 						item.Locked = false;  // Unlock the game item to allow editing
-						item.Map(newItem);
+						if (newItem != null)
+							item.Map(newItem);
 					}));
 				}
 				else
 				{
 					controller.StartCoroutine(apiManager.UpdateGameItem(item, (updatedItem) => {
 						item.Locked = false;  // Unlock the game item to allow editing
-						item.Map(updatedItem);
+						if (updatedItem != null)
+							item.Map(updatedItem);
 					}));
 				}
 				
