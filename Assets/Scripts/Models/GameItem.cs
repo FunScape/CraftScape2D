@@ -86,7 +86,14 @@ public class GameItem : ScriptableObject {
 			InventoryId = -1;
 		}
         int StackSize = (int) data["stack_size"];
-        int CreatedById = (int) data["created_by"];
+
+		int CreatedById;
+		try {
+			CreatedById = (int) data["created_by"];
+		} catch (System.Exception) {
+			CreatedById = -1;
+		}
+
         string CreatedByName = data["created_by_name"].ToString();
         int StaticGameItemId = (int) data["static_game_item"]["id"];
         GameItem item = GameItem.CreateInstance();

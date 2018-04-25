@@ -182,6 +182,10 @@ public class Inventory : ScriptableObject {
 				item.Position = i;
 			}
 
+			if (item.CreatedById == -1) {
+				item.CreatedById = CharacterId;
+			}
+
 			if (item.Dirty && !item.Locked)
 			{
 				item.InventoryId = this.Id;
