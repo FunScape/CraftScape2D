@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour {
 				return player;
 		}
 
-		return GameObject.FindWithTag("Player");
+		return null;
 	}
 
 	public GameObject LocalPlayer()
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
 				return player;
 		}
 
-		return GameObject.FindWithTag("Player");
+		return null;
 	}
 
 }

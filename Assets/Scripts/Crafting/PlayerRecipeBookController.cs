@@ -73,7 +73,8 @@ public class PlayerRecipeBookController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.C))
-			ToggleRecipeBook ();
+            if (GameManager.instance.LocalPlayer().Equals(this.gameObject))
+			    ToggleRecipeBook ();
 	}
 
     public void FindInventory() {

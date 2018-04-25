@@ -72,7 +72,11 @@ public class PlayerSkillController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.P))
-            ToggleSkillMenu();
+        {   
+            if (GameManager.instance.LocalPlayer().Equals(gameObject))    
+                ToggleSkillMenu();
+        }
+            
 	}
 
     public void LayoutSkillMenu()
