@@ -93,6 +93,21 @@ public class APIManager : MonoBehaviour {
 		callback(Character.Parse(data));
 	}
 
+    public IEnumerator UpdateCharacterPosition(Character character, float x, float y, System.Action<Character> callback)
+    {
+        Dictionary<string, object> formData = new Dictionary<string, object>();
+        formData.Add("x_pos", x);
+        formData.Add("y_pos", y);
+
+        UnityWebRequest www = PreparePUTRequest(routes.character + "/" + character.Id + "/", formData);
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+
+        callback(Character.Parse(data));
+    }
+
 	public IEnumerator GetInventory(int id, System.Action<Inventory> callback)
 	{
 		UnityWebRequest www = PrepareGETRequest(routes.inventory + "/" + id.ToString());
@@ -112,7 +127,9 @@ public class APIManager : MonoBehaviour {
 
 		JsonData data = HandleResponse(www);
 
-		callback(Inventory.Parse(data));
+		Inventory inventory = Inventory.Parse(data);
+
+		callback(inventory);
 	}
 
 	public IEnumerator UpdateInventory(Inventory inventory, System.Action<Inventory> callback)
@@ -157,7 +174,6 @@ public class APIManager : MonoBehaviour {
 	{
 		Dictionary<string, object> formData = item.ToDict();
 		formData.Add("static_game_item", item.StaticGameItemId);
-		formData.Add ("created_by_id", item.CreatedById);
 
 		UnityWebRequest www = PreparePOSTRequest(routes.gameItem, formData);
 
@@ -247,7 +263,7 @@ public class APIManager : MonoBehaviour {
 		callback(items);
 	}
 
-	UnityWebRequest PrepareGETRequest(string url) {
+	public UnityWebRequest PrepareGETRequest(string url) {
 		UnityWebRequest www = UnityWebRequest.Get(url);
 		www.SetRequestHeader("Content-Type", "application/json");
 		if (APIManager.token != null)
@@ -255,12 +271,12 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePOSTRequest(string url, Dictionary<string, object> formData) {
+	public UnityWebRequest PreparePOSTRequest(string url, Dictionary<string, object> formData) {
 		JsonData jsonData = JsonMapper.ToJson(formData);
 		return PreparePOSTRequest(url, jsonData.ToString());
 	}
 
-	UnityWebRequest PreparePOSTRequest(string url, string json) {
+	public UnityWebRequest PreparePOSTRequest(string url, string json) {
 
 		UnityWebRequest www = UnityWebRequest.Put(url, json);
 		www.method = "POST";
@@ -271,7 +287,7 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePUTRequest(string url, string json)
+	public UnityWebRequest PreparePUTRequest(string url, string json)
 	{
 		UnityWebRequest www = UnityWebRequest.Put(url, json);
 		www.SetRequestHeader("Content-Type", "application/json");
@@ -281,16 +297,16 @@ public class APIManager : MonoBehaviour {
 		return www;
 	}
 
-	UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
+	public UnityWebRequest PreparePUTRequest(string url, Dictionary<string, object> formData)
 	{
 		JsonData jsonData = JsonMapper.ToJson(formData);
 		return PreparePUTRequest(url, jsonData.ToString());
 	}
 
-	UnityWebRequest PrepareDELETERequest(string url)
+	public UnityWebRequest PrepareDELETERequest(string url)
 	{
 		UnityWebRequest www = UnityWebRequest.Delete (url);
-		www.SetRequestHeader ("Content-Type", "application/json; charset=utf8");
+		www.SetRequestHeader("Content-Type", "application/json; charset=utf8");
 		www.SetRequestHeader("Authorization", string.Format("Token {0}", APIManager.token));
 		www.chunkedTransfer = false;
 		return www;

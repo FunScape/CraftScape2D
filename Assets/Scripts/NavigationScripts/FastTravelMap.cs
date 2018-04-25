@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FastTravelMap : MonoBehaviour {
 
+	Vector3 forestLocation { get { return new Vector3 (244f, 141f, Camera.main.transform.localScale.z); } }
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,7 +20,9 @@ public class FastTravelMap : MonoBehaviour {
     {
         if (gameObject.name == "GoToForestScene")
         {
-            Application.LoadLevel("ForestScene");
+			Camera.main.transform.position = forestLocation;
+			GameObject player = GameManager.instance.LocalPlayer();
+			player.transform.position = forestLocation;
         }
         else if (gameObject.name == "GoToRiverScene")
         {

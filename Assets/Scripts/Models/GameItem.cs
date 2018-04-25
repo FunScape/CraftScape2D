@@ -35,6 +35,7 @@ public class GameItem : ScriptableObject {
 	public string CreatedByName { get { return createdByName; } set { createdByName = value; Dirty = true;} }
 	public int StaticGameItemId { get { return staticGameItemId; } set { staticGameItemId = value; Dirty = true;} }
 
+    public string Description { get { return staticGameItem.Description; } }
     public string Name { get { return staticGameItem.Name; } }
     public int MaxStackSize { get { return staticGameItem.MaxStack; } }
     public bool Equipable { get { return staticGameItem.Equipable; } }
@@ -96,6 +97,7 @@ public class GameItem : ScriptableObject {
 
         string CreatedByName = data["created_by_name"].ToString();
         int StaticGameItemId = (int) data["static_game_item"]["id"];
+        string description = data["static_game_item"]["description"].ToString();
         GameItem item = GameItem.CreateInstance();
         item.Init(Id, uuid, Url, Position, InventoryId, StackSize, CreatedById, CreatedByName, StaticGameItemId);
         item.staticGameItem = StaticGameItem.Parse(data["static_game_item"]);
@@ -141,7 +143,7 @@ public class GameItem : ScriptableObject {
         data.Add("inventory", InventoryId);
         data.Add("inventory_position", Position);
         data.Add("stack_size", StackSize);
-        data.Add("created_by", CreatedBy);
+        data.Add("created_by", CreatedById);
         return data;
     }
 

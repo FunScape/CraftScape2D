@@ -8,8 +8,13 @@ using UnityEngine.EventSystems;
 public class HeroInventoryController : InventoryController
 {
 
-    public void SetupInventory()
+    public void SetupInventory(Inventory inventory = null)
     {
+        if (inventory == null)
+            inventory = Inventory.CreateInstance();
+
+        this.inventory = inventory;
+        
         // Get reference to main canvas object
         GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
 
@@ -18,12 +23,6 @@ public class HeroInventoryController : InventoryController
 
         // Instantiate inventory panel
         base.inventoryPanel = Instantiate(inventoryPanelPrefab, Vector3.zero, Quaternion.identity, equipmentInventoryContainer.transform);
-
-        // Tell inventory what file to write objects to
-        // base.inventory.SetInventoryFileName(string.Format("inventory-{0}.json", GetComponent<SetupLocalHero>().netId.ToString()));
-
-        // Load inventory items from file
-        // base.inventory.LoadInventory();
 
         // Layout/render inventory on canvas
         base.LayoutInventory();
@@ -40,6 +39,7 @@ public class HeroInventoryController : InventoryController
 
 		}
 	}
+
 
 
 }

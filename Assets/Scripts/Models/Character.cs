@@ -13,6 +13,7 @@ public class Character : ScriptableObject {
     public int MaxHealth { get; private set; }
     public int Currency { get; private set; }
     public double WalkSpeed { get; private set; }
+    public Vector2 Position;
     public List<Inventory> Inventories { get; private set; }
     public List<string> inventoryUrls { get; set; }
     public Equipment equipment;
@@ -47,11 +48,21 @@ public class Character : ScriptableObject {
         int maxHealth = (int) (double) data["max_health"];
         int currency = (int) data["currency"];
         double walkSpeed = (double) data["walk_speed"];
+        
+        double? posX = null;
+        double? posY = null;
+        try {
+            posX = (double) data["x_pos"];
+            posY = (double) data["y_pos"];
+        } catch (System.Exception) {}
+
         List<string> inventoryUrls = new List<string>();
         foreach(JsonData url in data["inventories"]) { inventoryUrls.Add(url.ToString()); }
         string equipmentUrl = data["equipment"].ToString();
         Character character = Character.CreateInstance("Character") as Character;
         character.Init(id, userId, name, health, maxHealth, currency, walkSpeed, inventoryUrls, equipmentUrl);
+        if (posX != null && posY != null)
+            character.Position = new Vector2((float)posX, (float)posY);
         return character;
     }
 

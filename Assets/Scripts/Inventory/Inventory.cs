@@ -9,10 +9,10 @@ using System.Linq;
 [CreateAssetMenu(fileName="Inventory", menuName="Inventory/Inventory", order=1)]
 public class Inventory : ScriptableObject {
 
-	public int Id;
-	public int Position;
-	public int CharacterId;
-	public int Size;
+	public int Id { get; set; }
+	public int Position { get; set; }
+	public int CharacterId { get; set; }
+	public int Size { get; set; }
 	public GameItem[] GameItems;
 
 	private List<GameItem> trash = new List<GameItem> ();

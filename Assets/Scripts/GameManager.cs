@@ -68,14 +68,26 @@ public class GameManager : MonoBehaviour {
 
 	public static GameObject GetLocalPlayer()
 	{
-		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players) 
 		{
-			if (player.GetComponent<SetupLocalHero> ().isLocalPlayer)
+			if (player.GetComponent<SetupLocalHero>().isLocalPlayer)
 				return player;
 		}
 
-		return null;
+		return GameObject.FindWithTag ("Player");
+	}
+
+	public GameObject LocalPlayer()
+	{
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in players) 
+		{
+			if (player.GetComponent<SetupLocalHero>().isLocalPlayer)
+				return player;
+		}
+
+		return GameObject.FindWithTag ("Player");
 	}
 
 }

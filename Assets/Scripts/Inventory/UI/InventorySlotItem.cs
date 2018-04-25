@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
-    public GameObject hoverTextPrefab;
+    static GameObject hoverTextPrefab;
     GameObject hoverText;
     GameItem item;
 	InventorySlot parent;
@@ -37,6 +37,8 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 
     void StartHover() {
 		GameObject canvas = GameObject.FindWithTag("MainCanvas");
+        if (hoverTextPrefab == null)
+            hoverTextPrefab = GameObject.FindWithTag("MainCanvas").transform.Find("HoverTextPrefab").gameObject;
 		hoverText = GameObject.Instantiate(hoverTextPrefab);
 		hoverText.transform.SetParent(canvas.transform);
         UpdateText();
@@ -73,8 +75,7 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
     {
         if (hoverText != null && item != null) {
             hoverText.transform.Find("Name").GetComponent<Text>().text = item.Name;
-            hoverText.transform.Find("UUID").GetComponent<Text>().text = item.Uuid;
-            hoverText.transform.Find("Id").GetComponent<Text>().text = item.Id.ToString();
+            hoverText.transform.Find("Description").GetComponent<Text>().text = item.Description;
         }
     }
 }

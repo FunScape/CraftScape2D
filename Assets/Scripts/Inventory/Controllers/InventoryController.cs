@@ -40,6 +40,11 @@ public class InventoryController : MonoBehaviour
 
     }
 
+    void OnApplicationQuit()
+	{
+		inventory.Save();		
+	}
+
     protected void LayoutInventory()
     {
         GameObject slotContainer = inventoryPanel.transform.Find(inventorySlotsContainerName).gameObject;
@@ -184,7 +189,7 @@ public class InventoryController : MonoBehaviour
             slot.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
-        if (GameItemDatabase.instance.GetItem(slotIndex) != null)
+        if (inventory.GameItems[slotIndex] != null)
         {
             GameObject draggedSlotItem = inventorySlots[slotIndex].transform.Find("InventorySlotItem").gameObject;
             draggedInventoryItem = Instantiate(draggedSlotItem);
