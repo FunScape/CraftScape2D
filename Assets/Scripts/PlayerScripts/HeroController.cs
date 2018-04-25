@@ -67,7 +67,7 @@ public class HeroController : MonoBehaviour
                         Debug.Log("Loading character equipment...");
                         StartCoroutine(manager.GetEquipment(character, (equipment) => {
                             character.equipment = equipment;
-                            GameObject player = GameObject.FindWithTag("Player");
+                            GameObject player = GameManager.GetLocalPlayer();
                             EquipmentController eController = player.GetComponent<EquipmentController>();
                             eController.equipment = equipment;
 

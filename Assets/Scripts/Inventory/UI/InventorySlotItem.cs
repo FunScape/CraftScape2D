@@ -61,9 +61,9 @@ public class InventorySlotItem : MonoBehaviour, IDropHandler, IPointerEnterHandl
 
 	void UpdateItem()
 	{
-		if (GameObject.FindWithTag("Player").GetComponent<SetupLocalHero>().isLocalPlayer) {
+		if (GameManager.GetLocalPlayer().GetComponent<SetupLocalHero>().isLocalPlayer) {
 			parent = transform.parent.gameObject.GetComponent<InventorySlot> ();
-			GameObject player = GameObject.FindWithTag("Player");
+			GameObject player = GameManager.GetLocalPlayer();
 			InventoryController controller = player.GetComponent<InventoryController>();
 			item = controller.inventory.GameItems[parent.slotIndex];
 		}

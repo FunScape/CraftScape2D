@@ -299,11 +299,6 @@ public class APIManager : MonoBehaviour {
 	JsonData HandleResponse(UnityWebRequest www) {
 		if (www.isNetworkError || www.isHttpError) {
 			throw new System.Exception (www.downloadHandler.text);
-//			if (www.downloadHandler != null && www.downloadHandler.text != null)
-//				Debug.LogError (www.downloadHandler.text);
-//			else
-//				Debug.LogError (www.error);
-//			return null;
 		}
 
 		JsonData data = JsonMapper.ToObject(www.downloadHandler.text);

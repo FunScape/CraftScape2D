@@ -90,7 +90,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDr
 
 	EquipmentController GetEquipmentController()
 	{
-		GameObject player = GameObject.FindWithTag("Player");
+		GameObject player = GameManager.GetLocalPlayer();
 		return player.GetComponent<EquipmentController>();
 	}
 

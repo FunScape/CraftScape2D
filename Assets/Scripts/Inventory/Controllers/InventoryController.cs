@@ -28,11 +28,15 @@ public class InventoryController : MonoBehaviour
 
     protected void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            ToggleInventory();
-        }
+		
+			
+		if (Input.GetKeyDown(KeyCode.B)) 
+		{
+			GameObject player = GameManager.GetLocalPlayer();
+			if (player.GetComponent<SetupLocalHero> ().isLocalPlayer) {
+				ToggleInventory ();
+			}
+		}
 
     }
 

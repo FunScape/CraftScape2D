@@ -93,7 +93,7 @@ public class Equipment : ScriptableObject {
             return;
 
         APIManager manager = GameObject.FindWithTag("APIManager").GetComponent<APIManager>();
-//        EquipmentController controller = GameObject.FindWithTag("Player").GetComponent<EquipmentController>();
+//        EquipmentController controller = GameManager.GetLocalPlayer().GetComponent<EquipmentController>();
 
         manager.StartCoroutine(manager.UpdateEquipment(this, (equipment) => {
             ring = equipment.ring;

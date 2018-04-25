@@ -29,5 +29,17 @@ public class HeroInventoryController : InventoryController
         base.LayoutInventory();
     }
 
+	void ToggleInventory()
+	{
+		if (GameObject.FindWithTag ("Player").GetComponent<SetupLocalHero> ().isLocalPlayer) {
+
+			if (Input.GetKeyDown (KeyCode.B)) 
+			{
+				base.ToggleInventory();
+			}
+
+		}
+	}
+
 
 }

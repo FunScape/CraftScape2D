@@ -41,11 +41,21 @@ public class EquipmentController : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.G)) {
-			ToggleEquipment ();
+			
+			if (GameManager.GetLocalPlayer().GetComponent<SetupLocalHero>().isLocalPlayer) {
+
+				if (Input.GetKeyDown (KeyCode.B)) 
+				{
+					ToggleEquipment();
+				}
+
+			}
 		}
+
+
 	}
 
-	void ToggleEquipment()
+	protected void ToggleEquipment()
 	{
 		showEquipmentPanel = !showEquipmentPanel;
 
@@ -116,7 +126,7 @@ public class EquipmentController : MonoBehaviour {
 
 	public void OnDropGameItem(GameObject equipmentSlotObject, GameObject droppedObject)
 	{
-		Inventory inventory = GameObject.FindWithTag("Player").GetComponent<InventoryController>().inventory;
+		Inventory inventory = GameManager.GetLocalPlayer().GetComponent<InventoryController>().inventory;
 		InventorySlot inventorySlot = droppedObject.GetComponent<InventorySlot>();
 		GameItem item = inventory.GameItems[inventorySlot.slotIndex];
 
@@ -176,7 +186,7 @@ public class EquipmentController : MonoBehaviour {
 
     InventoryController GetInventoryController()
 	{
-		return GameObject.FindWithTag("Player").GetComponent<InventoryController>();
+		return GameManager.GetLocalPlayer().GetComponent<InventoryController>();
 	}
 
 	EquipmentSlot GetEquipmentSlot(string name)

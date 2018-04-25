@@ -4,6 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+	public static GameManager instance = null;
+
+	GameManager() {}
+
+	void Awake() {
+		//Check if instance already exists
+		if (instance == null)
+
+			//if not, set instance to this
+			instance = this;
+
+		//If instance already exists and it's not this:
+		else if (instance != this)
+
+			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			Destroy(gameObject);    
+
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad(gameObject);
+	}
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,10 +36,10 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-	void OnGUI()
-	{
-		// DrawMousePositionGUI();
-	}
+//	void OnGUI()
+//	{
+//		 DrawMousePositionGUI();
+//	}
 
 	void DrawMousePositionGUI()
 	{
@@ -42,6 +64,18 @@ public class GameManager : MonoBehaviour {
 		GUILayout.Label("Mouse position: " + mousePos);
 		GUILayout.Label("World position: " + position.ToString("F1"));
 		GUILayout.EndArea();
+	}
+
+	public static GameObject GetLocalPlayer()
+	{
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		foreach (GameObject player in players) 
+		{
+			if (player.GetComponent<SetupLocalHero> ().isLocalPlayer)
+				return player;
+		}
+
+		return null;
 	}
 
 }
