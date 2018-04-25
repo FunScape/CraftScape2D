@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LitJson;
 
 public class HeroController : MonoBehaviour
 {
@@ -122,19 +123,31 @@ public class HeroController : MonoBehaviour
 
                                 //Get character skills
                                 Debug.Log("Loading character skills...");
-                                StartCoroutine(manager.GetCharacterSkills((recipes) => {
+                                StartCoroutine(manager.GetCharacterSkills(character, (jsonData) => {
 
                                     //Find PlayerRecipeBookController
                                     PlayerRecipeBookController recipeBookController = player.GetComponent<PlayerRecipeBookController>();
 
                                     //Load recipes
-                                    recipeBookController.recipeBook.Load();
+                                    // recipeBookController.recipeBook.recipes = new List<Recipe>();
+                                    foreach (JsonData characterSkill in jsonData)
+                                    {
+                                        StartCoroutine(manager.GetSkill((int)characterSkill["skill"], (skillData) =>
+                                        {
+                                            recipeBookController.recipeBook.recipes.Add(Recipe.Parse(skillData, true));
+                                            //Connect inventory to recipe book controller and layout recipe book.
+                                            recipeBookController.FindInventory();
+
+                                            //Layout recipe book
+                                            recipeBookController.LayoutRecipeBook();
+                                        }));
+                                    }
 
                                     //Connect inventory to recipe book controller and layout recipe book.
-                                    recipeBookController.FindInventory();
+                                    // recipeBookController.FindInventory();
 
                                     //Layout recipe book
-                                    recipeBookController.LayoutRecipeBook();
+                                    // recipeBookController.LayoutRecipeBook();
 
                                     //Get all skills
                                     Debug.Log("Loading all skills...");

@@ -4,7 +4,7 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 
-public class Recipe{
+public class Recipe {
 
 	public int id;
     public StaticGameItem product;

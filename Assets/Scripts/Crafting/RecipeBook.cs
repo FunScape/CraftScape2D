@@ -29,7 +29,7 @@ public class RecipeBook {
     public RecipeBook()
     {
         recipes = new List<Recipe>();
-        Load();
+        // Load();
     }
 
 	//A method for printing a recipe book as a string, just for testing.
@@ -50,13 +50,14 @@ public class RecipeBook {
 
     public void Load()
     {
-        if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
-            return;
+        // if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
+        //     return;
         
-        APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
-        apiManager.StartCoroutine(apiManager.GetCharacterSkills((recipes) => {
-            this.recipes = recipes;
-        }));
+        // APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
+        // Character character = GameManager.instance.LocalPlayer().GetComponent<HeroController>().character;
+        // apiManager.StartCoroutine(apiManager.GetCharacterSkills(character, (recipes) => {
+        //     this.recipes = recipes;
+        // }));
     }
 
     /*public void Load()

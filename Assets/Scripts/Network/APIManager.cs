@@ -274,27 +274,27 @@ public class APIManager : MonoBehaviour {
         callback(data);
     }
 
-    public IEnumerator GetCharacterSkills(System.Action<List<Recipe>> callback) {
-        UnityWebRequest www = PrepareGETRequest(routes.characterSkill);
+    public IEnumerator GetCharacterSkills(Character character, System.Action<JsonData> callback) {
+        UnityWebRequest www = PrepareGETRequest(routes.characterSkill + string.Format("?character={0}", character.Id));
 
         yield return www.SendWebRequest();
 
         JsonData data = HandleResponse(www);
         
-        List<Recipe> recipes = new List<Recipe>();
+        // List<Recipe> recipes = new List<Recipe>();
 
-        foreach (JsonData characterSkill in data)
-        {
-            StartCoroutine(GetSkill((int)characterSkill["skill"], (skillData) =>
-            {
-                recipes.Add(Recipe.Parse(skillData, true));
-            }));
-        }
+        // foreach (JsonData characterSkill in data)
+        // {
+        //     StartCoroutine(GetSkill((int)characterSkill["skill"], (skillData) =>
+        //     {
+        //         recipes.Add(Recipe.Parse(skillData, true));
+        //     }));
+        // }
 
         /*foreach (JsonData characterSkill in data) {
             recipes.Add(Recipe.Parse(characterSkill["skill"], true));
         }*/
-        callback(recipes);
+        callback(data);
     }
 
     public IEnumerator GetAllSkills(System.Action<List<Recipe>> callback) {

@@ -65,7 +65,7 @@ public class PlayerSkillController : MonoBehaviour {
         skillTrees.Add("Blacksmithing", new SkillTree(1));
         selectedTree = skillTrees["Blacksmithing"];
 
-        recipeBookController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRecipeBookController>();
+        recipeBookController = GameManager.instance.LocalPlayer().GetComponent<PlayerRecipeBookController>();
 
     }
 	
@@ -147,7 +147,7 @@ public class PlayerSkillController : MonoBehaviour {
     public void LayoutIngredients()
     {
         GameObject ingredientsContainer = selectionPanel.transform.Find(ingredientsPanelName).gameObject;
-        Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryController>().inventory;
+        Inventory inventory = GameManager.instance.LocalPlayer().GetComponent<InventoryController>().inventory;
 
         foreach (RecipeRequirement ingredient in selectedSkill.recipe.ingredients)
         {
