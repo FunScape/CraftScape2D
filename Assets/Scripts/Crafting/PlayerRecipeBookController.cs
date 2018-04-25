@@ -77,7 +77,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 	}
 
     public void FindInventory() {
-        inventoryController = GameObject.FindWithTag("Player").GetComponent<InventoryController>();
+        inventoryController = GameManager.instance.LocalPlayer().GetComponent<InventoryController>();
         inventory = inventoryController.inventory;
 
         return;
