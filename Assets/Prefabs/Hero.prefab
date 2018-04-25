@@ -32,6 +32,8 @@ GameObject:
   - component: {fileID: 114669240750345662}
   - component: {fileID: 114721236348488318}
   - component: {fileID: 114265433598838922}
+  - component: {fileID: 114530646186166954}
+  - component: {fileID: 114346462175131324}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -164,6 +166,27 @@ MonoBehaviour:
   inventoryStackLabelPrefab: {fileID: 1980931201881440, guid: 2d1085ca39cc20a43910887376193f3e,
     type: 2}
   inventory: {fileID: 0}
+--- !u!114 &114346462175131324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e8d1d4d5640c4bb44a80c0109dccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  skillMenuPanelPrefab: {fileID: 1162175526828914, guid: 3f3c76e9e9a577b47add89ebe5b4829c,
+    type: 2}
+  skillMenuPanel: {fileID: 0}
+  selectionPanel: {fileID: 0}
+  skillNodePrefab: {fileID: 1726530354651426, guid: 38b4471f5edea0040b39f59a1961a6f6,
+    type: 2}
+  ingredientSlotPrefab: {fileID: 1032000434965874, guid: 5401e1dfaf67d6444994f7920d234e3e,
+    type: 2}
+  recipeBookController: {fileID: 0}
 --- !u!114 &114349765581526720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,6 +198,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a335449bf757a440283c902d391dde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114530646186166954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852322725998526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d104c6c1772f2848b5bf20a081da41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeBookPanelPrefab: {fileID: 1399914318393860, guid: 9ac7894a73937a24d917e4751d8618b4,
+    type: 2}
+  recipeButtonPrefab: {fileID: 1053539072311302, guid: 132b2d8f4ace3aa4d94659e0e4c9cd52,
+    type: 2}
+  recipeSlotPrefab: {fileID: 1797330086665918, guid: 7903b9dc3c6a1194e930cba2c18ebaf3,
+    type: 2}
+  ingredientSlotPrefab: {fileID: 1032000434965874, guid: 5401e1dfaf67d6444994f7920d234e3e,
+    type: 2}
+  recipeBookPanel: {fileID: 0}
+  inventoryController: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &114652310600041700
 MonoBehaviour:
   m_ObjectHideFlags: 1

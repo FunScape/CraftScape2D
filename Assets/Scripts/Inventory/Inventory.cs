@@ -113,7 +113,25 @@ public class Inventory : ScriptableObject {
 		AddItem(GameItemDatabase.instance.GetItem(name), controller);
 	}
 
-	public GameItem RemoveItem(GameItem item)
+    public int CheckQuantity(int checkItemId)
+    {
+
+        int qty = 0;
+
+        foreach (GameItem item in GameItems)
+        {
+            if (item != null)
+            {
+                if (item.StaticGameItemId == checkItemId)
+                    qty += item.StackSize;
+            }
+        }
+
+        return qty;
+    }
+
+
+    public GameItem RemoveItem(GameItem item)
 	{
 		for (int i = 0; i < GameItems.Length; i++)
 		{
@@ -161,7 +179,41 @@ public class Inventory : ScriptableObject {
 		}
 	}
 
-	public void Save(InventoryController controller = null)
+    public void RemoveQtyOfItems(int id, int qty)
+    {
+        foreach (GameItem item in GameItems)
+        {
+            if (item != null)
+            {
+                if (item.StaticGameItemId == id)
+                {
+                    if (item.StackSize> qty)
+                    {
+                        item.StackSize -= qty;
+                        qty = 0;
+                    }
+                    else if (item.StackSize == qty)
+                    {
+                        RemoveItem(item.Position);
+                        qty = 0;
+                    }
+                    else if (item.StackSize < qty)
+                    {
+                        qty -= item.StackSize;
+                        RemoveItem(item.Position);
+                    }
+                }
+
+                if (qty <= 0)
+                {
+                    Save();
+                    return;
+                }
+            }
+        }
+    }
+
+    public void Save(InventoryController controller = null)
 	{
 		if (PlayerPrefs.GetInt("IsLocalPlayer") == 1)
             return;

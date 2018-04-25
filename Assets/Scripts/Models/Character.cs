@@ -18,8 +18,9 @@ public class Character : ScriptableObject {
     public List<string> inventoryUrls { get; set; }
     public Equipment equipment;
     public string equipmentUrl;
+    public int experience;
 
-    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<string> inventoryUrls, string equipmentUrl)
+    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<string> inventoryUrls, string equipmentUrl, int experience)
     {
         this.Id = id;
         this.UserId = userId;
@@ -30,11 +31,12 @@ public class Character : ScriptableObject {
         this.WalkSpeed = walkSpeed;
         this.inventoryUrls = inventoryUrls;
         this.equipmentUrl = equipmentUrl;
+        this.experience = experience;
     }
 
-    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<Inventory> inventories, Equipment equipment) 
+    void Init(int id, int userId, string name, int health, int maxHealth, int currency, double walkSpeed, List<Inventory> inventories, Equipment equipment, int experience) 
     {
-        Init(id, userId, name, health, maxHealth, currency, walkSpeed, new List<string>(), equipment.Url);
+        Init(id, userId, name, health, maxHealth, currency, walkSpeed, new List<string>(), equipment.Url, experience);
         Inventories = inventories;
         this.equipment = equipment;
     }
@@ -59,11 +61,31 @@ public class Character : ScriptableObject {
         List<string> inventoryUrls = new List<string>();
         foreach(JsonData url in data["inventories"]) { inventoryUrls.Add(url.ToString()); }
         string equipmentUrl = data["equipment"].ToString();
+        int experience = (int)data["experience"];
         Character character = Character.CreateInstance("Character") as Character;
-        character.Init(id, userId, name, health, maxHealth, currency, walkSpeed, inventoryUrls, equipmentUrl);
+
+        character.Init(id, userId, name, health, maxHealth, currency, walkSpeed, inventoryUrls, equipmentUrl, experience);
+
         if (posX != null && posY != null)
             character.Position = new Vector2((float)posX, (float)posY);
+            
         return character;
     }
 
+    public Dictionary<string, object> ToDict()
+    {
+        Dictionary<string, object> data = new Dictionary<string, object>
+        {
+            {"id", Id},
+            {"user", UserId},
+            {"name", name},
+            {"health", Health},
+            {"max_health", MaxHealth},
+            {"currency", Currency},
+            {"walk_speed", WalkSpeed},
+            {"experience", experience}
+        };
+
+        return data;
+    }
 }

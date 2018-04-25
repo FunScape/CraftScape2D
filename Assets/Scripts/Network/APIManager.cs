@@ -6,7 +6,7 @@ using LitJson;
 using System.IO;
 using System.Text;
 using System.Linq;
-
+using System;
 
 public class APIManager : MonoBehaviour {
 
@@ -263,7 +263,114 @@ public class APIManager : MonoBehaviour {
 		callback(items);
 	}
 
-	public UnityWebRequest PrepareGETRequest(string url) {
+    public IEnumerator GetSkill(int skillId, System.Action<JsonData> callback)
+    {
+        UnityWebRequest www = PrepareGETRequest(routes.skill + skillId.ToString() + "/");
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+
+        callback(data);
+    }
+
+    public IEnumerator GetCharacterSkills(System.Action<List<Recipe>> callback) {
+        UnityWebRequest www = PrepareGETRequest(routes.characterSkill);
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+        
+        List<Recipe> recipes = new List<Recipe>();
+
+        foreach (JsonData characterSkill in data)
+        {
+            StartCoroutine(GetSkill((int)characterSkill["skill"], (skillData) =>
+            {
+                recipes.Add(Recipe.Parse(skillData, true));
+            }));
+        }
+
+        /*foreach (JsonData characterSkill in data) {
+            recipes.Add(Recipe.Parse(characterSkill["skill"], true));
+        }*/
+        callback(recipes);
+    }
+
+    public IEnumerator GetAllSkills(System.Action<List<Recipe>> callback) {
+        UnityWebRequest www = PrepareGETRequest(routes.skill);
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+
+        List<Recipe> skills = new List<Recipe>();
+        foreach (JsonData skill in data)
+        {
+            skills.Add(Recipe.Parse(skill, false));
+        }
+        callback(skills);
+    }
+
+    public IEnumerator GetSkillDependencies(System.Action<List<List<object>>> callback) {
+        UnityWebRequest www = PrepareGETRequest(routes.skillDependency);
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+        
+        //skillDependencies holds three lists: A list of ints, holding parent skill ids, a list of ints, holding child skill ids, and a list of characters, representing unions or intersections.
+        List<List<object>> skillDependencies = new List<List<object>>();
+        skillDependencies.Add(new List<object>());
+        skillDependencies.Add(new List<object>());
+        skillDependencies.Add(new List<object>());
+
+        foreach (JsonData dependency in data)
+        {
+            skillDependencies[0].Add((int)dependency["parent_skill"]);
+            skillDependencies[1].Add((int)dependency["child_skill"]);
+            skillDependencies[2].Add(((string)dependency["dependency_type"])[0]); //Since I can't convert between a single-character string and a char, I access the first character in the string and use that.
+        }
+
+        callback(skillDependencies);
+    }
+
+    public IEnumerator CreateCharacterSkill(Character character, Recipe skill)
+    {
+        Dictionary<string, object> formData = new Dictionary<string, object>
+        {
+            { "character", character.Id },
+            { "skill", skill.id }
+
+        };
+        
+        UnityWebRequest www = PreparePOSTRequest(routes.characterSkill, formData);
+
+        yield return www.SendWebRequest();
+    }
+
+    public IEnumerator UpdateCharacterExperience(Character character)
+    {
+        Dictionary<string, object> formData = new Dictionary<string, object>
+        {
+            { "id", character.Id },
+            { "experience", character.experience }
+        };
+        
+        UnityWebRequest www = PreparePUTRequest(routes.character, formData);
+
+        yield return www.SendWebRequest();
+    }
+
+    public IEnumerator UpdateCharacter(Character character)
+    {
+        Dictionary<string, object> data = character.ToDict();
+        UnityWebRequest www = PreparePUTRequest(routes.character, data);
+
+        yield return www.SendWebRequest();
+    }
+
+    UnityWebRequest PrepareGETRequest(string url) {
 		UnityWebRequest www = UnityWebRequest.Get(url);
 		www.SetRequestHeader("Content-Type", "application/json");
 		if (APIManager.token != null)
