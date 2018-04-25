@@ -33,7 +33,7 @@ public class InventoryController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.B)) 
 		{
 			GameObject player = GameManager.GetLocalPlayer();
-			if (player.GetComponent<SetupLocalHero> ().isLocalPlayer) {
+			if (player.Equals(this.gameObject)) {
 				ToggleInventory ();
 			}
 		}
