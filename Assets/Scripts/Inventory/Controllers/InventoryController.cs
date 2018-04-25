@@ -121,7 +121,7 @@ public class InventoryController : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
-		if (GameManager.instance.LocalPlayer().GetComponent<SetupLocalHero>().isLocalPlayer) {
+		if (GameManager.instance.LocalPlayer().Equals(this.gameObject)) {
             if (other.gameObject.name != null)
             {
                 StaticGameItem item = GameItemDatabase.instance.GetItem(other.gameObject.name);
