@@ -295,33 +295,55 @@ public class PlayerSkillController : MonoBehaviour {
 
     public void UnlockSkill()
     {
-        if (GetXP() < selectedSkill.recipe.expCost)
-            return;
-        else
+        if (GetXP() >= selectedSkill.recipe.expCost && !selectedSkill.recipe.canCraft)
         {
             SpendXP(selectedSkill.recipe.expCost);
             selectedSkill.recipe.canCraft = true;
+
+            SaveSelectedSkill();
 
             recipeBookController.AddRecipe(selectedSkill.recipe);
 
             LayoutSelectedSkill();
         }
+
+        return;
     }
 
     public void AddXP(int xp)
     {
         character.experience += xp;
+        SaveXP();
         LayoutXP();
     }
 
     public void SpendXP(int xp)
     {
         character.experience -= xp;
+        SaveXP();
         LayoutXP();
     }
 
     public int GetXP()
     {
         return character.experience;
+    }
+
+    public void SaveXP()
+    {
+        APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
+
+        StartCoroutine(apiManager.UpdateCharacterExperience(character));
+
+        return;
+    }
+
+    public void SaveSelectedSkill()
+    {
+        APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
+
+        StartCoroutine(apiManager.CreateCharacterSkill(character, selectedSkill.recipe));
+
+        return;
     }
 }

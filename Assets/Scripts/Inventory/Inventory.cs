@@ -205,7 +205,10 @@ public class Inventory : ScriptableObject {
                 }
 
                 if (qty <= 0)
+                {
+                    Save();
                     return;
+                }
             }
         }
     }

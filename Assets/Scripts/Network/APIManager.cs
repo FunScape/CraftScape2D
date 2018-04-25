@@ -247,17 +247,37 @@ public class APIManager : MonoBehaviour {
 		callback(items);
 	}
 
+    public IEnumerator GetSkill(int skillId, System.Action<JsonData> callback)
+    {
+        UnityWebRequest www = PrepareGETRequest(routes.skill + skillId.ToString() + "/");
+
+        yield return www.SendWebRequest();
+
+        JsonData data = HandleResponse(www);
+
+        callback(data);
+    }
+
     public IEnumerator GetCharacterSkills(System.Action<List<Recipe>> callback) {
         UnityWebRequest www = PrepareGETRequest(routes.characterSkill);
 
         yield return www.SendWebRequest();
 
         JsonData data = HandleResponse(www);
-
+        
         List<Recipe> recipes = new List<Recipe>();
-        foreach (JsonData characterSkill in data) {
-            recipes.Add(Recipe.Parse(characterSkill["skill"], true));
+
+        foreach (JsonData characterSkill in data)
+        {
+            StartCoroutine(GetSkill((int)characterSkill["skill"], (skillData) =>
+            {
+                recipes.Add(Recipe.Parse(skillData, true));
+            }));
         }
+
+        /*foreach (JsonData characterSkill in data) {
+            recipes.Add(Recipe.Parse(characterSkill["skill"], true));
+        }*/
         callback(recipes);
     }
 
@@ -299,7 +319,42 @@ public class APIManager : MonoBehaviour {
         callback(skillDependencies);
     }
 
-	UnityWebRequest PrepareGETRequest(string url) {
+    public IEnumerator CreateCharacterSkill(Character character, Recipe skill)
+    {
+        Dictionary<string, object> formData = new Dictionary<string, object>
+        {
+            { "character", character.Id },
+            { "skill", skill.id }
+
+        };
+        
+        UnityWebRequest www = PreparePOSTRequest(routes.characterSkill, formData);
+
+        yield return www.SendWebRequest();
+    }
+
+    public IEnumerator UpdateCharacterExperience(Character character)
+    {
+        Dictionary<string, object> formData = new Dictionary<string, object>
+        {
+            { "id", character.Id },
+            { "experience", character.experience }
+        };
+        
+        UnityWebRequest www = PreparePUTRequest(routes.character, formData);
+
+        yield return www.SendWebRequest();
+    }
+
+    public IEnumerator UpdateCharacter(Character character)
+    {
+        Dictionary<string, object> data = character.ToDict();
+        UnityWebRequest www = PreparePUTRequest(routes.character, data);
+
+        yield return www.SendWebRequest();
+    }
+
+    UnityWebRequest PrepareGETRequest(string url) {
 		UnityWebRequest www = UnityWebRequest.Get(url);
 		www.SetRequestHeader("Content-Type", "application/json");
 		if (APIManager.token != null)

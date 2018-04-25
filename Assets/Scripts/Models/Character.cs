@@ -58,4 +58,20 @@ public class Character : ScriptableObject {
         return character;
     }
 
+    public Dictionary<string, object> ToDict()
+    {
+        Dictionary<string, object> data = new Dictionary<string, object>
+        {
+            {"id", Id},
+            {"user", UserId},
+            {"name", name},
+            {"health", Health},
+            {"max_health", MaxHealth},
+            {"currency", Currency},
+            {"walk_speed", WalkSpeed},
+            {"experience", experience}
+        };
+
+        return data;
+    }
 }
