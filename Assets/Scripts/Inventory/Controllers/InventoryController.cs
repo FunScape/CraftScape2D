@@ -122,14 +122,52 @@ public class InventoryController : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D other)
     {
 		if (GameManager.instance.LocalPlayer().Equals(this.gameObject)) {
+
+            if (inventory != null && inventory.emptySlotsCount == 0)
+                return;
+
             if (other.gameObject.name != null)
             {
-                StaticGameItem item = GameItemDatabase.instance.GetItem(other.gameObject.name);
-                if (item != null)
-                {
-                    inventory.AddItem(item, this);
-                    Destroy(other.gameObject);
-                    UpdateInventoryPanelUI();
+                if (other.gameObject.name == "magic_apple") {
+                    StaticGameItem item = GameItemDatabase.instance.GetItem("apple");    
+                        if (item != null)
+                    {
+                        inventory.AddItem(item, this);
+                        UpdateInventoryPanelUI();
+                    }
+                } else if (other.gameObject.name == "magic_stick") {
+                    StaticGameItem item = GameItemDatabase.instance.GetItem("stick");    
+                        if (item != null)
+                    {
+                        inventory.AddItem(item, this);
+                        UpdateInventoryPanelUI();
+                    }
+
+                } else {
+
+                    if (other.gameObject.name == "iron_ingot")
+                    {
+                        // Debug.Log(GameManager.instance.LocalPlayer().GetComponent<HeroController>().character.Name)
+                        if (GameManager.instance.LocalPlayer().GetComponent<HeroController>().character.Name != "amnesia")
+                        {
+                            return;
+                        }
+                    }
+
+                    string name;
+                    if (other.gameObject.name == "sticks")
+                        name = "stick";
+                    else
+                        name = other.gameObject.name;
+
+                    StaticGameItem item = GameItemDatabase.instance.GetItem(name);
+                    if (item != null)
+                    {
+                        inventory.AddItem(item, this);
+                        if (other.gameObject.name != "sticks")
+                            Destroy(other.gameObject);
+                        UpdateInventoryPanelUI();
+                    }
                 }
             }
         }

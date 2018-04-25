@@ -8,7 +8,7 @@ public class HeroController : MonoBehaviour
 {
 
     [SerializeField]
-    float walkSpeed = 5f;
+    public float walkSpeed = 5f;
 
     Rigidbody2D body;
 
@@ -45,6 +45,10 @@ public class HeroController : MonoBehaviour
 
     void InitializeCharacter() {
 		
+        // don't ask.
+//        GameObject ground = GameObject.FindGameObjectWithTag("GroundGrid");
+//        ground.SetActive(true);
+
 		GameObject APIManager = GameObject.FindGameObjectWithTag("APIManager");
 		APIManager manager = APIManager.GetComponent<APIManager>();
         loginContainer = GameObject.FindGameObjectWithTag("LoginContainer");
@@ -118,8 +122,8 @@ public class HeroController : MonoBehaviour
                                 loginContainer.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 0f);
 
 								// Add inventory and do initial setup
-								GetComponent<HeroInventoryController>().inventory = inventory;
-								GetComponent<HeroInventoryController>().SetupInventory();
+								// GetComponent<HeroInventoryController>().inventory = inventory;
+								// GetComponent<HeroInventoryController>().SetupInventory(inventory);
 
                                 //Get character skills
                                 Debug.Log("Loading character skills...");

@@ -38,7 +38,7 @@ public class EquipmentController : MonoBehaviour {
 		equipmentPanel.GetComponent<RectTransform>().localPosition = new Vector3(Screen.width + 1000f, 0f, 0f);
 	}
 
-	void Update()
+	protected void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.G)) {
 			
@@ -48,7 +48,6 @@ public class EquipmentController : MonoBehaviour {
 
 			}
 		}
-
 
 	}
 	
@@ -86,6 +85,13 @@ public class EquipmentController : MonoBehaviour {
 		Hands.EquipItem(equipment.Hands);
 		Feet.EquipItem(equipment.Feet);
 		Legs.EquipItem(equipment.Legs);
+
+		// if (equipment.Feet != null)
+		// {
+		// 	GameManager.instance.LocalPlayer().GetComponent<HeroController>().walkSpeed = 10f;
+		// } else {
+		// 	GameManager.instance.LocalPlayer().GetComponent<HeroController>().walkSpeed = 5f;
+		// }
 	}
 
 	GameObject draggedItem;

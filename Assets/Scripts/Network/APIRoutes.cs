@@ -10,7 +10,8 @@ using System.Linq;
 [CreateAssetMenu()]
 public class APIRoutes : ScriptableObject {
 	// public string baseURL = "https://foostats.com/api";
-	public string baseURL = "localhost:8000";
+	// public string baseURL = "localhost:8000";
+	string baseURL = "http://129.123.129.57:8080";
 	public string authorize { get { return baseURL + "/api/authorize/"; } }
 	public string user { get { return baseURL + "/api/user/"; } }
 	public string character { get { return baseURL + "/api/character/"; } }

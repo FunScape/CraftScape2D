@@ -109,9 +109,18 @@ public class GameItem : ScriptableObject {
     {
 		GameItem item = GameItem.CreateInstance(this.staticGameItem);
 		if (exact == true) {
-			item.Map (this);
-			item.uuid = uuid;
+            item.uuid = uuid;
 		}
+        item.id = Id;
+        item.url = Url;
+        item.position = Position;
+        item.inventoryId = InventoryId;
+        item.stackSize = StackSize;
+        item.createdById = CreatedById;
+        item.createdBy = CreatedBy;
+        item.createdByName = CreatedByName;
+        item.staticGameItemId = StaticGameItemId;
+        item.staticGameItem = staticGameItem;
 		return item;
     }
 
@@ -122,7 +131,6 @@ public class GameItem : ScriptableObject {
 	public void Map(GameItem other)
 	{
         try {
-
             Id = other.Id;
             uuid = other.uuid;
             Url = other.Url;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler, IEndDragHandler {
 
-	GameItem equipedItem;
+	public GameItem equipedItem;
 
 	Dictionary<string, Sprite> slotEmptySprites;
 
@@ -87,10 +87,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IDragHandler, IBeginDr
 			EquipmentController controller = GetEquipmentController();
 			controller.OnDropGameItem(this.gameObject, eventData.pointerDrag.gameObject);
 		}
-		else
-		{
 
-		}
     }
 
 	EquipmentController GetEquipmentController()

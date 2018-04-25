@@ -20,6 +20,7 @@ TagManager:
   - APIManager
   - NetworkManager
   - LoginContainer
+  - GroundGrid
   layers:
   - Default
   - TransparentFX

@@ -27,6 +27,16 @@ public class LoginForm : MonoBehaviour {
 		} else {
 			rememberToggle.isOn = false;
 		}
+
+		if (!PlayerPrefs.HasKey("IsHost"))
+			PlayerPrefs.SetInt("IsHost", 0);
+
+		isGameHost.isOn = PlayerPrefs.GetInt("IsHost") == 1;
+
+		GameObject loginContainer = GameObject.FindGameObjectWithTag("LoginContainer");
+		GameObject background = loginContainer.transform.Find("Background").gameObject;
+		Image bgImage = background.GetComponentInChildren<Image>();
+		bgImage.color = new Color(69f/255f, 44f/255f, 15f/255f, 1f); // brown
 	}
 
 	void Update()
@@ -71,9 +81,20 @@ public class LoginForm : MonoBehaviour {
     public void OnClickLogin() {
         PlayerPrefs.SetInt("IsLocalPlayer", 0);
 
+		if (isGameHost.isOn)
+			PlayerPrefs.SetInt("IsHost", 1);
+		else
+			PlayerPrefs.SetInt("IsHost", 0);
+
 		APIManager manager = apiManager.GetComponent<APIManager>();
 
 		loginButton.interactable = false;
+
+		if (progressBar == null)
+			progressBar = transform.Find("ProgressBar").GetComponent<Slider>();
+
+		if (progressBarText == null)
+			progressBarText = transform.Find("ProgressBarText").GetComponent<Text>();
 
         progressBar.gameObject.SetActive(true);
         progressBarText.gameObject.SetActive(true);

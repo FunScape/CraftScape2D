@@ -14,6 +14,7 @@ public class SetupLocalHero : NetworkBehaviour {
             GetComponent<HeroAnimationBehaviour>().enabled = true;
 			GetComponent<InventoryController>().enabled = true;
 			GetComponent<EquipmentController>().enabled = true;
+			GetComponent<PlayerRecipeBookController>().enabled = true;
 			CameraFollow.player = gameObject.transform;
 		}
 		else
@@ -21,6 +22,7 @@ public class SetupLocalHero : NetworkBehaviour {
 			GetComponent<InventoryController>().enabled = false;
 			GetComponent<EquipmentController>().enabled = false;
             GetComponent<HeroAnimationBehaviour>().enabled = false;
+			GetComponent<PlayerRecipeBookController>().enabled = false;
 			GetComponent<HeroController>().enabled = false;
 		}
 	}

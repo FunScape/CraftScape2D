@@ -15,6 +15,18 @@ public class Inventory : ScriptableObject {
 	public int Size { get; set; }
 	public GameItem[] GameItems;
 
+	public int emptySlotsCount {
+		get {
+			int count = 0;
+			foreach(GameItem item in GameItems)
+			{
+				if (item == null)
+					count++;
+			}
+			return count;
+		}
+	}
+
 	private List<GameItem> trash = new List<GameItem> ();
 
 	public static Inventory CreateInstance()
@@ -153,7 +165,7 @@ public class Inventory : ScriptableObject {
 		{
 			if (GameItems[i] != null && GameItems[i].staticGameItem.Equals(item))
 			{
-				GameItem temp = GameItems [i].Clone (true);
+				GameItem temp = GameItems[i].Clone(true);
 				GameItems[i] = null;
 				trash.Add (temp);
 				Save ();

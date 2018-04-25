@@ -73,8 +73,10 @@ public class PlayerRecipeBookController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.C))
+        {
             if (GameManager.instance.LocalPlayer().Equals(this.gameObject))
 			    ToggleRecipeBook ();
+        }
 	}
 
     public void FindInventory() {
@@ -177,7 +179,7 @@ public class PlayerRecipeBookController : MonoBehaviour {
 				inventory.RemoveQtyOfItems (ingredient.ingredient.Id, ingredient.quantity);
 			}
 
-			inventory.AddItem (selectedRecipe.product.Id, inventoryController);
+			inventory.AddItem(selectedRecipe.product.Id, inventoryController);
 
             skillController.AddXP(selectedRecipe.expReward);
             skillController.LayoutXP();
