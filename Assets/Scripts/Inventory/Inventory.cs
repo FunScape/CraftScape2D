@@ -167,7 +167,7 @@ public class Inventory : ScriptableObject {
             return;
 
 		if (controller == null)
-			controller = GameObject.FindGameObjectWithTag ("Player").GetComponent<InventoryController> ();
+			controller = GameManager.instance.LocalPlayer().GetComponent<InventoryController>();
 
 		APIManager apiManager = GameObject.FindGameObjectWithTag("APIManager").GetComponent<APIManager>();
 

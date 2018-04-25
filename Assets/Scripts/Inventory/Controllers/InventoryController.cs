@@ -121,41 +121,21 @@ public class InventoryController : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
-		if (!GameManager.GetLocalPlayer ().GetComponent<SetupLocalHero> ().isLocalPlayer)
-			return;
+		if (GameManager.instance.LocalPlayer().GetComponent<SetupLocalHero>().isLocalPlayer) {
+            if (other.gameObject.name != null)
+            {
+                StaticGameItem item = GameItemDatabase.instance.GetItem(other.gameObject.name);
+                if (item != null)
+                {
+                    inventory.AddItem(item, this);
+                    Destroy(other.gameObject);
+                    UpdateInventoryPanelUI();
+                }
+            }
+        }
+			
 		
-        if (other.gameObject.name == "chest")
-        {
-            int rand = Random.Range(0, 100);
-            StaticGameItem item;
-            if (rand > 50)
-            {
-                // 50% chance the item will be an apple
-                item = GameItemDatabase.instance.GetItem("apple");
-            }
-            else if (rand > 90)
-            {
-                // 10% chance the item will be a gold ring
-                item = GameItemDatabase.instance.GetItem("gold ring");
-            }
-            else
-            {
-                item = GameItemDatabase.instance.GetItem(Random.Range(2, 5));
-            }
-
-            inventory.AddItem(item, this);
-            UpdateInventoryPanelUI();
-        }
-        else if (other.gameObject.name != null)
-        {
-            StaticGameItem item = GameItemDatabase.instance.GetItem(other.gameObject.name);
-            if (item != null)
-            {
-                inventory.AddItem(item, this);
-                Destroy(other.gameObject);
-                UpdateInventoryPanelUI();
-            }
-        }
+        
     }
 
     protected List<GameObject> GetInventorySlots()
